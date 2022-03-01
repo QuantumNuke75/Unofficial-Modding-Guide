@@ -5,11 +5,11 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 ### Sections
 
 
-**0. [FAQ](docs/faq.md)**
-**1. The Basics**
-  a. Extracting Game Files
-  b. Cooking Modifies Files
-  c. Creating a PAK File
+**0. [FAQ](docs/faq.md)**\n
+**1. The Basics**\n
+  a. Extracting Game Files\n
+  b. Cooking Modifies Files\n
+  c. Creating a PAK File\n
 **- Asset Modding**
   - Texture Replacement
   - Skeletal Mesh Replacement
