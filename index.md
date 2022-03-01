@@ -2,7 +2,7 @@
 
 This is a comprehensive guide for most aspects of Ready or Not modding.  
 
-Created by QuantumNuke75#3593
+Created by QuantumNuke75#3593 <img src="profilepic.png" width="20" />
 
 
 ### Sections
