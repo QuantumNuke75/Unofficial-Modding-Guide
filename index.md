@@ -5,7 +5,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 ### Sections
 
 ```
-**- FAQ**
+**- [FAQ](docs/faq.md)**
 **- The Basics**
   - Extracting Game Files
   - Cooking Modifies Files
