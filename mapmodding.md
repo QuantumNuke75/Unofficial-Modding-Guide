@@ -16,7 +16,7 @@
 
 **Adding Doors**  
 Note that the following files may be changed on a daily basis as they get more updates. Credit to Lewd SCP-1471-A#0880 for some assistance.
-1. Download the following files from here and put them in their associated directory:  
+1. Download the following files from [here](https://drive.google.com/file/d/1wmxcIwHvz_2T4bVMNsyWJPVEmVt-WDZ0/view?usp=sharing) and put them in their associated directory:  
   a. BP_Door, goes in `.../Content/BlueprintSpawners/…`, do package.  
   b. BP_Door_New, goes in `.../Content/Blueprints/Environment/…`, do not package.  
   c. DoorDataTable, goes in `.../Content/Blueprints/DataTables/…`, do not package.  
