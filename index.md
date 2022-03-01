@@ -5,37 +5,37 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 ### Sections
 ```markdown
 FAQ
-- The Basics
+**- The Basics**
   - Extracting Game Files
   - Cooking Modifies Files
   - Creating a PAK File
-- Asset Modding
+**- Asset Modding**
   - Texture Replacement
   - Skeletal Mesh Replacement
   - Material Replacement
-- Sound Modding
+**- Sound Modding**
   - Voiceover Modding
   - FMOD Modding
-- Map Modding
+**- Map Modding**
   - Creating Maps
   - Adding Props from the Game
   - Adding Doors
   - Better Map Loading
   - General Mapping Tips
-- UAsset Modding (soon)
+**- UAsset Modding (soon)**
   - Numerical/String Edits
   - Adding Data
-- Misc
+**- Misc**
   - Custom Map Loading
   - Console Unlocking
   - Easy AI Modding
-- Important Information
+**- Important Information**
   - Mod Installation
   - Mod File Structure
   - File Formats
   - Example Mod
   - Debugging
-- Tools
+**- Tools**
   - UModel
   - FModel
   - Universal Unreal Unlocker
@@ -43,31 +43,26 @@ FAQ
   - FMOD Bank Tools
 ```
 
+## FAQ
 
 ```markdown
-Syntax highlighted code block
+**Q: How do I install/uninstall mods?**
+A: Navigate to your Ready or Not install directory and go to `…/ReadyOrNot/Content/Paks/…` and drag in any .pak mods which you wish to install. If you want to uninstall, simply delete the mods from that directory.
 
-# Header 1
-## Header 2
-### Header 3
+**Q: Can I still play online with mods?**
+A: Yes, although if you use a map mod and they do not have that same mod, you will run into issues, whether you are hosting or not. 
 
-- Bulleted
-- List
+**Q: Can other people see my mods?**
+A: No, unless they also have that mod installed.
 
-1. Numbered
-2. List
+**Q: Will I get banned for using mods?**
+A: No, unless you cheat via other means. Mods are encouraged by the developers.
 
-**Bold** and _Italic_ and `Code` text
+**Q: Where can I find mods?**
+A: NexusMods. Any other website is not safe and harms creators. 
 
-[Link](url) and ![Image](src)
+**Q: Should I start modding?**
+A: Probably not. The official SDK might come out in 6 months, and that’s the best bet for modding. As for the moment, modding is a pain, and unless you really want to, you probably shouldn’t.
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/QuantumNuke75/Unofficial-Modding-Guide/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
