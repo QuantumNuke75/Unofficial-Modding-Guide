@@ -1,12 +1,48 @@
-## Welcome to GitHub Pages
+## Unofficial Modding Guide
 
-You can use the [editor on GitHub](https://github.com/QuantumNuke75/Unofficial-Modding-Guide/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is a comprehensive guide for most aspects of Ready or Not modding.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Sections
+```markdown
+FAQ
+- The Basics
+  - Extracting Game Files
+  - Cooking Modifies Files
+  - Creating a PAK File
+- Asset Modding
+  - Texture Replacement
+  - Skeletal Mesh Replacement
+  - Material Replacement
+- Sound Modding
+  - Voiceover Modding
+  - FMOD Modding
+- Map Modding
+  - Creating Maps
+  - Adding Props from the Game
+  - Adding Doors
+  - Better Map Loading
+  - General Mapping Tips
+- UAsset Modding (soon)
+  - Numerical/String Edits
+  - Adding Data
+- Misc
+  - Custom Map Loading
+  - Console Unlocking
+  - Easy AI Modding
+- Important Information
+  - Mod Installation
+  - Mod File Structure
+  - File Formats
+  - Example Mod
+  - Debugging
+- Tools
+  - UModel
+  - FModel
+  - Universal Unreal Unlocker
+  - Blender PSK Plugin
+  - FMOD Bank Tools
+```
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown
 Syntax highlighted code block
