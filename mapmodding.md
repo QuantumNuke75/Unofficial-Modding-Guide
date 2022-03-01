@@ -36,3 +36,43 @@ and are encouraged not to do so. You'll still need to add at least 5 player star
 **General Mapping Tips**  
 - In order to efficiently make level geometry, use BSP Brushes.
 - To make Swat AI move around, ensure that you have at least one Nav Mesh Bounds Volume.
+
+**FMOD Sound Integation**  
+For this you'll need UE4 FMOD integration, as well as a good understanding of UE4. Create a header file named `ReadyOrNotAudioVolume.h` with the following contents:
+```C++
+UCLASS()
+class READYORNOT_API AReadyOrNotAudioVolume : public AVolume
+{
+    GENERATED_BODY()
+    
+    // Sets default values for this actor's properties
+    AReadyOrNotAudioVolume();
+
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
+
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Billboard, meta = (AllowPrivateAccess = "true"))
+    UBillboardComponent* BillboardComponent;
+    public:    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    TArray<UFMODEvent*> ReverbEvents;
+
+    UPROPERTY()
+    TArray<FFMODEventInstance> EventInstances;
+
+    UPROPERTY()
+    bool bReverbActivated = false;
+
+    UPROPERTY()
+    TArray<UFMODAudioComponent*> AttachedAudioComponents;
+
+    bool IsAnotherVolumeActivatedAndPlayingEvent(UFMODEvent* Event, FFMODEventInstance& EventInstance);
+    bool IsAnotherVolumeActivatedAndPlayingEventInst(FFMODEventInstance EventInst);
+
+public:
+    bool IsReverbVolumeActivated();
+    TArray<UFMODEvent*> GetReverbEvents();
+    TArray<FFMODEventInstance> GetReverbEventInstances();
+    
+};
+```
