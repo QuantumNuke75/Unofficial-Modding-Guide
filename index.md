@@ -44,8 +44,9 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
   - FMOD Bank Tools
 ```
 
-## FAQ
+### FAQ
 
+```markdown
 **Q: How do I install/uninstall mods?**
 A: Navigate to your Ready or Not install directory and go to `…/ReadyOrNot/Content/Paks/…` and drag in any .pak mods which you wish to install. If you want to uninstall, simply delete the mods from that directory.
 
@@ -63,6 +64,7 @@ A: NexusMods. Any other website is not safe and harms creators.
 
 **Q: Should I start modding?**
 A: Probably not. The official SDK might come out in 6 months, and that’s the best bet for modding. As for the moment, modding is a pain, and unless you really want to, you probably shouldn’t.
+```
 
 
 
