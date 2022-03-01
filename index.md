@@ -66,5 +66,18 @@ A: NexusMods. Any other website is not safe and harms creators.
 A: Probably not. The official SDK might come out in 6 months, and that’s the best bet for modding. As for the moment, modding is a pain, and unless you really want to, you probably shouldn’t.
 ```
 
+```markdown
+Syntax highlighted code block
+# Header 1
+## Header 2
+### Header 3
+- Bulleted
+- List
+1. Numbered
+2. List
+**Bold** and _Italic_ and `Code` text
+[Link](url) and ![Image](src)
+```
+
 
 
