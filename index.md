@@ -4,12 +4,12 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 ### Sections
 
-
-**0. [FAQ](docs/faq.md)**\n
-**1. The Basics**\n
-  a. Extracting Game Files\n
-  b. Cooking Modifies Files\n
-  c. Creating a PAK File\n
+```markdown
+**- [FAQ](docs/faq.md)**
+**- The Basics**
+  - Extracting Game Files
+  - Cooking Modifies Files
+  - Creating a PAK File
 **- Asset Modding**
   - Texture Replacement
   - Skeletal Mesh Replacement
@@ -42,7 +42,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
   - Universal Unreal Unlocker
   - Blender PSK Plugin
   - FMOD Bank Tools
-
+```
 
 ### FAQ
 
