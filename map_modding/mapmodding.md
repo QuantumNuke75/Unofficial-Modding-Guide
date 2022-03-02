@@ -77,4 +77,5 @@ public:
 };
 ```
 Once you've creatd the header file, follow this PDF provided by Zack Bower:
-<a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/document.pdf" target="_blank">PDF.</a>
+<a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/document.pdf" target="_blank">PDF</a>
+<embed src="https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/document.pdf" type="application/pdf" />
