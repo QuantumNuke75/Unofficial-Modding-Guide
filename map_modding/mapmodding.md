@@ -76,5 +76,5 @@ public:
     
 };
 ```
-Once you've creatd the header file, follow this PDF provided by Zack Bower:
+Once you've created the header file, follow this PDF provided by Zack Bower:
 <embed src="https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/fmod.pdf" type="application/pdf" width="100vh" height="100vh"/>
