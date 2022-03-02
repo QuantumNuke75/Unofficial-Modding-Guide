@@ -11,7 +11,7 @@
 8. If you want to load a map, simply type `open <MapName>`.
 
 **Easy AI Modding**  
-1. If you already have an <a href="downloads/AILevelData.ini">`AILevelData.ini`</a> file you would like to use, skip steps 1-3. Create a new .bat file in the UnrealPak.exe location. In this .bat file put the following:
+1. If you already have an <a href="downloads/AILevelData.ini"download>`AILevelData.ini`</a> file you would like to use, skip steps 1-3. Create a new .bat file in the UnrealPak.exe location. In this .bat file put the following:
 ```batch
 @if "%~1"=="" goto skip
 @setlocal enableextensions
