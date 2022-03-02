@@ -14,20 +14,20 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
   - Extracting Game Files
   - Cooking Modifies Files
   - Creating a PAK File  
-- **[Asset Modding](assetmodding.md)**  
+- **[Asset Modding](asset_modding/assetmodding.md)**  
   - Texture Replacement
   - Skeletal Mesh Replacement
   - Material Replacement  
-- **[Sound Modding](soundmodding.md)**  
+- **[Sound Modding](sound_modding/soundmodding.md)**  
   - Voiceover Modding
   - FMOD Modding  
-- **[Map Modding](mapmodding.md)**  
+- **[Map Modding](map_modding/mapmodding.md)**  
   - Creating Maps
   - Adding Props from the Game
   - Adding Doors
   - Better Map Loading
   - General Mapping Tips  
-- **[UAsset Modding (soon)](uassetmodding.md)**  
+- **[UAsset Modding (soon)](uasset_modding/uassetmodding.md)**  
   - Numerical/String Edits
   - Adding Data  
 - **[Misc](misc.md)**  
