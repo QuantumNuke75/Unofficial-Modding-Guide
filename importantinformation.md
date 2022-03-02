@@ -12,14 +12,14 @@ The majority of the modding that you will do will be under the `Content` folder.
 
 ### File Formats  
 There are multiple different file formats that you may encounter while modding. Here is a list of most of them, and what each of them are.
-- .psk - A skeletal or static mesh. May contain the skeleton.
-- .psa - An animation for a specific mesh.
-- .uasset - Two types.
+- **.psk** - A skeletal or static mesh. May contain the skeleton.
+- **.psa** - An animation for a specific mesh.
+- **.uasset** - Two types.
   1. Raw .uasset files are the ones created after cooking a UE4 project. 
   2. UE4 .uasset files are the ones that are taken directly from a UE4 project, they are uncooked and can be transferred between projects.
-- .uexp - An raw complementary file to uassets, usually containing import and export maps.
-- .ubulk - Another data storage file that UE4 uses. 
-- .umap - A level/map file, similar to .uasset in the way that there is an uncooked and cooked version.
+- **.uexp** - An raw complementary file to uassets, usually containing import and export maps.
+- **.ubulk** - Another data storage file that UE4 uses. 
+- **.umap** - A level/map file, similar to .uasset in the way that there is an uncooked and cooked version.
 
 ### Example Mod  
 To see if your PAKing is working, download this [example mod](https://drive.google.com/file/d/1iSbu8JqFbry1lioBEIuB5ks0D8bhKQ7c/view?usp=sharing). This will turn your gun on the main menu pink if the .pak is correctly PAKed. Download and extract the .zip file before PAKing. 
