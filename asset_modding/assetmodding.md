@@ -1,14 +1,14 @@
 ## Asset Modding
 
 
-**Texture Replacement**  
+### Texture Replacement  
 Texture replacement is the easiest to mod. An example can be found in [PAK Example](importantinformation.md). If you are doing more than recoloring, you will also need to edit the normal and ORM maps.
 1. When ripping files from the game, look for files that contain `T_`, `BaseColor`, `_B`, as these files are usually the texture files. 
 2. Modify the texture however you would like with GIMP, Photoshop, or any other image editing software. You can also use Substance Painter, and doing such will make texturing much easier. 
 3. As with overriding any other object from the game, make sure to replicate the location of the texture. If you don’t, the changes won’t apply.
 4. Create a .pak file, and everything should work properly. 
 
-**Skeletal Mesh Replacement Pt. 1**  
+### Skeletal Mesh Replacement Pt. 1  
 1. Extract the model as a .psk using UModel.
 2. Import file into Blender.
 3. Change the units into Metric, Meters, with a scale of 0.01.
@@ -24,7 +24,7 @@ Texture replacement is the easiest to mod. An example can be found in [PAK Examp
 13. Cook the content, and put the texture, material, and mesh files in the correct places. 
 14. Make sure to add a `_P` to the end of your .pak file name. This makes it a patch file.
 
-**Skeletal Mesh Replacement Pt. 2 / Material Replacement**  
+### Skeletal Mesh Replacement Pt. 2 / Material Replacement  
 1. Using FModel, locate the master material you wish to use. Ensure that the material name somewhat correlates to what you are modding. For example, an attachment should have the master material `Weapon_1P_Toprain_MASTER`. Alternatively, you can use UModel to export the material and look at the .txt file.
 2. In that file, while still using FModel, locate three parameters. These parameters will point to the Normal, Texture, and ORM maps. If you are using UModel instead, you can also view these parameters.
 3. In UE4, create a fake master material with the same name in the same location as where it is within the game. You will not be exporting this file unless you uncheck the `Share Material Shader Code` in `Project Settings > Packaging`.
