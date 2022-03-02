@@ -19,5 +19,3 @@ Link: [https://github.com/Befzz/blender3d_import_psk_psa](https://github.com/Bef
 ### FMOD Bank Tools  
 Allows unpacking and repacking of FMOD banks.  
 Link: [https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs](https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs)
-
-<iframe src="https://discordapp.com/widget?id=947267972790112286&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
