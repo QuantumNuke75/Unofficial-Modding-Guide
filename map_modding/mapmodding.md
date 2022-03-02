@@ -77,4 +77,4 @@ public:
 };
 ```
 Once you've creatd the header file, follow this PDF provided by Zack Bower:
-<iframe src="downloads/fmod.pdf"></iframe>
+<a href="quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/document.pdf" target="_blank">PDF.</a>
