@@ -39,7 +39,7 @@ and are encouraged not to do so. You'll still need to add at least 5 player star
 
 **FMOD Sound Integation**  
 For this you'll need UE4 FMOD integration, as well as a good understanding of UE4. Create a header file named `ReadyOrNotAudioVolume.h` with the following contents:
-```C++
+```cpp
 UCLASS()
 class READYORNOT_API AReadyOrNotAudioVolume : public AVolume
 {
