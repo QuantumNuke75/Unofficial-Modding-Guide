@@ -1,6 +1,6 @@
 ## Misc
 
-**Custom Map Loading / Console Unlocking**  
+### Custom Map Loading / Console Unlocking  
 1. Download the latest version of Universal Unreal Engine 4 Unlocker, UUU.
 2. Extract the files and run `UuuClient.exe`.
 3. Open Ready or Not, you’ll have to have the game open in order to inject the console unlocker. 
@@ -10,7 +10,7 @@
 7. Press your `~` key in order to open the console. 
 8. If you want to load a map, simply type `open <MapName>`.
 
-**Easy AI Modding**  
+### Easy AI Modding  
 1. If you already have an <a href="downloads/AILevelData.ini" download>`AILevelData.ini`</a> file you would like to use, skip steps 1-3. Create a new .bat file in the UnrealPak.exe location. In this .bat file put the following:
 ```batch
 @if "%~1"=="" goto skip
