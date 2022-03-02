@@ -76,3 +76,5 @@ public:
     
 };
 ```
+Once you've creatd the header file, follow this PDF provided by Zack Bower:
+<iframe src="downloads/fmod.pdf"></iframe>
