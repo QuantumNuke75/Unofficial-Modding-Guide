@@ -6,7 +6,6 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 - QuantumNuke75#3593
 - The Real Sourc3#7480
 
-
 ### Sections
 
 - **[FAQ](faq.md)**  
