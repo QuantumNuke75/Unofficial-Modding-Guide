@@ -1,3 +1,4 @@
 remote_theme: QuantumNuke75/slate
 plugins:
 - jekyll-remote-theme
+future: true
