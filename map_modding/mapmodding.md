@@ -1,44 +1,142 @@
 ## Map Modding
 
-### Creating a Map  
-1. Create a Level, or acquire one from elsewhere. 
-2. In `/Content/Blueprints/Games/COOPModes/`, create a fake gamemode that replicated the name of any one of these from Ready or Not: GM_COOP_ActiveShooter, GM_COOP_BarricadedSuspects, GM_COOP_BombThreat, GM_COOP_HostageRescue, GM_COOP_Raid.
-3. Open your level, and at the top-ish of the editor press `Blueprints` and select the `World Override` gamemode to be the one that you just created.
-4. At this point the level can be played via the method in Misc.
+ 
+#### Special thanks to:    
 
-## Adding Props from the Game  
-1. Locate the prop[s] that you want to use on your map. These will have the .uasset format as any other file. However, make sure the .uasset you are looking at is the static mesh, not texture file or anything else. You can verify this by opening that file in UModel. If the class says `StaticMesh`, you’re good to go.
-2. Mimic the location of the folder structure in UE4 up to the location of the asset.
+`ACowBoyBishop#7664` and `Vegriv#8646` for testing and help! 
+Thanks to `matthew9324#3567` for C++ help and RoN Dev `Zack Bower#0466` for FMOD integration.  
+Guide written by `The Real Sourc3#7480`.
+
+If you need help don't hesitate to visit the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR) and tag me \:)
+
+### Folder Structure 
+Folder structure in UE4 4.27.2 needs to be as shown under to work. Content is the base folder your UE4 projects starts from.
+
+YourProjectName is only a placeholder for what you name your project when you make it in the New Project menu in Epic's UE4 Launcher.
+The project name for the Meth house map for example is listed as RoN_Meth
+
+To make a map you should start by downloading the Bare Bones mapping template on [Nexus Mods](https://www.nexusmods.com/readyornot/mods/472?tab=files)  
+It includes all the C++ files and Folder Structs like listed below and should provide you with a clean slate to start map modding.  
+The Folder struct below is only the nessescary files required for the map to work (using all features) but the Bare Bones includes more files for conveniency.  
+
+```
+Content  
+    BlueprintSpawners  
+      BP_Door.uasset  
+    Blueprints  
+      DataTables  
+        DoorDataTable.uasset   
+        DoorType.uasset  
+        TrapDataTable.uasset  
+        AI_DataTable.uasset  
+        AI_DataTable_V3.uasset  
+        AI  
+          AI_DataTable_Dealer.uasset  
+          AI_DataTable_Gas.uasset  
+          AI_DataTable_Hotel.uasset  
+          AI_DataTable_Meth.uasset  
+      Environment  
+        BP_Door_New.uasset  
+      Games  
+        GM_COOP.uasset 
+      E_WorldGenType.uasset  
+    ReadyOrNot  
+      Mods  
+        YourProjectName  
+          YourMapName.umap  
+        // Custom models, materials and textures are placed here in sorted folders.
+```
+
+### Project Settings  
+
+Project settings are important when making maps. They tell the engine how to interact with the assets and how they are cooked. When making maps you will need to change some of these to fit what content you want to include in your map. Some of the stuff are not optional. They will break certain elements of your game if they're cooked. Don't worry tho - it's nothing permanent. 
+
+Go to the top to *Settings* drop down button and pick **Project Settings** (2nd from the top).  
+Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there will be a tiny bar with an arrow on it to expand the menu further. Click on it and scroll down to *Directories To Never Cook* and add 2 array elements. Edit them with the 3 dots to this:  
+[Directories](https://imgur.com/a/b1V0vwV)
+
+The Folders in the Bare Bones Template that need this treatment are:  
+[List of folders](https://imgur.com/a/Yiv3kCc)
+
+### GameModes
+
+A gamemode blueprint must be constructed manually as no blueprints can be imported from the base game.  
+With the Bare Bones project this will be called **GM_COOP**.  
+Create an empty GameMode from the GameMode base class and rename it, then place it in the corresponding folder structure listed above. 
+
+#### GameMode Override:   
+ At the top of your editor screen you will find the *Blueprints* tab, where you can edit Asset Blueprints and World Blueprints.  
+ In order for your game to work you must override the default gamemode and pick **World Override**: and pick your intended gamemode blueprint class.  
+
+### World Geometry:
+   If you make a new level instead of using the `ron_wb_combat_01b` included in BB, just note that the standard level of UE4 includes a floor which is a static mesh. This will usually not show up in-game and you'll fall through the world upon launch.  
+If you want static / physics meshes in your world you must either reference base game meshes under the ReadyOrNot folder or provide your own in the correct folders.
+
+For prototyping or if you don't have access to a lot of high poly assets it can be desirable to use BSP brushes. These are usually just convex hull geometry that you can piece together. You can actually make most of your map with this, then add models to enhance the level afterwards.  
+
+To make a walkable floor you have to use the *Place Actor* menu's **Geometry** tab and choose the *Box* primitive.  
+Use the right side menu to adjust the size of the floor or use the *Brush Editing Mode* (Shift + 4) to adjust the shape and size of your primitive.
+You only really need a floor, but it can be favorable to include walls and ceilings to get a sense of scale as well as for AI generation.
+
+A trick would be to use the included `SM_Farm_Door_A` door model to align doorways and ceilings for the scale.
+
+### Lighting
+    
+Include at least one light if not using the "sun" light standard to the scene. This helps bake the correct lightdata on your geometry. Without any light you can sometimes recieve weird shadow artifacts or weird colors. This also helps those weird people who don't put any attachments on their guns.  
+
+You can add multiple lights in your scene, but adjust the Attenuation Radius so that too many don't overlap. UE4 is very limited when it comes to light overlapping, so you'll need to tinker with this to get a good feel for it.
+If a red X is displayed on the light it will not render in the final product or be glitched.
+
+## World Generation and AI Navigation
+
+This is probably one of the more complex steps as it involves messing a bit with the World Blueprint so I made the title a bit bigger.  
+In the new update the devs added world generation to custom maps so I will need to test a bit with that, but the previous way to go was to include *RosterScenarioSpawner* and  *WorldDataGenerator* C++ Actors in the map so that they would generate these points. The Bare Bones template should already have this included but if it doesn't or you create a new map from scratch you'll need to add these manually --- Guide Not Finished, more to come soon!
+
+### Adding Props / Models
+1. Locate the prop[s] that you want to use on your map. These will have the .uasset format as any other file. However, make sure the .uasset you are looking at is the static mesh, not texture file or anything else. You can verify this by opening that file in UModel. If the class says `StaticMesh`, you’re good to go.  
+An easier route is to download the [Mapping Reference Project](https://www.nexusmods.com/readyornot/mods/666/) made by **RareKiwi** and delete the assets from folder after cooking.
+2. Make the folder struct the same as the asset file path.
 3. Go to `Place Actors > Basic` and drag the Cube to the Content Browser and click `Copy Here`. You can use this in your level wherever and upon loading into your map, this will turn into the appropriate asset. Only go beyond this step if you want to see the asset within the editor.
 4. Export the static mesh you want to use as a .psk using UModel. 
 5. Using Blender and the .psk plugin for it, export the model as a .fbx. 
 6. Import the .fbx into UE4 with the same name as the asset you are attempting to use within your map. Make sure the file is in the same directory as the sibling file in the game files.
 
 ### Adding Doors  
-Note that the following files may be changed on a daily basis as they get more updates. Credit to Lewd SCP-1471-A#0880 for some assistance.
-1. Download the following files from [here](https://drive.google.com/file/d/1wmxcIwHvz_2T4bVMNsyWJPVEmVt-WDZ0/view?usp=sharing) and put them in their associated directory:  
-  a. BP_Door, goes in `.../Content/BlueprintSpawners/…`, do package.  
-  b. BP_Door_New, goes in `.../Content/Blueprints/Environment/…`, do not package.  
-  c. DoorDataTable, goes in `.../Content/Blueprints/DataTables/…`, do not package.  
-  d. DoorDataTableStructure, goes in `.../Content/Blueprints/DataTables/…`, do not package.  
-  e. TrapDataTable, goes in `.../Content/Blueprints/DataTables/…`, do not package.  
-  f. TrapDataTableStructure, goes in `.../Content/Blueprints/DataTables/…`, do not package.  
-2. Place an instance of BP_Door onto the map and change the desired values:  
-  a. Door Type, can be: Default_Wood, Meth_Garage_01, Meth_Garage_02,  Meth_Wood_01, Meth_Wood_02, Meth_Wood_Slat, Hotel_Wood_01, Hotel_Wood_02, Hotel_Wood_03, Hotel_Steel_01, Hotel_Steel_02, Hotel_Steel_03, Hotel_Wood_04, Gas_Metal_01, Port_Metal_01, Wood_Door_Painted, Wood_Door_Unpainted, Wood_Door_Fancy, Port_ShippingDoor_Right, Port_ShippingDoor_Left, Port_Jaildoor, Port_Chaindoor.   
-  b. Trap Type, can be: Explosive, Flashbang, Alarm, NoTrap.  
-  c. Lockchance, can be 0.0 - 1.0. Currently, this value does not work.  
-  d. Doorway Mesh, the static mesh location of the mesh to be used as the doorway. You can do this through adding props.  
 
-### Easier Loading / Multiplayer   
-In a recent Ready or Not update, the developers have mad map modding more seamlessly integrated with the game. You are no longer required to override maps within the game,
-and are encouraged not to do so. You'll still need to add at least 5 player starts in order ot prevent players from clipping into eachother.
+- Place an instance of BP_Door onto the map and change the desired values:  
+  - Door Type: Use the *DoorDataTable* in the data table block and select the wanted door.  
+  - Trap Type: Doors can have pre-attached traps. The types to choose from comes from the *TrapDataTable* and are Explosive, Flashbang, Alarm, NoTrap. Note that the NoTrap doesn't disable the trap, it makes it random.   
+  - Lockchance, can be 0.0 - 1.0 We're unsure if this value does anything, but we would expect higher probability of locking the closer to 1.  
+  - Lockable: If the door can be locked or not. If you want a door to always be open you tick this box to False.   
+  - NoSpawnTrap: If ticked it will disable any traps from pre-attaching to this door. Leave unticked if you want the *TrapType* to propigate.
+  - UseBrokenDoorMesh: We're unsure if this does anything other than spawning the ruined door from the training course in the lobby map.
+  - MinOpenClose / MaxOpenClose: Probably has something to do with the max angle the door can swing, but I have yet to notice any difference after changing these values..  
 
-### General Mapping Tips  
-- In order to efficiently make level geometry, use BSP Brushes.
-- To make Swat AI move around, ensure that you have at least one Nav Mesh Bounds Volume.
+### Multiplayer 
+
+Multiplayer works by default if you place enough spawn points in your map. This spawn point is called *PlayerStart* and you'll need at least 5 for normal multiplayer function.  
+
+### Building and Cooking
+
+At this point the map should be ready for rendering and packaging (you don't really need doors but maps are very lacklusting without).  
+You firstly need to Build the data into the map by pressing the *Build* button at the top of the screen. It will take some time to finish.  
+Once it is done you can go to **File** -> *Cook Contents For Windows*.   
+
+After the cook is finished you'll need to use the pak bat file to make a pak-file of your Content folder.  
+
+### Materials
+
+TODO: Add content to this chapter.  
+
+### Post Processing and visual tech
+
+TODO: Add content to this chapter.  
 
 ### FMOD Sound Integation  
-For this you'll need UE4 FMOD integration, as well as a good understanding of UE4. Create a header file named `ReadyOrNotAudioVolume.h` with the following contents:
+
+WIP! MORE INFO COMING SOON.    
+For this you'll need [FMOD for UE4](https://www.fmod.com/download), and the Visual Studio C++ editor. Create a new C++ *AudioVolume* Class file named *ReadyOrNotAudioVolume* and open it in Visual Studio. Paste then this content into the header file (the file named *ReadyOrNotAudioVolume.h*):
+
 ```cpp
 UCLASS()
 class READYORNOT_API AReadyOrNotAudioVolume : public AVolume
@@ -76,5 +174,6 @@ public:
     
 };
 ```
-Once you've created the header file, follow this PDF provided by Zack Bower:
-<embed src="https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/fmod.pdf" type="application/pdf" width="640" height="1000"/>
+Once you've created the header file and installed FMOD Studio 2.02.03, follow this PDF provided by Zack Bower:  
+    [Ambient Implementation](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/fmod.pdf)  
+    If you don't know how to install FMOD visit the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR) and check out the *Guides* Links
