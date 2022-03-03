@@ -54,9 +54,11 @@ Project settings are important when making maps. They tell the engine how to int
 Go to the top to *Settings* drop down button and pick **Project Settings** (2nd from the top).  
 Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there will be a tiny bar with an arrow on it to expand the menu further. Click on it and scroll down to *Directories To Never Cook* and add 2 array elements. Edit them with the 3 dots to this:  
 ![Directories](https://imgur.com/a/b1V0vwV)
+<img src="https://imgur.com/a/b1V0vwV">
 
 The Folders in the Bare Bones Template that need this treatment are:  
 ![List of folders](https://imgur.com/a/Yiv3kCc)
+<img src="\images\emoticons\cool.png">
 
 ### GameModes
 
