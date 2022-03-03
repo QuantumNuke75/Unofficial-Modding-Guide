@@ -9,13 +9,13 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 ### Sections
 <details>
     <summary>
-      <span><a href="faq.md">FAQ</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a></span>
     </summary>
 </details>
 
 <details>
     <summary>
-      <span><a href="thebasics.md">The Basics</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Extracting Game Files <br>
@@ -26,7 +26,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="asset_modding/assetmodding.md">Asset Modding</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Texture Replacement <br>
@@ -37,7 +37,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="sound_modding/soundmodding.md">Sound Modding</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Voiceover Modding <br>
@@ -47,7 +47,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="map_modding/mapmodding.md">Map Modding</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a></span>
     </summary>
     <p style="margin-left:5%">    
         - Folder Structure <br>
@@ -68,7 +68,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="uasset_modding/uassetmodding.md">UAsset Modding (soon)</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">UAsset Modding (soon)</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Numerical/String Edits <br>
@@ -78,7 +78,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="misc.md">Misc</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Custom Map Loading <br>
@@ -89,7 +89,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="importantinformation.md">Important Information</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/importantinformation.html">Important Information</a></span>
     </summary>
     <p style="margin-left:5%">  
         - Mod Installation <br>
@@ -102,7 +102,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="tools.md">Tools</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a></span>
     </summary>
     <p style="margin-left:5%">  
         - UModel <br>
