@@ -21,11 +21,19 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
   - Voiceover Modding
   - FMOD Modding  
 - **[Map Modding](map_modding/mapmodding.md)**  
-  - Creating Maps
-  - Adding Props from the Game
+  - Folder Structure
+  - Project Settings
+  - GameModes
+  - World Geometry
+  - Lighting
+  - World Generation + AI
+  - Adding Props
   - Adding Doors
-  - Better Map Loading
-  - General Mapping Tips  
+  - Multiplayer
+  - Building and Cooking
+  - Materials
+  - Post Process and Visuals
+  - FMOD Sound Integration (WIP)  
 - **[UAsset Modding (soon)](uasset_modding/uassetmodding.md)**  
   - Numerical/String Edits
   - Adding Data  
