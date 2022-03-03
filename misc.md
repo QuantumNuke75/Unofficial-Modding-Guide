@@ -1,6 +1,10 @@
 ## Misc
 
-### Custom Map Loading / Console Unlocking  
+### Custom Map Loading / Console Unlocking
+
+By default, custom maps will appear at the bottom right in the map table.  
+You might still want to use a free cam to take screenshots of your map or to inspect elements out of reach.
+
 1. Download the latest version of Universal Unreal Engine 4 Unlocker, UUU.
 2. Extract the files and run `UuuClient.exe`.
 3. Open Ready or Not, you’ll have to have the game open in order to inject the console unlocker. 
@@ -9,6 +13,7 @@
 6. Go back to your game window. You should see messages pop up in the upper left of your screen indicating that the injection of the console was successful, and that the camera was successfully hooked into.
 7. Press your `~` key in order to open the console. 
 8. If you want to load a map, simply type `open <MapName>`.
+An alternative to loading your map with UUU is using **RareKiwi**'s [In Game Menu Mod](https://www.nexusmods.com/readyornot/mods/476).
 
 ### Easy AI Modding  
 1. If you already have an <a href="downloads/AILevelData.ini" download>`AILevelData.ini`</a> file you would like to use, skip steps 1-3. Create a new .bat file in the UnrealPak.exe location. In this .bat file put the following:
