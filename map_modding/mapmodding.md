@@ -53,10 +53,10 @@ Project settings are important when making maps. They tell the engine how to int
 
 Go to the top to *Settings* drop down button and pick **Project Settings** (2nd from the top).  
 Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there will be a tiny bar with an arrow on it to expand the menu further. Click on it and scroll down to *Directories To Never Cook* and add 2 array elements. Edit them with the 3 dots to this:  
-![Directories](images/mapmodding_dontcook.png)
+![Directories](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/mapmodding_dontcook.png)
 
 The Folders in the Bare Bones Template that need this treatment are:  
-![List of folders](images/mapmodding_docook.png)
+![List of folders](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/mapmodding_docook.png)
 
 ### GameModes
 
