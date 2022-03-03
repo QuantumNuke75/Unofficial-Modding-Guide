@@ -17,7 +17,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="thebasics.md">The Basics</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Extracting Game Files <br>
         - Cooking Modifies Files <br>
         - Creating a PAK File  <br>
@@ -28,7 +28,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="asset_modding/assetmodding.md">Asset Modding</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Texture Replacement <br>
         - Skeletal Mesh Replacement <br>
         - Material Replacement   <br> 
@@ -39,7 +39,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="sound_modding/soundmodding.md">Sound Modding</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Voiceover Modding <br>
         - FMOD Modding   <br>  
     </p>
@@ -49,7 +49,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="map_modding/mapmodding.md">Map Modding</a></span>
     </summary>
-    <p style="margin-left:10%; margin-right:10%;">    
+    <p style="margin-left:5%">    
         - Folder Structure <br>
         - Project Settings <br>
         - GameModes <br>
@@ -70,7 +70,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="uasset_modding/uassetmodding.md">UAsset Modding (soon)</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Numerical/String Edits <br>
         - Adding Data   <br>
     </p>
@@ -80,7 +80,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="misc.md">Misc</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Custom Map Loading <br>
         - Console Unlocking <br>
         - Easy AI Modding <br>
@@ -91,7 +91,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="importantinformation.md">Important Information</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - Mod Installation <br>
         - Mod File Structure <br>
         - File Formats <br>
@@ -104,7 +104,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="tools.md">Tools</a></span>
     </summary>
-    <p>
+    <p style="margin-left:5%">  
         - UModel <br>
         - FModel <br> 
         - Universal Unreal Unlocker <br>
