@@ -49,7 +49,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <summary>
       <span><a href="map_modding/mapmodding.md">Map Modding</a></span>
     </summary>
-    <p>
+    <p style="margin-left:10%; margin-right:10%;">    
         - Folder Structure <br>
         - Project Settings <br>
         - GameModes <br>
