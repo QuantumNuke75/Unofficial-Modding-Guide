@@ -18,14 +18,14 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a></span>
     </summary>
     <p style="margin-left:2%">  
-        <b>1.</b> Extracting Game Files <br>
-        <b>2.</b> Cooking Modifies Files <br>
-        <b>3.</b> Creating a PAK File  <br>
-        <b>4.</b> Mod Installation <br>
-        <b>5.</b> Mod File Structure <br>
-        <b>6.</b> File Formats <br>
-        <b>7.</b> Example Mod <br>
-        <b>8.</b> Debugging   <br>
+        1. Extracting Game Files <br>
+        2. Cooking Modifies Files <br>
+        3. Creating a PAK File  <br>
+        4. Mod Installation <br>
+        5. Mod File Structure <br>
+        6. File Formats <br>
+        7. Example Mod <br>
+        8. Debugging   <br>
     </p>
 </details>
 
@@ -34,9 +34,9 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a></span>
     </summary>
     <p style="margin-left:2%">  
-        <b>1.</b> Texture Replacement <br>
-        <b>2.</b> Skeletal Mesh Replacement <br>
-        <b>3.</b> Material Replacement   <br> 
+        1. Texture Replacement <br>
+        2. Skeletal Mesh Replacement <br>
+        3. Material Replacement   <br> 
     </p>
 </details>
 
@@ -45,8 +45,8 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a></span>
     </summary>
     <p style="margin-left:2%">  
-        <b>1.</b> Voiceover Modding <br>
-        <b>2.</b> FMOD Modding   <br>  
+        1. Voiceover Modding <br>
+        2. FMOD Modding   <br>  
     </p>
 </details>
 
@@ -55,19 +55,19 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a></span>
     </summary>
     <p style="margin-left:2%">    
-        <b>1.</b> Folder Structure <br>
-        <b>2.</b> Project Settings <br>
-        <b>3.</b> GameModes <br>
-        <b>4.</b> World Geometry <br>
-        <b>5.</b> Lighting <br>
-        <b>6.</b> World Generation + AI <br>
-        <b>7.</b> Adding Props <br>
-        <b>8.</b> Adding Doors <br>
-        <b>9.</b> Multiplayer <br>
-        <b>10.</b> Building and Cooking <br>
-        <b>11.</b> Materials <br>
-        <b>12.</b> Post Process and Visuals <br>
-        <b>13.</b> FMOD Sound Integration (WIP)   <br> 
+        1. Folder Structure <br>
+        2. Project Settings <br>
+        3. GameModes <br>
+        4. World Geometry <br>
+        5. Lighting <br>
+        6. World Generation + AI <br>
+        7. Adding Props <br>
+        8. Adding Doors <br>
+        9. Multiplayer <br>
+        10. Building and Cooking <br>
+        11. Materials <br>
+        12. Post Process and Visuals <br>
+        13. FMOD Sound Integration (WIP)   <br> 
     </p>
 </details>
 
@@ -76,8 +76,8 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">UAsset Modding (soon)</a></span>
     </summary>
     <p style="margin-left:2%">  
-        <b>1.</b> Numerical/String Edits <br>
-        <b>2.</b> Adding Data   <br>
+        1. Numerical/String Edits <br>
+        2. Adding Data   <br>
     </p>
 </details>
 
@@ -86,9 +86,9 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a></span>
     </summary>
     <p style="margin-left:2%">  
-        <b>1.</b> Custom Map Loading <br>
-        <b>2.</b> Console Unlocking <br>
-        <b>3.</b> Easy AI Modding <br>
+        1. Custom Map Loading <br>
+        2. Console Unlocking <br>
+        3. Easy AI Modding <br>
     </p>
 </details>
 
