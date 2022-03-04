@@ -7,11 +7,11 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 - The Real Sourc3#7480
 
 ### Sections
-<details>
+<!--<details>
     <summary>
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a></span>
     </summary>
-</details>
+</details>-->
 
 <details>
     <summary>
