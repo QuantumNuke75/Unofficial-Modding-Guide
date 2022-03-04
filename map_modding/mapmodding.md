@@ -142,7 +142,7 @@ The cooked project will be located in your projects folder under `<yourprojectna
 
 To make the map appear in game you must pak the project folder with the pak bat file mentioned in [The Basics](https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html).
 Only pak the Project folder with the **Content** folder inside, not the *MetaData* or *AssetRegistry* and it should work from the mat \:)  
-Name the pak to *pakchunk99-Mods-<yourprojectname>_P* - Replace the brackets and what's in them with your project's name.  
+Name the pak to `pakchunk99-Mods-<yourprojectname>_P` - Replace the brackets and what's in them with your project's name.  
 
 ### Materials
 
