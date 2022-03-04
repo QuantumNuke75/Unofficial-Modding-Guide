@@ -13,7 +13,7 @@ If you need help don't hesitate to visit the [RoN Custom Maps Discord](https://d
 Folder structure in UE4 4.27.2 needs to be as shown under to work. Content is the base folder your UE4 projects starts from.
 
 YourProjectName is only a placeholder for what you name your project when you make it in the New Project menu in Epic's UE4 Launcher.
-The project name for the Meth house map for example is listed as RoN_Meth
+The project name for the Meth house map for example is listed as `RoN_Meth`.
 
 To make a map you should start by downloading the Bare Bones mapping template on [Nexus Mods](https://www.nexusmods.com/readyornot/mods/472?tab=files)  
 It includes all the C++ files and Folder Structs like listed below and should provide you with a clean slate to start map modding.  
@@ -49,7 +49,7 @@ Content
 
 ### Project Settings  
 
-Project settings are important when making maps. They tell the engine how to interact with the assets and how they are cooked. When making maps you will need to change some of these to fit what content you want to include in your map. Some of the stuff are not optional. They will break certain elements of your game if they're cooked. Don't worry tho - it's nothing permanent. 
+Project settings are important when making maps. They tell the engine how to interact with the assets and how they are cooked. When making maps you will need to change some of these to fit what content you want to include in your map. Some of the stuff are not optional. They will break certain elements of your game if they're cooked. Don't worry though - it's nothing permanent. 
 
 Go to the top to *Settings* drop down button and pick **Project Settings** (2nd from the top).  
 Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there will be a tiny bar with an arrow on it to expand the menu further. Click on it and scroll down to *Directories To Never Cook* and add 2 array elements. Edit them with the 3 dots to this:  
