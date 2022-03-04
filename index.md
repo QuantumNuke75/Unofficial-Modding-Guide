@@ -21,6 +21,11 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
         - Extracting Game Files <br>
         - Cooking Modifies Files <br>
         - Creating a PAK File  <br>
+        - Mod Installation <br>
+        - Mod File Structure <br>
+        - File Formats <br>
+        - Example Mod <br>
+        - Debugging   <br>
     </p>
 </details>
 
@@ -84,19 +89,6 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
         - Custom Map Loading <br>
         - Console Unlocking <br>
         - Easy AI Modding <br>
-    </p>
-</details>
-
-<details>
-    <summary>
-      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/importantinformation.html">Important Information</a></span>
-    </summary>
-    <p style="margin-left:2%">  
-        - Mod Installation <br>
-        - Mod File Structure <br>
-        - File Formats <br>
-        - Example Mod <br>
-        - Debugging   <br>
     </p>
 </details>
 
