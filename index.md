@@ -2,16 +2,7 @@
 
 This is a comprehensive guide for most aspects of Ready or Not modding.  
 
-### Contributors 
-- QuantumNuke75#3593
-- The Real Sourc3#7480
-
 ### Sections
-<!--<details>
-    <summary>
-      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a></span>
-    </summary>
-</details>-->
 
 <details>
     <summary>
@@ -92,18 +83,8 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     </p>
 </details>
 
-<!--<details>
-    <summary>
-      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a></span>
-    </summary>
-    <p style="margin-left:2%">  
-        - UModel <br>
-        - FModel <br> 
-        - Universal Unreal Unlocker <br>
-        - Blender PSK Plugin <br> 
-        - FMOD Bank Tools <br>
-    </p>
-</details>-->
-
+### Contributors 
+- QuantumNuke75#3593
+- The Real Sourc3#7480
 
 
