@@ -58,6 +58,10 @@ Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there wil
 The Folders in the Bare Bones Template that need this treatment are:  
 ![List of folders](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/mapmodding_docook.png)
 
+For custom materials to work we need to edit some **Packaging** settings that can be found in **Project Setings**.  
+Look for the tick box called *Share Material Shader Code* and make sure it is NOT ticked. It should be ticked off in the BB template by default.  
+You're then free to use all kinds of materials with both translucency and emissive properties without the need of instancing game master materials, making Quixel and Megascans importing a lot more user friendly.  
+
 ### GameModes
 
 A gamemode blueprint must be constructed manually as no blueprints can be imported from the base game.  
@@ -137,7 +141,7 @@ Once it is done you can cook the files.
 You cook the map so that the game can recognise the level as a playable map.  
 Before cooking be sure to select the *Content* folder as the cooker will cook everything down from that folder.
 
-Go to top left at **File** and choose under *Project* -> *Cook Content For Windows*.  
+Go to top left at **File** and choose under **Project** -> *Cook Content For Windows*.  
 The cooked project will be located in your projects folder under `<yourprojectname>/Saved/Cooked/WindowsNoEditor/`  
 
 To make the map appear in game you must pak the project folder with the pak bat file mentioned in [The Basics](https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html).
@@ -155,7 +159,7 @@ TODO: Add content to this chapter.
 ### FMOD Sound Integation  
 
 WIP! MORE INFO COMING SOON.    
-For this you'll need [FMOD for UE4](https://www.fmod.com/download), and the Visual Studio C++ editor. Create a new C++ *AudioVolume* Class file named *ReadyOrNotAudioVolume* and open it in Visual Studio. Paste then this content into the header file (the file named *ReadyOrNotAudioVolume.h*):
+For this you'll need [FMOD for UE4](https://www.fmod.com/download), and the Visual Studio C++ editor. Create a new C++ *Volume* Class file named *ReadyOrNotAudioVolume* and open it in Visual Studio. Paste then this content into the header file (the file named *ReadyOrNotAudioVolume.h*):
 
 ```cpp
 UCLASS()
