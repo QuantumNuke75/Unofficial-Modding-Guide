@@ -92,7 +92,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     </p>
 </details>
 
-<details>
+<!--<details>
     <summary>
       <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a></span>
     </summary>
@@ -103,6 +103,6 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
         - Blender PSK Plugin <br> 
         - FMOD Bank Tools <br>
     </p>
-</details>
+</details>-->
 
 
