@@ -69,6 +69,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
     <p style="margin-left:2%">  
         1. Numerical/String Edits <br>
         2. Adding Data   <br>
+        3. JSON Parsing <br>
     </p>
 </details>
 
