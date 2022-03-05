@@ -21,5 +21,5 @@ Allows unpacking and repacking of FMOD banks.
 Link: [https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs](https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs)
 
 ### UAsset GUI
-Allows editing raw .uasset files. Use responsibly.
+Allows editing raw .uasset files. Use responsibly.  
 Link: [https://github.com/atenfyr/UAssetGUI](https://github.com/atenfyr/UAssetGUI)
