@@ -15,7 +15,7 @@ Folder structure in UE4 4.27.2 needs to be as shown under to work. Content is th
 YourProjectName is only a placeholder for what you name your project when you make it in the New Project menu in Epic's UE4 Launcher.
 The project name for the Meth house map for example is listed as `RoN_Meth`.
 
-To make a map you should start by downloading the Bare Bones mapping template on [Nexus Mods](https://www.nexusmods.com/readyornot/mods/472?tab=files)  
+To make a map you should start by downloading the newly updated Bare Bones mapping template from my [Google Drive](https://drive.google.com/file/d/1jQHbh66hWBiBw-D0OWGVFNziU7p4fp8y/view?usp=sharing)  
 It includes all the C++ files and Folder Structs like listed below and should provide you with a clean slate to start map modding.  
 The Folder struct below is only the nessescary files required for the map to work (using all features) but the Bare Bones includes more files for conveniency.  
 
@@ -150,6 +150,10 @@ The cooked project will be located in your projects folder under `<yourprojectna
 To make the map appear in game you must pak the project folder with the pak bat file mentioned in [The Basics](https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html).
 Only pak the Project folder with the **Content** folder inside, not the *MetaData* or *AssetRegistry* and it should work from the mat \:)  
 Name the pak to `pakchunk99-Mods-<yourprojectname>_P` - Replace the brackets and what's in them with your project's name.  
+
+For now, delete the FMOD folder from your cooked folder unless you are testing FMOD stuff. And if you do, delete everything except your custom banks and events.  
+If you don't delete game-default assets everything from the game will be overwritten with empty data since the banks in this folder are only for reference.  
+That will result in your game having no sound other than VO.
 
 ### Materials
 
