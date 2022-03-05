@@ -40,11 +40,37 @@ import json
 ```
 Next, you'll want to open the file. To do this, replace FILE_NAME with the location of your JSON file that you extracted with `REDACTED`.
 ```python
-file = open('FFILE_NAME')
+file = open('FILE_NAME')
 ```
 You'll then want to load this file as a JSON file. `data` will become a Python dictionary.
 ```python
 data = json.load(file)
 ```
+Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and don't try to steal this code to make a competitor mod. 
+```python
+import json
 
+num_mags = 15
+
+file = open('ItemDataTable.json')
+data = json.load(file)
+
+# For every item in the table.
+for item in data["Exports"][0]["Table"]["Data"]:
+    # For every piece of the item data.
+    for item_data in item["Value"]:
+        if item_data["Name"] == "MagazineCountDefault(0)":
+            amount = int(item_data["Value"])
+            if 3 < amount < 30:
+                item_data["Value"] = num_mags
+                continue
+        if item_data["Name"] == "MagazineCountMax(0)":
+            amount = int(item_data["Value"])
+            if 3 < amount < 30:
+                item_data["Value"] = num_mags
+                continue
+
+json.dump(data, open(f"ammo_export_{num_mags}.json", "w"))
+
+``
 
