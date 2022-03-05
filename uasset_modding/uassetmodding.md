@@ -42,11 +42,16 @@ Next, you'll want to open the file. To do this, replace FILE_NAME with the locat
 ```python
 file = open('FILE_NAME')
 ```
+At the bottom of the file, you'll want to export your JSON file, which you can then load back up in `REDACTED` and save it as a .uasset.
+```python
+json.dump(data, open("export.json", "w"))
+```
+
 You'll then want to load this file as a JSON file. `data` will become a Python dictionary.
 ```python
 data = json.load(file)
 ```
-Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and don't try to steal this code to make a competitor mod. 
+Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.**
 ```python
 import json
 
