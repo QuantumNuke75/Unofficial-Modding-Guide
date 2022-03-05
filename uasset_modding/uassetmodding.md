@@ -51,7 +51,7 @@ You'll then want to load this file as a JSON file. `data` will become a Python d
 ```python
 data = json.load(file)
 ```
-Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.**
+Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.**  
 ```python
 import json
 
@@ -77,5 +77,5 @@ for item in data["Exports"][0]["Table"]["Data"]:
 
 json.dump(data, open(f"ammo_export_{num_mags}.json", "w"))
 
-``
+```
 
