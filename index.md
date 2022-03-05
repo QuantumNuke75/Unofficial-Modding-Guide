@@ -64,7 +64,7 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 
 <details>
     <summary>
-      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">UAsset Modding (soon)</a></span>
+      <span><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">UAsset Modding</a></span>
     </summary>
     <p style="margin-left:2%">  
         1. Numerical/String Edits <br>
