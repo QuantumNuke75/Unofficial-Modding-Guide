@@ -24,7 +24,7 @@ In order to override any assets within the game or add new content, the files mu
 @pause
 :skip
 ```
-4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as 5. the folder you just dragged. This file should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
+4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as the folder you just dragged. This file should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
 6. As long as your file structure mimics Ready or Not, and you followed these instructions, you will have a working mod.
 
 ### Mod Installation  
