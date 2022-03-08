@@ -544,33 +544,8 @@ var cookieconsent = function(e) {
                     de: s,
                     fr: c,
                     es: l,
-                    ca_es: p,
                     it: d,
-                    sv: u,
-                    nl: _,
-                    pt: m,
-                    fi: k,
-                    hu: v,
-                    hr: f,
-                    cs: y,
-                    da: b,
-                    ro: h,
-                    sk: g,
-                    sl: x,
-                    pl: w,
-                    sr: z,
-                    lt: j,
-                    lv: C,
-                    ru: A,
-                    no: L,
-                    bg: P,
-                    el: S,
-                    mk: E,
-                    cy: I,
-                    ja: O,
-                    ar: T,
-                    tr: B,
-                    oc: N
+                    ru: A
                 }, this.cookieConsent.log("[i18n] Default translations initialized", "info")
             }, e.prototype.initAvailableLanguages = function() {
                 this.availableLanguages = [{
@@ -586,86 +561,11 @@ var cookieconsent = function(e) {
                     value: "es",
                     title: "Spanish"
                 }, {
-                    value: "ca_es",
-                    title: "Catalan"
-                }, {
                     value: "it",
                     title: "Italian"
                 }, {
-                    value: "sv",
-                    title: "Swedish"
-                }, {
-                    value: "nl",
-                    title: "Dutch"
-                }, {
-                    value: "pt",
-                    title: "Portuguese"
-                }, {
-                    value: "fi",
-                    title: "Finnish"
-                }, {
-                    value: "hu",
-                    title: "Hungarian"
-                }, {
-                    value: "hr",
-                    title: "Croatian"
-                }, {
-                    value: "cs",
-                    title: "Czech"
-                }, {
-                    value: "da",
-                    title: "Danish"
-                }, {
-                    value: "ro",
-                    title: "Romanian"
-                }, {
-                    value: "sk",
-                    title: "Slovak"
-                }, {
-                    value: "sl",
-                    title: "Slovenian"
-                }, {
-                    value: "pl",
-                    title: "Polish"
-                }, {
-                    value: "sr",
-                    title: "Serbian"
-                }, {
-                    value: "lt",
-                    title: "Lithuanian"
-                }, {
-                    value: "lv",
-                    title: "Latvian"
-                }, {
                     value: "ru",
                     title: "Russian"
-                }, {
-                    value: "no",
-                    title: "Norwegian"
-                }, {
-                    value: "bg",
-                    title: "Bulgarian"
-                }, {
-                    value: "el",
-                    title: "Greek"
-                }, {
-                    value: "mk",
-                    title: "Macedonian"
-                }, {
-                    value: "cy",
-                    title: "Welsh"
-                }, {
-                    value: "ja",
-                    title: "Japanese"
-                }, {
-                    value: "ar",
-                    title: "Arabic"
-                }, {
-                    value: "tr",
-                    title: "Turkish"
-                }, {
-                    value: "oc",
-                    title: "Occitan"
                 }], this.cookieConsent.log("[i18n] Default languages initialized", "info")
             }, e.prototype.$t = function(e, t, i) {
                 void 0 === i && (i = null);
