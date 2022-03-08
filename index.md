@@ -88,5 +88,8 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 - QuantumNuke75#3593
 - The Real Sourc3#7480
 
+### About our Privacy Policy
+You may have noticed that we do have a privacy policy, and cookie consent. These just permit us to view website load data, page views, and page interest.
+
 
 
