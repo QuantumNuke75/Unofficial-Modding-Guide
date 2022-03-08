@@ -1040,7 +1040,6 @@ var cookieconsent = function(e) {
                     t = document.createElement("div");
                 t.classList.add("cc-cp-foot");
                 var i = document.createElement("div");
-                i.classList.add("cc-cp-foot-byline"), i.innerHTML = a.magicTransform("Q29va2llIENvbnNlbnQgYnkgPGEgaHJlZj0iaHR0cHM6Ly93d3cuZnJlZXByaXZhY3lwb2xpY3kuY29tL2ZyZWUtY29va2llLWNvbnNlbnQvIiB0YXJnZXQ9Il9ibGFuayI+RnJlZVByaXZhY3lQb2xpY3kuY29tPC9hPg==");
                 var n = document.createElement("div");
                 n.classList.add("cc-cp-foot-button");
                 var o = document.createElement("button");
