@@ -266,42 +266,7 @@ var cookieconsent = function(e) {
         e.href = URL.createObjectURL(r), s && URL.revokeObjectURL(s)
     }
 }, function(e) {
-    e.exports = JSON.parse('{	"i18n": {
-		"active": "Active",
-		"always_active": "Always active",
-		"impressum": "<a href='%s' target='_blank'>Impressum</a>",
-		"inactive": "Inactive",
-		"nb_agree": "I agree",
-		"nb_changep": "Change my preferences",
-		"nb_ok": "OK",
-		"nb_reject": "I decline",
-		"nb_text": "We use cookies and other tracking technologies to analyze our website traffic and to understand where our visitors are coming from.",
-		"nb_title": "We Utilize Cookies",
-		"pc_fnct_text_1": "Functionality cookies",
-		"pc_fnct_text_2": "These cookies are used to provide you with a more personalized experience on our website and to remember choices you make when you use our website.",
-		"pc_fnct_text_3": "For example, we may use functionality cookies to remember your language preferences or remember your login details.",
-		"pc_minfo_text_1": "More information",
-		"pc_minfo_text_2": "For any queries in relation to our policy on cookies and your choices, please contact us.",
-		"pc_minfo_text_3": "To find out more, please visit our <a href='%s' target='_blank'>Privacy Policy</a>.",
-		"pc_save": "Save my preferences",
-		"pc_sncssr_text_1": "Strictly necessary cookies",
-		"pc_sncssr_text_2": "These cookies are essential to provide you with services available through our website and to enable you to use certain features of our website.",
-		"pc_sncssr_text_3": "Without these cookies, we cannot provide you certain services on our website.",
-		"pc_title": "Cookies Preferences Center",
-		"pc_trck_text_1": "Tracking cookies",
-		"pc_trck_text_2": "These cookies are used to collect information to analyze the traffic to our website and how visitors are using our website.",
-		"pc_trck_text_3": "For example, these cookies may track things such as how long you spend on the website or the pages you visit which helps us to understand how we can improve our website site for you.",
-		"pc_trck_text_4": "The information collected through these tracking and performance cookies do not identify any individual visitor.",
-		"pc_trgt_text_1": "Targeting and advertising cookies",
-		"pc_trgt_text_2": "These cookies are used to show advertising that is likely to be of interest to you based on your browsing habits.",
-		"pc_trgt_text_3": "These cookies, as served by our content and/or advertising providers, may combine information they collected from our website with other information they have independently collected relating to your web browser's activities across their network of websites.",
-		"pc_trgt_text_4": "If you choose to remove or disable these targeting or advertising cookies, you will still see adverts but they may not be relevant to you.",
-		"pc_yprivacy_text_1": "Your privacy is important to us",
-		"pc_yprivacy_text_2": "Cookies are very small text files that are stored on your computer when you visit a website. We use cookies for a variety of purposes and to enhance your online experience on our website (for example, to remember your account login details).",
-		"pc_yprivacy_text_3": "You can change your preferences and decline certain types of cookies to be stored on your computer while browsing our website. You can also remove any cookies already stored on your computer, but keep in mind that deleting cookies may prevent you from using parts of our website.",
-		"pc_yprivacy_title": "Your privacy",
-		"privacy_policy": "<a href='%s' target='_blank'>Privacy Policy</a>"
-	}')
+    e.exports = JSON.parse('{"i18n":{"active":"Active","always_active":"Always active","impressum":"<a href=\'%s\' target=\'_blank\'>Impressum</a>","inactive":"Inactive","nb_agree":"I agree","nb_changep":"Change my preferences","nb_ok":"OK","nb_reject":"I decline","nb_text":"We use cookies and other tracking technologies to analyze our website traffic and to understand where our visitors are coming from.","nb_title":"We Utilize Cookies","pc_fnct_text_1":"Functionality cookies","pc_fnct_text_2":"These cookies are used to provide you with a more personalized experience on our website and to remember choices you make when you use our website.","pc_fnct_text_3":"For example, we may use functionality cookies to remember your language preferences or remember your login details.","pc_minfo_text_1":"More information","pc_minfo_text_2":"For any queries in relation to our policy on cookies and your choices, please contact us.","pc_minfo_text_3":"To find out more, please visit our <a href=\'%s\' target=\'_blank\'>Privacy Policy</a>.","pc_save":"Save my preferences","pc_sncssr_text_1":"Strictly necessary cookies","pc_sncssr_text_2":"These cookies are essential to provide you with services available through our website and to enable you to use certain features of our website.","pc_sncssr_text_3":"Without these cookies, we cannot provide you certain services on our website.","pc_title":"Cookies Preferences Center","pc_trck_text_1":"Tracking cookies","pc_trck_text_2":"These cookies are used to collect information to analyze the traffic to our website and how visitors are using our website.","pc_trck_text_3":"For example, these cookies may track things such as how long you spend on the website or the pages you visit which helps us to understand how we can improve our website site for you.","pc_trck_text_4":"The information collected through these tracking and performance cookies do not identify any individual visitor.","pc_trgt_text_1":"Targeting and advertising cookies","pc_trgt_text_2":"These cookies are used to show advertising that is likely to be of interest to you based on your browsing habits.","pc_trgt_text_3":"These cookies, as served by our content and/or advertising providers, may combine information they collected from our website with other information they have independently collected relating to your web browser\'s activities across their network of websites.","pc_trgt_text_4":"If you choose to remove or disable these targeting or advertising cookies, you will still see adverts but they may not be relevant to you.","pc_yprivacy_text_1":"Your privacy is important to us","pc_yprivacy_text_2":"Cookies are very small text files that are stored on your computer when you visit a website. We use cookies for a variety of purposes and to enhance your online experience on our website (for example, to remember your account login details).","pc_yprivacy_text_3":"You can change your preferences and decline certain types of cookies to be stored on your computer while browsing our website. You can also remove any cookies already stored on your computer, but keep in mind that deleting cookies may prevent you from using parts of our website.","pc_yprivacy_title":"Your privacy","privacy_policy":"<a href=\'%s\' target=\'_blank\'>Privacy Policy</a>"}}')
 }, function(e) {
     e.exports = JSON.parse('{"i18n":{"active":"Aktiv","always_active":"Immer aktiv","impressum":"<a href=\'%s\' target=\'_blank\'>Impressum</a>","inactive":"Inaktiv","nb_agree":"Alle akzeptieren","nb_changep":"Einstellungen Ã¤ndern","nb_ok":"OK","nb_reject":"Ich lehne ab","nb_text":"Diese Website verwendet Cookies und Targeting Technologien, um Ihnen ein besseres Internet-Erlebnis zu ermÃ¶glichen und die Werbung, die Sie sehen, besser an Ihre BedÃ¼rfnisse anzupassen. Diese Technologien nutzen wir auÃŸerdem, um Ergebnisse zu messen, um zu verstehen, woher unsere Besucher kommen oder um unsere Website weiter zu entwickeln.","nb_title":"Ihre PrivatsphÃ¤re ist uns wichtig","pc_fnct_text_1":"Funktions Cookies","pc_fnct_text_2":"Diese Cookies werden verwendet, um Ihnen ein persÃ¶nlicheres Erlebnis auf unserer Website zu ermÃ¶glichen und um sich an Ihre Entscheidungen zu erinnern, die Sie bei der Nutzung unserer Website getroffen haben.","pc_fnct_text_3":"Beispielsweise kÃ¶nnen wir Funktions-Cookies verwenden, um Ihre Spracheinstellungen oder Ihre Anmeldedaten zu speichern.","pc_minfo_text_1":"Mehr Informationen","pc_minfo_text_2":"Bei Fragen in Bezug auf unseren Umgang mit Cookies und Ihrer PrivatsphÃ¤re kontaktieren Sie uns bitte.","pc_minfo_text_3":"Details finden Sie in unserer <a href=\'%s\' target=\'_blank\'>Datenschutzrichtlinie</a>.","pc_save":"Einstellungen speichern","pc_sncssr_text_1":"Technisch notwendige Cookies","pc_sncssr_text_2":"Diese Cookies sind fÃ¼r die Bereitstellung von Diensten, die Ã¼ber unsere Website verfÃ¼gbar sind, und fÃ¼r die Verwendung bestimmter Funktionen unserer Website von wesentlicher Bedeutung.","pc_sncssr_text_3":"Ohne diese Cookies kÃ¶nnen wir Ihnen bestimmte Dienste auf unserer Website nicht zur VerfÃ¼gung stellen.","pc_title":"Cookie Einstellungen","pc_trck_text_1":"Tracking und Performance Cookies","pc_trck_text_2":"Diese Cookies werden zum Sammeln von Informationen verwendet, um den Verkehr auf unserer Website und die Nutzung unserer Website durch Besucher zu analysieren.","pc_trck_text_3":"Diese Cookies kÃ¶nnen beispielsweise nachverfolgen, wie lange Sie auf der Website verweilen oder welche Seiten Sie besuchen. So kÃ¶nnen wir verstehen, wie wir unsere Website fÃ¼r Sie verbessern kÃ¶nnen.","pc_trck_text_4":"Die durch diese Tracking- und Performance-Cookies gesammelten Informationen identifizieren keinen einzelnen Besucher.","pc_trgt_text_1":"Targeting und Werbung Cookies","pc_trgt_text_2":"Diese Cookies werden genutzt, um Werbung anzuzeigen, die Sie aufgrund Ihrer Surfgewohnheiten wahrscheinlich interessieren wird.","pc_trgt_text_3":"Diese Cookies, die von unseren Inhalten und / oder Werbeanbietern bereitgestellt werden, kÃ¶nnen Informationen, die sie von unserer Website gesammelt haben, mit anderen Informationen kombinieren, welche sie durch AktivitÃ¤ten Ihres Webbrowsers in Ihrem Netzwerk von Websites gesammelt haben.","pc_trgt_text_4":"Wenn Sie diese Targeting- oder Werbe-Cookies entfernen oder deaktivieren, werden weiterhin Anzeigen angezeigt. Diese sind fÃ¼r Sie jedoch mÃ¶glicherweise nicht relevant.","pc_yprivacy_text_1":"Ihre PrivatsphÃ¤re ist uns wichtig","pc_yprivacy_text_2":"Cookies sind sehr kleine Textdateien, die auf Ihrem Rechner gespeichert werden, wenn Sie eine Website besuchen. Wir verwenden Cookies fÃ¼r eine Reihe von Auswertungen, um damit Ihren Besuch auf unserer Website kontinuierlich verbessern zu kÃ¶nnen (z. B. damit Ihnen Ihre Login-Daten erhalten bleiben).","pc_yprivacy_text_3":"Sie kÃ¶nnen Ihre Einstellungen Ã¤ndern und verschiedenen Arten von Cookies erlauben, auf Ihrem Rechner gespeichert zu werden, wÃ¤hrend Sie unsere Webseite besuchen. Sie kÃ¶nnen auf Ihrem Rechner gespeicherte Cookies ebenso weitgehend wieder entfernen. Bitte bedenken Sie aber, dass dadurch Teile unserer Website mÃ¶glicherweise nicht mehr in der gedachten Art und Weise nutzbar sind.","pc_yprivacy_title":"Ihre PrivatsphÃ¤re","privacy_policy":"<a href=\'%s\' target=\'_blank\'>Datenschutzrichtlinie</a>"}}')
 }, function(e) {
@@ -579,8 +544,33 @@ var cookieconsent = function(e) {
                     de: s,
                     fr: c,
                     es: l,
+                    ca_es: p,
                     it: d,
+                    sv: u,
+                    nl: _,
+                    pt: m,
+                    fi: k,
+                    hu: v,
+                    hr: f,
+                    cs: y,
+                    da: b,
+                    ro: h,
+                    sk: g,
+                    sl: x,
+                    pl: w,
+                    sr: z,
+                    lt: j,
+                    lv: C,
                     ru: A,
+                    no: L,
+                    bg: P,
+                    el: S,
+                    mk: E,
+                    cy: I,
+                    ja: O,
+                    ar: T,
+                    tr: B,
+                    oc: N
                 }, this.cookieConsent.log("[i18n] Default translations initialized", "info")
             }, e.prototype.initAvailableLanguages = function() {
                 this.availableLanguages = [{
@@ -596,11 +586,86 @@ var cookieconsent = function(e) {
                     value: "es",
                     title: "Spanish"
                 }, {
+                    value: "ca_es",
+                    title: "Catalan"
+                }, {
                     value: "it",
                     title: "Italian"
                 }, {
+                    value: "sv",
+                    title: "Swedish"
+                }, {
+                    value: "nl",
+                    title: "Dutch"
+                }, {
+                    value: "pt",
+                    title: "Portuguese"
+                }, {
+                    value: "fi",
+                    title: "Finnish"
+                }, {
+                    value: "hu",
+                    title: "Hungarian"
+                }, {
+                    value: "hr",
+                    title: "Croatian"
+                }, {
+                    value: "cs",
+                    title: "Czech"
+                }, {
+                    value: "da",
+                    title: "Danish"
+                }, {
+                    value: "ro",
+                    title: "Romanian"
+                }, {
+                    value: "sk",
+                    title: "Slovak"
+                }, {
+                    value: "sl",
+                    title: "Slovenian"
+                }, {
+                    value: "pl",
+                    title: "Polish"
+                }, {
+                    value: "sr",
+                    title: "Serbian"
+                }, {
+                    value: "lt",
+                    title: "Lithuanian"
+                }, {
+                    value: "lv",
+                    title: "Latvian"
+                }, {
                     value: "ru",
                     title: "Russian"
+                }, {
+                    value: "no",
+                    title: "Norwegian"
+                }, {
+                    value: "bg",
+                    title: "Bulgarian"
+                }, {
+                    value: "el",
+                    title: "Greek"
+                }, {
+                    value: "mk",
+                    title: "Macedonian"
+                }, {
+                    value: "cy",
+                    title: "Welsh"
+                }, {
+                    value: "ja",
+                    title: "Japanese"
+                }, {
+                    value: "ar",
+                    title: "Arabic"
+                }, {
+                    value: "tr",
+                    title: "Turkish"
+                }, {
+                    value: "oc",
+                    title: "Occitan"
                 }], this.cookieConsent.log("[i18n] Default languages initialized", "info")
             }, e.prototype.$t = function(e, t, i) {
                 void 0 === i && (i = null);
