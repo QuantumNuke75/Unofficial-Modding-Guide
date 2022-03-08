@@ -68,7 +68,7 @@ The Company may use Personal Data for the following purposes:
  - **For other purposes**: We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience.
 We may share Your personal information in the following situations:
  - **With Your consent**: We may disclose Your personal information for any other purpose with Your consent.
- - 
+
 ### Retention of Your Personal Data
 
 The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
