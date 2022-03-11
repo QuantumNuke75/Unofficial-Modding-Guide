@@ -64,9 +64,9 @@ You're then free to use all kinds of materials with both translucency and emissi
 
 ### GameModes
 
-A gamemode blueprint must be constructed manually as no blueprints can be imported from the base game.  
-With the Bare Bones project this will be called **GM_COOP**.  
-Create an empty GameMode from the GameMode base class and rename it, then place it in the corresponding folder structure listed above. 
+Blueprints must be constructed manually as no blueprints can be imported from the base game.  
+With the Bare Bones project the gamemode blueprint will be called **GM_COOP**.  
+If you don't have one, create an empty GameMode from the GameMode base class and rename it, then place it in the corresponding folder structure listed above. 
 
 #### GameMode Override:   
  At the top of your editor screen you will find the *Blueprints* tab, where you can edit Asset Blueprints and World Blueprints.  
@@ -76,7 +76,7 @@ Create an empty GameMode from the GameMode base class and rename it, then place 
    If you make a new level instead of using the `ron_wb_combat_01b` included in BB, just note that the standard level of UE4 includes a floor which is a static mesh. This will usually not show up in-game and you'll fall through the world upon launch.  
 If you want static / physics meshes in your world you must either reference base game meshes under the ReadyOrNot folder or provide your own in the correct folders.
 
-For prototyping or if you don't have access to a lot of high poly assets it can be desirable to use BSP brushes. These are usually just convex hull geometry that you can piece together. You can actually make most of your map with this, then add models to enhance the level afterwards.  
+For prototyping or if you don't have access to a lot of high poly assets it can be desirable to use BSP brushes. These are usually just convex hull geometry that you can piece together. You can actually make most of your map with this, then add models to enhance the level afterwards. I included some basic materials too to get you going. 
 
 To make a walkable floor you have to use the *Place Actor* menu's **Geometry** tab and choose the *Box* primitive.  
 Use the right side menu to adjust the size of the floor or use the *Brush Editing Mode* (Shift + 4) to adjust the shape and size of your primitive.
@@ -87,6 +87,9 @@ A trick would be to use the included `SM_Farm_Door_A` door model to align doorwa
 ### Lighting
     
 Include at least one light if not using the "sun" light standard to the scene. This helps bake the correct lightdata on your geometry. Without any light you can sometimes recieve weird shadow artifacts or weird colors. This also helps those weird people who don't put any attachments on their guns.  
+
+I added the GoodSky asset pack from UE4 Marketplace into the template, because it's really handy to configure day/night using it; even adding a thunderstorm in a few clicks.
+In addition to that you'd need to place a Directional Light into the level for the actual light.
 
 You can add multiple lights in your scene, but adjust the Attenuation Radius so that too many don't overlap. UE4 is very limited when it comes to light overlapping, so you'll need to tinker with this to get a good feel for it.
 If a red X is displayed on the light it will not render in the final product or be glitched.
@@ -157,7 +160,12 @@ That will result in your game having no sound other than VO.
 
 ### Materials
 
-TODO: Add content to this chapter.  
+To "paint" your walls/models/etc. you'll need it to display a material. A material in UE4 is a set of textures layered on top of eachother to display color, depth and light interaction. Inside the asset it uses a block with nodes attached to it to get the information. This information is set up in a visual Blueprint form to make the process easier.  
+You drag connections between the material attributes nodes to link them together. I have added a TV simulated material woth a bunch of cool layering to convey a realistic look that you're free to use, mix n' match.
+
+To paint an object you can drag the material from the content browser out onto the surface directly or use the side menus and select multiple surfaces to paint at the same time. 
+
+Chapter not finished.   
 
 ### Post Processing and visual tech
 
