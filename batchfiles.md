@@ -31,6 +31,7 @@
 ```batch
 @if "%~1"=="" goto skip
 
+::REPLACE WITH YOUR DIRECTORY
 @set output_location=C:\Program Files (x86)\Steam\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks
 @setlocal enableextensions
 @pushd %~dp0
