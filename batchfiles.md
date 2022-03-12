@@ -13,6 +13,22 @@
 :skip
 ```
 
+### Un-pak to Custom Directory
+```batch
+@if "%~1"=="" goto skip
+
+::REPLACE WITH YOUR DIRECTORY TO EXTRACT TO
+@set output_location=C:\Program Files (x86)\Steam\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks
+@setlocal enableextensions
+@pushd %~dp0
+@echo %output_location%/%~n1
+.\UnrealPak.exe %1 -extract "%output_location%\%~n1"
+@popd
+@pause
+
+:skip
+```
+
 ### pak to Same Directory
 ```batch
 @if "%~1"=="" goto skip
@@ -27,7 +43,7 @@
 :skip
 ```
 
-### pak to ...\Content\Paks
+### pak to Custom Directory
 ```batch
 @if "%~1"=="" goto skip
 
