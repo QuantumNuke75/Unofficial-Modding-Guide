@@ -6,8 +6,8 @@ Link: [https://www.gildor.org/en/projects/umodel#files](https://www.gildor.org/e
 
 ### FModel  
 Allows for basic reverse engineering of the game.  
-Link: [https://fmodel.app](https://fmodel.app)
-**Addition Information:**
+Link: [https://fmodel.app](https://fmodel.app)  
+**Addition Information:**  
 If crashing occures, navigate to `%appdata%/Roaming` and delete the FModel folder. Then, copy the primary game .pak into a different folder. Relaunch FModel and point it towards the copied .pak file.
 
 ### Universal Unreal Unlocker  
