@@ -7,6 +7,7 @@ Link: [https://www.gildor.org/en/projects/umodel#files](https://www.gildor.org/e
 ### FModel  
 Allows for basic reverse engineering of the game.  
 Link: [https://fmodel.app](https://fmodel.app)  
+  
 **Addition Information:**  
 - If crashing occures, navigate to `%appdata%/Roaming` and delete the FModel folder. Then, copy the primary game .pak into a different folder. Relaunch FModel and point it towards the copied .pak file.
 
@@ -29,6 +30,7 @@ Link: [https://github.com/atenfyr/UAssetGUI](https://github.com/atenfyr/UAssetGU
 ### QuantumPAK
 Allows for easy PAKing and UNPAKing of files without needing to install UE4 or creating batch files.  
 Link: [QuantumPAK](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumPAK.zip)  
+  
 **Setup:**  
  - Extract the zip.
  - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
