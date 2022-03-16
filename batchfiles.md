@@ -1,5 +1,7 @@
 ## Batch Files
 
+**Beta Tool:** [QuantumPAK](https://drive.google.com/file/d/15HpQriK5ZuDCaldQyEBwEMworOFx91Xb/view?usp=sharing)  
+
 ### Un-pak to Win64
 ```batch
 @if "%~1"=="" goto skip
