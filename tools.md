@@ -25,3 +25,12 @@ Link: [https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs](https://www.n
 ### UAsset GUI
 Allows editing raw .uasset files. Use responsibly.  
 Link: [https://github.com/atenfyr/UAssetGUI](https://github.com/atenfyr/UAssetGUI)
+
+### QuantumPAK
+Allows for easy PAKing and UNPAKing of files without needing to install UE4 or creating batch files.  
+Link: [QuantumPAK](quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumPAK.zip)
+**Setup:**  
+ - Extract the zip.
+ - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
+ - Extract the contents of UnrealPakTool, and move all of the contents within the UnrealPakTool folder to `...\UnrealPaker\Engine\Binaries\Win64`.
+ - Run QuantumPAK.exe.
