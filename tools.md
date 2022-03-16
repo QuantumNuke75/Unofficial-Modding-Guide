@@ -28,7 +28,7 @@ Link: [https://github.com/atenfyr/UAssetGUI](https://github.com/atenfyr/UAssetGU
 
 ### QuantumPAK
 Allows for easy PAKing and UNPAKing of files without needing to install UE4 or creating batch files.  
-Link: [QuantumPAK](quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumPAK.zip)
+Link: [QuantumPAK](quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumPAK.zip)  
 **Setup:**  
  - Extract the zip.
  - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
