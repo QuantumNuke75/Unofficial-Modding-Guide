@@ -36,3 +36,12 @@ Link: [QuantumPAK](https://quantumnuke75.github.io/Unofficial-Modding-Guide/down
  - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
  - Extract the contents of UnrealPakTool, and move all of the contents within the UnrealPakTool folder to `...\UnrealPaker\Engine\Binaries\Win64`.
  - Run QuantumPAK.exe.
+
+### Quantum Mod Manager
+A simple mod manager made for Ready or Not. Quickly enable and disable mods, and create and save profiles.
+Link: [Quantum Mod Manager](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumModManager.zip)  
+  
+**Setup:**  
+ - Extract the zip.
+ - Run `QuantumModManager.exe`.
+ - Select the `Paks` folder located within your Ready or Not install location.
