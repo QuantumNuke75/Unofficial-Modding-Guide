@@ -42,6 +42,5 @@ A simple mod manager made for Ready or Not. Quickly enable and disable mods, and
 Link: [Quantum Mod Manager](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumModManager.exe)  
   
 **Setup:**  
- - Extract the zip.
  - Run `QuantumModManager.exe`.
- - Select the `Paks` folder located within your Ready or Not install location.
+ - Select the `Paks` folder located within your Ready or Not install location if the folder selection window pops up.
