@@ -39,7 +39,7 @@ Link: [QuantumPAK](https://quantumnuke75.github.io/Unofficial-Modding-Guide/down
 
 ### Quantum Mod Manager v1.3
 A simple mod manager made for Ready or Not. Quickly enable and disable mods, and create and save profiles.  
-Link: [Quantum Mod Manager](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumModManager.zip)  
+Link: [Quantum Mod Manager](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/QuantumModManager.exe)  
   
 **Setup:**  
  - Extract the zip.
