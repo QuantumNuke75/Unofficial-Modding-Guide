@@ -32,8 +32,9 @@ This can be a very complicated portion of modding. **Make sure to read all of th
 6. If you have made all your data additions and made sure to have the proper imports (you may need to import multiple times for just one thing), then the mod should work. You can tell if it's working if the game does't freeze or crash on launch (wait until the intro screen ends). If this occurs there is a high chance you messed up something with the imports.
 
 
-### JSON Parsing
-Once you have a firm understanding of `Adding Data`, you can semi-easily automate tasks. To start, you'll need soem Python, or other programming knowledge. I'll be using Python for this tutorial because of the simple to use json library that comes with Python 3.  
+### JSON Parsing via Python
+Once you have a firm understanding of `Adding Data`, you can semi-easily automate tasks. To start, you'll need some Python, or other programming knowledge. I'll be using Python for this tutorial because of the simple to use json library that comes with Python 3+. I highly recommend doing this if you need to change a lot of data every time the game updates. If you would like specific help with this, ask QuantumNuke75#3593 on Discord.  
+
 Your first line should be the import statement.
 ```python
 import json
@@ -47,11 +48,11 @@ At the bottom of the file, you'll want to export your JSON file, which you can t
 json.dump(data, open("export.json", "w"))
 ```
 
-You'll then want to load this file as a JSON file. `data` will become a Python dictionary.
+But, you'll then want to load this file as a JSON file. `data` will become a Python dictionary.
 ```python
 data = json.load(file)
 ```
-Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making my mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.**  
+Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making the mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.** In the future, I will also upload the code that automates Everything Unlocked, as that is a more complex example.   
 ```python
 import json
 
@@ -78,4 +79,3 @@ for item in data["Exports"][0]["Table"]["Data"]:
 json.dump(data, open(f"ammo_export_{num_mags}.json", "w"))
 
 ```
-
