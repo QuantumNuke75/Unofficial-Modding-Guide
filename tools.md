@@ -1,4 +1,4 @@
-## Tools
+## Modding Tools
 
 ### UModel  
 Allows for accessing UE4 game files.  
@@ -23,7 +23,7 @@ Link: [https://github.com/Befzz/blender3d_import_psk_psa](https://github.com/Bef
 Allows unpacking and repacking of FMOD banks.  
 Link: [https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs](https://www.nexusmods.com/rugbyleaguelive3/mods/2?tab=docs)
 
-### UAsset GUI
+### UAssetGUI
 Allows editing raw .uasset files. Use responsibly.  
 Link: [https://github.com/atenfyr/UAssetGUI](https://github.com/atenfyr/UAssetGUI)
 
@@ -36,6 +36,8 @@ Link: [QuantumPAK](https://quantumnuke75.github.io/Unofficial-Modding-Guide/down
  - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
  - Extract the contents of UnrealPakTool, and move all of the contents within the UnrealPakTool folder to `...\UnrealPaker\Engine\Binaries\Win64`.
  - Run QuantumPAK.exe.
+
+## Other Tools
 
 ### Quantum Mod Manager v3.3
 A simple mod manager made for Ready or Not. Quickly enable and disable mods, and create and save profiles.  
