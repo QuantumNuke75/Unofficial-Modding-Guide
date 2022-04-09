@@ -44,7 +44,7 @@ The right way is open the editor, and use "save as" to rename.
 
 ## Tutorials
 1. Close the UAssetGUI open before.
-2. Launch the Asset Editor, choose 4.25 at top right. Open IDT.
+2. Launch the Asset Editor, choose 4.25 at top right. Open **IDT**.
 3. Find the weapon you are replacing at "\Code Block\Block 1\DataTable\<WeaponName>", select it at the left side, and export sub (Edit->Export Sub)
 4. Choose one method
 	- Go to the exported sub open it, rename the "\CoreItem\NameString" and "CoreItem\SubTypeString" to **Index**
