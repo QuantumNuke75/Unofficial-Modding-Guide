@@ -1,4 +1,4 @@
-# UAsset Editing: Adding New Weapons
+# UAsset Editing: Adding New Weapons (WIP)
 
 **Tutorial Provided by 0w0-Yui**
 ## Requirements
