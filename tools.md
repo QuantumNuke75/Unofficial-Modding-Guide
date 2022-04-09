@@ -36,7 +36,10 @@ Link: [QuantumPAK](https://quantumnuke75.github.io/Unofficial-Modding-Guide/down
  - Download UnrealPakTool from [here](https://github.com/allcoolthingsatoneplace/UnrealPakTool/releases/download/4.27.0/UnrealPakTool.zip).
  - Extract the contents of UnrealPakTool, and move all of the contents within the UnrealPakTool folder to `...\UnrealPaker\Engine\Binaries\Win64`.
  - Run QuantumPAK.exe.
-
+  
+  
+  
+  
 ## Other Tools
 
 ### Quantum Mod Manager v3.3
