@@ -35,7 +35,7 @@
   <style>
     .navbar {
       overflow: hidden;
-      background-color: #444;
+      background-color: #333; 
     }
 
     .navbar a {
@@ -43,9 +43,55 @@
       font-size: 16px;
       color: white;
       text-align: center;
-      padding: 12px 16px;
+      padding: 14px 16px;
       text-decoration: none;
     }
+
+    .subnav {
+      float: left;
+      overflow: hidden;
+    }
+
+    .subnav .subnavbtn {
+      font-size: 16px;  
+      border: none;
+      outline: none;
+      color: white;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+    }
+
+    .navbar a:hover, .subnav:hover .subnavbtn {
+      background-color: red;
+    }
+
+    .subnav-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      background-color: red;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .subnav-content a {
+      float: left;
+      color: white;
+      text-decoration: none;
+    }
+
+    .subnav-content a:hover {
+      background-color: #eee;
+      color: black;
+    }
+
+    .subnav:hover .subnav-content {
+      display: block;
+    }
+
+
 
     .dropdown {
       float: left;
@@ -64,7 +110,7 @@
     }
 
     .navbar a:hover, .dropdown:hover .dropbtn {
-      background-color: #133ebf;
+      background-color: red;
     }
 
     .dropdown-content {
@@ -79,7 +125,7 @@
     .dropdown-content a {
       float: none;
       color: black;
-      padding: 14px 16px;
+      padding: 12px 16px;
       text-decoration: none;
       display: block;
       text-align: left;
@@ -92,6 +138,8 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
+
+
     
     details {
         border: 0px solid #aaa;
@@ -123,40 +171,36 @@
         <header class="inner">
 
           <h1 id="project_title">Unofficial Modding Guide</h1>
-         
+          
           <div class="navbar">
-            
-            <!-- Home page -->
             <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/index.html">Home</a>
             <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a>
-            <!-- Modding Dropdown -->
-            <div class="dropdown">
-              <button class="dropbtn">Modding 
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
+            
+            <!-- Modding -->
+            <div class="subnav">
+              <button class="subnavbtn">Modding<i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a>
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a>
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a>
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a>
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">UAsset Modding</a>
                 <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a>
-                
-              </div>           
-            </div> 
-            
-            <!--Batch Files Page -->
+                <div class="dropdown">
+                <button class="dropbtn">UAsset Modding<i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Weapon Adding</a>
+                </div>
+              </div> 
+              </div>
+            </div>
             <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/batchfiles.html">Batch Files</a>
-            
-            <!--Tools Page -->
             <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a>
             
-            <!-- Discord Dropdown -->
-            <div class="dropdown">
-              <button class="dropbtn">Discords 
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
+            <!-- Discords -->
+            <div class="subnav">
+              <button class="subnavbtn">Discords<i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
                 <a href="https://discord.gg/ttpc7h6PnU" target="_blank">Ready or Mod</a>
                 <a href="https://discord.com/invite/NGAtrTmXBR" target="_blank">RoN Custom Maps</a>
               </div>
