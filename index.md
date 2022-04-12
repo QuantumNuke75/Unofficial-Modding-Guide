@@ -91,6 +91,3 @@ This is a comprehensive guide for most aspects of Ready or Not modding.
 ### About our Privacy Policy
 You may have noticed that we do have a privacy policy, and cookie consent. These just permit us to view website load data, page views, and page interest.
 
-
-
-
