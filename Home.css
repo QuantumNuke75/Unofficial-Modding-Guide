@@ -9,29 +9,5 @@
   text-transform: uppercase;
   letter-spacing: 0px;
   font-weight: 700;
-  margin: 60px auto 60px calc(((100% - 1440px) / 2) + 635px);
-}
-
-@media (max-width: 1199px) {
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 940px) / 2) + 135px);
-  }
-}
-
-@media (max-width: 991px) {
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 720px) / 2));
-  }
-}
-
-@media (max-width: 767px) {
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 540px) / 2));
-  }
-}
-
-@media (max-width: 575px) {
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 340px) / 2));
-  }
+  margin: 60px auto;
 }
