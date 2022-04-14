@@ -8,7 +8,7 @@
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>default</title>
     <link rel="stylesheet" href="https://unofficial-modding-guide.com/nicepage.css" media="screen">
-<link rel="stylesheet" href="https://unofficial-modding-guide.com/_includes/default_css.css" media="screen">
+<link rel="stylesheet" href="default.css" media="screen">
     <script class="u-script" type="text/javascript" src="https://unofficial-modding-guide.com/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="https://unofficial-modding-guide.com/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.8.2, nicepage.com">
@@ -21,9 +21,11 @@
 		"@type": "Organization",
 		"name": ""
 }</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="default">
-    <meta property="og:type" content="website">
+     <meta content="Unofficial Modding Guide" property="og:title" />
+    <meta content="A comprehensive guide for most aspects of Ready or Not modding." property="og:description" />
+    <meta content="https://unofficial-modding-guide.com/images/unofficialmoddingguide.png" property="og:image" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta content="#FF0000" data-react-helmet="true" name="theme-color" />
   </head>
   <body class="u-body u-xl-mode"><header class="u-clearfix u-grey-90 u-header u-sticky u-sticky-eab3 u-header" id="sec-f7b3"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-align-left u-custom-font u-font-oswald u-text u-text-default u-text-1">UMG</p>
@@ -88,8 +90,22 @@
         </nav>
       </div></header>
     <section class="u-clearfix u-grey-10 u-section-1" id="sec-8060">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-custom-html u-custom-html-1">{{ content }}</div>
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-layout-cell u-size-10 u-layout-cell-1">
+              <div class="u-container-layout u-container-layout-1"></div>
+            </div>
+            <div class="u-container-style u-layout-cell u-size-40 u-layout-cell-2">
+              <div class="u-container-layout u-container-layout-2">
+                <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">{{ content }}</div>
+              </div>
+            </div>
+            <div class="u-container-style u-layout-cell u-size-10 u-layout-cell-3">
+              <div class="u-container-layout u-container-layout-3"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     

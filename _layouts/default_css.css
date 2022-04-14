@@ -516,23 +516,126 @@ Small Device Styles
   }
 
 } 
-.u-section-1 {
+
+
+ .u-section-1 {
   background-image: none;
+  min-height: 608px;
 }
 
-.u-section-1 .u-sheet-1 {
-  min-height: 500px;
+.u-section-1 .u-layout-wrap-1 {
+  margin: 0 auto;
+}
+
+.u-section-1 .u-layout-cell-1 {
+  min-height: 608px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-1 .u-layout-cell-2 {
+  min-height: 608px;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 30px;
 }
 
 .u-section-1 .u-custom-html-1 {
-  height: auto;
-  min-height: 25px;
-  margin: 0 4px 60px -4px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.u-section-1 .u-layout-cell-3 {
+  min-height: 608px;
+}
+
+.u-section-1 .u-container-layout-3 {
+  padding: 30px;
 }
 
 @media (max-width: 1199px) {
-  .u-section-1 .u-custom-html-1 {
-    margin-right: 0;
-    margin-left: 0;
+   .u-section-1 {
+    min-height: 397px;
+  }
+
+  .u-section-1 .u-layout-wrap-1 {
+    margin-right: initial;
+    margin-left: initial;
+  }
+
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 397px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 397px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 397px;
+  }
+}
+
+@media (max-width: 991px) {
+   .u-section-1 {
+    min-height: 304px;
+  }
+
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 304px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 100px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 304px;
+  }
+}
+
+@media (max-width: 767px) {
+   .u-section-1 {
+    min-height: 3420px;
+  }
+
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 1710px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 1710px;
+  }
+
+  .u-section-1 .u-container-layout-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+   .u-section-1 {
+    min-height: 2154px;
+  }
+
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 1077px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 1077px;
   }
 }
