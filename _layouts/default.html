@@ -1,247 +1,110 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-
+<html style="font-size: 16px;">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>default</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="default_css.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 4.8.2, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
     
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <meta content="Unofficial Modding Guide" property="og:title" />
-    <meta content="A comprehensive guide for most aspects of Ready or Not modding." property="og:description" />
-    <meta content="https://unofficial-modding-guide.com/images/unofficialmoddingguide.png" property="og:image" />
-    <meta name="twitter:card" content="summary_large_image">
-    <meta content="#FF0000" data-react-helmet="true" name="theme-color" />
-    <!--<meta content="https://embed.com/this-is-the-site-url" property="og:url" />-->
-    
-    
-    {% if site.google_analytics and jekyll.environment == 'production' %}
-    {% include analytics.html %}
-    {% endif %}
-
-    {% seo %}
-    {% include head-custom.html %}
-    
-    <!-- Cookie Consent-->
-    <script type="text/javascript" src="https://quantumnuke75.github.io/Unofficial-Modding-Guide/consent.js" charset="UTF-8"></script>
-    <script type="text/javascript" charset="UTF-8">
-    document.addEventListener('DOMContentLoaded', function () {
-    cookieconsent.run({"notice_banner_type":"headline","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"Unofficial Modding Guide","website_privacy_policy_url":"https://quantumnuke75.github.io/Unofficial-Modding-Guide/privacy_policy.html"});
-    });
-    </script>
-
-    <noscript>Cookie Consent</noscript>
-    <!-- End Cookie Consent -->
-    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="default">
+    <meta property="og:type" content="website">
   </head>
-  
-  <style>
-    .navbar {
-      overflow: hidden;
-      background-color: #333;
-    }
-
-    .navbar a {
-      float: left;
-      font-size: 16px;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-
-    .subnav {
-      float: left;
-      overflow: hidden;
-    }
-
-    .subnav .subnavbtn {
-      font-size: 16px;  
-      border: none;
-      outline: none;
-      color: white;
-      padding: 16px 16px 18px 16px;
-      background-color: inherit;
-      font-family: inherit;
-      margin: 0;
-    }
-
-    .navbar a:hover, .subnav:hover .subnavbtn {
-      background-color: red;
-    }
-
-    .subnav-content {
-      display: none;
-      position: fixed;
-      background-color: rgb(200,0,0);
-      z-index: 1;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    }
-
-    .subnav-content a {
-      float: left;
-      color: white;
-      text-decoration: none;
-    }
-
-    .subnav-content a:hover {
-      background-color: #ddd;
-      color: white;
-    }
-
-    .subnav:hover .subnav-content {
-      display: block;
-    }
-
-
-
-    .dropdown {
-      float: left;
-      overflow: hidden;
-    }
-
-    .dropdown .dropbtn {
-      font-size: 16px;  
-      border: none;
-      outline: none;
-      color: white;
-      padding: 14px 16px 20px 16px;
-      background-color: inherit;
-      font-family: inherit;
-      margin: 0;
-    }
-
-    .navbar a:hover, .dropdown:hover .dropbtn {
-      background-color: red;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      float: none;
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-
-    
-    details {
-        border: 0px solid #aaa;
-        border-radius: 1px;
-        padding: .5em .5em 0;
-    }
-
-    summary {
-        font-weight: bold;
-        margin: -.5em -.5em 0;
-        padding: .5em;
-    }
-
-    details[open] {
-        padding: .5em;
-    }
-
-    details[open] summary {
-        border-bottom: 1px solid #aaa;
-        margin-bottom: .5em;
-    }
-    
-    </style>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-
-          <h1 id="project_title">Unofficial Modding Guide</h1>
-          
-          <div class="navbar">
-            <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/index.html">Home</a>
-            <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a>
-            
-            <!-- Modding -->
-            <div class="subnav">
-              <button class="subnavbtn">Modding <i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a>
-                <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a>
-                <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a>
-                <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a>
-                <div class="dropdown">
-                  <button class="dropbtn">UAsset Modding <i class="fa fa-caret-down"></i></button>
-                  <div class="dropdown-content">
-                    <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">General UAsset Modding</a>
-                    <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/adding_weapons.html">Adding Weapons</a>
-                  </div>
-                </div> 
-                <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a>
+  <body class="u-body u-xl-mode"><header class="u-clearfix u-grey-90 u-header u-sticky u-sticky-eab3 u-header" id="sec-f7b3"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-align-left u-custom-font u-font-oswald u-text u-text-default u-text-1">UMG</p>
+        <nav class="u-align-right u-dropdown-icon u-menu u-menu-dropdown u-menu-open-right u-offcanvas u-menu-1" data-responsive-from="XL">
+          <div class="menu-collapse">
+            <a class="u-button-style u-nav-link" href="#">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-abc1"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="svg-abc1" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/index.html">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Modding</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white">UAsset Modding</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">General UAsset Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/adding_weapons.html">Adding Weapons</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/batchfiles.html">Batch  Files</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Discords</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://discord.gg/ttpc7h6PnU" target="_blank">Ready or Mod</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://discord.com/invite/NGAtrTmXBR" target="_blank">RoN Custom Maps</a>
+</li></ul>
+</div>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-border-2 u-border-white u-container-style u-inner-container-layout u-opacity u-opacity-85 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-custom-font u-font-oswald u-nav u-popupmenu-items u-spacing-17 u-unstyled u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/index.html">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/faq.html">FAQ</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Modding</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/thebasics.html">The Basics</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/asset_modding/assetmodding.html">Asset Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/sound_modding/soundmodding.html">Sound Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/map_modding/mapmodding.html">Map Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">UAsset Modding</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-7"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/uassetmodding.html">General UAsset Modding</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/uasset_modding/adding_weapons.html">Adding Weapons</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/misc.html">Misc</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/batchfiles.html">Batch  Files</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Discords</a><div class="u-nav-popup"><ul class="u-custom-font u-font-oswald u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-8"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://discord.gg/ttpc7h6PnU" target="_blank">Ready or Mod</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://discord.com/invite/NGAtrTmXBR" target="_blank">RoN Custom Maps</a>
+</li></ul>
+</div>
+</li></ul>
               </div>
             </div>
-            <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/batchfiles.html">Batch Files</a>
-            <a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/tools.html">Tools</a>
-            
-            <!-- Discords -->
-            <div class="subnav">
-              <button class="subnavbtn">Discords <i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="https://discord.gg/ttpc7h6PnU" target="_blank">Ready or Mod</a>
-                <a href="https://discord.com/invite/NGAtrTmXBR" target="_blank">RoN Custom Maps</a>
-              </div>
-            </div> 
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
-          
-          <!--
-          {% if site.github.is_project_page %}
-            <a id="readyormod_banner" href="https://discord.gg/ttpc7h6PnU">Ready or Mod Discord</a>
-          {% endif %}
-          -->  
-
-          <!--<h2 id="project_tagline">{{ site.description | default: site.github.project_tagline }}</h2>-->
-
-          {% if site.show_downloads %}
-            <section id="downloads">
-              <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>
-            </section>
-          {% endif %}
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        {{ content }}
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        {% if site.github.is_project_page %}
-        <p class="copyright"><a href="https://quantumnuke75.github.io/Unofficial-Modding-Guide/privacy_policy.html">Privacy Policy</a></p>
-        {% endif %}
-      </footer>
-    </div>
+        </nav>
+      </div></header>
+    <section class="u-clearfix u-grey-10 u-section-1" id="sec-8060">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-custom-html u-custom-html-1">{{ content }}</div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-90 u-footer" id="sec-a5a7"><div class="u-align-left u-clearfix u-sheet u-sheet-1"></div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
   </body>
 </html>
