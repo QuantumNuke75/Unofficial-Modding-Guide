@@ -36365,8 +36365,39 @@ a.u-link.u-text-hover-grey-90:hover {
   margin: -40px 0 8px auto;
 }
 
+.u-header .u-nav-2 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.u-header .u-nav-3 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.u-header .u-nav-4 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
 .u-header .u-nav-5 {
   font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.u-header .u-nav-6 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.u-header .u-nav-7 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.u-header .u-nav-8 {
+  font-weight: 400;
+  font-size: 0.75rem;
 }
 @media (max-width: 1199px) {
    .u-header {
