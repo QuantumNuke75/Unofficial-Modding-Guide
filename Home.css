@@ -1,10 +1,7 @@
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("images/blueprint.jpg");
+  background-image: url("images/UMG_Background.jpg");
   background-position: 50% 50%;
-}
-
-.u-section-1 .u-sheet-1 {
-  min-height: 870px;
+  min-height: 100vh;
 }
 
 .u-section-1 .u-btn-1 {
@@ -12,33 +9,29 @@
   text-transform: uppercase;
   letter-spacing: 0px;
   font-weight: 700;
-  margin: 60px auto;
+  margin: 60px auto 60px calc(((100% - 1440px) / 2) + 635px);
 }
 
 @media (max-width: 1199px) {
-   .u-section-1 {
-    background-size: 110%;
-  }
-
-  .u-section-1 .u-sheet-1 {
-    min-height: 660px;
+  .u-section-1 .u-btn-1 {
+    margin-left: calc(((100% - 940px) / 2) + 135px);
   }
 }
 
 @media (max-width: 991px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 506px;
+  .u-section-1 .u-btn-1 {
+    margin-left: calc(((100% - 720px) / 2));
   }
 }
 
 @media (max-width: 767px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 380px;
+  .u-section-1 .u-btn-1 {
+    margin-left: calc(((100% - 540px) / 2));
   }
 }
 
 @media (max-width: 575px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 239px;
+  .u-section-1 .u-btn-1 {
+    margin-left: calc(((100% - 340px) / 2));
   }
 }

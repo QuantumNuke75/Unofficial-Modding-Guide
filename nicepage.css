@@ -36526,7 +36526,7 @@ a.u-link.u-text-hover-grey-90:hover {
 /*end-variables sitestylecss*/
  .u-header {
   background-image: none;
-  min-height: 49px;
+  min-height: 50px;
 }
 
 .u-header .u-text-1 {
@@ -36580,8 +36580,7 @@ a.u-link.u-text-hover-grey-90:hover {
 @media (max-width: 1199px) {
   .u-header .u-text-1 {
     width: auto;
-    margin-right: calc(((100% - 1440px) / 2) + 1136px);
-    margin-left: calc(((100% - 1440px) / 2) + 250px);
+    margin-right: calc(((100% - 940px) / 2) + 922px);
   }
 
   .u-header .u-menu-1 {
