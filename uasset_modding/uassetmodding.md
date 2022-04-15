@@ -1,3 +1,8 @@
+---
+title: UAsset Modding
+layout: default
+--- 
+
 ## UAsset Modding
 To do  UAsset modding, you'll need to be able to extract the raw files from the game. Make sure to use this .bat file in your UE4 install directory to unpack the game files:
 ```batch
