@@ -1,7 +1,6 @@
 ---
-title: PAGE TITLE HERE
-layout: Test-Content-Page
-filename: misc
+title: Misc
+layout: default
 --- 
 
 ## Misc
