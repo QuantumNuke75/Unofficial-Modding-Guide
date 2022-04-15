@@ -1,3 +1,8 @@
+---
+title: The Basics
+layout: default
+--- 
+
 ## The Basics
 
 ### Extracting Game Files  
