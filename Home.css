@@ -1,7 +1,6 @@
  .u-section-1 {
   background-image: url("images/UMG_Background.jpg");
   background-position: 50% 50%;
-  min-height: 1871px;
 }
 
 .u-section-1 .u-btn-1 {
@@ -14,13 +13,14 @@
 
 .u-section-1 .u-text-1 {
   background-image: none;
-  margin: 203px auto 0 calc(((100% - 1200px) / 2) + 109px);
+  font-weight: normal;
+  margin: 231px auto 0 calc(((100% - 1200px) / 2) + 121px);
 }
 
 .u-section-1 .u-gallery-1 {
   height: 558px;
   width: 958px;
-  margin: 2px auto 60px calc(((100% - 1200px) / 2) + 109px);
+  margin: 0 auto 60px;
 }
 
 .u-section-1 .u-carousel-indicators-1 {
@@ -104,79 +104,50 @@
 }
 
 @media (max-width: 1199px) {
-   .u-section-1 {
-    min-height: 1123px;
-  }
-
   .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 720px) / 2) + 22px);
     align-self: center;
+    margin-top: 689px;
+    margin-left: auto;
   }
 
   .u-section-1 .u-text-1 {
-    font-weight: normal;
-    margin-left: calc(((100% - 720px) / 2) + 109px);
+    margin-top: 237px;
+    margin-left: calc(((100% - 720px) / 2) + 121px);
   }
 
   .u-section-1 .u-gallery-1 {
     width: 720px;
-    margin-left: calc(((100% - 720px) / 2));
+    margin-top: 20px;
   }
 }
 
 @media (max-width: 991px) {
-   .u-section-1 {
-    min-height: 1092px;
-  }
-
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 700px) / 2) + 2px);
-  }
-
   .u-section-1 .u-text-1 {
-    margin-left: calc(((100% - 700px) / 2) + 109px);
+    margin-left: calc(((100% - 700px) / 2) + 121px);
   }
 
   .u-section-1 .u-gallery-1 {
     width: 700px;
-    margin-left: calc(((100% - 700px) / 2));
+    margin-top: 0;
   }
 }
 
 @media (max-width: 767px) {
-   .u-section-1 {
-    min-height: 842px;
-  }
-
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 540px) / 2));
-  }
-
   .u-section-1 .u-text-1 {
-    margin-left: calc(((100% - 540px) / 2) + 109px);
+    margin-left: calc(((100% - 540px) / 2) + 121px);
   }
 
   .u-section-1 .u-gallery-1 {
     width: 540px;
-    margin-left: calc(((100% - 540px) / 2));
   }
 }
 
 @media (max-width: 575px) {
-   .u-section-1 {
-    min-height: 530px;
-  }
-
-  .u-section-1 .u-btn-1 {
-    margin-left: calc(((100% - 340px) / 2));
-  }
-
   .u-section-1 .u-text-1 {
-    margin-left: calc(((100% - 340px) / 2) + 109px);
+    margin-left: calc(((100% - 340px) / 2) + 76px);
   }
 
   .u-section-1 .u-gallery-1 {
     width: 340px;
-    margin-left: calc(((100% - 340px) / 2));
   }
 }
