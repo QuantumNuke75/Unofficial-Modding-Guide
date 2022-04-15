@@ -1,3 +1,8 @@
+---
+title: Sound Modding
+layout: default
+--- 
+
 ## Sound Modding
 
 ### Voiceover Modding  
