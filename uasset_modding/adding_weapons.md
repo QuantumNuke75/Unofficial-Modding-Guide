@@ -1,3 +1,8 @@
+---
+title: Adding Weapons
+layout: default
+--- 
+
 # UAsset Editing: Adding New Weapons (WIP)
 
 **Tutorial Provided by 0w0-Yui**
