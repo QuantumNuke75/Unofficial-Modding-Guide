@@ -237,15 +237,15 @@
 .u-section-2 .u-carousel-control-3 {
   position: absolute;
   left: 10px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 }
 
 .u-section-2 .u-carousel-control-4 {
   position: absolute;
   right: 10px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 }
 
 .u-section-2 .u-layout-cell-3 {
@@ -342,6 +342,7 @@
   left: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 .u-section-2 .u-carousel-control-6 {
@@ -349,6 +350,7 @@
   right: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 .u-section-2 .u-layout-wrap-2 {
@@ -423,6 +425,7 @@
   left: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 .u-section-2 .u-carousel-control-8 {
@@ -430,6 +433,7 @@
   right: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 .u-section-2 .u-layout-cell-5 {
@@ -497,15 +501,15 @@
 .u-section-2 .u-carousel-control-9 {
   position: absolute;
   left: 10px;
-  width: 40px;
-  height: 40px;
+  width: 53px;
+  height: 53px;
 }
 
 .u-section-2 .u-carousel-control-10 {
   position: absolute;
   right: 10px;
-  width: 40px;
-  height: 40px;
+  width: 53px;
+  height: 53px;
 }
 
 .u-section-2 .u-layout-cell-6 {
@@ -575,6 +579,7 @@
   left: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 .u-section-2 .u-carousel-control-12 {
@@ -582,6 +587,7 @@
   right: 10px;
   width: 40px;
   height: 40px;
+  padding: 5px;
 }
 
 @media (max-width: 1199px) {

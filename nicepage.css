@@ -36545,29 +36545,11 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-nav-1 {
   font-weight: 400;
-  letter-spacing: 0px;
 }
 
 .u-header .u-nav-5 {
   font-size: 1.25rem;
   font-weight: 400;
-}
-
-.u-header .u-nav-6 {
-  font-weight: 400;
-  font-size: 0.875rem;
-  font-style: normal;
-}
-
-.u-header .u-nav-7 {
-  font-weight: 400;
-  font-size: 0.875rem;
-}
-
-.u-header .u-nav-8 {
-  font-weight: 400;
-  font-size: 0.875rem;
-  font-style: normal;
 }
 @media (max-width: 1199px) {
   .u-header .u-text-1 {
@@ -36576,6 +36558,10 @@ a.u-link.u-text-hover-grey-90:hover {
 
   .u-header .u-menu-1 {
     margin-top: -40px;
+  }
+
+  .u-header .u-nav-1 {
+    letter-spacing: normal;
   }
 }
 @media (max-width: 991px) {
