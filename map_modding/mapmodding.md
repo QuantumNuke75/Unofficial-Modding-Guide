@@ -174,50 +174,39 @@ Chapter not finished.
 
 ### Post Processing and visual tech
 
-TODO: Add content to this chapter.  
+Post processing in UE4 is the method to give your maps the extra *umph* and sell the immersion visually. It's how you get areas to feel different and lift the ambience for the player. The goal of post processing is to enhance what's already there to reflect your intended visuals. I might be a little cryptic here, but that's for the better.
+Let's examplify this: If your lore is set in the Middle East it would not make sense that the light has the same color as it does further north like UK, it might be a little orange-shifted to give the "desert-feel". Maybe you want some fog and haze to emulate distant sandstorms. 
+
+Or enhanced clarity. Maybe the lighting  is dialed in right for realism, but has the wrong color, saturation and contrast. Take a look at this basic example:
+
+![Without PP](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/pp_disabled.png)
+![With PP](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/pp_enabled.png)
+
+I can't tell you what exactly you should do for your map to look real. It is very contextual, so it varies from map to map. But I can tell you how certain elements work to achieve some effects. 
+The first element that you should have to enable custom post processing is most obviously a *Post Process Volume* actor. It allows you to change a lot of values regarding filmic and rendering. 
+It contains a long set of variables that you can change to get the desired effects: 
+
+![PP-Menu](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PostProcessMenu.PNG)
+
+For the most part we will use what's in the Color Grading section, because it has the most effect. Scrolling down to **Color Grading** Changing *Temperature*, *Tint* and *Saturation*, *Contrast*, *Gain*, *Gamma* will be our main focus point. Most scene "moods" can be achieved here..
+
+![ColorGrading](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PP_ColorGrading.PNG)
+
+Note that the effects in **Global** has a drop down to change overall values more specifically, and for the most part we should only care about the slider under the color-cirle to change the value of that parameter. If you need to do some color balancing in that area you'd mostly want to do it in *Saturation* and *Gain*.
+
+![ColorGrading Sliders](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PP_ColorGrading_Sliders.PNG)
 
 ### FMOD Sound Integation  
 
-WIP! MORE INFO COMING SOON.    
-For this you'll need [FMOD for UE4](https://www.fmod.com/download), and the Visual Studio C++ editor. Create a new C++ *Volume* Class file named *ReadyOrNotAudioVolume* and open it in Visual Studio. Paste then this content into the header file (the file named *ReadyOrNotAudioVolume.h*):
+#### (WIP - \*no custom sounds yet)
 
-```cpp
-UCLASS()
-class READYORNOT_API AReadyOrNotAudioVolume : public AVolume
-{
-    GENERATED_BODY()
+For this you'll need [FMOD for UE4](https://www.fmod.com/download)
+    If you don't know how to install FMOD visit the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR) and check out the *Guides* Links or watch [THIS VIDEO](https://www.youtube.com/watch?v=z2m925V4jm8)
     
-    // Sets default values for this actor's properties
-    AReadyOrNotAudioVolume();
-
-    virtual void BeginPlay() override;
-    virtual void Tick(float DeltaSeconds) override;
-
-    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Billboard, meta = (AllowPrivateAccess = "true"))
-    UBillboardComponent* BillboardComponent;
-    public:    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    TArray<UFMODEvent*> ReverbEvents;
-
-    UPROPERTY()
-    TArray<FFMODEventInstance> EventInstances;
-
-    UPROPERTY()
-    bool bReverbActivated = false;
-
-    UPROPERTY()
-    TArray<UFMODAudioComponent*> AttachedAudioComponents;
-
-    bool IsAnotherVolumeActivatedAndPlayingEvent(UFMODEvent* Event, FFMODEventInstance& EventInstance);
-    bool IsAnotherVolumeActivatedAndPlayingEventInst(FFMODEventInstance EventInst);
-
-public:
-    bool IsReverbVolumeActivated();
-    TArray<UFMODEvent*> GetReverbEvents();
-    TArray<FFMODEventInstance> GetReverbEventInstances();
-    
-};
-```
-Once you've created the header file and installed FMOD Studio 2.02.03, follow this PDF provided by Zack Bower:  
-    [Ambient Implementation](https://quantumnuke75.github.io/Unofficial-Modding-Guide/downloads/fmod.pdf)  
-    If you don't know how to install FMOD visit the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR) and check out the *Guides* Links
+   When you have installed FMOD correctly, you can make sound come into your map by placing a **FMOD Audio Player** from the *Place Actors* menu. You'll also need to reference a sound that's already in game\* for it to play. If you want this sound to always play regardless of your location (like theme music) you don't really need to do anything but to check that the "Start Activated" checkbox is ticked.
+   
+   If you want to make a dynamically changing ambience based on the area you enter you will need to use a simple blueprint actor for this. I covered that briefly in the video above, but the idea is to blend or stop all other ambiences when you step into a new one. 
+   Using a box collision that only overlaps the *Pawn* channel will make the triggering happen. To fade in a sound you can use a timeline to manipulate the volume but ideally you want to fade in based on the distance to the other ambience actor but for normal cues 2 seconds of fade time will do.
+   
+   We will see more Audio work in the near future!
+   (And if you wondered what happened to Zack's approach, let's just say we don't have access to all the files needed for that to work)
