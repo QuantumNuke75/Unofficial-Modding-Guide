@@ -5,7 +5,7 @@ layout: default
 
 ## Batch Files
 
-### Un-pak to Win64
+### Extract to Win64
 ```batch
 @if "%~1"=="" goto skip
 
@@ -18,7 +18,7 @@ layout: default
 :skip
 ```
 
-### Un-pak to Custom Directory
+### Extract to Custom Directory
 ```batch
 @if "%~1"=="" goto skip
 
@@ -34,7 +34,7 @@ layout: default
 :skip
 ```
 
-### pak to Same Directory
+### Pak to Same Directory
 ```batch
 @if "%~1"=="" goto skip
 
@@ -48,7 +48,7 @@ layout: default
 :skip
 ```
 
-### pak to Custom Directory
+### Pak to Custom Directory
 ```batch
 @if "%~1"=="" goto skip
 
