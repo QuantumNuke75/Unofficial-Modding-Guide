@@ -22,4 +22,4 @@ No, unless you cheat via other means. Mods are supported by the developers.
 NexusMods is the recommended place to find mods. Any other website may not be safe and can harm the creators of the mod.
 
 **Q: Should I start modding?**  
-Probably not. The official SDK might come out in 3-6 months, and that’s the best bet for modding. As for the moment, modding is a pain compared to when the SDK comes out, and unless you really want to, you probably shouldn’t.
+Depends on your willingness to learn. Modding can be difficult to get into, but isn't too hard either. The SDK is coming on or post game release, which will be when mods are officially supported. Along with the SDK will come ease of modding, which we do not currently have.
