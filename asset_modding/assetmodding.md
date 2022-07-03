@@ -13,7 +13,7 @@ Texture replacement is the easiest to mod. An example can be found in [Example M
 3. As with overriding any other object from the game, make sure to replicate the location of the texture. If you don’t, the changes won’t apply.
 4. Create a .pak file, and everything should work properly. 
 
-### Skeletal Mesh Replacement Pt. 1  
+### Skeletal Mesh Replacement 
 1. Extract the model as a .psk using UModel.
 2. Import file into Blender.
 3. Change the units into Metric, Meters, with a scale of 0.01.
@@ -29,7 +29,7 @@ Texture replacement is the easiest to mod. An example can be found in [Example M
 13. Cook the content, and put the texture, material, and mesh files in the correct places. 
 14. Make sure to add a `_P` to the end of your .pak file name. This makes it a patch file.
 
-### Skeletal Mesh Replacement Pt. 2 / Material Replacement  
+### Material Replacement  
 1. Using FModel, locate the master material you wish to use. Ensure that the material name somewhat correlates to what you are modding. For example, an attachment should have the master material `Weapon_1P_Toprain_MASTER`. Alternatively, you can use UModel to export the material and look at the .txt file.
 2. In that file, while still using FModel, locate three parameters. These parameters will point to the Normal, Texture, and ORM maps. If you are using UModel instead, you can also view these parameters.
 3. In UE4, create a fake master material with the same name in the same location as where it is within the game. You will not be exporting this file unless you uncheck the `Share Material Shader Code` in `Project Settings > Packaging`.
