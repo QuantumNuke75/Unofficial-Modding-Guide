@@ -7,7 +7,7 @@ layout: default
 
 ### Extracting Game Files  
 There are two methods of easily accessing the files within the game. 
-1. [UModel](https://unofficial-modding-guide.com/tools.html), directing it towards the location of the .pak files within Ready or Not: `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks`. This will allow you to extract almost anything you want. Texture files will be in .tga, and models should be in .psk.
+1. [UModel](https://unofficial-modding-guide.com/tools.html), directing it towards the location of the .pak files within Ready or Not: `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks`. This will allow you to extract textures, models, and animations.
 2. Unpaking, which can be done simply by setting up an unpak batch script, coverd in [Misc](https://unofficial-modding-guide.com/misc.html).
 
 ### Cooking Modified Files  
@@ -15,10 +15,10 @@ In order to override any assets within the game or add new content, the files mu
 
 1. Install the latest version of Unreal Engine 4.27. The current latest version is 4.27.2.
 2. Import all the files you want to pack with your mod into a new blank project. Any other template can work, but will result in significantly longer cooking times.
-3. Go to `File > Cook Content for Windows`. This converts the files into a UE4 exported format. Retrieve the cooked files in `<ProjectLocation/><ProjectName>/Saved/Cooked/WindowsNoEditor/`.
+3. Go to `File > Cook Content for Windows`. This converts the files into a UE4 exported format (\*.uasset, \*.uexp, \*.ubulk). Retrieve the cooked files in `<ProjectLocation/><ProjectName>/Saved/Cooked/WindowsNoEditor/`.
 
 ### Creating a PAK File  
-1. Make sure the folder you are PAKing, for example `pakchunk99-Mods_MyMod`, contains the same file structure as Ready or Not. This is the file structure. Make sure to read all of it, and completely understand it before continuing. The number after `pakchunk` indicates the load order of the .pak.
+1. Make sure the folder you are PAKing, for example `pakchunk99-Mods_MyMod_P`, contains the same file structure as Ready or Not. This is the file structure. Make sure to read all of it, and completely understand it before continuing. The number after `pakchunk` indicates the load order of the .pak.
 2. Create a .bat file in your UnrealPak install location (located within your Unreal Engine 4 install), usually `<InstallLocation>\UE_4.27\Engine\Binaries\Win64\UnrealPak.exe`.
 3. In the .bat file, paste the following lines in and save:
 ```batch
@@ -31,14 +31,14 @@ In order to override any assets within the game or add new content, the files mu
 @pause
 :skip
 ```
-4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as the folder you just dragged. This file should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
+4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod_P`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as the folder you just dragged. This file should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
 6. As long as your file structure mimics Ready or Not, and you followed these instructions, you will have a working mod.
 
 ### Mod Installation  
 Navigate to `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks` and put your .pak file there. Ensure that the .pak load order is correct.
 
 ### Understanding the File Structure  
-Let's make this braindead easy. When creating a project in Unreal Engine 4, the project will be saved to a directory. Within that directory will be the project. For example: `<SaveDirectory>/<ProjectName>/…`. `<ProjectName>` houses all of the contents of the Unreal Engine 4 project. In that project folder, there will be a subfolder named `Content`. That folder houses all of the assets and blueprints within a game.
+When creating a project in Unreal Engine 4, the project will be saved to a directory. Within that directory will be the project. For example: `<SaveDirectory>/<ProjectName>/…`. `<ProjectName>` houses all of the contents of the Unreal Engine 4 project. In that project folder, there will be a subfolder named `Content`. That folder houses all of the assets and blueprints within a game.
 
 In the case of Ready or Not, the project name is `ReadyOrNot`. Within that folder, there is a folder called `Content`. Again, this houses everything inside a game except for configuration files. However, when you open the game files in UModel, there may not be a `Content` folder, instead, it’ll have been replaced with a `Game` folder. When .paking your mod, you should replace `Game` with `Content`. Any of the sub folders will remain the same.
 
@@ -59,4 +59,4 @@ There are multiple different file formats that you may encounter while modding. 
 To see if your PAKing is working, download this [example mod](https://drive.google.com/file/d/1iSbu8JqFbry1lioBEIuB5ks0D8bhKQ7c/view?usp=sharing). This will turn your gun on the main menu pink if the .pak is correctly PAKed. Download and extract the .zip file before PAKing. 
 
 ### Debugging  
-The best way to debug any issues is to use the builtin UnrealPak.exe. Simply open this with cmd with the line: `unreakpak.exe -List This_Is_A_Pak.pak`. Look at the mounting point. If you have a single innermost directory that contains all your files, and the mounting point is that directory, you are fine. Otherwise, with multiple directories, the mounting point should be `../../../ReadyOrNot/`.
+The best way to debug any issues is to use the builtin UnrealPak.exe. Simply open this with cmd with the line: `unreakpak.exe -List This_Is_A_Pak.pak`. Look at the mounting point. The mounting point will be the deepest folder that encapulates all of your content. If it is not, you may have an issue.
