@@ -25,7 +25,7 @@ Texture replacement is the easiest to mod. An example can be found in [Example M
 9. Paint the weights accordingly. For guns you’ll most likely want to paint each moving piece with a value of 1.0.
 10. Export the file as an .fbx without leaf bones.
 11. Import the file into UE4.
-12. In order to make material files work, they must be instances of preexisting materials in the game. Instance a material, edit as you would like. Hook up your texture assets. This will be talked about in part two.
+12. In order to make material files work, they must be instances of preexisting materials in the game. Instance a material, edit as you would like. Hook up your texture assets. This will be talked about in Material Replacement.
 13. Cook the content, and put the texture, material, and mesh files in the correct places. 
 14. Make sure to add a `_P` to the end of your .pak file name. This makes it a patch file.
 
