@@ -5,7 +5,7 @@ layout: default
 
 ## Misc
 
-## Batch Pak File Extraction  
+### Batch Pak File Extraction  
 1. Create a new .bat file in the UnrealPak.exe location. In this .bat file put the following:
 ```batch
 @if "%~1"=="" goto skip
