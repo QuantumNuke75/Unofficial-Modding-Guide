@@ -55,6 +55,8 @@ In order to override any assets within the game or add new content, the files mu
 ```
 4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod_P`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as the folder you just dragged.
 
+## Additional Information
+
 ### Mod Installation  
 All .pak mods go here. `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks`. Ensure that the .pak load order is correct.
 
