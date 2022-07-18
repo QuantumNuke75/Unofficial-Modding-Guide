@@ -15,7 +15,7 @@ Texture replacement is the easiest to mod. An example can be found in [Example M
 
 ### Skeletal Mesh Replacement 
 1. Extract the model as a .psk using UModel.
-2. Import file into Blender.
+2. Import file into Blender using the [Blender PSK plugin](https://unofficial-modding-guide.com/tools.html).
 3. Change the units into Metric, Meters, with a scale of 0.01.
 4. Scale the model and skeleton by 100.
 5. Unparent the skeleton from the model.
