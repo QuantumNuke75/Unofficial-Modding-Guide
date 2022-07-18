@@ -3,7 +3,7 @@ title: The Basics
 layout: default
 --- 
 
-## The Basics
+## Important Information
 
 ### Understanding the File Structure  
 When creating a project in Unreal Engine 4, the project will be saved to a directory. Within that directory will be the project. For example: `<SaveDirectory>/<ProjectName>/…`. `<ProjectName>` houses all of the contents of the Unreal Engine 4 project. In that project folder, there will be a subfolder named `Content`. That folder houses all of the assets and blueprints within a game.
@@ -22,6 +22,10 @@ There are multiple different file formats that you may encounter while modding. 
 - **.uexp** - An raw complementary file to uassets, usually containing import and export maps.
 - **.ubulk** - Another data storage file that UE4 uses. 
 - **.umap** - A level/map file, similar to .uasset in the way that there is an uncooked and cooked version.
+
+  
+  
+## Essentials
 
 ### Extracting Game Files  
 There are two methods of extracting games files, both have important differences:
@@ -59,7 +63,7 @@ To see if your PAKing is working, download this [example mod](https://drive.goog
 
 ### Debugging  
 If your mod is not working, make sure to check these common error points:
-1. File structure
-2. No `_P` at the end of your mod name
-3. Load order
-4. Mount point (The best way to debug any issues is to use the builtin UnrealPak.exe. Simply open this with cmd with the line: `unreakpak.exe -List This_Is_A_Pak.pak`. Look at the mounting point. The mounting point will be the deepest folder that encapulates all of your content. If it is not, you may have an issue.)
+- Check the file strucuture. This must perfectly match the files within the game, otherwise it will not load.
+- No `_P` at the end of the mod name. This is needed when a patch pak is used for the main game files.
+- Load order. Incorrecy load order may cause issues between mods, change the numberical elements of the pak name to change the load order.
+- Mount point (The best way to debug any issues is to use the builtin UnrealPak.exe. Simply open this with cmd with the line: `unreakpak.exe -List This_Is_A_Pak.pak`. Look at the mounting point. The mounting point will be the deepest folder that encapulates all of your content. If it is not, you may have an issue.)
