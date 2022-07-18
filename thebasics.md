@@ -25,7 +25,7 @@ There are multiple different file formats that you may encounter while modding. 
 
   
   
-## **Essentials**
+## Essentials
 
 ### Extracting Game Files  
 There are two methods of extracting games files, both have important differences:
