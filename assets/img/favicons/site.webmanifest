@@ -5,8 +5,8 @@ layout: compress
 {% assign favicon_path = "/assets/img/favicons" | relative_url %}
 
 {
-  "name": "HELLO THIS IS A TEST",
-  "short_name": "SHORT TEST",
+  "name": "{{ site.title }}",
+  "short_name": "{{ site.title }}",
   "description": "{{ site.description }}",
   "icons": [
     {
