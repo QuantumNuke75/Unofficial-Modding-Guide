@@ -4,5 +4,4 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+This is the Unofficial Modding Guide for Ready or Not. This is a community build and driven guide, seeking to provide the most accurate and helpful information to those seeking to become modders. 
