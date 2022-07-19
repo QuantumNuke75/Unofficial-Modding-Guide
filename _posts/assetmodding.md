@@ -1,6 +1,5 @@
 ---
 title: Asset Modding
-layout: default
 --- 
 
 ## Asset Modding
