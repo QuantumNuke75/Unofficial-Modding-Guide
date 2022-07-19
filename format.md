@@ -13,9 +13,9 @@ layout: default
 **Bold**  
 ~~Strikethrough~~  
 _Italics_  
-<sub>sub</sub>  
-<sup>sup</sup>  
-> Quote
+<sub>sub<\sub>  
+<sup>sup<\sup>  
+> Quote  
 Light `#ffffff` Dark `#0d1117`
 
 1. Item 1
