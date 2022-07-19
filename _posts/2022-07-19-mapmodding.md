@@ -5,7 +5,6 @@ categories: [Map Modding]
 tags: [maps]
 math: true
 mermaid: true
-comments: true
 ---
 
 
