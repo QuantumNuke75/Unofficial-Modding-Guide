@@ -21,15 +21,15 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Test                          # the main title
+title: Unofficial Modding Guide                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: Guide.   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  Unofficial Guide for Modding
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://quantumnuke75.github.io'
+url: 'https://quantumnuke75.github.io/'
 
 github:
   username: github_username             # change to your github username
