@@ -99,7 +99,7 @@ GEM
     yell (2.2.2)
 
 PLATFORMS
-  x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   html-proofer (~> 3.18)
