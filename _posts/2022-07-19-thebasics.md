@@ -16,6 +16,9 @@ In the case of Ready or Not, the project name is `ReadyOrNot`. Within that folde
 
 The majority of the modding that you will do will be under the `Content` folder. If a file that you are looking to override is in `.../ReadyOrNot/Game/ReadyOrNot/Assets/Weapons/Python`, the file path to copy would be `.../Content/ReadyOrNot/Assets/Weapons/Python`.
 
+> Failure to copy the exact path of Ready or Not will result in a broken mod.
+{: .prompt-danger }
+
 ### File Formats  
 There are multiple different file formats that you may encounter while modding. Here is a list of most of them, and what each of them are.
 - **.psk** - A skeletal or static mesh. May contain the skeleton.
@@ -58,6 +61,10 @@ In order to override any assets within the game or add new content, the files mu
 :skip
 ```
 4. Drag the folder you want to PAK, for example `pakchunk99-Mods_MyMod_P`, directly onto the .bat file you just created.  This will create a .pak file in the same directory as the folder you just dragged.
+
+> If the .pak file size is 1 KB, change the locations of the contents you are attempting to pak.
+{: .prompt-warning }
+
 
 ## Additional Information
 
