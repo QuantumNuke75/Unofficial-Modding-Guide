@@ -2,7 +2,7 @@
 title: Asset Modding
 date: 2022-07-19 12:00:00 +0800
 categories: [Asset Modding]
-tags: [weapons, assets]
+tags: [weapon, assets]
 ---
 
 ## Asset Modding
