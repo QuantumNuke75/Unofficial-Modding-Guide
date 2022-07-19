@@ -62,10 +62,10 @@ Project settings are important when making maps. They tell the engine how to int
 
 Go to the top to *Settings* drop down button and pick **Project Settings** (2nd from the top).  
 Navigate to *Packaging* and scroll down to **Ini Section Blacklist** - there will be a tiny bar with an arrow on it to expand the menu further. Click on it and scroll down to *Directories To Never Cook* and add 2 array elements. Edit them with the 3 dots to this:  
-![Directories](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/mapmodding_dontcook.png)
+![Directories](https://unofficial-modding-guide.com/assets/mapmodding_dontcook.png)
 
 The Folders in the Bare Bones Template that need this treatment are:  
-![List of folders](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/mapmodding_docook.png)
+![List of folders](https://unofficial-modding-guide.com/assets/mapmodding_docook.png)
 
 For custom materials to work we need to edit some **Packaging** settings that can be found in **Project Settings**.  
 Look for the tick box called *Share Material Shader Code* and make sure it is NOT ticked. It should be ticked off in the BB template by default.  
@@ -183,22 +183,22 @@ Let's examplify this: If your lore is set in the Middle East it would not make s
 
 Or enhanced clarity. Maybe the lighting  is dialed in right for realism, but has the wrong color, saturation and contrast. Take a look at this basic example:
 
-![Without PP](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/pp_disabled.png)
-![With PP](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/pp_enabled.png)
+![Without PP](https://unofficial-modding-guide.com/assets/pp_disabled.png)
+![With PP](https://unofficial-modding-guide.com/assets/pp_enabled.png)
 
 I can't tell you what exactly you should do for your map to look real. It is very contextual, so it varies from map to map. But I can tell you how certain elements work to achieve some effects. 
 The first element that you should have to enable custom post processing is most obviously a *Post Process Volume* actor. It allows you to change a lot of values regarding filmic and rendering. 
 It contains a long set of variables that you can change to get the desired effects: 
 
-![PP-Menu](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PostProcessMenu.PNG)
+![PP-Menu](https://unofficial-modding-guide.com/assets/PostProcessMenu.PNG)
 
 For the most part we will use what's in the Color Grading section, because it has the most effect. Scrolling down to **Color Grading** Changing *Temperature*, *Tint* and *Saturation*, *Contrast*, *Gain*, *Gamma* will be our main focus point. Most scene "moods" can be achieved here..
 
-![ColorGrading](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PP_ColorGrading.PNG)
+![ColorGrading](https://unofficial-modding-guide.com/assets/PP_ColorGrading.PNG)
 
 Note that the effects in **Global** has a drop down to change overall values more specifically, and for the most part we should only care about the slider under the color-cirle to change the value of that parameter. If you need to do some color balancing in that area you'd mostly want to do it in *Saturation* and *Gain*.
 
-![ColorGrading Sliders](https://quantumnuke75.github.io/Unofficial-Modding-Guide/images/PP_ColorGrading_Sliders.PNG)
+![ColorGrading Sliders](https://unofficial-modding-guide.com/assets/PP_ColorGrading_Sliders.PNG)
 
 ### FMOD Sound Integation  
 
