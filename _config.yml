@@ -37,7 +37,7 @@ description: >-                        # used by seo meta and the atom feed
 
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://quantumnuke75.github.io'
+url: 'https://unofficial-modding-guide.com'
 
 github:
   username: github_username             # change to your github username
@@ -48,7 +48,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Quantum
+  name: UMG
   email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
