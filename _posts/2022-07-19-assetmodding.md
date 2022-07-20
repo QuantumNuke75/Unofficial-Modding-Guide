@@ -9,7 +9,7 @@ tags: [weapon, assets]
 
 
 ### Texture Replacement  
-Texture replacement is the easiest to mod. An example can be found in [Example Mod](https://unofficial-modding-guide.com/thebasics.html). If you are doing more than recoloring, you will also need to edit the normal and ORM maps.
+Texture replacement is the easiest to mod. An example can be found in [Example Mod](https://unofficial-modding-guide.com/posts/thebasics). If you are doing more than recoloring, you will also need to edit the normal and ORM maps.
 1. When ripping files from the game, look for files that contain `T_`, `BaseColor`, `_B`, as these files are usually the texture files. 
 2. Modify the texture however you would like with GIMP, Photoshop, or any other image editing software. You can also use Substance Painter, and doing such will make texturing much easier. 
 3. As with overriding any other object from the game, make sure to replicate the location of the texture. If you don’t, the changes won’t apply.
@@ -17,7 +17,7 @@ Texture replacement is the easiest to mod. An example can be found in [Example M
 
 ### Skeletal Mesh Replacement 
 1. Extract the model as a .psk using UModel.
-2. Import file into Blender using the [Blender PSK plugin](https://unofficial-modding-guide.com/tools.html).
+2. Import file into Blender using the [Blender PSK plugin](https://unofficial-modding-guide.com/posts/tools).
 3. Change the units into Metric, Meters, with a scale of 0.01.
 4. Scale the model and skeleton by 100.
 5. Unparent the skeleton from the model.
