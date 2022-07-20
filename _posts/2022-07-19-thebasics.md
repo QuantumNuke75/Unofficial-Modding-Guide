@@ -1,9 +1,9 @@
 ---
 title: The Basics
 author: QuantumNuke75
-date: 2022-07-01 00:00:00 +0000
+date: 2022-07-20 00:00:00 +0000
 categories: [General Information]
-tags: []
+tags: [essential, batch]
 pin: true
 ---
 
