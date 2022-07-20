@@ -61,7 +61,7 @@ But, you'll then want to load this file as a JSON file. `data` will become a Pyt
 ```python
 data = json.load(file)
 ```
-Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making the mod, More Ammo. I ask that you take this as an example, and **don't try to steal this code to make a competitor ammo mod, that would be a shitty thing to do.** In the future, I will also upload the code that automates Everything Unlocked, as that is a more complex example.   
+Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making the mod, More Ammo.
 ```python
 import json
 
@@ -70,10 +70,11 @@ num_mags = 15
 file = open('ItemDataTable.json')
 data = json.load(file)
 
-# For every item in the table.
+# For every item in the export table.
 for item in data["Exports"][0]["Table"]["Data"]:
     # For every piece of the item data.
     for item_data in item["Value"]:
+        # If the item's name is MagazineCount
         if item_data["Name"] == "MagazineCountDefault(0)":
             amount = int(item_data["Value"])
             if 3 < amount < 30:
@@ -86,5 +87,6 @@ for item in data["Exports"][0]["Table"]["Data"]:
                 continue
 
 json.dump(data, open(f"ammo_export_{num_mags}.json", "w"))
-
 ```
+> **More Ammo** is an outdated mod, and this code will no longer effect anything in the game.
+{: .prompt-warning }
