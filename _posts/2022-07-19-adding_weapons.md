@@ -1,9 +1,9 @@
 ---
 title: Adding Weapons
-author: QuantumNuke75
 date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
 tags: [weapon, uasset]
+author: "0w0-Yui"
 ---
 
 # UAsset Editing: Adding New Weapons (WIP)
