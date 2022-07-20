@@ -4,7 +4,7 @@ date: 2022-07-19 12:00:00 +0800
 categories: [General Information]
 tags: [batch]
 pin: true
-desc: Various options for batch files to extract games files or to create a .pak file.
+description: Various options for batch files to extract games files or to create a .pak file.
 ---
 
 ## Batch Files
