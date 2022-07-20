@@ -85,7 +85,7 @@ In order to override any assets within the game or add new content, the files mu
 All .pak mods go here. `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks`. Ensure that the .pak load order is correct.
 
 ### Example Mod  
-To see if your PAKing is working, download this [example mod](https://drive.google.com/file/d/1iSbu8JqFbry1lioBEIuB5ks0D8bhKQ7c/view?usp=sharing). This will turn your gun on the main menu pink if the .pak is correctly PAKed. Download and extract the .zip file before PAKing. 
+To see if your PAKing is working, download this [example mod](https://drive.google.com/file/d/1G_c_4V8ZfZTwNkpzWn-KbgFlI6WQGGJ1/view?usp=sharing). This will turn your gun on the main menu pink if the .pak is correctly PAKed. Download and extract the .zip file before PAKing. 
 
 ### Debugging  
 If your mod is not working, make sure to check these common error points:
