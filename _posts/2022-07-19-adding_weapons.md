@@ -1,7 +1,7 @@
 ---
 title: Adding Weapons
 author: QuantumNuke75
-date: 2019-08-11 00:34:00 +0800
+date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
 tags: [weapon, uasset]
 ---

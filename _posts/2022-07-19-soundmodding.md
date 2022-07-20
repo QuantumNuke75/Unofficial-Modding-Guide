@@ -1,10 +1,9 @@
 ---
 title: Sound Modding
-date: 2022-07-19 12:00:00 +0800
+date: 2022-07-19 00:00:00 +0000
 categories: [Sound Modding]
 tags: [sound, fmod]
-math: true
-mermaid: true
+description: A guide on how to replace various sound files within the game.
 ---
 
 ## Sound Modding

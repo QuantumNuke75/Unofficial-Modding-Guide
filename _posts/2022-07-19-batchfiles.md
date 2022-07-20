@@ -1,6 +1,6 @@
 ---
 title: Batch Files
-date: 2022-07-19 12:00:00 +0800
+date: 2022-07-19 00:00:00 +0000
 categories: [General Information]
 tags: [batch]
 pin: true

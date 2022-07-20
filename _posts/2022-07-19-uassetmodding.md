@@ -1,10 +1,9 @@
 ---
 title: UAsset Modding
-date: 2022-07-19 12:00:00 +0800
+date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
-tags: [uasset]
-math: true
-mermaid: true
+tags: [uasset, python]
+description: A general guide on how to edit UAsset files, along with an example of automating edits with Python.
 ---
 
 ## UAsset Modding

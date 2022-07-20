@@ -38,7 +38,19 @@ There are multiple different file formats that you may encounter while modding. 
 ### Extracting Game Files  
 There are two methods of extracting games files, both have important differences:
 1. [UModel](https://unofficial-modding-guide.com/posts/tools). This program can extract non-raw files, allowing you to gain access to textures, models, and animations. To use it, direct it towards the location of the .pak files within Ready or Not: `<GameInstallLocation>\Ready Or Not\ReadyOrNot\Content\Paks`. You'll be able to extract individual assets once loaded.
-2. Manual unpaking. This can be done simply by setting up an unpak batch script, coverd in [Misc](https://unofficial-modding-guide.com/posts/misc).
+2. Manual unpaking. This can be done simply by setting up an unpak batch script. 
+	1. Create a .bat file in your UnrealPak install location (located within your Unreal Engine 4 install), usually `<InstallLocation>\UE_4.27\Engine\Binaries\Win64\UnrealPak.exe`.
+	2. In the .bat file, paste the following lines in and save:
+	```batch
+	@if "%~1"=="" goto skip
+	@setlocal enableextensions
+	@pushd %~dp0
+	.\UnrealPak.exe %1 -extract "%~n1"
+	@popd
+	@pause
+	:skip
+	```
+	3. Drag the .pak file you want to unpak, for example `pakchunk0-WindownNoEditor_0_P`, directly onto the .bat file you just created.  This will extract the pak's files in the same location as the batch file.
 
 ### Cooking Modified Files  
 In order to override any assets within the game or add new content, the files must be in a format that the game can recognize. The files you extracted via UModel will be in a format that is easily accessible by you, not the game. You will first need to cook these before PAKing the files.
