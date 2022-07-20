@@ -3,8 +3,7 @@ title: Map Modding
 date: 2022-07-19 12:00:00 +0800
 categories: [Map Modding]
 tags: [maps]
-math: true
-mermaid: true
+desc: An in-depth guide on how to create maps and add audio, doors, AI, and game assets.
 ---
 
 
