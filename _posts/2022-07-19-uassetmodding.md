@@ -3,7 +3,7 @@ title: UAsset Modding
 date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
 tags: [uasset, python]
-description: A general guide on how to edit UAsset files, along with an example of automating edits with Python.
+description: A general guide on how to edit UAsset files by changing values and adding data.
 author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
@@ -39,54 +39,3 @@ This can be a very complicated portion of modding. **Make sure to read all of th
 	- When adding a reference from the game, it's a good idea to copy and paste similar references and then change the strings slightly. This ensures that you will retain the correct formatting. You can add this reference either in the JSON file or in UAssetGUI. Both are better in different scenarios. If you're going to add a bunch of imports, use the JSON file, otherwise use UAssetGUI.
 5. Save the JSON file with all your edits and open that JSON file in UAssetGUI. If you get an error, you messed up the JSON formatting.
 6. If you have made all your data additions and made sure to have the proper imports (you may need to import multiple times for just one thing), then the mod should work. You can tell if it's working if the game does't freeze or crash on launch (wait until the intro screen ends). If this occurs there is a high chance you messed up something with the imports.
-
-
-### JSON Parsing via Python
-Once you have a firm understanding of `Adding Data`, you can semi-easily automate tasks. To start, you'll need some Python, or other programming knowledge. I'll be using Python for this tutorial because of the simple to use json library that comes with Python 3+. I highly recommend doing this if you need to change a lot of data every time the game updates. If you would like specific help with this, ask QuantumNuke75#3593 on Discord.  
-
-Your first line should be the import statement.
-```python
-import json
-```
-Next, you'll want to open the file. To do this, replace FILE_NAME with the location of your JSON file that you extracted with UAssetGUI.
-```python
-file = open('FILE_NAME')
-```
-At the bottom of the file, you'll want to export your JSON file, which you can then load back up in UAssetGUI and save it as a .uasset.
-```python
-json.dump(data, open("export.json", "w"))
-```
-
-But, you'll then want to load this file as a JSON file. `data` will become a Python dictionary.
-```python
-data = json.load(file)
-```
-Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you'll be able to easily automate adding, data, changing values, or anything. Below I will attach the code that automates making the mod, More Ammo.
-```python
-import json
-
-num_mags = 15
-
-file = open('ItemDataTable.json')
-data = json.load(file)
-
-# For every item in the export table.
-for item in data["Exports"][0]["Table"]["Data"]:
-    # For every piece of the item data.
-    for item_data in item["Value"]:
-        # If the item's name is MagazineCount
-        if item_data["Name"] == "MagazineCountDefault(0)":
-            amount = int(item_data["Value"])
-            if 3 < amount < 30:
-                item_data["Value"] = num_mags
-                continue
-        if item_data["Name"] == "MagazineCountMax(0)":
-            amount = int(item_data["Value"])
-            if 3 < amount < 30:
-                item_data["Value"] = num_mags
-                continue
-
-json.dump(data, open(f"ammo_export_{num_mags}.json", "w"))
-```
-> **More Ammo** is an outdated mod, and this code will no longer effect anything in the game.
-{: .prompt-warning }
