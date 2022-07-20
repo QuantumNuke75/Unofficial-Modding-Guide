@@ -5,6 +5,7 @@ categories: [General Information]
 tags: [batch]
 pin: true
 description: Various options for batch files to extract games files or to create a .pak file.
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 ## Batch Files

@@ -3,6 +3,7 @@ title: Skeletal Mesh Modding
 date: 2022-07-19 00:00:00 +0000
 categories: [Skeletal Mesh Modding]
 tags: [skeletal mesh]
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 ## Skeletal Mesh Modding

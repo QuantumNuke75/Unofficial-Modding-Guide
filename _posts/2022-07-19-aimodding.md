@@ -4,6 +4,7 @@ date: 2022-07-19 00:00:00 +0000
 categories: [AI Modding]
 tags: [ai]
 description: A guide on how to create AI mods.
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 

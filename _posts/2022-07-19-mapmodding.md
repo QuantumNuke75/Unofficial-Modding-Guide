@@ -4,6 +4,7 @@ date: 2022-07-19 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps]
 description: An in-depth guide on how to create maps and add audio, doors, AI, and game assets.
+author: "TO BE FIXED"
 ---
 
 

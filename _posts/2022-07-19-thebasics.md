@@ -6,6 +6,7 @@ categories: [General Information]
 tags: [essential, batch]
 pin: true
 description: The basics of modding for Ready or Not. Covers extracting game files, the game's file structure, file formats, cooking files, and creating .pak files.
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 ## Important Information

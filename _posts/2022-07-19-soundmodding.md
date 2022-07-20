@@ -4,6 +4,7 @@ date: 2022-07-19 00:00:00 +0000
 categories: [Sound Modding]
 tags: [sound, fmod]
 description: A guide on how to replace various sound files within the game.
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 ## Sound Modding

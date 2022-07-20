@@ -58,6 +58,7 @@ tail_includes:
   <div class="d-flex justify-content-between">
     <!-- author -->
     <span>
+	   <!--
       {% capture author_name %}{{ site.data.authors[page.author].name | default: site.social.name }}{% endcapture %}
       {% assign author_link = nil %}
 
@@ -76,6 +77,26 @@ tail_includes:
         {{ author_name }}
         {% endif %}
       </em>
+	  -->
+	  
+	  By
+		  {% assign author_split = page.author | split: "," %}
+		  {% for author_info in author_split %}
+			{% assign author_info_split = author_info | split: "|" %}
+			
+			{% if author_info_split[1] %}
+				<a href="{{ author_info_split[1] }}">{{ author_info_split[0] }}</a>	
+			{% else %}
+				{{ author_info }}
+			{% endif %}
+			
+			{% if author_info != author_split[-1] %}
+				&
+			{% endif %}
+			
+
+		  {% endfor %}
+	  
     </span>
     <div>
       <!-- page views -->

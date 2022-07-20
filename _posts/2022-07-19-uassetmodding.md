@@ -4,6 +4,7 @@ date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
 tags: [uasset, python]
 description: A general guide on how to edit UAsset files, along with an example of automating edits with Python.
+author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
 ## UAsset Modding
