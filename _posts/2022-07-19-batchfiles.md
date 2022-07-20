@@ -3,8 +3,7 @@ title: Batch Files
 date: 2022-07-19 12:00:00 +0800
 categories: [General Information]
 tags: [batch]
-math: true
-mermaid: true
+pin:true
 ---
 
 ## Batch Files
