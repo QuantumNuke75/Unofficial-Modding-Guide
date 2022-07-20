@@ -473,4 +473,110 @@ for item in data["Exports"][0]["Table"]["Data"]:
             continue
 ```
 
-And you're done!
+And you're done! Code below.
+```python
+import copy, json
+
+file = open('json/ItemDataTable.json')
+data = json.load(file)
+
+
+all_under = {-38:"combat_grip",
+-39:"combat_grip",
+-65:"mp5_foregrip",
+-66:"mp5_foregrip",
+-70:"mp5_foregrip",
+-81:"light_socket",
+-82:"laser_socket",
+-83:"laser_socket",
+-86:"foregrip_socket",
+-87:"afg_mlok_grip",
+-90:"foregrip_socket",
+-91:"pointer_socket",
+-92:"pointer_socket",
+-102:"foregrip_VFG_socket",
+-103:"foregrip_socket",
+-104:"vfg_mlok_grip",
+-136:"foregrip_socket"}
+
+all_scopes = {}
+all_muzzles = {}
+
+weapon_to_attachments = {'M1911A1':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'},
+'G19':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'}}
+
+
+attachment_dic_format = {'$type': 'UAssetAPI.PropertyTypes.ObjectPropertyData, UAssetAPI', 'Name': '3', 'DuplicationIndex': 0, 'Value': -95}
+
+
+scope_attachments.remove(-75)
+
+# For every item in the table.
+for item in data["Exports"][0]["Table"]["Data"]:
+
+
+    # For every piece of the item data.
+    for item_data in item["Value"]:
+
+        # Attachments
+        if item_data["Name"] == "AvailableScopeAttachments(0)":
+            name = item["Value"][0]["CultureInvariantString"]
+            try:
+                comp_attachments = weapon_to_attachments[name]
+            except:
+                continue
+
+            attachments_to_add = []
+            for scope in all_scopes:
+                if all_scopes[scope] in comp_attachments:
+                    attachments_to_add.append(scope)
+
+            for attachment in attachments_to_add:
+                copied = copy.deepcopy(attachment_dic_format)
+                copied["Value"] = attachment
+
+                if copied not in item_data["Value"]:
+                    item_data["Value"].append(copied)
+            continue
+
+        elif item_data["Name"] == "AvailableMuzzleAttachments(0)":
+            name = item["Value"][0]["CultureInvariantString"]
+            try:
+                comp_attachments = weapon_to_attachments[name]
+            except:
+                continue
+
+            attachments_to_add = []
+            for muzzle in all_muzzles:
+                if all_muzzles[muzzle] in comp_attachments:
+                    attachments_to_add.append(muzzle)
+
+            for attachment in attachments_to_add:
+                copied = copy.deepcopy(attachment_dic_format)
+                copied["Value"] = attachment
+                if copied not in item_data["Value"]:
+                    item_data["Value"].append(copied)
+            continue
+        elif item_data["Name"] == "AvailableUnderbarrelAttachments(0)":
+            name = item["Value"][0]["CultureInvariantString"]
+            try:
+                comp_attachments = weapon_to_attachments[name]
+            except:
+                continue
+
+            attachments_to_add = []
+            for under in all_under:
+                if all_under[under] in comp_attachments:
+                    attachments_to_add.append(under)
+
+            for attachment in attachments_to_add:
+                copied = copy.deepcopy(attachment_dic_format)
+                copied["Value"] = attachment
+                if copied not in item_data["Value"]:
+                    item_data["Value"].append(copied)
+            continue
+
+json.dump(data, open(f"output/everything_unlocked_itemdatatable.json", "w"))
+
+```
+
