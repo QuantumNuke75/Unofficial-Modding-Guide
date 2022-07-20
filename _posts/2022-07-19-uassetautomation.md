@@ -3,7 +3,7 @@ title: UAsset Automation
 date: 2022-07-19 00:00:00 +0000
 categories: [UAsset Modding]
 tags: [uasset, python, automation]
-description: An in depth guide on how to automatically edit and parse data from a UAsset file.
+description: An in depth guide on how to automatically edit and parse data from a UAsset file. Useful for quickly updating mods when a new Ready or Not update comes out.
 author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
