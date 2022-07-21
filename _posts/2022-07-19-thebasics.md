@@ -60,7 +60,7 @@ In order to override any assets within the game or add new content, the files mu
 3. Go to `File > Cook Content for Windows`. This converts the files into a UE4 exported format (\*.uasset, \*.uexp, \*.ubulk). Retrieve the cooked files in `<ProjectLocation/><ProjectName>/Saved/Cooked/WindowsNoEditor/`.
 
 ### Creating a PAK File  
-1. Make sure the folder you are paking, for example `pakchunk99-Mods_MyMod_P`, contains the same file structure as Ready or Not. The number after `pakchunk` indicates the load order of the .pak. Make sure to understand the directory structure first, before paking your mod. Incorrect directory structure will lead to issues. Your structure should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
+1. Make sure the folder you are paking, for example `pakchunk99-Mods_MyMod_P`, contains the same file structure as Ready or Not. Also ensure that `_P` is at the end of your pak name. Not doing so will likely result in the mod not loading. The number after `pakchunk` indicates the load order of the .pak. Make sure to understand the directory structure first, before paking your mod. Incorrect directory structure will lead to issues. Your structure should mimic something like this: `pakchunk99-Mods_MyMod/Content/ReadyOrNot/Assets/…`.
 2. Create a .bat file in your UnrealPak install location (located within your Unreal Engine 4 install), usually `<InstallLocation>\UE_4.27\Engine\Binaries\Win64\UnrealPak.exe`.
 3. In the .bat file, paste the following lines in and save:
 ```batch
