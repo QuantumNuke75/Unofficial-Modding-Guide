@@ -10,7 +10,7 @@ author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unof
 ## UAsset Automation
 
 ### JSON Parsing via Python
-Once you have a firm understanding of manually editing UAssets, you can semi-easily automate tasks. To start, you'll need some Python, or other programming knowledge. I'll be using Python for this tutorial because of the simple to use json library that comes with Python 3+. I highly recommend doing this if you need to change a lot of data every time the game updates. If you would like specific help with this, ask QuantumNuke75#3593 on Discord.  
+Once you have a firm understanding of manually editing UAssets, you can semi-easily automate tasks. To start, you'll need some Python, or other programming knowledge. I'll be using Python for this tutorial because of the simple to use json library that comes with Python 3+. I highly recommend doing this if you need to change a lot of data every time the game updates. If you would like specific help with this, ask QuantumNuke75#3593 on Discord. Note that the code down below may not be pretty, as it's gone under numerous changes as the game updates. 
 
 
 ### Ammo Mod
@@ -422,7 +422,7 @@ json.dump(data, open(f"output/everything_unlocked_itemdata.json", "w"))
 
 #### ItemDataTable
 This is an easier table to edit, but required more data. To start, you'll need a dictionary of attachments mapped to their respective socket for each category of attachment: sight, muzzle, underbarrel. You'll also need a dictionary of item names, mapped to a list of sockets they have.  
-Here's an example of the underbarrel attachment:
+Here's an example of the underbarrel attachment list, which we'll be using as an example:
 ```python
 all_under = {-38:"combat_grip",
 -39:"combat_grip",
@@ -443,13 +443,13 @@ all_under = {-38:"combat_grip",
 -136:"foregrip_socket"}
 ```
 
-And here's an example of the weapon names mapped to attachments:
+And here's an example of the weapon names mapped to attachments (Note: *This list may be outdated.*):
 ```python
 weapon_to_attachments = {'M1911A1':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'},
 'G19':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'}}
 ```
 
-Now we parse through the `ItemDataTable` and look for the corresponding attachment `AvailableUnderbarrelAttachments(0)`.
+Now we parse through the `ItemDataTable` and look for the corresponding attachment `AvailableUnderbarrelAttachments(0)`. Once we do, we check the `weapon_to_attachments` dictionary, and add all the attachments to the weapon.
 ```python
 for item in data["Exports"][0]["Table"]["Data"]:
     for item_data in item["Value"]:
@@ -473,13 +473,79 @@ for item in data["Exports"][0]["Table"]["Data"]:
             continue
 ```
 
-And you're done! Code below.
+Full code below. As a bonus, weapon inertia was also changed for items, making unlocked weapons more usable.
 ```python
 import copy, json
 
 file = open('json/ItemDataTable.json')
 data = json.load(file)
 
+all_scopes = {-42:"SRO_FBI_Socket",
+-43:"RMR_FBI_Socket",
+-44:"RMRPistol_Socket",
+-45:"RMR_Socket",
+-46:"RMRPistol_Socket",
+-47:"SRO_Socket",
+-48:"SROPistol_Socket",
+-49:"SROPistol_Socket",
+-50:"SRORaised_socket",
+-51:"Delta_Socket",
+-52:"ACOG_Socket",
+-53:"atac_Socket",
+-54:"HAMR_Socket",
+-55:"Harris_Socket",
+-56:"M5B_Socket",
+-57:"sdr_Socket",
+-105:"Scope_Socket",
+-106:"Reflex_Socket",
+-107:"EXPS3_socket",
+-108:"Holosight_XPS3",
+-109:"Rail_Socket",
+-110:"Rail_Socket",
+-111:"Rail_Socket",
+-112:"Reflex_Socket",
+-113:"Reflex_Socket",
+-114:"Reflex_Socket",
+-115:"Reflex_Socket",
+-116:"Reflex_Socket",
+-117:"Reflex_Socket",
+-118:"Reflex_Socket",
+-119:"MicroT2_Socket",
+-120:"MicroT2_FBI_Socket",
+-121:"MicroT2Raised_Socket",
+-122:"EXPS3_MP5_optic",
+-123:"SRO_MP5_optic",
+-124:"mp5_optic",
+-125:"MicroT2_mp5_optic",
+-126:"Reflex_Socket",
+-127:"Reflex_Socket",
+-128:"Reflex_Socket",
+-129:"SRSRaised_socket"}
+
+all_muzzles = {-28:"muzzle_socket",
+-29:"asr_socket",
+-30:"asr_socket",
+-31:"sfmb_socket",
+-32:"sfmb_socket",
+-33:"shotgunbrake_socket",
+-40:"brake_socket",
+-60:"socom338_socket",
+-61:"tag_mp9suppressor",
+-62:"PBS_socket",
+-63:"socom338_socket",
+-64:"socom338_socket",
+-78:"comp_socket",
+-79:"comp_socket",
+-80:"flash_socket",
+-84:"supressor_socket",
+-85:"supressor_socket",
+-88:"compensator_socket",
+-97:"Barrel_Socket",
+-100:"Barrel_Socket",
+-101:"supressor_socket",
+-130:"Choke_Socket",
+-131:"tube_socket",
+-135:"supressor_socket"}
 
 all_under = {-38:"combat_grip",
 -39:"combat_grip",
@@ -499,17 +565,49 @@ all_under = {-38:"combat_grip",
 -104:"vfg_mlok_grip",
 -136:"foregrip_socket"}
 
-all_scopes = {}
-all_muzzles = {}
-
 weapon_to_attachments = {'M1911A1':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'},
-'G19':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'}}
-
+'G19':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'flash_socket', 'Reflex_Socket'},
+'G18 Auto':{'light_socket', 'laser_socket', 'comp_socket', 'RMRPistol_Socket', 'supressor_socket', 'flash_socket', 'Reflex_Socket', 'SROPistol_Socket'},
+'SKL_Pistol_M92FS':{'light_socket', 'brake_socket', 'comp_socket', 'supressor_socket'},
+'P250':{'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'brake_socket'},
+'P99':{'comp_socket', 'Delta_Socket', 'supressor_socket', 'laser_socket', 'light_socket', 'flash_socket', 'Reflex_Socket', 'Harris_Socket'},
+'.357 Magnum':{'muzzle_socket', 'pointer_socket', 'Reflex_Socket', 'supressor_socket'},
+'Taser':{'laser_socket'},
+'USP45':{'RMRPistol_Socket', 'comp_socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'brake_socket'},
+'P92X':{'RMRPistol_Socket', 'supressor_socket', 'light_socket', 'laser_socket', 'SROPistol_Socket', 'brake_socket'},
+'G36C':{'asr_socket', 'RMR_Socket', 'pointer_socket', 'HAMR_Socket', 'laser_socket', 'light_socket', 'combat_grip', 'socom338_socket', 'M5B_Socket', 'sfmb_socket', 'foregrip_socket', 'EXPS3_socket', 'SRO_Socket', 'Reflex_Socket'},
+'M14':{'Rail_Socket', 'foregrip_socket', 'laser_socket', 'supressor_socket'},
+'M24':{'ACOG_Socket', 'Scope_Socket', 'Reflex_Socket', 'supressor_socket'},
+'M4A1':{'asr_socket', 'pointer_socket', 'HAMR_Socket', 'ACOG_Socket', 'supressor_socket', 'MicroT2Raised_Socket', 'laser_socket', 'light_socket', 'combat_grip', 'compensator_socket', 'M5B_Socket', 'sfmb_socket', 'socom338_socket', 'foregrip_socket', 'Reflex_Socket'},
+'AK102':{'pointer_socket', 'HAMR_Socket', 'ACOG_Socket', 'supressor_socket', 'laser_socket', 'light_socket', 'foregrip_socket', 'Reflex_Socket', 'Harris_Socket'},
+'MK1 Carbine':{'asr_socket', 'pointer_socket', 'SRSRaised_socket', 'laser_socket', 'socom338_socket', 'combat_grip', 'sfmb_socket', 'foregrip_socket'},
+'ARN-18':{'asr_socket', 'laser_socket', 'socom338_socket', 'combat_grip', 'sfmb_socket', 'EXPS3_socket', 'vfg_mlok_grip', 'Reflex_Socket', 'afg_mlok_grip'},
+'SA-58':{'asr_socket', 'sdr_Socket', 'pointer_socket', 'MicroT2Raised_Socket', 'laser_socket', 'light_socket', 'combat_grip', 'socom338_socket', 'M5B_Socket', 'sfmb_socket', 'foregrip_socket', 'EXPS3_socket', 'SRO_Socket', 'atac_Socket', 'Reflex_Socket'},
+'GA416':{'asr_socket', 'sdr_Socket', 'pointer_socket', 'ACOG_Socket', 'SRSRaised_socket', 'laser_socket', 'socom338_socket', 'combat_grip', 'M5B_Socket', 'sfmb_socket', 'EXPS3_socket', 'vfg_mlok_grip', 'atac_Socket', 'Reflex_Socket', 'afg_mlok_grip'},
+'M16A4':{'HAMR_Socket', 'ACOG_Socket', 'Scope_Socket', 'supressor_socket', 'Reflex_Socket'},
+'SCAR-H':{'asr_socket', 'pointer_socket', 'SRSRaised_socket', 'socom338_socket', 'combat_grip', 'sfmb_socket', 'foregrip_socket', 'atac_Socket'},
+'SLR47':{'pointer_socket', 'laser_socket', 'combat_grip', 'PBS_socket', 'afg_mlok_grip'},
+'SR-16':{'asr_socket', 'Harris_Socket', 'pointer_socket', 'HAMR_Socket', 'ACOG_Socket', 'supressor_socket', 'SRSRaised_socket', 'laser_socket', 'light_socket', 'combat_grip', 'socom338_socket', 'M5B_Socket', 'sfmb_socket', 'foregrip_socket', 'EXPS3_socket', 'vfg_mlok_grip', 'Reflex_Socket', 'afg_mlok_grip'},
+'Pepperball Gun':{'pointer_socket', 'combat_grip', 'M5B_Socket', 'foregrip_socket', 'Reflex_Socket'},
+'B1301':{'Choke_Socket', 'MicroT2_Socket', 'RMR_Socket', 'pointer_socket', 'shotgunbrake_socket', 'SRO_FBI_Socket', 'RMR_FBI_Socket', 'MicroT2_FBI_Socket', 'brake_socket', 'SRO_Socket'},
+'B1301 "Entryman"':{'Choke_Socket', 'MicroT2_Socket', 'RMR_Socket', 'pointer_socket', 'shotgunbrake_socket', 'SRO_FBI_Socket', 'RMR_FBI_Socket', 'MicroT2_FBI_Socket', 'brake_socket', 'SRO_Socket'},
+'M4 Super 90':{'Choke_Socket', 'Barrel_Socket', 'supressor_socket', 'light_socket', 'foregrip_socket', 'Reflex_Socket'},
+'M590-A':{'tube_socket', 'supressor_socket', 'light_socket', 'foregrip_socket', 'Reflex_Socket'},
+'Saiga 12':{'pointer_socket', 'Reflex_Socket'},
+'870 CQB':{'RMR_Socket', 'supressor_socket', 'light_socket', 'shotgunbrake_socket', 'brake_socket', 'SRO_Socket', 'Reflex_Socket'},
+'MP5/10MM':{'MicroT2_Socket', 'RMR_Socket', 'pointer_socket', 'laser_socket', 'foregrip_VFG_socket', 'combat_grip', 'socom338_socket', 'foregrip_socket', 'SRO_Socket'},
+'MP5A3':{'MicroT2_Socket', 'RMR_Socket', 'pointer_socket', 'laser_socket', 'foregrip_VFG_socket', 'combat_grip', 'socom338_socket', 'foregrip_socket', 'EXPS3_socket', 'SRO_Socket'},
+'MP9':{'MicroT2_Socket', 'RMR_Socket', 'pointer_socket', 'tag_mp9suppressor', 'laser_socket', 'SRO_Socket'},
+'MPX':{'pointer_socket', 'supressor_socket', 'light_socket', 'socom338_socket', 'combat_grip', 'SRORaised_socket', 'vfg_mlok_grip', 'Reflex_Socket', 'afg_mlok_grip'},
+'P90':{'RMR_Socket', 'pointer_socket', 'socom338_socket', 'light_socket', 'Reflex_Socket'},
+'57 USG':{'RMRPistol_Socket', 'supressor_socket', 'light_socket', 'laser_socket', 'socom338_socket', 'SROPistol_Socket'},
+'MK16':{'asr_socket', 'Barrel_Socket', 'pointer_socket', 'HAMR_Socket', 'supressor_socket', 'MicroT2Raised_Socket', 'laser_socket', 'light_socket', 'socom338_socket', 'compensator_socket', 'sfmb_socket', 'foregrip_socket', 'Reflex_Socket', 'Harris_Socket'},
+'ARWC':{'asr_socket', 'sdr_Socket', 'pointer_socket', 'HAMR_Socket', 'SRSRaised_socket', 'laser_socket', 'light_socket', 'combat_grip', 'socom338_socket', 'sfmb_socket', 'EXPS3_socket', 'vfg_mlok_grip', 'atac_Socket', 'Reflex_Socket', 'afg_mlok_grip'},
+'UMP-45':{'comp_socket', 'pointer_socket', 'supressor_socket', 'MicroT2Raised_Socket', 'SRSRaised_socket', 'laser_socket', 'light_socket', 'combat_grip', 'SRORaised_socket', 'foregrip_socket', 'EXPS3_socket', 'Reflex_Socket'},
+'PFC9':{'SROPistol_Socket', 'laser_socket', 'comp_socket', 'light_socket', 'RMRPistol_Socket', 'supressor_socket'}}
 
 attachment_dic_format = {'$type': 'UAssetAPI.PropertyTypes.ObjectPropertyData, UAssetAPI', 'Name': '3', 'DuplicationIndex': 0, 'Value': -95}
 
-
-scope_attachments.remove(-75)
 
 # For every item in the table.
 for item in data["Exports"][0]["Table"]["Data"]:
@@ -518,8 +616,25 @@ for item in data["Exports"][0]["Table"]["Data"]:
     # For every piece of the item data.
     for item_data in item["Value"]:
 
+        #
+        # Set inertia
+        #
+        if item_data["Name"] == "InertiaDragAimRotation(0)":
+            item_data["Value"] = 0.8
+            continue
+        elif item_data["Name"] == "InertiaDragAimLocation(0)":
+            item_data["Value"] = 0.15
+            continue
+        elif item_data["Name"] == "InertiaDragStrafeRotation(0)":
+            item_data["Value"] = 0.4
+            continue
+        elif item_data["Name"] == "InertiaDragStrafeLocation(0)":
+            item_data["Value"] = 0.2
+            continue
+
+
         # Attachments
-        if item_data["Name"] == "AvailableScopeAttachments(0)":
+        elif item_data["Name"] == "AvailableScopeAttachments(0)":
             name = item["Value"][0]["CultureInvariantString"]
             try:
                 comp_attachments = weapon_to_attachments[name]
