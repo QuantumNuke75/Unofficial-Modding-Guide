@@ -6,7 +6,7 @@ tags: [texture]
 author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
-## Asset Modding
+## Texture Modding
 
 ### Texture Replacement  
 Texture replacement is the easiest to mod. An example can be found in [Example Mod](https://unofficial-modding-guide.com/posts/thebasics). If you are doing more than recoloring, you will also need to edit the normal and ORM maps.
