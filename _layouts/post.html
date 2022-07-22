@@ -82,6 +82,7 @@ tail_includes:
 	  By
 		  {% assign author_split = page.author | split: "," %}
 		  {% for author_info in author_split %}
+		  
 			{% assign author_info_split = author_info | split: "|" %}
 			
 			{% if author_info_split[1] %}
