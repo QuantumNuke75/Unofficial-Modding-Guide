@@ -1,10 +1,10 @@
 ---
 title: Map Modding
-date: 2022-07-19 00:00:00 +0000
+date: 2022-08-07 13:00:00 +0100
 categories: [Map Modding]
 tags: [maps]
-description: An in-depth guide on how to create maps and add audio, doors, AI, and game assets.
-author: "TO BE FIXED"
+description: An in-depth guide on how to create maps with custom game modes and add audio, doors, AI, and game assets.
+author: "TheRealSourc3"
 ---
 
 
@@ -18,6 +18,7 @@ Thanks to `matthew9324#3567` for C++ help and RoN Dev `Zack Bower#0466` for FMOD
 Guide written by `The Real Sourc3#7480`.
 
 If you need help don't hesitate to visit the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR) and tag me \:)
+I heavily advise to watch the [video](https://youtu.be/zOIhu7AkU2U)s related to the newest *Covered Bones* template on Nexus.
 
 ### Folder Structure 
 Folder structure in UE4 4.27.2 needs to be as shown under to work. Content is the base folder your UE4 projects starts from.
@@ -25,14 +26,21 @@ Folder structure in UE4 4.27.2 needs to be as shown under to work. Content is th
 YourProjectName is only a placeholder for what you name your project when you make it in the New Project menu in Epic's UE4 Launcher.
 The project name for the Meth house map for example is listed as `RoN_Meth`.
 
-To make a map you should start by downloading the newly updated Bare Bones mapping template from my [Google Drive](https://drive.google.com/file/d/1jQHbh66hWBiBw-D0OWGVFNziU7p4fp8y/view?usp=sharing)  
-It includes all the C++ files and Folder Structs like listed below and should provide you with a clean slate to start map modding.  
-The Folder struct below is only the nessescary files required for the map to work (using all features) but the Bare Bones includes more files for conveniency.  
+To make a map you should start by downloading the newly updated Covered Bones Mapping template from [Nexus](https://www.nexusmods.com/readyornot/mods/1384)  
+It includes all the C++ files and Folder Structs like listed below and should provide you with a strong basis to start map modding.  
+The Folder struct below is only the nessescary files required for the map to work (using all features) but the Covered Bones includes more files for conveniency.
+To distinguish the old Bare Bones from the new updated template, it's now called Covered Bones.
 
 ```
 Content  
     BlueprintSpawners  
-      BP_Door.uasset  
+      BP_Door.uasset 
+      bp_door_reap.uasset
+      CustomGameModeOverride.uasset
+      BombSpawner.uasset
+      BP_SpawnEvidence.uasset
+      BP_SpawnActor.uasset
+      BP_SpawnSelectedActor.uasset
     Blueprints  
       DataTables  
         DoorDataTable.uasset   
@@ -41,20 +49,49 @@ Content
         AI_DataTable.uasset  
         AI_DataTable_V3.uasset  
         AI  
-          AI_DataTable_Dealer.uasset  
+          AI_DataTable_Club.uasset 
+          AI_DataTable_Dealer.uasset 
+          AI_DataTable_Farm.uasset 
           AI_DataTable_Gas.uasset  
           AI_DataTable_Hotel.uasset  
-          AI_DataTable_Meth.uasset  
+          AI_DataTable_Meth.uasset
+          AI_DataTable_Penthouse.uasset 
+          AI_DataTable_Port.uasset
+          AI_DataTable_Ridgeline.uasset
+          AI_DataTable_Valley.uasset
       Environment  
         BP_Door_New.uasset  
+      Gameplay
+        COOP
+          BP_BombActor.uasset
       Games  
         GM_COOP.uasset 
+      Logic
+        MethLogic
+          BP_Evidence_Meth_Contraband.uasset
+          BP_Evidence_Meth_Contraband_2.uasset
+        PortLogic
+          BP_Evidence_Port_Dossier.uasset
+        RidgelineLogic
+          BP_Evidence_Ridgeline_Ricin.uasset
+        ValleyLogic
+          BP_Evidence_Valley_HardDrive.uasset
+          BP_Evidence_Valley_HardDrive_02.uasset
+          BP_Evidence_Valley_Laptop.uasset
       E_WorldGenType.uasset  
-    ReadyOrNot  
-      Mods  
-        YourProjectName  
-          YourMapName.umap  
+    FMOD
+     // Sound banks and events located here
+    Mods  
+        YourProjectName (CoveredBones)  
+          Levels
+            // To make your level appear mod main menu place it here:
+            YourMapName.umap 
+            YourMapName_uBuildData.uasset 
         // Custom models, materials and textures are placed here in sorted folders.
+    ReadyOrNot 
+      Data
+       // Misc useful data items are located here
+      
 ```
 
 ### Project Settings  
@@ -80,7 +117,10 @@ If you don't have one, create an empty GameMode from the GameMode base class and
 
 #### GameMode Override:   
  At the top of your editor screen you will find the *Blueprints* tab, where you can edit Asset Blueprints and World Blueprints.  
- In order for your game to work you must override the default gamemode and pick **World Override**: and pick your intended gamemode blueprint class.  
+ In order for your game to work you must override the default gamemode and pick **World Override**: and pick the *GM_COOP* gamemode blueprint class.  
+ 
+ I have added a new way to set the gamemode as by default the game comes with **Barricaded Suspects** and **Raid** as the *only* available game modes. This tool is found in **BlueprintSpawners** and is called GameModeOverride. It does what it says - override the gamemode - and thus that gamemode will be the only gamemode for the level, despite what it says on the map in the lobby. 
+ This asset is dragged out somewhere in your level (doesn't matter where) and you select your intended game mode and provide the *literal* map name as it appears top left on the tab in the editor. If you want the game to be Bomb Threat you should also add up to 2 *BombSpawner.uasset*s in your level that spawns vanilla game defusable bombs in the level.
 
 ### World Geometry:
    If you make a new level instead of using the `ron_wb_combat_01b` included in BB, just note that the standard level of UE4 includes a floor which is a static mesh. This will usually not show up in-game and you'll fall through the world upon launch.  
@@ -144,6 +184,13 @@ The red arrow in the BP shows which way the trap will be placed and marks the ba
   - UseBrokenDoorMesh: We're unsure if this does anything other than spawning the ruined door from the training course in the lobby map.
   - MinOpenClose / MaxOpenClose: Probably has something to do with the max angle the door can swing, but I have yet to notice any difference after changing these values..  
 
+### Evidence Actors
+
+If you've played the game for more than 5 minutes you may have come across the different kinds of *evidence* that you can pick up in the world. These are the smaller kinds of objects that are linked to drugs, videos/photos, lists and more. In the new *Covered Bones* there is a provided blueprint to spawn these kinds of actors. 
+
+Simply drag out one *BP_SpawnEvidence.uasset* per evidence actor into your desired location in your map, and select your preferred evidence (oh and due to my negligence the white and red meth bags were swapped on the list - whoops)
+The evidence types should have intuitive icons when you select between them :)
+
 ### Multiplayer 
 
 Multiplayer works by default if you place enough spawn points in your map. This spawn point is called *PlayerStart* and you'll need at least 5 for normal multiplayer function.  
@@ -201,6 +248,7 @@ Note that the effects in **Global** has a drop down to change overall values mor
 
 ![ColorGrading Sliders](https://unofficial-modding-guide.com/assets/PP_ColorGrading_Sliders.PNG)
 
+
 ### FMOD Sound Integation  
 
 #### (WIP - \*no custom sounds yet)
@@ -213,5 +261,7 @@ For this you'll need [FMOD for UE4](https://www.fmod.com/download)
    If you want to make a dynamically changing ambience based on the area you enter you will need to use a simple blueprint actor for this. I covered that briefly in the video above, but the idea is to blend or stop all other ambiences when you step into a new one. 
    Using a box collision that only overlaps the *Pawn* channel will make the triggering happen. To fade in a sound you can use a timeline to manipulate the volume but ideally you want to fade in based on the distance to the other ambience actor but for normal cues 2 seconds of fade time will do.
    
-   We will see more Audio work in the near future!
-   (And if you wondered what happened to Zack's approach, let's just say we don't have access to all the files needed for that to work)
+  For sound transitioning there is a transitioning volume located in *Mods/Audio/Atmos* that you can use to simplify this process - with that actor you can select what sound you transition to and from and you can walk back and forth through it. Place down the default ambience actor too for the sound to be played when u spawn into the level.
+   
+  Hopefully we will see custom sounds possible in the near future!
+  
