@@ -4,7 +4,7 @@ date: 2022-08-07 13:00:00 +0100
 categories: [Map Modding]
 tags: [maps]
 description: An in-depth guide on how to create maps with custom game modes and add audio, doors, AI, and game assets.
-author: "TheRealSourc3"
+author: "TheRealSourc3 | https://www.nexusmods.com/readyornot/mods/1384"
 ---
 
 
