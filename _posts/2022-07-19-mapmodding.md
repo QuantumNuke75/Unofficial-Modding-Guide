@@ -258,6 +258,20 @@ For this you'll need [FMOD for UE4](https://www.fmod.com/download)
     
    When you have installed FMOD correctly, you can make sound come into your map by placing a **FMOD Audio Player** from the *Place Actors* menu. You'll also need to reference a sound that's already in game\* for it to play. If you want this sound to always play regardless of your location (like theme music) you don't really need to do anything but to check that the "Start Activated" checkbox is ticked.
    
+   To get the sounds from *Ready Or Not* into unreal editor for referencing and preview (yes you can preview the audio!) you need to copy over some banks from the game's directory into your project.
+   Navigate to your `Steam/Steamapps/Common/Ready Or Not/ReadyOrNot/Content/FMOD/Desktop` folder and select all the bank files in the folder and copy them.
+   
+   ![Copy these files](https://unofficial-modding-guide.com/assets/bank-files-copy.PNG)
+   
+   Then go to your project and go to the `Content/FMOD/Desktop` folder and paste in the banks...
+   
+   ![Paste banks here](https://unofficial-modding-guide.com/assets/bank-files-paste.png)
+   
+   Navigate to the *Events* folder to verify that it works, you should be able to double-click an asset and preview the sound in the editor.
+   
+   ![Datacenter banks imported after ADAM update](https://unofficial-modding-guide.com/assets/bank-files-ue4-preview.PNG)
+   
+   
    If you want to make a dynamically changing ambience based on the area you enter you will need to use a simple blueprint actor for this. I covered that briefly in the video above, but the idea is to blend or stop all other ambiences when you step into a new one. 
    Using a box collision that only overlaps the *Pawn* channel will make the triggering happen. To fade in a sound you can use a timeline to manipulate the volume but ideally you want to fade in based on the distance to the other ambience actor but for normal cues 2 seconds of fade time will do.
    
