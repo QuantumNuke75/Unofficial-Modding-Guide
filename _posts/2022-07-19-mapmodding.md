@@ -37,6 +37,7 @@ Content
       BP_Door.uasset 
       bp_door_reap.uasset
       CustomGameModeOverride.uasset
+      BP_GameModeOverride.uasset
       BombSpawner.uasset
       BP_SpawnEvidence.uasset
       BP_SpawnActor.uasset
@@ -50,10 +51,13 @@ Content
         AI_DataTable_V3.uasset  
         AI  
           AI_DataTable_Club.uasset 
+          AI_DataTable_DataCenter.uasset
           AI_DataTable_Dealer.uasset 
           AI_DataTable_Farm.uasset 
           AI_DataTable_Gas.uasset  
-          AI_DataTable_Hotel.uasset  
+          AI_DataTable_Hospital.uasset
+          AI_DataTable_Hotel.uasset 
+          AI_DataTable_Importer.uasset
           AI_DataTable_Meth.uasset
           AI_DataTable_Penthouse.uasset 
           AI_DataTable_Port.uasset
@@ -61,9 +65,16 @@ Content
           AI_DataTable_Valley.uasset
       Environment  
         BP_Door_New.uasset  
+        IncapacitatedHuman.uasset
       Gameplay
         COOP
           BP_BombActor.uasset
+          COOPModes
+            GM_COOP_ActiveShooter
+            GM_COOP_BarricadedSuspects
+            GM_COOP_BombThreat
+            GM_COOP_HostageRescue
+            GM_COOP_Raid
       Games  
         GM_COOP.uasset 
       Logic
@@ -78,7 +89,12 @@ Content
           BP_Evidence_Valley_HardDrive.uasset
           BP_Evidence_Valley_HardDrive_02.uasset
           BP_Evidence_Valley_Laptop.uasset
-      E_WorldGenType.uasset  
+      Sound
+        Unused
+          ModMusic_BP.uasset
+          ModSound_BP.uasset
+      E_WorldGenType.uasset 
+      
     FMOD
      // Sound banks and events located here
     Mods  
@@ -86,7 +102,9 @@ Content
           Levels
             // To make your level appear mod main menu place it here:
             YourMapName.umap 
-            YourMapName_uBuildData.uasset 
+            YourMapName_BuildData.uasset 
+            MoreDoor.umap
+            MoreDoor_BuildData.uasset
         // Custom models, materials and textures are placed here in sorted folders.
     ReadyOrNot 
       Data
@@ -123,7 +141,7 @@ If you don't have one, create an empty GameMode from the GameMode base class and
  This asset is dragged out somewhere in your level (doesn't matter where) and you select your intended game mode and provide the *literal* map name as it appears top left on the tab in the editor. If you want the game to be Bomb Threat you should also add up to 2 *BombSpawner.uasset*s in your level that spawns vanilla game defusable bombs in the level.
 
 ### World Geometry:
-   If you make a new level instead of using the `ron_wb_combat_01b` included in BB, just note that the standard level of UE4 includes a floor which is a static mesh. This will usually not show up in-game and you'll fall through the world upon launch.  
+   If you make a new level instead of using the template's included test map, just note that the standard level of UE4 includes a floor which is a static mesh. This will usually not show up in-game and you'll fall through the world upon launch.  
 If you want static / physics meshes in your world you must either reference base game meshes under the ReadyOrNot folder or provide your own in the correct folders.
 
 For prototyping or if you don't have access to a lot of high poly assets it can be desirable to use BSP brushes. These are usually just convex hull geometry that you can piece together. You can actually make most of your map with this, then add models to enhance the level afterwards. I included some basic materials too to get you going. 
