@@ -62,7 +62,7 @@ Drag the `.fsb` containing desired audio onto `/fsbext/extractFSB.bat`
 - Use a program such as [Audacity](/posts/tools/#audacity) to open, edit and export your .wav files
 - Audio length needs to match the source
 - Project Rate is usually 48000Hz
-- Encoding needs to match the source which for RoN wav I think is Signed 16-bit PCM. Check file sizes are identical to confirm.
+- Encoding needs to match the source which for RoN .wav, I think, is Signed 16-bit PCM. Check file sizes are identical to confirm.
 - Video of [mostly relevant Audacity editing](https://youtu.be/l5Zgiuehrks?t=624)
 
 #### FSB Rebuild and Bank Injection
