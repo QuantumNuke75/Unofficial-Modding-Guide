@@ -322,7 +322,7 @@ For this you'll need [FMOD for UE4](https://www.fmod.com/download)
 Once you have obtained a file to play you will need to create a folder path (if it doesn't already exist!) that will look like: *Mods/Blueprints/Sound/Unused*
 !Note that it should be in the *Mods* folder. Other locations might not work or cause the blueprints to misbehave...
 Game music needs to be fixed before I upload the **ModMusic_BP**, but you can download the **ModSound_BP** and the **FireAlarm.wav** here (extract in Content folder): 
-![ZIP file archive](https://unofficial-modding-guide.com/downloads/CustomAudioFiles.zip)
+[ZIP file archive](https://unofficial-modding-guide.com/downloads/CustomAudioFiles.zip)
 
 #### Using The Blueprint:
 Drag the blueprint out in the world where you want it to play from - a fire alarm usually plays best from above head height.
