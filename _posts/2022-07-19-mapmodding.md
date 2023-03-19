@@ -303,32 +303,32 @@ For this you'll need [FMOD for UE4](https://www.fmod.com/download)
   #### Audio Files Setup:
   Make a new folder in your main (Content) folder and name it something like *MySpicyAudio* or something you can remember. Go to the Explorer window in Windows where you can see the files and browse to your covered bones project and go into the *MySpicyAudio* folder. Drag out your preferred sound (.wav, .mp3 or .ogg formats) and put it into the folder like shown below: 
   
-  ![Step1](https://unofficial-modding-guide.com/assets/MySpicyAudio_Setup1.png)
+  ![Step1](assets/MySpicyAudio_Setup1.PNG)
   
-  ![Step2](https://unofficial-modding-guide.com/assets/MySpicyAudio_Setup2.png)
+  ![Step2](assets/MySpicyAudio_Setup2.PNG)
   
   The default wave sound file that will be included in the upcoming version of bare bones will be a 1 second long clip of a fire alarm, just to show it working:
   
-  ![FireAlarm](https://unofficial-modding-guide.com/assets/MySpicyAudio_Setup3.png)
+  ![FireAlarm](assets/MySpicyAudio_Setup3.PNG)
   
   Unreal Editor will prompt you about importing the asset, so just click **Import** and it should appear in the Content menu.
-  ![UnrealPrompt](https://unofficial-modding-guide.com/assets/AudioImportSounds1.png)
+  ![UnrealPrompt](assets/AudioImportSounds1.PNG)
     
   If you have set the sound up correctly you should see that the source file says *FireAlarm.wav* and that the path says */Game/MySpicyAudio* and not the path to the location you imported it from or else it won't play.
   
-![SoundInformation](https://unofficial-modding-guide.com/assets/AudioImportSounds2.png)
+![SoundInformation](assets/AudioImportSounds2.PNG)
 
 #### Sound Blueprints Setup:
 Once you have obtained a file to play you will need to create a folder path (if it doesn't already exist!) that will look like: *Mods/Blueprints/Sound/Unused*
 !Note that it should be in the *Mods* folder. Other locations might not work or cause the blueprints to misbehave...
 Game music needs to be fixed before I upload the **ModMusic_BP**, but you can download the **ModSound_BP** and the **FireAlarm.wav** here (extract in Content folder): 
-![ZIP file archive](https://unofficial-modding-guide.com/downloads/CustomAudioFiles.zip)
+![ZIP file archive](downloads/CustomAudioFiles.zip)
 
 #### Using The Blueprint:
 Drag the blueprint out in the world where you want it to play from - a fire alarm usually plays best from above head height.
 In the details panel on the side you can edit some of the parameters; if it should loop, if it's 3D (not playing everywhere) and more settings related to the max audible distance. Amongst these settings you need to set the *Sound To Use* as a Sound Name - The way to set up the sound name is to reference its location, name and file extension. So for the included fire alarm file you should change the name to *MySpicyAudio/FireAlarm.wav* - any other file you add to your custom audio folder would need to be set up the same way.
 
-![Sound Settings](https://unofficial-modding-guide.com/assets/AudioNameSettings.png)
+![Sound Settings](assets/AudioNameSettings.PNG)
 
 If it works in the editor it will most likely work in game too. Re-cook the build and verify that the sound files and bp's were copied over. 
 Look in the discord and ask if you're getting stuck :)
