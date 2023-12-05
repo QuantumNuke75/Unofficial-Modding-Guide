@@ -79,7 +79,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://github.com/FurrySparkle/Pechomods.com/assets/img/favicons/pechomods.png?raw=true
+avatar: https://github.com/FurrySparkle/Pechomods.com/blob/main/assets/img/favicons/pechomods.png?raw=true
 
 # boolean type, the global switch for ToC in posts.
 toc: true
