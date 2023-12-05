@@ -21,19 +21,19 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Unofficial Modding Guide                          # the main title
+title: Pecho's Mods                          # the main title
 
-tagline: A comprehensive guide for most aspects of Ready or Not modding.   # it will display as the sub-title
+tagline: A comprehensive guide for most aspects of Into The Radius modding.   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A comprehensive guide for most aspects of Ready or Not modding.
+  A comprehensive guide for most aspects of Into The Radius modding.
 
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://unofficial-modding-guide.com'
+url: 'https://pechomods.com'
 
 github:
-  username: quantumnuke75             # change to your github username
+  username: FurrySparkle             # change to your github username
 
 twitter:
   username: twitter_username            # change to your twitter username
@@ -41,10 +41,10 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: UMG
-  email: quantumnuke75@gmail.com             # change to your email address
+  name: P_M
+  email: madao@gmail.com             # change to your email address
   links:
-    - https://github.com/QuantumNuke75/Unofficial-Modding-Guide
+    - https://github.com/FurrySparkle/Pechomods.com
 
 google_site_verification:               # fill in to your verification string
 
@@ -79,7 +79,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://github.com/QuantumNuke75/Unofficial-Modding-Guide/blob/main/assets/img/favicons/UMG.png?raw=true
+avatar: https://github.com/QuantumNuke75/Unofficial-Modding-Guide/blob/main/assets/img/favicons/pechomods.png?raw=true
 
 # boolean type, the global switch for ToC in posts.
 toc: true
@@ -88,7 +88,7 @@ comments:
   active:        # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   disqus:
-    shortname: https://unofficial-modding-guide.disqus.com   # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname:   # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
     repo:         # <gh-username>/<repo>
