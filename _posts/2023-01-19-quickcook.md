@@ -3,17 +3,17 @@ title: Quick Cook Setup
 date: 2023-01-19 00:00:00 +0100
 categories: [Map Modding]
 tags: [maps]
-description: How to utilize quick cook to speed up game testing iterations.
+description: How to utilise quick cook to speed up game testing iterations.
 author: RareKiwi|https://discordapp.com/users/RareKiwi#5360
 ---
 
 This is a guide to setup and use the quick cook editor scripting widget.  
-The widget automates repetitive cooking, copying, paking and starting the game to load a specific level. Also supports seperate profiles for maps or mods.
+The widget automates repetitive cooking, copying, paking and starting the game to load a specific level. Also supports separate profiles for maps or mods.
 ![](/assets/QuickCookHeader.png) 
 ## Quick Cook Setup:
 
 1. [Download the .zip](/posts/tools/#quickcook--quickmap) containing the widget and python dependencies.  
-2. Extract the .zip contents into your UE4 Project's content folder so that you have two subfolders as shown;
+2. Extract the .zip contents into your UE4 Project's content folder so that you have two sub folders as shown;
 	- `.../Content/QuickCook`
 	- `.../Content/Python`
 3. Restart UE4 if it was open to ensure the new python modules are available.
@@ -21,7 +21,7 @@ The widget automates repetitive cooking, copying, paking and starting the game t
 ![](/assets/RunEditorScriptingWidget.png) 
   
 5. Fill out the configuration to match your setup for:
-	- Project Folder: Should be your covered bones folder etc containging the `.uproject`
+	- Project Folder: Should be your covered bones folder etc containing the `.uproject`
 	- Staging Folder: Should be the parent of the after-cooking copy folder which you use with UnrealPak.exe to create .paks.
 	> This should be the parent folder of your pakchunk99-YOURMOD folder etc.
 	- Unreal Engine Dir: Should be where your engine files for UE 4.27 are located.
@@ -46,7 +46,7 @@ The widget automates repetitive cooking, copying, paking and starting the game t
 1. Open your map.  
 2. Opening a map will try to load a profile with matching name.  
 	- To create your own, under "PAK NAME" enter your staging folder name (i.e. your pak name without .pak)  
-	- In the right field enter your map name excatly as seen in the top-left tab or content browser.  
+	- In the right field enter your map name exactly as seen in the top-left tab or content browser.  
 	- Press the `Save` button.
 	> Profiles are saved as .ini files in the project's `...\Saved\QuickCook\`  
 	{: .prompt-tip }
@@ -69,7 +69,7 @@ Although you can't drag folders from the content browser, you CAN drag an asset 
 ### Usage Notes:
 
 - For `Play` to work correctly ensure QuickMap is [installed and configured](#quickmap-setup).
-- Check box state and gamemode selection state is saved to config, not profile.
+- Check box state and game mode selection state is saved to config, not profile.
 - ![](/assets/QuickCookCont.png) ![](/assets/QuickCookStop.png) Check boxes below Copy, Pak and Play allow the tool to continue after the button to the left has finished it's action.  
 This let's you in one click, press cook, then (after some time) automatically spawn in your level in game with a chosen gamemode.
 - Freemode skips the 10 second game countdown and disables AI. No loadouts are loaded.

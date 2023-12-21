@@ -74,7 +74,7 @@ With the `/fsbext` folder open in another window, drag `<FSBNAME>.dat` onto `/fs
 Copy your new `fsb` to `/banks/in/<BANKNAME>/`
 > Confirm the size is identical to the original just outside of `/new`
 3. Navigate to `/banks/`  
-With the `/bmsbank` folder open in another window, drag your `.bank` onto `/fsbext/makeFSB.bat` to inject your modified `.fsb` into the file.
+With the `/bmsbank` folder open in another window, drag your `.bank` onto `/bmsbank/injectBank.bat` to inject your modified `.fsb` into the file.
 4. Backup the original `.bank` from `.../Ready Or Not/ReadyOrNot/Content/FMOD/Desktop/`
 > Change the file extension of your backup to something else like `.bankoriginal`{: .filepath} for example to keep it in the same folder.
 5. Copy your injected `.bank` file from `/banks` to your games `.../FMOD/Desktop/` folder.  
