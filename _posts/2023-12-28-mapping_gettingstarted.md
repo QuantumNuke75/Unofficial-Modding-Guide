@@ -43,7 +43,7 @@ If you would like to see what it's like to make a map for Ready or Not, I record
 ## Installation
 
 ### Unreal Engine 
-1. Download and install the [Epic Launcher](https://store.epicgames.com/en-US/download).
+1. Download and install the [Epic Launcher](https://store.epicgames.com/en-US/download){:target="_blank"}.
 2. Open the Launcher, go `Unreal Engine` on the left side bar, then `Library` along the top toolbar
 3. Under `Engine Versions` press the `+` icon and next to the Version Number, click the drop down and select `4.27.2` and Install
 
@@ -227,7 +227,7 @@ This is an example of what a Staging folder can look like:
 
 
 ## Testing your Map
-> I highly recommend that you download the [Console Unlocker - Camera Mod](https://www.nexusmods.com/readyornot/mods/716) by QuantumNuke75. It will give you ability to use a Free-Look camera and also use basic Unreal Engine Console Commands. Both functions are extremely helpful for testing.
+> I highly recommend that you download the [Console Unlocker - Camera Mod](https://www.nexusmods.com/readyornot/mods/716){:target="_blank"} by QuantumNuke75. It will give you ability to use a Free-Look camera and also use basic Unreal Engine Console Commands. Both functions are extremely helpful for testing.
 {: .prompt-tip }
 
 The easiest way to test your map is to simply load up the game and select it from the Mission Select screen. If all works well then it should take a couple of seconds to build WorldGen and plops you into the map.
@@ -290,7 +290,7 @@ You can simply place down these meshes in your level but they may not have mater
 >It is generally not recommended to extract/save everything as it will take a very long time to do and will likely crash/fail to do so. Putting ALL the assets into your project will also significantly increase file size & launching time when you open UE.
 {: .prompt-tip }
 
->If for some reason the assets are not loading double check the project settings so that it can use cooked content: [https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent](https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent)
+>If for some reason the assets are not loading double check the project settings so that it can use cooked content: [https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent](https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent){:target="_blank"}
 {: .prompt-warning }
 
 Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.youtube.com/watch?v=-xQKyV7_6fE){:target="_blank"}
