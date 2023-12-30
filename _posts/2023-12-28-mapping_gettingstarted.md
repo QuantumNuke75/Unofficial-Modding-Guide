@@ -22,7 +22,7 @@ This guide will step you through the basic set of requirements needed to build c
 It is recommended that you spend some time watching and learning some beginner videos for UE4 on youtube before you start asking too many newbie questions.
 {: .prompt-info }
 
-If you need help or do have any questions, don't hesitate to join the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR)!
+If you need help or do have any questions, don't hesitate to join the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR){:target="_blank"}!
 
 ### The Level Design Cycle for RoN
 
@@ -35,9 +35,9 @@ It is important to note that currently we cannot test gameplay within Unreal Eng
 ![Ready or Not Development Cycle](/assets/mapping-gettingstarted/DevCycle.png)
 
 ### Development Example
-If you would like to see what its like to make a map for Ready or Not, I recorded my entire development for [Hell Comes to the Hills](https://www.nexusmods.com/readyornot/mods/3072/). 
+If you would like to see what its like to make a map for Ready or Not, I recorded my entire development for [Hell Comes to the Hills](https://www.nexusmods.com/readyornot/mods/3072/){:target="_blank"}. 
 
-[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3)
+[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3){:target="_blank"}
 
 
 ## Installation
@@ -53,10 +53,10 @@ If you would like to see what its like to make a map for Ready or Not, I recorde
 
 1. Create a Folder anywhere and name it whatever you want. This will be the folder you need to extract the following files into. I will refer to this folder as `RoNTemplate`. 
 2. Download and Extract the following into `RoNTemplate`
-    * https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing
-    * https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing
+    * [https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing](https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing){:target="_blank"}
+    * [https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing](https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing){:target="_blank"}
 3. Download the following Hotfix. **DELETE** your `/plugins/` folder within `RoNTemplate` and then Extract the contents of the hotfix to `RoNTemplate`
-    * https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing 
+    * [https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing](https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing){:target="_blank"}
 4. Open `RoNTemplate` and open the `ReadyOrNot.uproject`. This will launch the Project and may take a couple of minutes to load if this is your first time using Unreal. Just be patient.
 
 >**HELP! I Get 100s of errors when I load up the project!**
@@ -98,14 +98,18 @@ Content
 5. Under the `Place Actors` tab, chuck down a Geometry floor and a couple of walls using boxes to act as a space to play in
     * If everything is black, press `Alt+3` to switch to `Unlit Mode`
 6. Under the `Place Actors` tab, go to `All Classes` and search for and place down the following:
-    - [ ] 5 Player Start Actors
-          : This is where your Player and Team Spawn
-    - [ ] Nav Mesh Bounds Volume
-          : Required for your AI to function, whatever this covers will be where your AI can walk
-    - [ ] World Data Generator Actor
-          : This will build the navigation and gameplay elements when you load your map
-    - [ ] Roster Scenario Spawner Actor
-          : This creates your gameplay objectives and spawns
+    - [ ] ***5 Player Start Actors***
+      * This is where your Player and Team Spawn
+          
+    - [ ] ***Nav Mesh Bounds Volume***
+      * Required for your AI to function, whatever this covers will be where your AI can walk
+          
+    - [ ] ***World Data Generator Actor***
+      * This will build the navigation and gameplay elements when you load your map
+          
+    - [ ] ***Roster Scenario Spawner Actor***
+      * This creates your gameplay objectives and spawns
+          
 7. In the Content Browser, navigate to `...\Content\BlueprintSpawners\PostRelease` and place down 2 ***BP_AISpawn_Reap_V1*** Blueprints
     * Technically not needed, but without it the map will automatically complete when you play it and you wont be able to test it.
     * You can use the `AISpawn` actor, but Reap's one has some better control
@@ -199,15 +203,16 @@ Packaging will turn our cooked content into a single compressed file that we can
     * Replace `YOURMAPNAME` with whatever your map's name is. This will not show up in game, but will help identify your map/mod to people downloading your mod.
     * Sometimes it is required to append `_P` at the end of the name if you are replacing files (i.e. P for Patching). But since you shouldn't be replacing any files this is unneeded. 
 3. Go to `C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64` and create a `.bat` file here with the following arguments:
-    ```batch
-    @if "%~1"=="" goto skip
-    @setlocal enableextensions
-    @pushd %~dp0
-    @echo "%~1\*.*" "../../../ReadyOrNot/" >filelist.txt
-    .\UnrealPak.exe "%~1.pak" -create=filelist.txt -compress
-    @popd
-    @pause
-    :skip```
+```batch
+  @if "%~1"=="" goto skip
+  @setlocal enableextensions
+  @pushd %~dp0
+  @echo "%~1\*.*" "../../../ReadyOrNot/" >filelist.txt
+  .\UnrealPak.exe "%~1.pak" -create=filelist.txt -compress
+  @popd
+  @pause
+  :skip
+```
 4. Create a Shortcut to the .bat file you created and move it to your staging folder from Step 1.
 5. Navigate to your Template/Project folder and go to: `...\RoNTemplate\Saved\Cooked\WindowsNoEditor\ReadyOrNot` and copy **ONLY** the `Content` folder
 6. Paste your `Content` folder into your `pakchunk99_YOURMAPNAME` folder
@@ -259,7 +264,7 @@ There are just some final important steps needed to know when you re-cook and pa
 
 ## Using Ready or Not Game Assets and Content
 
-If you want to use RoN game assets you will need to extract them yourself using umodel: https://www.gildor.org/en/projects/umodel
+If you want to use RoN game assets you will need to extract them yourself using umodel: [https://www.gildor.org/en/projects/umodel](https://www.gildor.org/en/projects/umodel){:target="_blank"}
 
 To get the assets:
 1. Open umodel and select your `...\ReadyOrNot\Content\Paks` folder
@@ -284,4 +289,4 @@ Restarting the Editor may take some time as the project discovers and indexes al
 >If for some reason the assets are not loading double check the project settings so that it can use cooked content: https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent
 {: .prompt-warning }
 
-Video Guide by Reap: https://www.youtube.com/watch?v=-xQKyV7_6fE 
+Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.youtube.com/watch?v=-xQKyV7_6fE){:target="_blank"}
