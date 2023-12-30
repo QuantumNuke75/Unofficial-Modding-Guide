@@ -215,7 +215,7 @@ Packaging will turn our cooked content into a single compressed file that we can
 4. Create a Shortcut to the .bat file you created and move it to your staging folder from step 1.
 5. Navigate to your Template/Project folder and go to: `...\RoNTemplate\Saved\Cooked\WindowsNoEditor\ReadyOrNot` and copy **ONLY** the `Content` folder
 6. Paste your `Content` folder into your `pakchunk99-YOURMAPNAME` folder
-7. Drag your `pakchunk99-YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99_YOURMAPNAME.pak`
+7. Drag your `pakchunk99-YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99-YOURMAPNAME.pak`
 8. Copy your `pakchunk99-YOURMAPNAME.pak` to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks`
 9. Your map should now be available in the game
 
