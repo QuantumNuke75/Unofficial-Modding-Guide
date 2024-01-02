@@ -1,5 +1,5 @@
 ---
-title: Map Modding
+title: Map Modding (OUTDATED)
 date: 2022-08-07 13:00:00 +0100
 categories: [Map Modding]
 tags: [maps]
@@ -10,7 +10,9 @@ author: TheRealSourc3|https://www.nexusmods.com/readyornot/mods/1384
 
 ## Map Modding
 
- 
+>This version of the mapping guide is outdated since the release of 1.0. For an updated guide and download please check out [Getting Started with Ready or Not Mapping](https://unofficial-modding-guide.com/posts/mapping_gettingstarted/)
+{: .prompt-danger }
+
 #### Special thanks to:    
 
 `ACowBoyBishop#7664` and `Vegriv#8646` for testing and help! 
