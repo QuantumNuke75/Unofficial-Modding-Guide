@@ -22,11 +22,11 @@ This guide will step you through the basic set of requirements needed to build c
 It is recommended that you spend some time watching and learning some beginner videos for UE4 on youtube before you start asking too many newbie questions.
 {: .prompt-info }
 
-If you need help or do have any questions, don't hesitate to join the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR)!
+If you need help or have any questions, don't hesitate to join the [RoN Custom Maps Discord](https://discord.gg/NGAtrTmXBR){:target="_blank"}!
 
 ### The Level Design Cycle for RoN
 
-We currently provide a template project that contains all the gameplay features/blueprints needed to make RoN maps here: [Installation](##Installation).
+We currently provide a template project that contains all the gameplay features/blueprints needed to make RoN maps here: [Installation](#installation).
 
 For the Level Design process, you pretty much do it all within Unreal Engine, and can use whatever (reasonable) method you want to create your level. 
 
@@ -35,15 +35,15 @@ It is important to note that currently we cannot test gameplay within Unreal Eng
 ![Ready or Not Development Cycle](/assets/mapping-gettingstarted/DevCycle.png)
 
 ### Development Example
-If you would like to see what its like to make a map for Ready or Not, I recorded my entire development for [Hell Comes to the Hills](https://www.nexusmods.com/readyornot/mods/3072/). 
+If you would like to see what it's like to make a map for Ready or Not, I recorded my entire development for [Hell Comes to the Hills](https://www.nexusmods.com/readyornot/mods/3072/){:target="_blank"}. 
 
-[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3)
+[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3){:target="_blank"}
 
 
 ## Installation
 
 ### Unreal Engine 
-1. Download and install the [Epic Launcher](https://store.epicgames.com/en-US/download) and install Unreal Engine 4.27.2.
+1. Download and install the [Epic Launcher](https://store.epicgames.com/en-US/download){:target="_blank"}.
 2. Open the Launcher, go `Unreal Engine` on the left side bar, then `Library` along the top toolbar
 3. Under `Engine Versions` press the `+` icon and next to the Version Number, click the drop down and select `4.27.2` and Install
 
@@ -53,10 +53,10 @@ If you would like to see what its like to make a map for Ready or Not, I recorde
 
 1. Create a Folder anywhere and name it whatever you want. This will be the folder you need to extract the following files into. I will refer to this folder as `RoNTemplate`. 
 2. Download and Extract the following into `RoNTemplate`
-    * https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing
-    * https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing
+    * [https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing](https://drive.google.com/file/d/17uyZ_hrklBIN1ci88GajcnT1pOeFQJGx/view?usp=sharing){:target="_blank"}
+    * [https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing](https://drive.google.com/file/d/1BsavVwAYh6kq7hUs9wD3o2A5_nY6rWn6/view?usp=sharing){:target="_blank"}
 3. Download the following Hotfix. **DELETE** your `/plugins/` folder within `RoNTemplate` and then Extract the contents of the hotfix to `RoNTemplate`
-    * https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing 
+    * [https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing](https://drive.google.com/file/d/1IAD9qjTfN2JJ5yBUZ3R9Jhzi8R0YdgCS/view?usp=sharing){:target="_blank"}
 4. Open `RoNTemplate` and open the `ReadyOrNot.uproject`. This will launch the Project and may take a couple of minutes to load if this is your first time using Unreal. Just be patient.
 
 >**HELP! I Get 100s of errors when I load up the project!**
@@ -98,14 +98,18 @@ Content
 5. Under the `Place Actors` tab, chuck down a Geometry floor and a couple of walls using boxes to act as a space to play in
     * If everything is black, press `Alt+3` to switch to `Unlit Mode`
 6. Under the `Place Actors` tab, go to `All Classes` and search for and place down the following:
-    - [ ] 5 Player Start Actors
-          : This is where your Player and Team Spawn
-    - [ ] Nav Mesh Bounds Volume
-          : Required for your AI to function, whatever this covers will be where your AI can walk
-    - [ ] World Data Generator Actor
-          : This will build the navigation and gameplay elements when you load your map
-    - [ ] Roster Scenario Spawner Actor
-          : This creates your gameplay objectives and spawns
+    - [ ] ***5 Player Start Actors***
+      * This is where your Player and Team Spawn
+          
+    - [ ] ***Nav Mesh Bounds Volume***
+      * Required for your AI to function, whatever this covers will be where your AI can walk
+          
+    - [ ] ***World Data Generator Actor***
+      * This will build the navigation and gameplay elements when you load your map
+          
+    - [ ] ***Roster Scenario Spawner Actor***
+      * This creates your gameplay objectives and spawns
+          
 7. In the Content Browser, navigate to `...\Content\BlueprintSpawners\PostRelease` and place down 2 ***BP_AISpawn_Reap_V1*** Blueprints
     * Technically not needed, but without it the map will automatically complete when you play it and you wont be able to test it.
     * You can use the `AISpawn` actor, but Reap's one has some better control
@@ -124,7 +128,7 @@ Currently your level doesn't have any light, so we should set up the basic stuff
 - [ ] 1 Sky Atmosphere Actor
 - [ ] 1 Exponential Height Fog Actor
 - [ ] 1 Sphere Reflection Probe that encompasses the map
-    * Without reflections the models/guns in game can look flat and not lit properly.
+    * Without reflections the models/guns in game can look flat and not properly lit.
 
 >If you set your Directional Light to be the Atmosphere Sun Light, you can use `Ctrl+L` to change the direction of your sun now
 {: .prompt-tip }
@@ -159,7 +163,6 @@ Doors are pretty simple to place down into your map.
 ### LevelData
 *LevelData will show you how your map will look in the Level/Mission Select screen. Currently LevelData does not work and we are waiting for a patch from VOID.*
 
-### Covergen
 
 ## Building / Baking
 If you've been following along so far, then you probably have not built your map. Building a map fixes up changes in Geometry & Volumes, Lighting & Reflections and Pathing. You should do it whenever you want to update/preview changes in your map.
@@ -183,8 +186,8 @@ Cooking is the process of turning the project into content that can be deployed 
 6. Select `File > Cook Content for Windows`
     * This could take some time for your first cook as it compiles all the shaders. Just be patient.
 
->You should hear it succeed, but a message will not remain on screen when it completes. If it failed the notification will stay on the screen. A common cause of a failed Cook is usual a result of including already Cooked content from [this process](#using-ready-or-not-game-assets-and-content), so make sure you haven't included it in any of your directories.
-{: .prompt-info }
+>You should hear it succeed, but a message will not remain on screen when it completes. If it failed the notification will stay on the screen. A common cause of a failed Cook is usual a result of including already Cooked content from [this process](#using-ready-or-not-game-assets-and-content), so make sure you haven't included it in any of your directories. Even creating materials that reference cooked textures will create a cook to fail.
+{: .prompt-warning }
 
 
 ## Packaging & Installing your Map
@@ -194,25 +197,26 @@ Packaging will turn our cooked content into a single compressed file that we can
 {: .prompt-danger }
 
 1. Create a folder somewhere to act as your staging location for packing, name doesn't matter but I use `Paking`. 
-2. Within this folder create a new folder using the following naming convention: `pakchunk99_YOURMAPNAME`
+2. Within this folder create a new folder using the following naming convention: `pakchunk99-YOURMAPNAME`
     * the 99 after `pakchunk` indicates the load order of paks. We keep maps at 99.
     * Replace `YOURMAPNAME` with whatever your map's name is. This will not show up in game, but will help identify your map/mod to people downloading your mod.
     * Sometimes it is required to append `_P` at the end of the name if you are replacing files (i.e. P for Patching). But since you shouldn't be replacing any files this is unneeded. 
 3. Go to `C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64` and create a `.bat` file here with the following arguments:
-    ```batch
-    @if "%~1"=="" goto skip
-    @setlocal enableextensions
-    @pushd %~dp0
-    @echo "%~1\*.*" "../../../ReadyOrNot/" >filelist.txt
-    .\UnrealPak.exe "%~1.pak" -create=filelist.txt -compress
-    @popd
-    @pause
-    :skip```
-4. Create a Shortcut to the .bat file you created and move it to your staging folder from Step 1.
+```batch
+  @if "%~1"=="" goto skip
+  @setlocal enableextensions
+  @pushd %~dp0
+  @echo "%~1\*.*" "../../../ReadyOrNot/" >filelist.txt
+  .\UnrealPak.exe "%~1.pak" -create=filelist.txt -compress
+  @popd
+  @pause
+  :skip
+```
+4. Create a Shortcut to the .bat file you created and move it to your staging folder from step 1.
 5. Navigate to your Template/Project folder and go to: `...\RoNTemplate\Saved\Cooked\WindowsNoEditor\ReadyOrNot` and copy **ONLY** the `Content` folder
-6. Paste your `Content` folder into your `pakchunk99_YOURMAPNAME` folder
-7. Drag your `pakchunk99_YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99_YOURMAPNAME.pak`
-8. Copy your `pakchunk99_YOURMAPNAME.pak` to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks`
+6. Paste your `Content` folder into your `pakchunk99-YOURMAPNAME` folder
+7. Drag your `pakchunk99-YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99-YOURMAPNAME.pak`
+8. Copy your `pakchunk99-YOURMAPNAME.pak` to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks`
 9. Your map should now be available in the game
 
 This is an example of what a Staging folder can look like:
@@ -223,7 +227,7 @@ This is an example of what a Staging folder can look like:
 
 
 ## Testing your Map
-> I highly recommend that you download the [Console Unlocker - Camera Mod](https://www.nexusmods.com/readyornot/mods/716) by QuantumNuke75. It will give you ability to use a Free-Look camera and also use basic Unreal Engine Console Commands. Both functions are extremely helpful for testing.
+> I highly recommend that you download the [Console Unlocker - Camera Mod](https://www.nexusmods.com/readyornot/mods/716){:target="_blank"} by QuantumNuke75. It will give you ability to use a Free-Look camera and also use basic Unreal Engine Console Commands. Both functions are extremely helpful for testing.
 {: .prompt-tip }
 
 The easiest way to test your map is to simply load up the game and select it from the Mission Select screen. If all works well then it should take a couple of seconds to build WorldGen and plops you into the map.
@@ -248,7 +252,7 @@ And Voilà! You've just gone through your first iteration of RoN Mapping!
 
 There are just some final important steps needed to know when you re-cook and package your map to test updates:
 
-1. After you recook your map, it is recommended that you delete the `Content` folder within your staged `pakchunk99_YOURMAPNAME` folder instead of overriding it. 
+1. After you recook your map, it is recommended that you delete the `Content` folder within your staged `pakchunk99-YOURMAPNAME` folder instead of overriding it. 
     * Overriding your folders may leave residual files and settings that may mess with your playtest
 2. **BEFORE** you launch the game. Navigate to `C:\Users\USERNAME\AppData\Local\ReadyOrNot\Saved\SaveGames` and delete the WorldGen.sav file that has the same map name as your map (e.g. Hell Comes to the Hills filename looks like `Hell_Comes_to_the_Hills_WorldGen_40173.sav`).
     * **This step is critical!** Each time the game launches your map for the first time, it generates World Data and stores it so the map launches faster the next time you play it. However the game does not know when your map has been changed. So you will likely be playing on a map with outdated build information resulting in quite a few bugs.
@@ -259,29 +263,34 @@ There are just some final important steps needed to know when you re-cook and pa
 
 ## Using Ready or Not Game Assets and Content
 
-If you want to use RoN game assets you will need to extract them yourself using umodel: https://www.gildor.org/en/projects/umodel
+If you want to use RoN game assets you will need to extract them yourself using umodel: [https://www.gildor.org/en/projects/umodel](https://www.gildor.org/en/projects/umodel){:target="_blank"}
 
 To get the assets:
 1. Open umodel and select your `...\ReadyOrNot\Content\Paks` folder
 2. Click `Tools > Scan Content` and select `Unreal Engine 4.27`
 3. Tick `Flat View` in the top-left corner.
-4. Sort by `Stat`
+4. Sort by `Stat` (Static Meshes)
 5. Select all with `Stat` = 1
 6. Select `Tools > Save Selected Packages`
 
-You can repeat this for `Skel` 
+You can repeat steps 4-6 for `Skel` (Skeletal Meshes)
 
 Once you are done copy the saved files to your project. For umodel the `Game` folder is the `Content` folder for your Project. So you can just copy the contents of `Game` into your `Content` folder. 
 
-Restarting the Editor may take some time as the project discovers and indexes all the cooked assets.
+Restarting the Editor may take some time as the project discovers and indexes all the cooked assets. 
 
->You may want to repeat for some `Tex` as well. But be warned that you will not have the materials to display onto the meshes. You will need rebuild the materials from scratch, and saving the Textures is not usually worth the time and hassle.
+You can simply place down these meshes in your level but they may not have materials. However, when you load the game they will be textured fine. This is just a limitation we need to work around.
+
+>Make sure you are keeping the directories the same from `Game` to `Content`. Cooked assets are the actual game files the game needs to reference for them to work. Do not put them in your `Mods\Username` folder.
+{: .prompt-warning }
+
+>You may want to repeat for some `Tex` (Textures) as well. But be warned that you will not have the materials to display onto the meshes. You will need rebuild the materials from scratch, and saving the Textures is not usually worth the time and hassle.
 {: .prompt-info }
 
 >It is generally not recommended to extract/save everything as it will take a very long time to do and will likely crash/fail to do so. Putting ALL the assets into your project will also significantly increase file size & launching time when you open UE.
 {: .prompt-tip }
 
->If for some reason the assets are not loading double check the project settings so that it can use cooked content: https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent
+>If for some reason the assets are not loading double check the project settings so that it can use cooked content: [https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent](https://docs.unrealengine.com/4.27/en-US/WorkingWithContent/CookedContent){:target="_blank"}
 {: .prompt-warning }
 
-Video Guide by Reap: https://www.youtube.com/watch?v=-xQKyV7_6fE 
+Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.youtube.com/watch?v=-xQKyV7_6fE){:target="_blank"}
