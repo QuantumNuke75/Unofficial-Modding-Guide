@@ -55,7 +55,7 @@ This documentation will explain the requirements to get QSM working within your 
 {: .prompt-warning }
 
 ### Sound_ParameterTransition_V2_BP_C Blueprint
-* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds.
+* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms.
 
 | Property | Description |
 |:---|:---|
@@ -69,6 +69,9 @@ This documentation will explain the requirements to get QSM working within your 
 | Use Door Check Feature | Enable if the transition between Rooms uses doors. Helps with determining reverb on different door open states. |
 | Gobal Parameter Door Check? | Leave `Disabled`. *Unsure what it does.* |
 | Doors Open | *Unable to modify, but within the official editor, is auto populated via the Construction script.* |
+
+>The 'IN' part of the BP can be identified by the white spline line inside the box when the BP is UNSELECTED.
+{: .prompt-info }
 
 >Distance Along Spline Threshold, Min/Max Range OUTSIDE/INSIDE can be edited but should be left default values.
 {: .prompt-info }
@@ -85,7 +88,8 @@ TODO
 
 ### Part 2 - Ready or Not Audio Volume and Level Ambience & Reverb
 1. Drag a `Ready or Not Audio Volume` from the actor's tab into the scene.
-2. Edit the brush to cover the playable area. It is recommended to scale it just a bit over to encapsulate the some of the outside area as a safety net against players
+2. Edit the brush to cover the playable area. 
+    * It is recommended to scale it just a bit over to encapsulate the some of the outside area as a safety net against players
 3. Go to `Content > FMOD > Levels > Reverbs` in the Content Browser and select the `ReverbMaster` FMOD Event and drag it into your scene.
 4. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it a child actor of it.
 5. Decide which Level's ambience is appropriate for your map and navigate to `Content > FMOD > Levels` and enter the appropriate level folder.
@@ -102,11 +106,58 @@ Room Volumes (RV) have a couple of requirements and quirks that you **MUST** fol
 * RVs of the same ID can overlap, and it is recommended to slightly overlap volumes to be safe.
 * HOWEVER RVs of different IDs **CANNOT** overlap **AND** their faces must be touching/meeting (see Figure below). Failure to meet these requirements will mean that QSM will not work correctly. 
     * It is HIGHLY recommended that for this process you keep World grid snapping enabled for your entire process to make 'meeting' the walls an easier task.
+    * Snapping to 5uu is an excellent increment to work fast and accurately.
 * It is recommended that the RVs conform to the shape of the room they are in as closely as possible. 
-* It is also recommended that the volumes also slightly extend into the walls rather than undershoot them as so the Audio bounces retain their accuracy
+* It is also recommended that the volumes also slightly extend into the floors, walls & ceilings rather than undershoot them as so the Audio bounces retain their accuracy. 
+    * Having the RV not extend outside the walls a little bit might cause issues such as footsteps not being heard on the floor or gunshots not being registered inside the room if they hit the ceiling or walls.
+    * I have used a spacing of 5uu as a good buffer for my extra extending.
 
 ### Part 4 - Setting up Portal Volumes
 
+Portal Volumes (PV) are relatively easier to set up in comparison to Room Volumes and don't require as many special rules
+
+1. Drag a  `Portal Volume` from the actor's tab into the scene.
+2. Drag the PV so that it covers the threshold between 2 different Rooms. e.g. Between a doorway or going from an outdoor area to an interior one.
+3. Edit the PV in Brush Edit Mode (Shift+4) so that it completely covers the doorframe/window/hole and extends out a little bit. See pictures below for examples (TODO)
+    * **DO NOT Scale** the PV, they should only be edited via Brush Edit Mode
+3. If the PV goes from an exterior/outdoor area into an interior area with Room Volumes, `enable` the `Is Outside` property
+4. In most cases, leave `Portal Type` to `HORIZONTAL`.
+4. If the PV contains Doors within it, you will need to add (`+`) some array elements to the `Attached Objects` property and select the Doors inside the PV with the eyedropper.
+5. You do not need to change the `Breakable Glass Soft Pointer` as we do not have a working example for Breakable Glass
+
+>Zack recommends to approach doing Portal Volumes by completeing the Outdoor-to-Indoor thresholds first for testing. You will need to make sure that all of these thresholds are covered for QSM to correctly identify the Interior and Exterior areas. 
+{: .prompt-tip }
+
 ### Part 5 - Setting up Sound_ParameterTransition_V2_BP_C Blueprints
+
+#### Part 5.1 Placing the Transition BP
+1. Drag a `Sound_ParameterTransition_V2_BP_C` into the scene, located within the Content Browser at `Content > Blueprints > Sound`.
+2. Identify which side of the BP is the `IN` side by **UNSELECTING** the BP and noting down what side the white spline line inside the box is on. The side the line is on is your `IN` direction. 
+    * When you select the BP there will be splines on either side.
+3. Rotate the Transition BP appropriately so you know which part of the BP is `IN` & `OUT`
+4. You will likely need to resize the BP, but it is imporant that you **DO NOT SCALE** it. To change the size select the `Box Component` of the BP and adjust the `Box Extent` values instead.
+    * The size of the box is an artistic choice but note that as soon as a player steps into it, the transitions will begin. So take careful consideration to not place them in areas that do not make sense logically. 
+5. The spline values determines the ratio in which the volume of the ambience changes when moving through the BP. You should make sure that if you edit the `Box Component`, you also edit the `Spline Component` points on either end to be WITHIN the `Box Component`
+    * You should only need to change the `X` value for the spline point's `Location`
+
+#### Part 5.2 Editing the Transition BP Properties
+1. Add (`+`) an element to `FMOD Ambient / Music Events` and add your `*_Amb` you selected from step 2.
+2. For the same element, type the corresponding `INParameter` & `OUTParameter` that is defined within the same FMOD Event
+    * These will either be named `IN` and `OUT` OR `INT` and `EXT`. 
+        * Eg: `Gas_Amb_V2` is `GasAmbIN` & `GasAmbOUT`, while `Valley_Amb_V2` uses `ValleyAmbINT` & `ValleyAmbEXT`
+    * You will need to locate these identifiers from the Ambience FMOD Event. To do so make sure you have completed [Step 1](#part-1---getting-the-fmod-assets-into-your-project). Once complete, create a duplicate the the event and double click the duplicate (This is so you can work around not being able to inspect Cooked assets).
+3. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
+4. For `FMOD Global Parameter` type in exactly: `AmbSwitch`
+5. Enable `Use Door Check Feature` if your Transition BP contains doors
+6. You cannot add elements to `Doors Open`, this is supposed to self-populate via the BP's construction script.
+
+>The following part needs further clarification
+
+7. Zack recommends for `Global Parameter IN` to be set to `1` & `Global Parameter OUT` to be set to `0`
+    * These are more artistic values and hard to describe **ZACK SHOULD WRITE SOMETHING HERE WINK WINK** 
+    * Its unsure whether `Global Parameter OUT` should be set for 0 for Interior sections
+8. You do not need to edit `Min/Max Range OUTSIDE/INSIDE` values, but I believe these need some further clarification from ZACK especially for Interior-to-Interior transitions. 
+    * There us probably more nuance to it as transitioning does affect the Ambient volume noticable from Interior-to-Interior.
+9. I do not know what entirely what `Distance Along Spline Theshold` accomplishes.
 
 ## Setting up OST Triggers
