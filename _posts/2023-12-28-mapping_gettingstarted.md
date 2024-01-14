@@ -295,3 +295,13 @@ You can simply place down these meshes in your level but they may not have mater
 {: .prompt-warning }
 
 Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.youtube.com/watch?v=-xQKyV7_6fE){:target="_blank"}
+
+## Where to Next?
+We have other guides that cover some more in-depth aspects of mapping that you can check out below:
+
+### [Additional Game Mechanics]() COMING SOON
+### [Map Optimization]() COMING SOON
+### [Setting up Audio and Working with QSM]() COMING SOON
+### [Setting up Music Events for Levels]() COMING SOON
+
+
