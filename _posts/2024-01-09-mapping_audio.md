@@ -90,7 +90,7 @@ This documentation will explain the requirements to get QSM working within your 
 3. Go to `Content > FMOD > Levels > Reverbs` in the Content Browser and select the `ReverbMaster` FMOD Event and drag it into your scene.
 4. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it a child actor of it.
 5. Decide which Level's ambience is appropriate for your map and navigate to `Content > FMOD > Levels` and enter the appropriate level folder.
-6. Find the correct Ambient FMOD Event for your specific level listed here: Reference - [FMOD Parameters](){:target="_blank"} and drag it into your scene.
+6. Find the correct Ambient FMOD Event for your specific level listed here: [Reference - FMOD Parameters](){:target="_blank"} and drag it into your scene.
 7. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it a child actor of it, just like before.
 
 The Ready or Not Audio Volumes can also be used to control FMOD events that should play persistantly around the map but shouldn't be heard all the time. e.g. The hum of a fridge that was in a room, but you didn't want to hear it if you were outside. Another example would be hearing the splash of a water feature outside, but only if you were close to it. 
