@@ -7,6 +7,6 @@ description: An in-depth guide on setting up event queues to dynamically change 
 author: Zack|https://voidinteractive.net/, Delta|https://www.nexusmods.com/readyornot/mods/3072/
 ---
 
-#Setting up Music Events for Levels
+# Setting up Music Events for Levels
 
-##Hello
+## Hello
