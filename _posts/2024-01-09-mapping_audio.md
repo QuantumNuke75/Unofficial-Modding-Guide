@@ -83,24 +83,21 @@ This documentation will explain the requirements to get QSM working within your 
 > Before beginning, it is **highly** recommended that each one of these steps are done within a folder (or sub-level) within the World Outliner to keep things ordered. In this particular case you should be renaming assets (F2) as you create them to keep things managable.
 {: .prompt-tip }
 
-### Part 1 - Getting the FMOD Assets into your Project
-TODO
-
-### Part 2 - Ready or Not Audio Volume and Level Ambience & Reverb
+### Part 1 - Ready or Not Audio Volume and Level Ambience & Reverb
 1. Drag a `Ready or Not Audio Volume` from the actor's tab into the scene.
 2. Edit the brush to cover the playable area. 
     * It is recommended to scale it just a bit over to encapsulate the some of the outside area as a safety net against players
 3. Go to `Content > FMOD > Levels > Reverbs` in the Content Browser and select the `ReverbMaster` FMOD Event and drag it into your scene.
 4. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it a child actor of it.
 5. Decide which Level's ambience is appropriate for your map and navigate to `Content > FMOD > Levels` and enter the appropriate level folder.
-6. Find the `FMOD Event` that has `*_Amb` in the name. (eg: `Gas_Amb_V2`) and drag that into your scene
+6. Find the correct Ambient FMOD Event for your specific level listed here: Reference - [FMOD Parameters](){:target="_blank"} and drag it into your scene.
 7. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it a child actor of it, just like before.
 
 The Ready or Not Audio Volumes can also be used to control FMOD events that should play persistantly around the map but shouldn't be heard all the time. e.g. The hum of a fridge that was in a room, but you didn't want to hear it if you were outside. Another example would be hearing the splash of a water feature outside, but only if you were close to it. 
 
 You can think of them as trigger volumes to control scenarios by setting them up in the same manner as above, by making any relevant FMOD Events a child actor of the Volume. 
 
-### Part 3 - Setting up Room Volumes
+### Part 2 - Setting up Room Volumes
 
 Room Volumes (RV) have a couple of requirements and quirks that you **MUST** follow:
 * You DO NOT need a RV for the Exterior/Outside portions of your map. Only Interior sections. 
@@ -116,7 +113,7 @@ Room Volumes (RV) have a couple of requirements and quirks that you **MUST** fol
     * Having the RV not extend outside the walls a little bit might cause issues such as footsteps not being heard on the floor or gunshots not being registered inside the room if they hit the ceiling or walls.
     * I have used a spacing of 5uu as a good buffer for my extra extending.
 
-### Part 4 - Setting up Portal Volumes
+### Part 3 - Setting up Portal Volumes
 
 Portal Volumes (PV) are relatively easier to set up in comparison to Room Volumes and don't require as many special rules
 
@@ -132,9 +129,9 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 >Zack recommends to approach doing Portal Volumes by completeing the Outdoor-to-Indoor thresholds first for testing. You will need to make sure that all of these thresholds are covered for QSM to correctly identify the Interior and Exterior areas. 
 {: .prompt-tip }
 
-### Part 5 - Setting up Sound_ParameterTransition_V2_BP_C Blueprints
+### Part 4 - Setting up Sound_ParameterTransition_V2_BP_C Blueprints
 
-#### Part 5.1 Placing the Transition BP
+#### Part 4.1 Placing the Transition BP
 1. Drag a `Sound_ParameterTransition_V2_BP_C` into the scene, located within the Content Browser at `Content > Blueprints > Sound`.
 2. Identify which side of the BP is the `IN` side by **UNSELECTING** the BP and noting down what side the white spline line inside the box is on. The side the line is on is your `IN` direction. 
     * When you select the BP there will be splines on either side.
@@ -147,12 +144,12 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 >Transition BP's require different property settings for Outdoor-to-Indoor and Indoor-to-Indoor thresholds. Please read the requirements properly. 
 {: .prompt-warning }
 
-#### Part 5.2 Properties for OUTDOOR-to-INDOOR Transitions
-1. Add (`+`) an element to `FMOD Ambient / Music Events` and add your `*_Amb` you selected from step 2.
+#### Part 4.2 Properties for OUTDOOR-to-INDOOR Transitions
+1. Add (`+`) an element to `FMOD Ambient / Music Events` and add your Ambient Event you selected from step 1.
 2. For the same element, type the corresponding `INParameter` & `OUTParameter` that is defined within the same FMOD Event
-    * These will either be named `IN` and `OUT` OR `INT` and `EXT`. 
+    * These do not have a consistent naming convention, however the OUT parameter is usually named `OUT` or `EXT`
         * Eg: `Gas_Amb_V2` is `GasAmbIN` & `GasAmbOUT`, while `Valley_Amb_V2` uses `ValleyAmbINT` & `ValleyAmbEXT`
-    * You will need to locate these identifiers from the Ambience FMOD Event. To do so make sure you have completed [Step 1](#part-1---getting-the-fmod-assets-into-your-project). Once complete, create a duplicate the the event and double click the duplicate (This is so you can work around not being able to inspect Cooked assets).
+    * You will need to locate these identifiers defined here [Reference - FMOD Parameters](){:target="_blank"}
 3. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. For `FMOD Global Parameter` type in exactly: `AmbSwitch`
 5. Enable `Use Door Check Feature` if your Transition BP contains doors
@@ -162,5 +159,3 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 #### Part 5.3 Properties for INDOOR-to-INDOOR Transitions
 1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. Thats it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
-
-## Setting up OST Triggers
