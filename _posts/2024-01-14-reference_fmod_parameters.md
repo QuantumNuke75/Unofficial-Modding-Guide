@@ -12,6 +12,7 @@ author: Zack|https://voidinteractive.net/, Delta|https://www.nexusmods.com/ready
 The following tables list the different parameters to use with the Sound_ParameterTransition_V2_BP_C Blueprint to modifier Ambient and Music queues within your level.
 
 **[D] = Dynamic paraneter**: if x parameter = 1, a layer's volume is brought up, if 0, it's back down again. You can transition between these parameters freely.
+
 **[S] = Static parameter**: once it's triggered, it shouldn't be set back to 0. It's a one and done kinda parameter. You cannot go backwards on the music timelines once these are called
 
 ## Agency
