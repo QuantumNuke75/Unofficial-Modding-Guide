@@ -299,9 +299,9 @@ Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.y
 ## Where to Next?
 We have other guides that cover some more in-depth aspects of mapping that you can check out below:
 
-### [Additional Game Mechanics]() COMING SOON
-### [Map Optimization]() COMING SOON
-### [Setting up Audio and Working with QSM]() COMING SOON
-### [Setting up Music Events for Levels]() COMING SOON
+### [Additional Game Mechanics](){:target="_blank"} COMING SOON
+### [Map Optimization](){:target="_blank"} COMING SOON
+### [Setting up Audio and Working with QSM](){:target="_blank"} COMING SOON
+### [Setting up Music Events for Levels](){:target="_blank"} COMING SOON
 
 
