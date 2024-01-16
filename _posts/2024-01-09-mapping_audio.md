@@ -17,6 +17,8 @@ Ready or Not uses a combination of FMOD and an in-house built audio solver calle
 
 This documentation will explain the requirements to get QSM working within your map and how to integrate it with FMOD ambience and events.
 
+If you want documentation on how to set up dynamic music for levels, the below documentation is pre-requisite knowledge. Once understood you can check out: [Setting up Music Events for Levels](){:target="_blank"}.
+
 ## Actor Overview
 >Any property not listed in the tables below are meant to be private and we shouldn't modify them
 {: .prompt-info }
@@ -48,20 +50,20 @@ This documentation will explain the requirements to get QSM working within your 
 |:---|:---|
 | Is Outside | Enable if the Portal connects to the outside   |
 | Portal Type | Used to determine the direction in which sound will pass through the portal: **HORIZONTAL** for regular use through doors and windows. **VERTICAL** for upward sound direction through a well or hole in the ground. |
-| Attached Objects | Add your doors that are within the Volume to this array. **DO NOT ADD TO "Doors"!** |
+| Attached Objects | ~~Add your doors that are within the Volume to this array. **DO NOT ADD TO "Doors"!**~~  WORK-AROUND: Assign the Portal Volume to the *Door's* `Add to Audio Portal Volume` |
 | Breakable Glass Soft Pointer | Pointer to the Breakable Glass BP the Portal Volume covers, currently we dont have a working breakable glass example |
 
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the Volume in Brush Edit mode (Shift+4).
 {: .prompt-warning }
 
 ### Sound_ParameterTransition_V2_BP_C Blueprint
-* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms.
+* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms. They can also be used to activate parameters for the music in the game to make it more dynamic.
 
 | Property | Description |
 |:---|:---|
-| FMOD Ambient / Music Events | Contains the FMOD Event for Ambient sounds for Outdoor-to-Indoor Transitions - choose which map Ambient sounds to go here (will contain `*_Amb` in the file name, eg: `Gas_Amb_V2` |
-| INParameter | FMOD Parameter taken from the Amb FMOD Event you added above, suffix with `IN` (eg: `GasAmbIN`). Double click the FMOD event to find these values. |
-| OUTParameter | Exactly the same as above, but suffix with `OUT` (eg: `GasAmbOUT`) |
+| FMOD Ambient / Music Events | Contains the FMOD Events that control the Transitions. For Ambient sound Outdoor-to-Indoor Transitions - choose which map Ambient sounds to go here (will contain `*_Amb` in the file name, eg: `Gas_Amb_V2` |
+| INParameter | FMOD Parameter taken from the Amb FMOD Event you added above. You can find these values here: [Reference - FMOD Parameters](){:target="_blank"} |
+| OUTParameter | Exactly the same as above, but usually suffix with `OUT` (eg: `GasAmbOUT`) |
 | Reverb IN | Select the drop down that best represents the Room Reverb you are moving into |
 | Reverb OUT | Select the drop down that best represents the Reverb in the room you are entering from |
 | Global Parameter IN | The FMOD modifier for Indoor Audio. Set to `1` as a good default |
@@ -123,8 +125,9 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
     * **DO NOT Scale** the PV, they should only be edited via Brush Edit Mode
 3. If the PV goes from an exterior/outdoor area into an interior area with Room Volumes, Enable the `Is Outside` property
 4. In most cases, leave `Portal Type` to `HORIZONTAL`.
-4. If the PV contains Doors within it, you will need to add (`+`) some array elements to the `Attached Objects` property and select the Doors inside the PV with the eyedropper.
 5. You do not need to change the `Breakable Glass Soft Pointer` as we do not have a working example for Breakable Glass
+6. Finally, if you have doors within your PV, select the Door Actor and within the Door Actor's properties find `Add to Audio Room Portal` and use the eye dropper to select the appropriate PV.
+     * Not doing so will cause the door's audio to be muffled on one side of the door when interacting with it.
 
 >Zack recommends to approach doing Portal Volumes by completeing the Outdoor-to-Indoor thresholds first for testing. You will need to make sure that all of these thresholds are covered for QSM to correctly identify the Interior and Exterior areas. 
 {: .prompt-tip }
@@ -156,6 +159,6 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 6. You cannot add elements to `Doors Open`, this is supposed to self-populate via the BP's construction script.
 7. Se the `Global Parameter IN` to be set to `1` & `Global Parameter OUT` to be set to `0`
 
-#### Part 5.3 Properties for INDOOR-to-INDOOR Transitions
+#### Part 4.3 Properties for INDOOR-to-INDOOR Transitions
 1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. Thats it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
