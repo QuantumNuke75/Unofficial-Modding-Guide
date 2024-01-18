@@ -417,7 +417,8 @@ For this level, there are 6 special spatial events - 5 opera singer events (`Sin
 | StreamerENTRY | [S] | advances timeline past intro |
 | StreamerSERVERROOM | [S] | advances timeline to server section |
 | StreamerAGENCYPICSSEEN | [S] | plays agency stinger |
-| StreamerROOMENTERED | [D] | lowers volume of certain layers |
+| StreamerROOMENTERED | [D] | lowers volume of certain layers. If AmbSwitch <= 1.35, this value will be 0. If AmbSwitch >= 2, this value will be 1. |
+| StreamerMAINROOM | [D] | changes volume of certain layers. |
 
 There are 2 spatial events, `Streamer_Spatial_Server_A` and `Streamer_Spatial_Server_B`, these play those lil server chirps that sync with the track
 
