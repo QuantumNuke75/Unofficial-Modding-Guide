@@ -32,10 +32,11 @@ The following tables list the different parameters to use with the Sound_Paramet
 
 ### Music: *Main_Agency_Timeline*
 
-| Parameter Name | Type | Description |
-|:---|:--:|:---|
-| AgencyMusicIN | [S] | transitions the music into the inside sections |
-| AgencyMusicQUIET | [D] | lowers the volume of certain layers |
+| Parameter Name | Type | Description | Correct? |
+|:---|:--:|:---|:---|
+| AgencyMusicIN | [S] | transitions the music into the inside sections | Y |
+| AgencyMusicQUIET | [D] | lowers the volume of certain layers | Y |
+| AgencyMusicMIRROR | [D] | Controls creepy aaaaaaaa | Y |
 
 ## Beachfront
 
@@ -49,10 +50,11 @@ The following tables list the different parameters to use with the Sound_Paramet
 
 ### Music: *Main_Beachfront_Timeline*
 
-| Parameter Name | Type | Description |
-|:---|:--:|:---|
-| BeachfrontHOUSEENTER | [D] | transitions the music into the inside sections |
-| BeachfrontATTICENTER | [S] | allows the timeline to flow to the piano section |
+| Parameter Name | Type | Description | Correct? |
+|:---|:--:|:---|:---|
+| BeachfrontHOUSEENTER | [D] | transitions the music into the inside sections | a |
+| BeachfrontATTICENTER | [S] | allows the timeline to flow to the piano section |  a |
+| EndLoop | Ambswitch Controlled | 0-1 Outside non-looping, 1-9 Is inside looping | a  |
 
 Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, can be placed on your map and act as spatial accompaniments
 
@@ -141,7 +143,7 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
 | DataCenter Entered [^nameWithSpace] | [D] | transitions the music into the inside sections |
-| AmbSwitch | [D] | changes certain layers coming in, having it go from 1-3 should adjust the intensity |
+| AmbSwitch | [D] | changes certain layers coming in, having it go from 0-2 should adjust the intensity, 1 would be like the entrance and outer rooms while 2 would be inside the main server room |
 
 ## Dealer
 
@@ -230,10 +232,13 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 |:---|:--:|:---|
 | HospitalLIGHTSPOTTED | [S] | triggers a light stinger |
 | HospitalHEAVYSPOTTED | [S] | triggers a heavier stinger |
+| | | |
 | HospitalDEPTH1 | [S] | once triggered, each step advances the timeline further and adds more layers. So the deeper you go through hospital for example, it fires 1 through 4 respectively. |
 | HospitalDEPTH2 | [S] | "" |
 | HospitalDEPTH3 | [S] | "" |
 | HospitalDEPTH4 | [S] | "" |
+| | | | 
+| HospitalDEPTH | [D] | |
 
 There are 6 FMOD events that you can place if this music is used, that have synchronized beeps to the music (`Hospital_OST_Beeps_1 - 6`)
 
@@ -255,7 +260,7 @@ There are 6 FMOD events that you can place if this music is used, that have sync
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
 | ImporterMusicINSIDE | [D] | transitions the music to the inside sections |
-| mporterMusicILLEGALACTIVITYSEEN | [S] | triggers certain lead lines to come in |
+| ImporterMusicILLEGALACTIVITYSEEN | [S] | triggers certain lead lines to come in |
 
 ## Meth
 
