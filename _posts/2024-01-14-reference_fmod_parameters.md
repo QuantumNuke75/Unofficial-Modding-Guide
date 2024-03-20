@@ -9,11 +9,14 @@ author: Zack|https://voidinteractive.net/, Delta|https://www.nexusmods.com/ready
 
 # Reference - FMOD Parameters
 
-The following tables list the different parameters to use with the Sound_ParameterTransition_V2_BP_C Blueprint to modifier Ambient and Music queues within your level.
+The following tables list the different parameters to use with the `Sound_ParameterTransition_V2_BP_C` Blueprint to modify Ambient and Music queues within your level.
 
-**[D] = Dynamic parameter**: if x parameter = 1, a layer's volume is brought up, if 0, it's back down again. You can transition between these parameters freely.
+**[D] = Dynamic parameter**: These are layers that can be toggled between different states multiple times, and transition between them freely. Usually if x parameter = 1, a layer's volume is brought up, if 0, it's back down again.
 
-**[S] = Static parameter**: once it's triggered, it shouldn't be set back to 0. It's a one and done kinda parameter. You cannot go backwards on the music timelines once these are called
+**[S] = Static parameter**: These are single use events that are one and done, you cannot trigger them again after the initial firing. These are used for timelines that have some linear progression to them or trigger a sting event (eg: seeing the pictures on Streamer). Once it's triggered, it shouldn't be set back to 0. You cannot go backwards on the music timelines once these are called.
+
+>FMOD Events Parameters are *NOT* case sensitive. Spaces in some names are required however.
+{: .prompt-info }
 
 ## Agency
 
@@ -32,11 +35,11 @@ The following tables list the different parameters to use with the Sound_Paramet
 
 ### Music: *Main_Agency_Timeline*
 
-| Parameter Name | Type | Description | Correct? |
-|:---|:--:|:---|:---|
-| AgencyMusicIN | [S] | transitions the music into the inside sections | Y |
-| AgencyMusicQUIET | [D] | lowers the volume of certain layers | Y |
-| AgencyMusicMIRROR | [D] | Controls creepy aaaaaaaa | Y |
+| Parameter Name | Type | Description |
+|:---|:--:|:---|
+| AgencyMusicIN | [S] | transitions the music into the inside sections |
+| AgencyMusicQUIET | [D] | lowers the volume of certain layers |
+| AgencyMusicMIRROR | [D] | Controls creepy aaaaaaaa |
 
 ## Beachfront
 
@@ -50,13 +53,23 @@ The following tables list the different parameters to use with the Sound_Paramet
 
 ### Music: *Main_Beachfront_Timeline*
 
-| Parameter Name | Type | Description | Correct? |
-|:---|:--:|:---|:---|
-| BeachfrontHOUSEENTER | [D] | transitions the music into the inside sections | a |
-| BeachfrontATTICENTER | [S] | allows the timeline to flow to the piano section |  a |
-| EndLoop | Ambswitch Controlled | 0-1 Outside non-looping, 1-9 Is inside looping | a  |
+| Parameter Name | Type | Description |
+|:---|:--:|:---|
+| BeachfrontHOUSEENTER | [D] | transitions the music into the inside sections |
+| BeachfrontATTICENTER | [S] | allows the timeline to flow to the piano section |
+| BeachfrontHOUSECHIMES | [D] | If == 1, you can hear the spatial event `Beachfront_Chimes_Spatial` |
+| EndLoop | Ambswitch Controlled | 0-1 Outside non-looping, 1-9 Is inside looping |
 
-Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, can be placed on your map and act as spatial accompaniments
+1. Timeline will continue to play initial guitar chords until BeachfrontHOUSEENTER == 1
+2. Timeline will continue to play muted bass hits until combat is entered
+3. Timeline will loop a combat section as long as the player stays in combat
+4. Timeline will eventually transition to a post combat loop until BeachfrontATTICENTER == 1
+5. Timeline will play attic section with piano until reaching an 'end loop' that eventually transitions to a quieter loop if ambswitch < 1 (Outside)
+
+Two spatial FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, can be placed on your map and act as spatial accompaniments
+
+* The flute spatial sounds will only trigger if AmbSwitch >= 1 and is placed in your map.
+* The chimes spatial sound will play if BeachfrontHOUSECHIMES == 1 and is placed in your map.
 
 ## Campus
 
@@ -99,6 +112,8 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 | ClubOSTSauna | [D] | transitions to a variant of certain layers |
 | ClubOSTBodyRoom | [D] | ups the volume on a disturbing layer |
 
+Timeline will remain silent until MasterZackVolume == 1
+
 ## Coyote
 
 ### Ambience: *Amb_Coyote*
@@ -124,6 +139,10 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 | CoyoteCAVEDEPTH3 | [S] | transitions further into the music timeline |
 | CoyoteSIDECAVES | [D] | adds a shaker layer |
 
+Coyote is a more linear timeline as you move through the tunnels, so each Depth adds more layers to the soundtrack. 
+
+There is 1 spatial FMOD Event `Coyote_Spatial_Drum`. This is used at the entrance of the cave before you enter. As long as this is placed in your map, this will continue to play while CoyoteCAVEDEPTH1 == 0
+
 ## DataCenter
 
 ### Ambience: *Data_Center_Amb*
@@ -145,6 +164,10 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 | DataCenter Entered [^nameWithSpace] | [D] | transitions the music into the inside sections |
 | AmbSwitch | [D] | changes certain layers coming in, having it go from 0-2 should adjust the intensity, 1 would be like the entrance and outer rooms while 2 would be inside the main server room |
 
+* AmbSwitch is used to add more depth as you get deeper into the map
+* The timeline will only continue properly as long as DataCenter Entered == 1 and AmbSwitch > 0
+* You can trigger multiple different sections depending on the value of AmbSwitch (so ambswitch 1 is a new section, ambswitch 2 new section)
+
 ## Dealer
 
 ### Ambience: *Dealer_Amb_V2*
@@ -162,6 +185,7 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
+| DealerEXPReception | [D] | The close the value is to 1, the more muffled the game OST will be |
 | DealerEXPMurderRoom | [D] | makes certain layers all distorted |
 
 ## Farm
@@ -183,19 +207,26 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
-| FarmMusicENTRYAPPROACH | [D] | adjusts the volume of the initial entry choir sound |
 | FarmMusicENTRY | [S] | transitions to a sudden drum hit and continues the timeline |
+| FarmMusicENTRYAPPROACH | [D] | adjusts the volume of the initial entry choir sound |
 | FarmMusicDRONEINSIDE | [D] | volume for inside drone layer |
 | FarmMusicDRONEOUTSIDE | [D] | volume for outside drone layer |
 | | | |
 | FarmMusicCHURCHAPPROACH | [D] | used when approaching church |
 | FarmMusicDRONECHURCH | [D] | volume for church drone / scarier rooms |
 | FarmMusicDRONECHURCHCLOSER | [D] | volume for more intense church drone |
+| FarmMusicCHURCHDRUMSPEED | [D] | Increases drum speed 0 = slow, 1 = faster |
 | FarmMusicTREE | [S] | triggers the tree stinger and subsequent eerie organ section |
-| | | |
-| FarmMusicCHURCHAPPROACH | [D] | used when approaching church |
-| FarmMusicDRONECHURCH | [D] | volume for church drone / scarier rooms |
-| FarmMusicDRONECHURCHCLOSER | [D] | volume for more intense church drone |
+
+There are 3 spatial events: `Farm_Music_Spatial_Drum`, `Farm_Music_Spatial_Synth` and `Farm_Music_Spatial_Voice`
+
+1. The timeline will only continue properly if FarmMusicENTRY == 1. As FarmMusicENTRYAPPROACH increases to 1, a choir layer is increased in volume - this layer only plays during the intro section.
+2. Once FarmMusicENTRY == 1, a large drum hit will play, and the timeline will continue.
+3. Using the assorted drone parameters, different layers can come in and out
+4. To have the church approach section play, set FarmMusicCHURCHAPPROACH to 1. As long as the `Farm_Music_Spatial_Drum` FMOD event is placed in your map, you should hear this drum play spatially now.
+5. To control the drum speed, set FarmMusicCHURCHDRUMSPEED to 0 for slow or 1 for faster
+6. To continue the timeline past the church section and fire the spooky stinger, set FarmMusicTREE to 1.
+7. The timeline will eventually return back to the third stage, where you can use the drone parameters again to control different layers.
 
 ## Gas
 
@@ -239,6 +270,10 @@ Two FMOD events, `Beachfront_Chimes_Spatial` and `Beachfront_Flutes_Spatial`, ca
 | HospitalDEPTH4 | [S] | "" |
 | | | | 
 | HospitalDEPTH | [D] | |
+
+* The SPOTTED events are meant to be used for spotting things like bullet holes, blood and dead bodies
+* The way Hospital works, is that the Transition Volumes are set up so as you go deeper it adds more layers.
+* Since there are different spawn locations on different sides of the map, Hospital sets up multiple Transitions, for example Depth2, so no matter which side you enter from it will always trigger. It continues to cascade Transitions in-wards from opposite sides as you continue to move deeper through the map.
 
 There are 6 FMOD events that you can place if this music is used, that have synchronized beeps to the music (`Hospital_OST_Beeps_1 - 6`)
 
@@ -292,7 +327,7 @@ PenthouseAmbSTAIRWELL | [D] | |
 
 ### Music: *Main_Penthouse_Timeline_V2*
 
-*No Parameters to edit.*
+* No parameters to edit, Timeline will just work.
 
 ## Port
 
