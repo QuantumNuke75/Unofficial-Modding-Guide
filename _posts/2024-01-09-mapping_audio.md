@@ -21,7 +21,28 @@ If you want documentation on how to set up dynamic music for levels, the below d
 
 ## Required Download & Example Map
 The below link has updated files that are required for QSM to function correctly, as well as a number of QoL Blueprints to help you test and debug. These were made by RareKiwi so give him some love.
+
 LINK
+
+## Setting up FMOD
+>You do not actually need to complete the steps below to implement QSM. However it is likely you will want to mess with some events if you want to tweak Ambient events. The steps below will tell you how to get it working. 
+{: .prompt-info }
+
+Currently the Template has placeholders for the FMOD events - you cannot actually listen to them. If you wish to hear them you will need to:
+
+1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD` and copy the `Desktop` folder
+2. Within your project folder, paste the `Desktop` folder to `...\RonTemplate\Content\FMOD`
+
+You should be able to preview sounds now. Since they are Cooked assets, you will need to create a duplicate to actually see the values. 
+
+If you do not actually hear sound after moving the folder, you will need to reinstall the FMOD plugin:
+
+1. Go to [https://www.fmod.com/download](https://www.fmod.com/download){:target="_blank"} and sign-in or create an account
+2. Click `FMOD for Unreal`, select `UE4` on the right and then `2.02`, then finally from the drop-down select version `2.02.19`.
+3. Click Download for Windows
+4. Once downloaded, open the .zip file and drag the `FMODStudio` folder into the following location within your project: `...\RonTemplate\Plugins` and override any files.
+
+This should be all you need to do to start hearing FMOD events.
 
 ## Actor Overview
 >Any property not listed in the tables below are meant to be private and we shouldn't modify them
@@ -58,13 +79,14 @@ LINK
 | Is Outside | Enable if the Portal connects to the outside   |
 | Portal Type | Used to determine the direction in which sound will pass through the portal: **HORIZONTAL** for regular use through doors and windows. **VERTICAL** for upward sound direction through a well or hole in the ground. |
 | Attached Objects | ~~Add your doors that are within the Volume to this array. **DO NOT ADD TO "Doors"!**~~  WORK-AROUND: Assign the Portal Volume to  `BP_Door_Reap_V2_QSM`'s `Add to Audio Portal Volume` |
-| Breakable Glass Soft Pointer | Pointer to the Breakable Glass BP the Portal Volume covers. The Breakable Glass BP is called: " |
+| Breakable Glass Soft Pointer | Pointer to the Breakable Glass BP the Portal Volume covers. The Breakable Glass BP is located: `Content > BreakableGlass > Blueprints > BP_BreakableGlass_C`. 1 BP per Portal. |
 
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the Volume in Brush Edit mode (Shift+4).
 {: .prompt-warning }
 
 ### Sound_ParameterTransition_V2_BP_C Blueprint
-* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms. They can also be used to activate parameters for the music in the game to make it more dynamic.
+* This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms.
+* They can also be used to activate parameters for the music in the game to make it more dynamic.
 
 | Property | Description |
 |:---|:---|
@@ -128,12 +150,18 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 
 1. Drag a  `Portal Volume` from the actor's tab into the scene.
 2. Drag the PV so that it covers the threshold between 2 different Rooms. e.g. Between a doorway or going from an outdoor area to an interior one.
-3. Edit the PV in Brush Edit Mode (Shift+4) so that it completely covers the doorframe/window/hole and extends out a little bit. See pictures below for examples (TODO)
+3. Edit the PV in Brush Edit Mode (Shift+4) so that it completely covers the doorframe/window/hole and extends out a little bit. See the picture below for an example:
     * **DO NOT Scale** the PV, they should only be edited via Brush Edit Mode
+    * PVs do not need to be exactly the same size as the hole, and it is fine if it is larger or extends wider/higher than the hole that it covers
+
+![Portal Volume Example](/assets/mapping-audio/PortalVolumeExample.jpg)
+ 
 3. If the PV goes from an exterior/outdoor area into an interior area with Room Volumes, Enable the `Is Outside` property
 4. In most cases, leave `Portal Type` to `HORIZONTAL`.
-5. You do not need to change the `Breakable Glass Soft Pointer` as we do not have a working example for Breakable Glass
-6. Finally, if you have doors within your PV, select the Door Actor and within the Door Actor's properties find `Add to Audio Room Portal` and use the eye dropper to select the appropriate PV.
+5. If you are using Breakable Glass, set the  `Breakable Glass Soft Pointer` to the corresponding `BP_BreakableGlass_C` Blueprint.
+6. If you have doors within your PV, you will need to replace any previous version of that door with the newer version provided in the download above located at `Content > Mods > RareKiwi > BP_Door_Reap_V2_QSM`
+     * This contains a workaround that allows us to link the Door and PV together in run-time
+7. Select the new Door Actor and within the Door Actor's properties find `Add to Audio Room Portal` and use the eye dropper to select the appropriate PV.
      * Not doing so will cause the door's audio to be muffled on one side of the door when interacting with it.
 
 >Zack recommends to approach doing Portal Volumes by completeing the Outdoor-to-Indoor thresholds first for testing. You will need to make sure that all of these thresholds are covered for QSM to correctly identify the Interior and Exterior areas. 
@@ -145,6 +173,9 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 1. Drag a `Sound_ParameterTransition_V2_BP_C` into the scene, located within the Content Browser at `Content > Blueprints > Sound`.
 2. Identify which side of the BP is the `IN` side by **UNSELECTING** the BP and noting down what side the white spline line inside the box is on. The side the line is on is your `IN` direction. 
     * When you select the BP there will be splines on either side.
+
+![Identifying IN and OUT](/assets/mapping-audio/IdentifyingINandOUT.jpg)
+
 3. Rotate the Transition BP appropriately so you know which part of the BP is `IN` & `OUT`
 4. You will likely need to resize the BP, but it is imporant that you **DO NOT SCALE** it. To change the size select the `Box Component` of the BP and adjust the `Box Extent` values instead.
     * The size of the box is an artistic choice but note that as soon as a player steps into it, the transitions will begin. So take careful consideration to not place them in areas that do not make sense logically. 
