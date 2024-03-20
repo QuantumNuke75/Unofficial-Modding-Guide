@@ -1,5 +1,5 @@
 ---
-title: Setting up Audio and Working with QSM
+title: Setting up Audio and Working with QSM & the OST
 date: 2024-01-09 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, audio]
@@ -7,7 +7,7 @@ description: An in-depth guide on making your map compatible with the Quantum So
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://voidinteractive.net/
 ---
 
-# Setting up Audio and Working with QSM
+# Setting up Audio and Working with QSM & the OST
 
 >This information is very temporary at the moment and highly likely to change.
 {: .prompt-danger }
@@ -15,9 +15,9 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://void
 ## Introduction
 Ready or Not uses a combination of FMOD and an in-house built audio solver called the [Quantum Sound Manager (QSM)](https://www.youtube.com/watch?v=ATLRmTDEfG8){:target="_blank"}. QSM is a method to help with reverb and audio occlusion from around the map and takes into consideration room sizes, door states and even whether or not glass is broken and adjust volumes accordingly.
 
-This documentation will explain the requirements to get QSM working within your map and how to integrate it with FMOD ambience and events.
+This documentation will explain the requirements to get QSM working within your map and how to integrate it with FMOD ambience and events. 
 
-If you want documentation on how to set up dynamic music for levels, the below documentation is pre-requisite knowledge. Once understood you can check out: [Setting up Music Events for Levels](){:target="_blank"}.
+Once understanding QSM, you will be able to implement music within your map and control timelines, events and queues that make Official Levels so dynamic.
 
 ## Required Download & Example Map
 The below link has updated files that are required for QSM to function correctly, as well as a number of QoL Blueprints to help you test and debug. These were made by RareKiwi so give him some love.
@@ -200,3 +200,21 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 #### Part 4.3 Properties for INDOOR-to-INDOOR Transitions
 1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. Thats it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
+
+## Setting up Music
+
+### Level Blueprint Setup
+ 
+For the music to react dynamically to the combat, the bare minimum you need to do is to set it up in the Level Blueprint. 
+
+The download at the top contains the appropriate Data files for the next couple of steps. You can also find them located at `Content > ReadyOrNot > Data > Music` and extract them using [FModel](https://fmodel.app/){:target="_blank"} if you need to.
+
+1. Open the Level Blueprint for you main Level
+2. Click on the `Class Defaults` button at the top and under details panel locate `Ready or Not Level Script > Level Data > Music Data`
+3. In `Music Data` assign the Data Asset for the music you wish to use for you level. These are located at `Content > ReadyOrNot > Data > Music`
+4. Click Compile and Save. You can close the Blueprint and next time you play your Level, it should play the music assigned and dynamically change when you enter combat!
+
+### Controlling the OST
+
+## Tools & Testing
+
