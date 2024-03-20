@@ -19,12 +19,16 @@ This documentation will explain the requirements to get QSM working within your 
 
 If you want documentation on how to set up dynamic music for levels, the below documentation is pre-requisite knowledge. Once understood you can check out: [Setting up Music Events for Levels](){:target="_blank"}.
 
+## Required Download & Example Map
+The below link has updated files that are required for QSM to function correctly, as well as a number of QoL Blueprints to help you test and debug. These were made by RareKiwi so give him some love.
+LINK
+
 ## Actor Overview
 >Any property not listed in the tables below are meant to be private and we shouldn't modify them
 {: .prompt-info }
 
 ### Ready Or Not Audio Volume
-* A Volume that controls FMOD Events when players are in them
+* A Volume that controls FMOD Events when players are in them, it essentially acts as a trigger volume for child events.
 * Maps require at least one for Reverb and Ambient Sounds that cover the entire playable space
 
 | Property | Description |
@@ -46,12 +50,15 @@ If you want documentation on how to set up dynamic music for levels, the below d
 ### Portal Volume
 * These volumes act as portals for QSM to pass through into other rooms. These are specifically placed in doorways, open windows, arches & holes and even managing when glass is broken.
 
+>You will need to use the modified Door Blueprint `BP_Door_Reap_V2_QSM` provided in the download above for door audio to function properly. Not doing so will cause the sound to be muffled on one-side of the door.
+{: .prompt-info }
+
 | Property | Description |
 |:---|:---|
 | Is Outside | Enable if the Portal connects to the outside   |
 | Portal Type | Used to determine the direction in which sound will pass through the portal: **HORIZONTAL** for regular use through doors and windows. **VERTICAL** for upward sound direction through a well or hole in the ground. |
-| Attached Objects | ~~Add your doors that are within the Volume to this array. **DO NOT ADD TO "Doors"!**~~  WORK-AROUND: Assign the Portal Volume to the *Door's* `Add to Audio Portal Volume` |
-| Breakable Glass Soft Pointer | Pointer to the Breakable Glass BP the Portal Volume covers, currently we dont have a working breakable glass example |
+| Attached Objects | ~~Add your doors that are within the Volume to this array. **DO NOT ADD TO "Doors"!**~~  WORK-AROUND: Assign the Portal Volume to  `BP_Door_Reap_V2_QSM`'s `Add to Audio Portal Volume` |
+| Breakable Glass Soft Pointer | Pointer to the Breakable Glass BP the Portal Volume covers. The Breakable Glass BP is called: " |
 
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the Volume in Brush Edit mode (Shift+4).
 {: .prompt-warning }
