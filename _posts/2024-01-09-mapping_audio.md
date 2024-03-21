@@ -1,5 +1,5 @@
 ---
-title: Setting up Audio and Working with QSM & the OST
+title: Setting up Audio and Working with QSM for Maps
 date: 2024-01-09 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, audio]
@@ -7,17 +7,14 @@ description: An in-depth guide on making your map compatible with the Quantum So
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://voidinteractive.net/
 ---
 
-# Setting up Audio and Working with QSM & the OST
-
->This information is very temporary at the moment and highly likely to change.
-{: .prompt-danger }
+# Setting up Audio and Working with QSM for Maps
 
 ## Introduction
 Ready or Not uses a combination of FMOD and an in-house built audio solver called the [Quantum Sound Manager (QSM)](https://www.youtube.com/watch?v=ATLRmTDEfG8){:target="_blank"}. QSM is a method to help with reverb and audio occlusion from around the map and takes into consideration room sizes, door states and even whether or not glass is broken and adjust volumes accordingly.
 
-This documentation will explain the requirements to get QSM working within your map and how to integrate it with FMOD ambience and events. 
+This guide will explain the requirements to get QSM working within your map and how to integrate it with FMOD ambience and events. 
 
-Once understanding QSM, you will be able to implement music within your map and control timelines, events and queues that make Official Levels so dynamic.
+The second part of this guide is [Setting up Music Events for Maps]()
 
 ## Required Download & Example Map
 The below link has updated files that are required for QSM to function correctly, as well as a number of QoL Blueprints to help you test and debug. These were made by RareKiwi so give him some love.
@@ -201,20 +198,36 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. Thats it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
 
-## Setting up Music
-
-### Level Blueprint Setup
- 
-For the music to react dynamically to the combat, the bare minimum you need to do is to set it up in the Level Blueprint. 
-
-The download at the top contains the appropriate Data files for the next couple of steps. You can also find them located at `Content > ReadyOrNot > Data > Music` and extract them using [FModel](https://fmodel.app/){:target="_blank"} if you need to.
-
-1. Open the Level Blueprint for you main Level
-2. Click on the `Class Defaults` button at the top and under details panel locate `Ready or Not Level Script > Level Data > Music Data`
-3. In `Music Data` assign the Data Asset for the music you wish to use for you level. These are located at `Content > ReadyOrNot > Data > Music`
-4. Click Compile and Save. You can close the Blueprint and next time you play your Level, it should play the music assigned and dynamically change when you enter combat!
-
-### Controlling the OST
-
 ## Tools & Testing
 
+RareKiwi has created a bunch of useful tools to help test and debug QSM and OST Values. All these tools are provided in the QSM folder in the download at the top. 
+
+### BP_AudioProppagationQSMTester
+
+This is a BP that you place anywhere in your level. When you play your level in the game it will constantly fire a gun shot so you can debug and see if QSM is working correctly. 
+
+| Control | Action |
+|:---|:---|
+| P | Move Here |
+| [ (Left Bracket) | Trace there |
+| ] (Right Bracket) | Occlusion Type |
+| \ (Backslash) | Toggle Active |
+
+>Pressing \ (Backslash) during the mission countdown will crash RoN
+{: .prompt-warning }
+
+### BP_AudioSampler
+
+When placed in your level, it allows you to test the effect different FMOD Parameters have on FMOD Events. This is meant to be used within the Editor. You can changed what Event to preview by selecting the `FMODAudio` component in the Details panel. You can use any FMOD Event in here; Timelines, Ambients and regular sound effects!
+
+When you are playing in the editor, the Blueprint will auto-populate the sliders to show what you can edit. However the sliders will not update the audio automatically and you will need press the Play button for each change you make. 
+
+**Example Use:** The FMOD event `Ridgeline_Cicadas` can be controlled by AmbSwitch to lower the volume for entering interior sections. To would be hard to figure out the correct values to use without lots iterative builds, but using the AudioSampler allows us to quickly identify the values needed without leaving the editor.
+
+### Tool_ListRoomIDs
+
+Used to help keep track and change the Room IDs of Room Volumes. It creates a list of all Room IDs you have and select specific IDs.
+
+## What Next? Music!
+
+If you got QSM all set up, you should look at the next part of the guide: [Setting up Music Events for Maps]() to allow you add music to your map and let it react dynamically to combat and other parameters. 
