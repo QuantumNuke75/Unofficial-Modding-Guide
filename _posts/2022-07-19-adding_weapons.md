@@ -19,7 +19,7 @@ author: "0w0-Yui"
 
 - JSON Viewer (Optional, I use VS Code)
 
->**[UE5.3]** UassetGUI and FModel now need a [Mappings.usmap](/posts/ue4ss_and_mappings/#Mappings-Download) for full functionality
+>**[UE5.3]** UassetGUI and FModel now need a [Mappings.usmap](/posts/ue4ss_and_mappings/#mappings-download) for full functionality
 {: .prompt-warning }
 
 ## Getting Start
