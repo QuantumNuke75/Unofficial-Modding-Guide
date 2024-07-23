@@ -19,6 +19,9 @@ author: "0w0-Yui"
 
 - JSON Viewer (Optional, I use VS Code)
 
+>**[UE5.3]** UassetGUI and FModel now need a [Mappings.usmap](/posts/ue4ss_and_mappings/#Mappings-Download) for full functionality
+{: .prompt-warning }
+
 ## Getting Start
 ### Preparations
 1. You need a weapon replacement mod first.
@@ -48,7 +51,7 @@ Data include in .uexp
 .uasset point to .uexp, if you rename the file, they will broken. 
 The right way is open the editor, and use "save as" to rename.
 
-![Editor Preview](https://raw.githubusercontent.com/QuantumNuke75/Unofficial-Modding-Guide/gh-pages/images/editor_preview.png "Editor Preview")
+![Editor Preview](/assets/editor_preview.png "Editor Preview")
 
 ## Tutorials
 1. Close the UAssetGUI open before.

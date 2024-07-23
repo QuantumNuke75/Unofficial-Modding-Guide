@@ -8,7 +8,27 @@ description: Various options for batch files to extract games files or to create
 author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"
 ---
 
-## Batch Files
+## Batch Files 5.3
+
+### Pak Dragged Folder
+You will need a ReadyOrNot folder within.  
+> For example: `...\pakchunk99-Mod_PlayerLimitEdit_P\ReadyOrNot\Content\...`
+{: .prompt-info }
+```batch
+@setlocal ENABLEDELAYEDEXPANSION
+@if "%~1"=="" goto skip
+@setlocal enableextensions
+@pushd %~1
+(for /R %%f in (*) do @set "filePath=%%f" & set "relativePath=!filePath:%~1=!" & @echo "%%f" "../../..!relativePath!")>"%~dp0/filelist.txt"
+@pushd %~dp0
+::-compresslevel=4 for Normal, -compresslevel=-4 for uncompressed hyperfast paking
+.\UnrealPak.exe "%~1.pak" -create=filelist.txt -compress -compressionformats=Oodle -compressmethod=Kraken -compresslevel=4
+@popd
+@pause
+:skip
+```
+
+## Batch Files 4.27
 
 ### Extract to Win64
 ```batch
@@ -38,6 +58,8 @@ author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unof
 
 :skip
 ```
+> The following create Pak batch files may need to be updated for the Ready Or Not UE5.3/Home Invasion update 
+{: .prompt-danger }
 
 ### Pak to Same Directory
 ```batch

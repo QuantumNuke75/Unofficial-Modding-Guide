@@ -8,6 +8,9 @@ author: "QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unof
 ---
 
 ## UAsset Modding
+>**[UE5.3]** UassetGUI now needs a [Mappings.usmap](/posts/ue4ss_and_mappings/#Mappings-Download) for full functionality
+{: .prompt-warning }
+
 To do  UAsset modding, you'll need to be able to extract the raw files from the game. Make sure to use this .bat file in your UE4 install directory to unpack the game files:
 ```batch
 @if "%~1"=="" goto skip
