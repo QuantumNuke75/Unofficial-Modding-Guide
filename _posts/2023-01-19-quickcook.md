@@ -83,7 +83,8 @@ Quickmap is an empty level that can be loaded before the game's MainMenu level t
 1. Download the `pakchunk99-QuickLoad.pak` from [here](/posts/tools/#quickcook--quickmap) or [Nexus Mods](https://www.nexusmods.com/readyornot/mods/2313) or [mod.io](https://mod.io/g/readyornot/m/quickload)
 2. If in a .zip, extract it, then copy it your game's pak folder like any other mod.  
 	`/Ready Or Not/ReadyOrNot/Content/Paks/`  
-3. Open `%localappdata%\ReadyOrNot\Saved\Config\WindowsNoEditor\Engine.ini`
+3. Open `%localappdata%\ReadyOrNot\Saved\Config\Windows\Engine.ini`  
+> **[UE5]** This is now \Windows\ instead of 4.27 \WindowsNoEditor\  
 4. Add an empty line then add this override;  
 ```ini
 [/Script/EngineSettings.GameMapsSettings]
