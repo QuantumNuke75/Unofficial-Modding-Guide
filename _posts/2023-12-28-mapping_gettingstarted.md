@@ -5,6 +5,7 @@ categories: [Map Modding]
 tags: [maps, essential, introduction]
 description: An in-depth guide on getting started with Ready or Not Mapping
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/
+pin: true
 ---
 
 # Getting Started with Ready or Not Mapping [POST 1.0 RELEASE]
@@ -63,6 +64,10 @@ If you would like to see what it's like to make a map for Ready or Not, I record
 This is normal, it's just missing some game files that you can extract later on. We also don't have access to everything. Any errors you get on start-up are fine and will not give you any issues, provided you followed the steps so far exactly.
 {: .prompt-warning }
 
+## Your First Map
+>If you have seen previous YouTube tutorials it may have said you need to set up the Render Settings, or modify the Packaging settings. With the latest version of the Template, you do not need to change or extract any settings. You should be good to go from the first time you launch.
+{: .prompt-info }
+
 ### The Folder Structure
 Before we continue, it is very important to understand the folder structure of an Unreal Project. 
 
@@ -84,13 +89,8 @@ Content
 >Since you will be visiting your folder frequently I would consider changing the the folder color and adding it your favourites within the Content Browser. You can do this by simply right-clicking the folder here. 
 {: .prompt-tip }
 
-
-## Your First Map
->If you have seen previous YouTube tutorials it may have said you need to set up the Render Settings, or modify the Packaging settings. With the latest version of the Template, you do not need to change or extract any settings. You should be good to go from the first time you launch.
-{: .prompt-info }
-
 ### Bare Essentials for Gameplay
-1. Following the previous steps, go to your `...\Mod\Username` directory in the Content Browser and create a new Level then open it
+1. Following the previous steps, go to your `...\Mod\YourUsername` directory in the Content Browser and create a new Level then open it
     * Whatever you name it will be what it shows up as in-game
 2. Once opened, on the toolbar click on `Blueprints > Open Level Blueprint`
 3. Under `Class Defaults`, check the details panel and click on `Item Data` and add the `ItemData` asset
@@ -294,3 +294,13 @@ You can simply place down these meshes in your level but they may not have mater
 {: .prompt-warning }
 
 Video Guide by Reap: [https://www.youtube.com/watch?v=-xQKyV7_6fE](https://www.youtube.com/watch?v=-xQKyV7_6fE){:target="_blank"}
+
+## Where to Next?
+We have other guides that cover some more in-depth aspects of mapping that you can check out below:
+
+### [Additional Game Mechanics](){:target="_blank"} COMING SOON
+### [Map Optimization](){:target="_blank"} COMING SOON
+### [Setting up Audio and Working with QSM](){:target="_blank"} COMING SOON
+### [Setting up Music Events for Levels](){:target="_blank"} COMING SOON
+
+
