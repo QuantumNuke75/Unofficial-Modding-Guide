@@ -11,7 +11,7 @@ pin: true
 
 ## 1. UE5 Template 
 Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download)
-Download the following new UE5 Template and extract to your prefered location: [Download](Download)
+Download the following new UE5 Template and extract to your preferred location: [Download](Download)
 
 ## 2. UE4 Map Preparation
 Nearly all of the previous work you have done can be ported over with exception of any Blueprints from the old Template. 
@@ -30,7 +30,7 @@ The following should be replaced (or deleted) with placeholder engine meshes so 
 `Ready Or Not Audio Volumes`, `Portal Volumes`, `Room Volumes`, `CoverGenOverride Volumes` can remain as they are still the same actors. If they do not work convert them to a BlockingVolume (Under Actors tab in Details) temporarily to convert back after migration.
 `Sound_ParameterTransition_V2_BP_C` Blueprint can remain but it is likely you will need to reassign everything.
 
-> You did organise your map already into nice folders in the Outliner right????
+> You did organize your map already into nice folders in the Outliner right????
 {: .prompt-tip }
 
 ## 3. FModel Setup
@@ -73,7 +73,7 @@ If you wish to hear the QSM or ambient sounds follow these steps, there are plac
 1. Make sure the UE5 Template is closed before continuing.
 2. In your UE4 Project, right click on your Level and select *Asset Actions > Migrate*
 3. **DESELECT** everything first. We do not want to copy ANY of the old Blueprints or Cooked Content
-4. Navigate to your `Mods > YourUsername` section (where your Map *SHOULD* be located) and **ONLY SELECT** these files (or any Files YOU created and want to cary over). Hit OK.
+4. Navigate to your `Mods > YourUsername` section (where your Map *SHOULD* be located) and **ONLY SELECT** these files (or any Files YOU created and want to carry over). Hit OK.
     * You do not need to copy over any previous contents from `Mods > Reap`
 5. In the new Window, select the location of the `Content` folder of the UE5 Project and proceed.
 6. Once complete open up your map in the UE5 Project and inspect the result.
@@ -138,7 +138,7 @@ Things mostly remain the same, however the following changes to workflow are nee
 Cook and Paking remains the same process as before but there are 2 important things that have changed.
 
 ### Updated .bat Pak file
-You NEED to use the new updated .bat with the UE5.3 files (do not just edit your exisiting one):
+You NEED to use the new updated .bat with the UE5.3 files (do not just edit your existing one):
 [More Info](https://unofficial-modding-guide.com/posts/batchfiles/)
 
 ```batch
@@ -156,7 +156,7 @@ You NEED to use the new updated .bat with the UE5.3 files (do not just edit your
 ```
 
 ### Delete Global ShaderArchives
-Cooking a map now produces Shadercaches, there is an extra step needed for cooking to prevent them from being cooked but still provide the neccessary ones for your materials and .uassets:
+Cooking a map now produces Shadercaches, there is an extra step needed for cooking to prevent them from being cooked but still provide the necessary ones for your materials and .uassets:
 1. Before you cook, go to *Edit > Project Settings > Packaging*, and disable `Share Material Shader Code` - **BUT DO NOT RESTART THE EDITOR!**
 2. Cook your map as usual.
 3. When cook is complete, re-enabled `Share Material Shader Code`.
@@ -177,7 +177,9 @@ Cooking a map now produces Shadercaches, there is an extra step needed for cooki
 
 * We now have the ***Actor Palette Plugin*** enabled. This allows you to open up a level under *Tools > Actor Palette*. Doing so allows you to drag and drop Assets from the window into you map with ease! [Very cool~](https://www.youtube.com/watch?v=ym6kLi0EYQs)
     * There are a bunch of maps in `Mods > Template > Levels > ActorPalette` that you can load to test
-    * Warning: These maps require a LOT of memory as they are loading essentially all the usuable props from cooked assets. I would not open `Palette_MASTER` unless you have a strong PC.
+    * Warning: These maps require a LOT of memory as they are loading essentially all the usable props from cooked assets. I would not open `Palette_MASTER` unless you have a strong PC.
+ 
+* We can now create custom doors from our own DoorData DataTables (and there are tools to help copy over Door and AI rows from cooked assets courtesy of RareKiwi).
 
 ## Known Bugs
 
