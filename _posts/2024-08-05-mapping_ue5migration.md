@@ -11,7 +11,6 @@ pin: true
 
 ## 1. UE5 Template 
 Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download)
-
 Download the following new UE5 Template and extract to your prefered location: [Download](Download)
 
 ## 2. UE4 Map Preparation
@@ -179,3 +178,13 @@ Cooking a map now produces Shadercaches, there is an extra step needed for cooki
 * We now have the ***Actor Palette Plugin*** enabled. This allows you to open up a level under *Tools > Actor Palette*. Doing so allows you to drag and drop Assets from the window into you map with ease! [Very cool~](https://www.youtube.com/watch?v=ym6kLi0EYQs)
     * There are a bunch of maps in `Mods > Template > Levels > ActorPalette` that you can load to test
     * Warning: These maps require a LOT of memory as they are loading essentially all the usuable props from cooked assets. I would not open `Palette_MASTER` unless you have a strong PC.
+
+## Known Bugs
+
+* Double doors do not seem to work as double doors after the first load of the game, this seems to be an issue with the World Generation that is out of our hands for now.
+
+## Credits and Thanks
+
+Kingly credits need to go to **RareKiwi** for his dedication to updating the project and previous Blueprints. It is no small thing to say that without him, we would not have the new Template.
+
+Additional Credits to KITT, StenTheAwesome, Delta, Reap, The Real Sourc3 and to the beautiful VOID Interactive Devs (killowatt, Zack, QuantumNuke and Hunter).
