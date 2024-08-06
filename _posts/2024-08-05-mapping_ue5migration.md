@@ -64,8 +64,11 @@ All the game's assets should be available in the project now, including working 
 
 ## 5. Migrating your UE4 map to the new UE5 Project
 
+> There is a serious bug that occurs when migrating from 4.27 to 5.3, any custom Static Meshes you bring into the project will have their collisions Inverted. We are looking for an automated process to fix this at the moment.
+{: .prompt-warning }
+
 1. Make sure the UE5 Template is closed before continuing.
-2. In your UE4 Project, right click on your Level and select Asset `Actions > Migrate`
+2. In your UE4 Project, right click on your Level and select `Asset Actions > Migrate`
 3. **DESELECT** everything first. We do not want to copy ANY of the old Blueprints or Cooked Content
 4. Navigate to your `Mods > YourUsername` section (where your Map *SHOULD* be located) and **ONLY SELECT** these files (or any Files YOU created and want to cary over). Hit OK.
     * You do not need to copy over any previous contents from `Mods > Reap`
@@ -75,7 +78,7 @@ All the game's assets should be available in the project now, including working 
 > If you Level wont open or crashes the Editor, I would recommend taking a more manual process to migrating the map. Following up to step 5, instead create a new Level and manually Copy-Paste assets between Editors. **DO NOT** copy anything RoN Specific this time. Make sure not to have any Landscapes either.
 {: .prompt-tip }
 
-## 6. Fixing up missing Assets
+## 6. Fixing Issues and missing Assets
 
 If you have followed the steps up to this point, the Map should be mostly still intact. Most of the Cooked Assets from UE4 have remained in the same location in UE5, but now you can also view their Materials!
 
@@ -102,11 +105,13 @@ Things mostly remain the same, however the following changes to workflow are nee
     * Without it the map will crash on Level load
 * `BP_SpawnManager_V3` is required now (located in Mods/Template/Blueprints)
     * Without it no AISpawns will not work
+* Make sure that all `BP_AISpawns_Managed` have "*Managed*" assigned to their `Details > Actor > Tags` 
+    * Without it no AI will spawn even with the Spawn Manager
+    * This may happen if you Right Click > Replace Selected Actors with on placeholder actors after the migration.
 * Add a `BP_CoverGen` actor
     * Without it AI won't really move or do anything when engaged in fights
 * Multple PlayerSpawns are no long spawn the SWAT AI on them; they will all spawn on your PlayerSpawn. You only need 1 PlayerSpawn per actual Spawn Point (set in ModLevelData Table).
 * QSM Changes - *Documentation Soon™*
-
 
 
 ## 7. New Cook & Pak Method
