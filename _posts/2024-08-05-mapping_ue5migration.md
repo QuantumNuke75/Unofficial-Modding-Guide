@@ -184,6 +184,7 @@ Cooking a map now produces Shadercaches, there is an extra step needed for cooki
 ## Known Bugs
 
 * Double doors do not seem to work as double doors after the first load of the game, this seems to be an issue with the World Generation that is out of our hands for now.
+* When saving or opening a Level, the editor will ask you save changes to `BP_Makarov_2Handed_AnimData` and `BP_Tec9_AnimData`, you can ignore these. Saving wont break the project if you do. 
 
 ## Credits and Thanks
 
