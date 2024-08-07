@@ -12,7 +12,7 @@ pin: true
 ## 1. UE5 Template 
 Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download)
 
-Download the following new UE5 Template and extract to your preferred location: [Download](Download)
+Download the following new UE5 Template and extract to your preferred location: [https://www.nexusmods.com/readyornot/mods/1384](https://www.nexusmods.com/readyornot/mods/1384)
 
 ## 2. UE4 Map Preparation
 Nearly all of the previous work you have done can be ported over with exception of any Blueprints from the old Template. 
