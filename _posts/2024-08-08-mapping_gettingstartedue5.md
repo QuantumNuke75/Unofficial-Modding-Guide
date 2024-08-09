@@ -10,7 +10,7 @@ pin: true
 
 # Getting Started with Ready or Not Mapping in UE5 [POST DLC1 Home Invasion]
 
-> If you already have a map made in UE4 for Ready or Not we have a [Migration Guide into UE5](/_posts/2024-08-05-mapping_ue5migration.md) for you.
+> If you already have a map made in UE4 for Ready or Not we have a [Migration Guide into UE5](/posts/mapping_ue5migration) for you.
 {: .prompt-tip } 
 
 ## Introduction
