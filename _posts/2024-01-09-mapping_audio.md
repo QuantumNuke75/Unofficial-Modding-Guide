@@ -16,7 +16,7 @@ This guide will explain the requirements to get QSM working within your map and 
 
 The Example Map provided in the Template has QSM set up for a generic house, so check it out if you're curious.
 
-The second part of this guide is [Setting up Music Events for Maps](/_posts/2024-01-14-mapping_music.md)
+The second part of this guide is [Setting up Music Events for Maps](/posts/mapping_music.md)
 
 ## Setting up FMOD
 >You do not actually need to complete the steps below to implement QSM. However it is likely you will want to mess with some events if you want to tweak Ambient events. The steps below will tell you how to get it working. 
