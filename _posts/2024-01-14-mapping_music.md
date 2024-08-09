@@ -9,7 +9,7 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://void
 
 # Setting up Music Events for Maps
 
->[Setting up Audio and Working with QSM for Maps](posts/mapping_audio) is REQUIRED knowledge for this page. Please read it before continuing.
+>[Setting up Audio and Working with QSM for Maps](/posts/mapping_audio) is REQUIRED knowledge for this page. Please read it before continuing.
 {: .prompt-danger }
 
 ## Introduction
