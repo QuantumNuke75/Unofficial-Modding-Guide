@@ -465,6 +465,7 @@ There are 2 spatial events, `Streamer_Spatial_Server_A` and `Streamer_Spatial_Se
 ## Training
 
 ### Ambience: *Training_Amb_V2*
+
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
 | AmbSwitch | [D] | If AmbSwitch > 0, the sound becomes muffled |
