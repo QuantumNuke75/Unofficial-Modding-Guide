@@ -477,8 +477,8 @@ There are 2 spatial events, `Streamer_Spatial_Server_A` and `Streamer_Spatial_Se
 
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
-ValleyAmbBUNKER
-ValleyAmbEXT
+ValleyAmbBUNKER | [S] | |
+ValleyAmbEXT | [S] | |
 ValleyAmbINT | [S] | Ambswitch > 1 muffles this layer. |
 
 ### Music: *Main_Valley_Timeline_V2*

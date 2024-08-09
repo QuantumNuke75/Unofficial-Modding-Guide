@@ -1,14 +1,17 @@
 ---
-title: Getting Started with Ready or Not Mapping
+title: (OUTDATED) Getting Started with Ready or Not Mapping in UE4
 date: 2023-12-28 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, essential, introduction]
 description: An in-depth guide on getting started with Ready or Not Mapping
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/
-pin: true
+pin: false
 ---
 
-# Getting Started with Ready or Not Mapping [POST 1.0 RELEASE]
+# [OUTDATED] Getting Started with Ready or Not Mapping in UE4 [1.0 RELEASE]
+
+> This guide is outdated with the release of DLC1 Home Invasion and the engine being upgraded to UE5. Please click here for the updated guide: [Getting Started with Ready or Not Mapping in UE5](/_posts/2024-08-08-mapping_gettingstartedue5.md)
+{: .prompt-danger }
 
 
 ## Introduction
