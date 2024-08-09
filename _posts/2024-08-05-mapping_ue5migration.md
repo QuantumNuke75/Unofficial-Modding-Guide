@@ -9,10 +9,14 @@ pin: true
 ---
 # UE4 to UE5 Map Migration Guide
 
-## 1. UE5 Template 
-Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download)
+## Introduction
 
-Download the following new UE5 Template and extract to your preferred location: [https://www.nexusmods.com/readyornot/mods/1384](https://www.nexusmods.com/readyornot/mods/1384)
+This guide aims to help you transition your previous map from UE4.27.2 to UE5.3.2. It includes necessary steps and changes to the workflow to minimize the amount of work needed to port your map.
+
+## 1. UE5 Template 
+Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download){:target="_blank"}
+
+Download the following new UE5 Template and extract to your preferred location: [https://www.nexusmods.com/readyornot/mods/1384](https://www.nexusmods.com/readyornot/mods/1384){:target="_blank"}
 
 ## 2. UE4 Map Preparation
 Nearly all of the previous work you have done can be ported over with exception of any Blueprints from the old Template. 
@@ -37,9 +41,9 @@ The following should be replaced (or deleted) with placeholder engine meshes so 
 ## 3. FModel Setup
 We no longer are using UModel anymore as it is no longer supported for UE5.
 
-Download FModel: [https://fmodel.app/](https://fmodel.app/)
+Download FModel: [https://fmodel.app/](https://fmodel.app/){:target="_blank"}
 
-Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/posts/ue4ss_and_mappings/#mappings-download)
+Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/posts/ue4ss_and_mappings/#mappings-download){:target="_blank"}
 
 1. If first time using, click the arrows for `ADD UNDETECTED GAME` and select `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot` as your directory AND press the `+` button.
 2. Select the UE Version to be `GAME_UE5_3` and press OK
@@ -51,7 +55,7 @@ Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/post
 {: .prompt-warning }
 
 4. On the Archives Tab, select all the .paks from the game and click Load.
-5. On the Folders Tab, navigate to the `Content` folder and right-click and select `Export Folder's Packages Raw Data (.uasset)`. This will save all the cooked content from the game and might take some time.
+5. On the Folders Tab, navigate to the `ReadyOrNot > Content` folder and right-click and select `Export Folder's Packages Raw Data (.uasset)`. This will save all the cooked content from the game and might take some time.
 
 Once complete move onto the next step
 
@@ -88,7 +92,7 @@ If you wish to hear the QSM or ambient sounds follow these steps, there are plac
 ### Fixing Inverted Collision from Migration
 
 > There is a serious bug that occurs when migrating from 4.27 to 5.3, any custom Static Meshes you bring into the project will have their collisions Inverted. Thankfully VOID also encountered this and helped with the solution (major thanks to killowatt & RareKiwi for this)
-{: .prompt-warning }
+{: .prompt-danger }
 
 To fix this:
 1. Select all Static Meshes that you migrated in the content browser.
@@ -114,7 +118,7 @@ All missing assets should say "Static mesh actor has NULL StaticMesh property". 
 ### New Basic Map Requirements and Changes
 
 > Do not click `Build All`, currently doing so will lock the Editor in "Building Texture Streaming" and will require you close it via Task Manager. You unfortunately have to Build Geometry, Paths and Lighting separately now.
-{: .prompt-warning }
+{: .prompt-danger }
 
 Things mostly remain the same, however the following changes to workflow are needed to make sure that the map runs correctly:
 * Set the Level Blueprint Parent Class type to `Ready or Not Level Script` 
@@ -141,7 +145,7 @@ Cook and Paking remains the same process as before but there are 2 important thi
 
 ### Updated .bat Pak file
 You NEED to use the new updated .bat with the UE5.3 files (do not just edit your existing one):
-[More Info](https://unofficial-modding-guide.com/posts/batchfiles/)
+[More Info](https://unofficial-modding-guide.com/posts/batchfiles/){:target="_blank"}
 
 ```batch
 @setlocal ENABLEDELAYEDEXPANSION
@@ -166,7 +170,9 @@ Cooking a map now produces Shadercaches, there is an extra step needed for cooki
 > **The above method should be used if you are sharing/distributing your final map .pak. If you include shadercaches that aren't just your own materials than we might run into conflicts.**
 {: .prompt-warning }
 
-*For faster development however* - you can just cook and copy the `Content` folder as usual without always needing to disable/enable `Share Material Shader Code`. HOWEVER if you include files named similar to `ShaderArchive-Global-PCD3D_SM5-PCD3D_SM5` then Ready Or Not will crash on launch. So before you Pak your map, make sure you delete the all the ones named `ShaderArchive-Global...` (you can leave the others) from the Content folder. If you delete the other ones some of your custom materials may not render properly in-game. 
+*For faster development however* - you can just cook and copy the `Content` folder as usual without always needing to disable/enable `Share Material Shader Code`. HOWEVER if you include files named similar to `ShaderArchive-Global-PCD3D_SM5-PCD3D_SM5` then Ready Or Not will crash on launch. So before you Pak your map, make sure you delete the all the ones named `ShaderArchive-Global...` (you can leave the others) from the Content folder. If you delete the other ones some of your custom materials may not render properly in-game. However, if there are some issues with your own materials, also try deleting the files named like *""*
+
+As a final resultIf you are still having issues also try deleting the ones named: 
 
 **JUST REMEMBER TO DO THE COOK METHOD MENTIONED FIRST FOR DISTRIBUTION!**
 
@@ -177,7 +183,7 @@ Cooking a map now produces Shadercaches, there is an extra step needed for cooki
     * **RoN_ExampleMap** showcases how to build a map. It has information on the Spawn Manager, Objectives, QSM and working with the FMOD, along with some other interesting bits of information
     * In general the layout of information and Blueprints we actually use is a lot cleaner now.
 
-* We now have the ***Actor Palette Plugin*** enabled. This allows you to open up a level under *Tools > Actor Palette*. Doing so allows you to drag and drop Assets from the window into you map with ease! [Very cool~](https://www.youtube.com/watch?v=ym6kLi0EYQs)
+* We now have the ***Actor Palette Plugin*** enabled. This allows you to open up a level under *Tools > Actor Palette*. Doing so allows you to drag and drop Assets from the window into you map with ease! [Very cool~](https://www.youtube.com/watch?v=ym6kLi0EYQs){:target="_blank"}
     * There are a bunch of maps in `Mods > Template > Levels > ActorPalette` that you can load to test
     * Warning: These maps require a LOT of memory as they are loading essentially all the usable props from cooked assets. I would not open `Palette_MASTER` unless you have a strong PC.
  

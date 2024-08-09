@@ -465,6 +465,7 @@ There are 2 spatial events, `Streamer_Spatial_Server_A` and `Streamer_Spatial_Se
 ## Training
 
 ### Ambience: *Training_Amb_V2*
+
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
 | AmbSwitch | [D] | If AmbSwitch > 0, the sound becomes muffled |
@@ -477,8 +478,8 @@ There are 2 spatial events, `Streamer_Spatial_Server_A` and `Streamer_Spatial_Se
 
 | Parameter Name | Type | Description |
 |:---|:--:|:---|
-ValleyAmbBUNKER
-ValleyAmbEXT
+ValleyAmbBUNKER | [S] | |
+ValleyAmbEXT | [S] | |
 ValleyAmbINT | [S] | Ambswitch > 1 muffles this layer. |
 
 ### Music: *Main_Valley_Timeline_V2*
