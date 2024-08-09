@@ -378,8 +378,8 @@ If you wish to hear the QSM or ambient sounds follow these steps:
 ## Where to Next?
 We have other guides that cover some more in-depth aspects of mapping that you can check out below:
 
-### [Setting up Audio and Working with QSM](posts/-mapping_audio.md){:target="_blank"}
-### [Setting up Music Events for Levels](/posts/mapping_music.md){:target="_blank"}
+### [Setting up Audio and Working with QSM](posts/-mapping_audio){:target="_blank"}
+### [Setting up Music Events for Levels](/posts/mapping_music){:target="_blank"}
 ### Mission Select (ModLevelData) - COMING SOON
 ### Map Optimization - COMING SOON
 

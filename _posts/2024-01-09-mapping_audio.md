@@ -16,7 +16,7 @@ This guide will explain the requirements to get QSM working within your map and 
 
 The Example Map provided in the Template has QSM set up for a generic house, so check it out if you're curious.
 
-The second part of this guide is [Setting up Music Events for Maps](/posts/mapping_music.md)
+The second part of this guide is [Setting up Music Events for Maps](/posts/mapping_music)
 
 ## Setting up FMOD
 >You do not actually need to complete the steps below to implement QSM. However it is likely you will want to mess with some events if you want to tweak Ambient events. The steps below will tell you how to get it working. 
@@ -311,4 +311,4 @@ Used to help keep track and change the Room IDs of Room Volumes. It creates a li
 
 ## What Next? Music!
 
-If you got QSM all set up, you should look at the next part of the guide: [Setting up Music Events for Maps](/_posts/2024-01-14-mapping_music.md) to allow you add music to your map and let it react dynamically to combat and other parameters. 
+If you got QSM all set up, you should look at the next part of the guide: [Setting up Music Events for Maps](/posts/mapping_music) to allow you add music to your map and let it react dynamically to combat and other parameters. 

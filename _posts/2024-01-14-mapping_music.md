@@ -9,7 +9,7 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://void
 
 # Setting up Music Events for Maps
 
->[Setting up Audio and Working with QSM for Maps](posts/mapping_audio.md) is REQUIRED knowledge for this page. Please read it before continuing.
+>[Setting up Audio and Working with QSM for Maps](posts/mapping_audio) is REQUIRED knowledge for this page. Please read it before continuing.
 {: .prompt-danger }
 
 ## Introduction
@@ -37,7 +37,7 @@ For music to react dynamically to combat, the bare minimum you need to do is to 
 
 If you want to take full advantage of the OST of the game, you will need to leverage the `Sound_ParameterTransition_V2_BP_C` Blueprint (**T-BP** from here on) to control FMOD Parameters. This is pretty much the only actor needed to control the OST.
 
->ALL the values and parameters you will need are documented here: [Reference - FMOD Parameters](/_posts/2024-01-14-reference_fmod_parameters.md)
+>ALL the values and parameters you will need are documented here: [Reference - FMOD Parameters](/posts/reference_fmod_parameters)
 {: .prompt-info }
 
 The OST Timelines are different for each map. Depending on the map chosen, you may need to adjust the timeline in different ways. 

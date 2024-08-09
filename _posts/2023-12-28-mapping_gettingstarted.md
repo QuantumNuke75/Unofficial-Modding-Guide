@@ -10,7 +10,7 @@ pin: false
 
 # [OUTDATED] Getting Started with Ready or Not Mapping in UE4 [1.0 RELEASE]
 
-> This guide is outdated with the release of DLC1 Home Invasion and the engine being upgraded to UE5. Please click here for the updated guide: [Getting Started with Ready or Not Mapping in UE5](/posts/mapping_gettingstartedue5.md)
+> This guide is outdated with the release of DLC1 Home Invasion and the engine being upgraded to UE5. Please click here for the updated guide: [Getting Started with Ready or Not Mapping in UE5](/posts/mapping_gettingstartedue5)
 {: .prompt-danger }
 
 
