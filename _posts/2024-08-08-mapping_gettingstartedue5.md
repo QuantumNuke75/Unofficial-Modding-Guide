@@ -107,9 +107,6 @@ Content
     - [ ] ***Nav Mesh Bounds Volume***
       * Required for your AI to function, whatever this covers will be where your AI can walk
           
-    - [ ] ***World Data Generator Actor***
-      * This will build the navigation and gameplay elements when you load your map
-          
     - [ ] ***Roster Scenario Spawner Actor***
       * This creates your gameplay objectives and spawns
           
