@@ -9,20 +9,18 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://void
 
 # Setting up Music Events for Maps
 
->[Setting up Audio and Working with QSM for Maps]() is REQUIRED knowledge for this page. Please read it before continuing.
+>[Setting up Audio and Working with QSM for Maps](/_posts/2024-01-09-mapping_audio.md) is REQUIRED knowledge for this page. Please read it before continuing.
 {: .prompt-danger }
 
 ## Introduction
 
 This guide will step you through the requirements to get music implemented into your game. It will also discuss how to use the more dynamic elements of the OST to make your levels feel much more polished. 
 
-There is an Example map provided in the download that demonstrates the use of the OST and some of the additional actors you can use with it.
+There is an Example map provided in the Community Mapping Framework that demonstrates the use of the OST and some of the additional actors you can use with it.
 
 ## Level Blueprint Setup
  
 For music to react dynamically to combat, the bare minimum you need to do is to set it up in the Level Blueprint. 
-
-The download from [Setting up Audio and Working with QSM for Maps]() contains the appropriate Data files for the next couple of steps. You can also find them located at `Content > ReadyOrNot > Data > Music` and extract them using [FModel](https://fmodel.app/){:target="_blank"} if you need to.
 
 1. Open the Level Blueprint for you main Level
 2. Click on the `Class Defaults` button at the top and under details panel locate `Ready or Not Level Script > Level Data > Music Data`
@@ -39,7 +37,7 @@ The download from [Setting up Audio and Working with QSM for Maps]() contains th
 
 If you want to take full advantage of the OST of the game, you will need to leverage the `Sound_ParameterTransition_V2_BP_C` Blueprint (**T-BP** from here on) to control FMOD Parameters. This is pretty much the only actor needed to control the OST.
 
->ALL the values and parameters you will need are documented here: [Reference - FMOD Parameters]()
+>ALL the values and parameters you will need are documented here: [Reference - FMOD Parameters](/_posts/2024-01-14-reference_fmod_parameters.md)
 {: .prompt-info }
 
 The OST Timelines are different for each map. Depending on the map chosen, you may need to adjust the timeline in different ways. 
@@ -69,4 +67,25 @@ This is a blueprint that plays a sting when you look at a specific location. It 
 The following maps have events that are compatible with the Music Timelines:
 * Streamer
 * Hospital
-* What else?
+* Dorms
+
+| Property | Description |
+|:---|:---|
+| FMOD Event to Change | Chuck the timeline you are using in here  |
+| FMOD Parameter to Change | Self explanatory. eg: For Streamer, you would play `StreamerAGENCYPICSSEEN` to activate the sting |
+
+DO NOT Edit the scale of these or any of their components! If you require to edit the shape - modify the Box's `Box Extent` or LookAtTrigger's `Sphere Radius` .
+{: .prompt-warning }
+
+## Sound_MusicParameterChanger_BP_C
+
+This blueprints acts as a way to dynamically change some specific Timeline parameters as players get closer or further away from them. eg: Muffling the Timeline when the player gets closer to the Jukebox in Gas, you can hear the Jukebox music clearer.
+
+| Property | Description |
+|:---|:---|
+| Radius | Self-explanatory  |
+| Event | The Timeline event to modify |
+| Parameter Name | Parameter name to edit. eg: In Gas it would be `GasDiegetic` |
+| Indoor / Outdoor Check | If the change needs to take into account being inside or outside |
+| Amb Switch Min Value To Check | Self-explanatory |
+| Amb Switch Max Value To Check | Self-explanatory |

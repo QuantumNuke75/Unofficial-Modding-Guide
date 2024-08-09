@@ -83,7 +83,7 @@ Content
         Tools
         YourUsername
 ```
-> You will see other folders in here such as `ModeLevelData`, `Template` & `Tools`. **DO NOT** edit the files in here. 
+> You will see other folders in here such as `Template` & `Tools`. **DO NOT** edit the files in here. 
 {: .prompt-danger }
 
 > Since you will be visiting your folder frequently I would consider changing the the folder color and adding it your favourites within the Content Browser. You can do this by simply right-clicking the folder here. 
@@ -145,7 +145,7 @@ Currently your level doesn't have any light, so we should set up the basic stuff
     - [ ] ***1 Sphere Reflection Probe*** that encompasses the map
         * Without reflections the models/guns in game can look flat and not properly lit.
 
->If you set your Directional Light to be the Atmosphere Sun Light, you can use `Ctrl+L` to change the direction of your sun now
+>If you set your Directional Light to be the Atmosphere Sun Light (done by default if you did the above), you can use `Ctrl+L` to change the direction of your sun now
 {: .prompt-tip }
 
 ### AI Spawns
@@ -177,9 +177,10 @@ The ***BP_SpawnManager_V3*** is required to spawn AI. By default it is set up wo
 You are free to add and change the tags on the Spawns and Manager how you see fit for you level. There are a couple of notes:
 * You can have AISpawns with different AIDataTable and/or Row Values spawn on the same tag without any issues. (it's how we set it up above).
     * eg: Notice that the 2 AISpawns have `Civilian_Gas_Woman_01` & `Suspect_01_Shotgun` but share the same tag of *"group1"*
-    * You can use this to create a much larger array of scenarios for your map!
+    * You can use this to create a variety of scenarios for your map!
 * If you want a set number of a specific AI tag group to spawn, set the `MinimumAmount` & `MaximumAmount` to be the same number.
 * If you want to spawn a random range of enemies of a tag, set a min and max value but also *Enable* `RandomizeWithinRange`.
+* For now we can just leave everything as default.
 
 ### Doors
 Doors are pretty simple to place down and edit into your map. 
@@ -204,7 +205,7 @@ To build your map, on the Toolbar, drop down Build and select what is appropriat
     * Check for errors in your map - this will usually run if you do any build settings regardless but useful if you dont want to modify anything.
 * ***Build Geometry***
     * This will rebuild your brushes and volumes after editing
-    * Usually best to do this first
+    * Usually best to do this first before any other builds
 * ***Build Pathing***
     * Will update the NavMesh of any changes, best to do it after building geometry.
 * ***Build Lighting Only***
@@ -368,7 +369,8 @@ All the game's assets should be available in the project now, including working 
 
 ### Optional: Importing FMOD Events
 
-If you wish to hear the QSM or ambient sounds follow these steps, there are placeholders if you do not wish to make your project folder any bigger:
+If you wish to hear the QSM or ambient sounds follow these steps:
+
 1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD` and copy the `Desktop` folder.
 2. Navigate to your projects `...Content\FMOD` folder and paste the `Desktop` folder here.
 

@@ -58,7 +58,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
 ### [NEW] Reflection Probe
 * A probe placed in the middle of the Room Volume to communicate the center and size of the room to QSM
 * There is a Tool available called **EUW_Tool_RoomVolumeHelper** which will automate the process for you
-* This is a new requirement with DLC1/UE5
+* This is not a requirement but Zack HIGHLY RECOMMENDS IT.
 
 | Property | Description |
 |:---|:---|
@@ -90,7 +90,9 @@ This should be all you need to do to start hearing FMOD events if you press Play
 | INParameter | FMOD Parameter taken from the Amb FMOD Event you added above. You can find these values here: [Reference - FMOD Parameters](){:target="_blank"} |
 | OUTParameter | Exactly the same as above, but usually suffix with `OUT` (eg: `GasAmbOUT`) |
 | Reverb IN | Select the drop down that best represents the Room Reverb you are moving into |
+| Reverb IN Material | Select the drop down that best represents the physical material of the room you are moving into |
 | Reverb OUT | Select the drop down that best represents the Reverb in the room you are entering from |
+| Reverb OUT Material | Select the drop down that best represents the physical material of the room you are entering from |
 | Global Parameter IN | The FMOD modifier for Indoor Audio. Set to `1` as a good default |
 | Global Parameter OUT | The FMOD modifier for Outdoor Audiot. Set to `0` as a good default |
 | Use Door Check Feature | Enable if the transition between Rooms uses doors. Helps with determining reverb on different door open states. |
@@ -106,6 +108,15 @@ This should be all you need to do to start hearing FMOD events if you press Play
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the `Box` component's `Box Extent`. Editing the object scales will mess with the FMOD transitions.
 {: .prompt-warning }
 
+### [NEW] QSM_Weapon_Reflection_Probe
+* Located `Content > FMOD > Events > Levels > Reverbs`
+* The best way to describe it is that it's akin to a sound version of a Map's Facade. Its a fake Reverb/Echo probe placed outside the map to mimic where sound would Reverb off of back to the player. 
+    * eg: Bouncing off distance large buildings or a neighbours house, Echos/Reverbs from an underpass or cave outside the map, or just a simulated reverb from a large valley or open field
+    * These are more artistically placed around the map to give that je ne sais quoi to the echoes
+
+>DO NOT Exceed more than 6 of these probes per map. You may usually need less. 
+{: .prompt-warning }
+
 ### [NEW] Sound_StarterAmbience_V2_BP_C Blueprint
 * Works very similar to the Transition Blueprint above, however is meant to set the starting values for Ambience through *"*AmbSwitch"* when a player loads into a map. It covers the player spawns.
 
@@ -116,16 +127,8 @@ This should be all you need to do to start hearing FMOD events if you press Play
 | Starting Global Parameter | Just set this to *"AmbSwitch"* |
 | Starting Global Parameter Value | The value of AmbSwitch to be set when a player loads in |
 | Starting Reverb | Select the drop down that best represents the Reverb of the starting area |
-| Starting Reverb Material | The FMOD modifier for Indoor Audio. Set to `1` as a good default |
+| Starting Reverb Material | Select the drop down that best represents the make of the materials of the starting area |
 
-### [NEW] QSM_Weapon_Reflection_Probe
-* Located `Content > FMOD > Events > Levels > Reverbs`
-* The best way to describe it is that it's akin to a sound version of a Map's Facade. Its a fake Reverb/Echo probe placed outside the map to mimic where sound would Reverb off of back to the player. 
-    * eg: Bouncing off distance large buildings or a neighbours house, Echos/Reverbs from an underpass or cave outside the map, or just a simulated reverb from a large valley or open field
-    * These are more artistically placed around the map to give that je ne sais quoi to the echoes
-
->DO NOT Exceed more than 6 of these probes per map. You may usually need less. 
-{: .prompt-warning }
 
 ## Setting up Audio
 > Before beginning, it is **highly** recommended that each one of these steps are done within a folder (or sub-level) within the World Outliner to keep things ordered. In this particular case you should be renaming assets (F2) as you create them to keep things managable.
@@ -232,7 +235,17 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
 4. Thats it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
 
-### Part 7 - [NEW] Placing down QSM_Weapon_Reflection_Probes
+### Part 7 - [NEW] Breakable Glass
+
+Breakable glass is extremely easy to implement but they need to use Portals to allow sound to allow sound pass through when they're broken.
+
+1. Create a Portal Volume that *tightly* fits the area where the breakable glass will go
+2. Drop a `BP_BreakableGlass_v01_C` (located: `Content > ThirdParty > BreakableGlass > Blueprints`) into your scene
+    * You can select the Material and Mesh for the Blueprint to use
+3. Select the Portal Volume you wish to match with the glass and under `Breakable Glass Soft Point` use the eye-dropper to select the Breakable Glass Blueprint in the scene.
+4. If your Breakable Glass crosses the threshold of Indoor-Outdoor (like most windows do), Enable `Is Outside`
+
+### Part 8 - [NEW] Placing down QSM_Weapon_Reflection_Probes
 As mentioned in the Actor Overview, these are akin to a sound version of a Map's Facade. It's a fake Reverb/Echo probe placed outside the map to mimic where sound (specifically gunshots) would echo/reverb off of back towards the player. 
 
 Examples: Bouncing off distance large buildings or a neighbours house, echos/reverbs from an underpass or cave outside the map, or just a simulated reverb from a large valley or open field. These are more artistically placed around the map to give it that *je ne sais quoi*. There really isn't a science to it, just where you think some reverb and echoes should come from.
@@ -242,13 +255,23 @@ To set them up:
 2. As with all FMOD Events, nest it in a Ready Or Not Audio Volume and Disable `Auto Activate`.
 3. That's it!
 
-Some additional notes, Zack mentions can place up to around 6 probes in your map, but you shouldn't exceed 6. Additionally only 2 probes are active at a time based on proximity to the player.
+Some additional notes, Zack mentions you can place up to around 6 probes in your map, but you shouldn't exceed 6. Additionally only 2 probes are active at a time based on proximity to the player. They can be nested in a RoNAudioVolume, but do not need to be physically inside it.
+
+### Part 9 - [NEW] Using the Sound_StarterAmbience_V2_BP_C Blueprint
+
+These work very similar to the Transition Blueprints, however is meant to set the starting values for Ambience through *"*AmbSwitch"* when a player loads into a map. 
+
+1. Place a `Sound_StarterAmbience_V2_BP_C` into your scene and make sure it covers the PlayerStart
+    * You do not need one BP per PlayerStart (as one can cover many), but it really should be 1 BP per location
+        * Do not just encompass the map in one BP, it should be as localised as possible.
+2. The rest of it works the same as a Transition Blueprint, just select the Event to edits and the starting AmbSwitch parameters and values that you wish.
+
 
 ## Tools & Testing
 
 RareKiwi has created a bunch of useful tools to help test and debug QSM and OST Values. All these tools are provided in the Blueprint and Tools folders. 
 
-### BP_AudioProppagationQSMTester
+### BP_AudioPropagationQSMTester
 
 *Content > Mods > Template > Blueprints*
 
@@ -262,7 +285,7 @@ This is a BP that you place anywhere in your level. When you play your level in 
 | \ (Backslash) | Toggle Active |
 
 >Pressing \ (Backslash) during the mission countdown will crash RoN
-{: .prompt-warning }
+{: .prompt-danger }
 
 ### BP_AudioSampler
 

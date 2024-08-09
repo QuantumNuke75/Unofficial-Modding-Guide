@@ -9,6 +9,10 @@ pin: true
 ---
 # UE4 to UE5 Map Migration Guide
 
+## Introduction
+
+This guide aims to help you transition your previous map from UE4.27.2 to UE5.3.2. It includes necessary steps and changes to the workflow to minimize the amount of work needed to port your map.
+
 ## 1. UE5 Template 
 Download and Install Unreal Engine **5.3.2**: [https://www.unrealengine.com/en-US/download](https://www.unrealengine.com/en-US/download){:target="_blank"}
 
