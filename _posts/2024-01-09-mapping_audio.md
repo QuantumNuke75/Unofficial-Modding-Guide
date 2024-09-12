@@ -187,6 +187,7 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
 3. Edit the PV in Brush Edit Mode (Shift+4) so that it completely covers the doorframe/window/hole and extends out a little bit. See the picture below for an example:
     * **DO NOT Scale** the PV, they should only be edited via Brush Edit Mode
     * PVs do not need to be exactly the same size as the hole, and it is fine if it is larger or extends wider/higher than the hole that it covers
+    * The PV's box needs to be present in both rooms it is creating a Portal for.
 
 ![Portal Volume Example](/assets/mapping-audio/PortalVolumeExample.jpg)
  

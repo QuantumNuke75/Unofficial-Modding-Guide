@@ -74,33 +74,49 @@ Unreal uses this concept of a `Content` folder, this is where all the game conte
 
 When you install a `.PAK` file you are essentially adding or overriding assets in `Content`. Any change you make here will likely affect other mods that people use. This a more common occurance when a lot of us are using the same Marketplace or Quixel/Megascans assets. 
 
-To prevent us from stepping on each other's work, It is highly suggested that you create a directory for yourself within the `Mods` folder using your username and place **ALL** your assets (including 3rd Party/Marketplace/Quixel/Megascans) there. The `Mods` folder should look like the following:
+**More importantly**, it can also cause conflicts with the core Blueprints required for gameplay! 
+
+To prevent us from stepping on each other's work and causing game crashing conflicts:
+
+1. Create a directory for yourself within the `Mods` folder using your username and place **ALL** your assets (including 3rd Party/Marketplace/Quixel/Megascans) there. 
+2. Drag the *Mods > Template > `Blueprints`* folder into your newly created folder from Step 1.
+3. Within the Content Browser, right click on the `Mods` folder and select *"Fix Up Redirectors"*
+4. Within your folder from Step 1, create a empty folder called *"ModLevelData"*
+    * We will use this later on to put our Mission Select and Level Select data
+
+
+The `Mods` folder should now look like the following:
 ```
 Content  
     Mods
         ModLevelData
         Template 
         Tools
-        YourUsername
+        YourUserName
+            Blueprints
+            ModLevelData
 ```
-> You will see other folders in here such as `Template` & `Tools`. **DO NOT** edit the files in here. 
-{: .prompt-danger }
+
+> You may want to copy the `Mods` folder back into your project from the Framework.7z for future reference. The reason we move the Blueprints folder into our own is because as development continues newer version of the Blueprints may come out that fix bugs or improve functionality. If we just overwrite the previous version within the Template directory, it **WILL** cause issues for other mappers.
+{: .prompt-info }
 
 > Since you will be visiting your folder frequently I would consider changing the the folder color and adding it your favourites within the Content Browser. You can do this by simply right-clicking the folder here. 
 {: .prompt-tip }
 
 ### Bare Essentials for Gameplay
-1. *Following the previous steps in Folder Structure*, go to your `...\Mod\YourUsername` directory in the Content Browser and create a new Level then open it
+
+1. Before proceeding: **It is CRITICAL that you have read the previous section on Folder Structure**. Do not proceed until you have completed the steps above.
+2. *Following the previous steps in Folder Structure*, go to your `...\Mod\YourUsername` directory in the Content Browser and create a new Level then open it
     * Whatever you name it will be what it shows up as in-game
         * But do not name it "House" - it is a restricted namespace and will not load in game
-2. Once opened, on the toolbar click Blueprints button and click `Open Level Blueprint`
+3. Once opened, on the toolbar click Blueprints button and click `Open Level Blueprint`
 ![Level Blueprint Location](/assets/mapping-gettingstarted/OpenLevelBlueprintLocation.png)
-3. Under `Class Settings`, check the details panel and change the `Parent Class` to `ReadyOrNotLevelScript`
-4. Click `Compile`, and you can save and exit the window
-5. On the toolbar select *Window > Place Actors*
-6. Within the new *Place Actors* window select the Geometry Tab ![Geometry Tab](/assets/mapping-gettingstarted/PlaceActorsGeometry.png) and chuck down a couple of boxes to make a floor and a couple of walls to act as a space to play in.
+4. Under `Class Settings`, check the details panel and change the `Parent Class` to `ReadyOrNotLevelScript`
+5. Click `Compile`, and you can save and exit the window
+6. On the toolbar select *Window > Place Actors*
+7. Within the new *Place Actors* window select the Geometry Tab ![Geometry Tab](/assets/mapping-gettingstarted/PlaceActorsGeometry.png) and chuck down a couple of boxes to make a floor and a couple of walls to act as a space to play in.
     * If everything is black, press `Alt+3` to switch to `Unlit Mode`
-7. Back in the *Place Actors* window, search for, and place down the following:
+8. Back in the *Place Actors* window, search for, and place down the following:
     - [ ] ***1 Player Start Actor***
       * This is where your Player and Team Spawn
           
@@ -113,7 +129,7 @@ Content
     - [ ] ***Roster Scenario Spawner Actor***
       * This creates your gameplay objectives and spawns
           
-8. In the Content Browser, navigate to `...\Content\Template\Blueprints` and place down the following:
+9. In the Content Browser, navigate to `...\Content\YourUserName\Blueprints` and place down the following:
     - [ ] ***2 BP_AISpawn_Managed***
       * Spawn points for AI - we will come back to this in a little bit
       * Also move them up from the ground about 50uu - Sometimes AI will not spawn if flush with the ground
@@ -136,8 +152,9 @@ Currently your level doesn't have any light, so we should set up the basic stuff
         * In the *Outliner* select it and set the Mobility to `Static`
     - [ ] ***Create Atmosphereic Light*** (our Directional Light)
         * In the *Outliner* select the `DirectionalLight` it and set the Mobility to `Stationary`
+        * With it still selected, Go to *Cascaded Shadow Maps* and set the `Dynamic Shadow Distance StationaryLight` to *4000* and set the `Num Dynamic Shadow Cascades` to *1*.
+            * These values will be what you will see in game
     - [ ] ***Create Sky Atmosphere***
-    - [ ] ***Create Sky Volumetric Cloud***
     - [ ] ***Create Height Fog***
 
 2. In the *Place Actors* window search for and place down:
@@ -191,7 +208,7 @@ Doors are pretty simple to place down and edit into your map.
 {: .prompt-info }
 
 >Currently double doors do not work, it's a bug and limitation we do not have the ability to address at the moment. They do work on the first time you load a map, but on subsequent loads they will not show as double doors anymore. 
-{: .prompt-info }
+{: .prompt-warning }
 
 
 ## Building / Baking
@@ -230,6 +247,14 @@ My usual build process currently is: Build Geometery > Pathing > Lighting. Once 
 Cooking is the process of turning the project into content that can be deployed on other machines. We also only want cook content that is only important for the map to keep file size small. We need to configure this first:
 
 1. Go to `Edit > Project Settings` and on the side tab select `Project > Packaging`
+2. Under `Packaging` Disable `Share material Shader Code`
+
+    > We Disable it to stop us from sharing shadercode. If we cook a map with shared shadercode, it is very likely it will break other people's map and even cause their games to crash. 
+    {: .prompt-danger }
+
+    > If you have Cooked Content installed in your project this option allows you to see materials in the Editor if enabled. However If you have it disabled when you close the Editor, the materials will be black next time you open it. You can fix it by enabling it again and restarting the Editor.
+    {: .prompt-warning }
+
 2. Under `Packaging > List of maps to include in a packaged build` you should see an element that shows the directory for the *RoN_ExampleMap* and *RoN_Template*. 
     * If you do not see `List of maps to include in a packaged build` you may need to expand the `Advanced` category.
 3. Delete these 2 entries for now.
@@ -241,9 +266,10 @@ Cooking is the process of turning the project into content that can be deployed 
 8. On the Toolbar click *Platforms > Windows > Cook Content*
 ![UE5 Cook Location](/assets/mapping-gettingstarted/UE5CookLocation.png)
     * This could take some time for your first cook as it compiles all the shaders. Just be patient.
+9. Once cooking has completed re-Enable *Project Settings > Packaging* `Share Material Shader Code`
 
 >You should hear it succeed, but a message will not remain on screen when it completes. If it failed the notification will stay on the screen. You will need to look at the Output log in the Editor to find out what the Errors are (you can ignore warnings - there will be a lot of them).
-{: .prompt-warning }
+{: .prompt-info }
 
 
 ## Packaging & Installing your Map
@@ -258,7 +284,7 @@ Packaging will turn our cooked content into a single compressed file that we can
     * the 99 after `pakchunk` indicates the load order of paks. We keep maps at 99.
     * Replace `YOURMAPNAME` with whatever your map's name is. This will not show up in game, but will help identify your map/mod to people downloading your mod.
 
->A lot of mods have _P appended to the end of their .paks. For maps we do not need it and should not use this namespace. Using _P in your package actually patches over files and we do not want to to this! There are a bunch of shadercaches that are generated when wee cook our map and it will conflict with other mods if you include them.
+>A lot of mods have _P appended to the end of their .paks. For maps we do not need it and should not use this namespace. Using _P in your package actually patches over files and we do not want to to this! There could be a bunch of Blueprints or shadercaches that are generated when we cook our map and it will conflict with other mods if you include them.
 **AGAIN. DO NOT ADD _P TO YOUR PAK NAME.**
 {: .prompt-danger }
 
@@ -279,9 +305,6 @@ Packaging will turn our cooked content into a single compressed file that we can
 4. Create a Shortcut to the .bat file you created and move it to your staging folder from step 1.
 5. Navigate to your Template/Project folder and go to: `...\RoNTemplate\Saved\Cooked\Windows\ReadyOrNot` and copy **ONLY** the `Content` folder
 6. Paste your `Content` folder into your `pakchunk99-YOURMAPNAME` folder
-7. From this pasted `Content` folder, enter it and delete the files that start with *"ShaderArchive-Global"* but do not delete any others
-    * If you include these files the game will immediately crash when you launch it.
-    * If you delete the others then materials in your map may be broken
 7. Drag your `pakchunk99-YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99-YOURMAPNAME.pak`
 8. Copy your `pakchunk99-YOURMAPNAME.pak` to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks`
 9. Your map should now be available in the game
@@ -292,22 +315,8 @@ This is an example of what a Staging folder can look like:
 >You will be jumping between these folders a lot, I really recommend putting your Staging folder, Project Cooked folder Ready or Not Pak directory to your Quick Access bar.
 {: .prompt-tip }
 
-### Alternative Cooking & Packaging Method
-There is another way to cook your map that does not produce shadercaches. But it requires some extra clicks and slower in the overall scheme of things. But if your Map is not loading correctly in game it is worth trying. 
-
-1. Before you cook your map, open up *Project Settings > Packaging* and Disable `Share Material Shader Code` **BUT DO NOT RESTART THE EDITOR!**
-    * If you restart the editor, materials from cooked RoN assets will be broken. 
-2. Cook the map as usual.
-3. After cooking completes, Re-Enable `Share Material Shader Code`.
-4. Stage your package as usual, however you will not need to delete the *"ShaderArchive-Global"* files.
-
-
 ## Testing your Map
 The easiest way to test your map is to simply load up the game and select it from the Mission Select screen. If all works well then it should take a couple of seconds to build WorldGen and plops you into the map.
-
-If you installed the Console Unlocker mod, you can also load into it faster by hitting ~ and typing `open YOURMAPNAME` and pressing execute. 
-* `YOURMAPNAME` should be what the .umap name is called within your project. NOT the package name. 
-* For Hell Comes to the Hills the command for opening it is `open Hell_Comes_to_the_Hills`.
 
 ### Common Issues with a Map not Loading
 
@@ -315,9 +324,7 @@ Make sure you did the following:
 - [ ] Using the up-to-date version of the template [linked above in this guide](#the-template-project).
 - [ ] You are using the packing method [described above in this guide](#packaging--installing-your-map).
 - [ ] Only include the `Content` folder from `\RoNTemplate\Saved\Cooked\WindowsNoEditor\ReadyOrNot`
-- [ ] Delete the *"ShaderArchive-Global"* files
-    * If you are still having issues try also deleting the files starting with *"ShaderAssetInfo-Global"*
-    * Or try the [alternate method for cooking your map](#alternative-cooking--packaging-method).
+- [ ] Disabled `Share Material Shader Code`
 - [ ] You have all the actors mentioned in [Bare Essentials for Gameplay](#bare-essentials-for-gameplay).
 
 If your map is still not not launching, then you may want to reach out for help on the Mapping Discord linked above.
@@ -347,6 +354,9 @@ There are just some final important steps needed to know when you re-cook and pa
 Download FModel: [https://fmodel.app/](https://fmodel.app/){:target="_blank"}
 
 Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/posts/ue4ss_and_mappings/#mappings-download){:target="_blank"}
+
+>**BEFORE PROCEEDING:** Remove *ALL* mods from your game. FModel will load them and cause issues and materials may not load properly.
+{: .prompt-danger }
 
 1. If first time using, click the arrows for `ADD UNDETECTED GAME` and select `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot` as your directory AND press the `+` button.
 2. Select the UE Version to be `GAME_UE5_3` and press OK
