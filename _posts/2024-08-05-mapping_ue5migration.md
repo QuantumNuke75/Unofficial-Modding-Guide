@@ -45,6 +45,9 @@ Download FModel: [https://fmodel.app/](https://fmodel.app/){:target="_blank"}
 
 Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/posts/ue4ss_and_mappings/#mappings-download){:target="_blank"}
 
+>**BEFORE PROCEEDING:** Remove *ALL* mods from your game. FModel will load them and cause issues and materials may not load properly.
+{: .prompt-danger }
+
 1. If first time using, click the arrows for `ADD UNDETECTED GAME` and select `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot` as your directory AND press the `+` button.
 2. Select the UE Version to be `GAME_UE5_3` and press OK
 3. Go to Settings and under *General > Advanced*, Enable `Local Mapping File` and set the `Mapping File Path` to the downloaded Mappings file. (This will allow you to view the cooked content in FModel)
@@ -136,7 +139,7 @@ Things mostly remain the same, however the following changes to workflow are nee
 * Add a `BP_CoverGen` actor
     * Without it AI won't really move or do anything when engaged in fights
 * Multple PlayerSpawns are no long spawn the SWAT AI on them; they will all spawn on your PlayerSpawn. You only need 1 PlayerSpawn per actual Spawn Point (set in ModLevelData Table).
-* QSM Changes - *Documentation Soon™*
+* [QSM Changes](/posts/mapping_audio){:target="_blank"}
 
 
 ## 7. New Cook & Pak Method
