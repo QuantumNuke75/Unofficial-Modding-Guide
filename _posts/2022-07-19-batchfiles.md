@@ -44,7 +44,7 @@ Download: [Pak.bat](/downloads/Pak.bat)
 {: .prompt-tip }
 
 ### Extract to the Pak's containing folder with folders intact
-Download: [Unpak.bat](/downloads/Pak.bat)  
+Download: [Unpak.bat](/downloads/Unpak.bat)  
 ```batch
 @if "%~1"=="" goto skip
 @setlocal enableextensions
