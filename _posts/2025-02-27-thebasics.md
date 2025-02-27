@@ -1,6 +1,6 @@
 ---
 title: The Basics
-date: 2025-02-28 00:00:00 +0000
+date: 2025-02-27 00:00:00 +0000
 categories: [General Information]
 tags: [essential, batch]
 pin: true
