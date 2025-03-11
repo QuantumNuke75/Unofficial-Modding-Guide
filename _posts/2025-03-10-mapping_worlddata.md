@@ -138,7 +138,7 @@ For each room;
 3. Check `Is Outside` if applicable.
 4. Keep duplicating your threats to cover the entire nav-mesh of your room. See placement;
     * Auto generation spaces them at 150-250u with closer points when nav-mesh edges are closer.
-![Meth Outside Threats](/assets/world-data/worlddata_Mth_outside.jpg){: w="1615" h="999" }
+![Meth Outside Threats](/assets/world-data/worlddata_mth_outside.jpg){: w="1615" h="999" }
 _Meth Outside Threats_
 	* Threats are points that the SWAT has to visually check in order to clear a room. If SWAT can see all points from their clear path, they will stop following the path and resume their other activities. Keep that in mind for corners, you may want to offset a threat closer to an inside wall or behind an obstruction of a corner so that SWAT has to check more of an angle in that location.
 	* Threats are also used to determine where the SWAT should stand to minimise their perceived threat.
@@ -150,7 +150,7 @@ _Meth Door Threat Placement_
 	    * Placed on one side of the nav-mesh boundary (or both if wide enough)
 		* Elevated much higher, usually above any ballistrades or rails so that look-at-traces have clearer line-of-sights to doors and proxies for tracing.
 		* Placed much tighter together, about 60 units. This is probably to give more accurate SWAT look-at-points.
-![Meth stair threats](/assets/world-data/worlddata_Mth_stairs.jpg){: w="1448" h="1132" }
+![Meth stair threats](/assets/world-data/worlddata_mth_stairs.jpg){: w="1448" h="1132" }
 _Meth Stair Threats_
 5. ![](/assets/world-data/FallbackIcon.png){: .right } You can mark a single threat per room as `Preferred Exit` for use in the later sync step.
     * Exits are supposed to be used by suspects and civs in some capacity when fleeing or retreating.
