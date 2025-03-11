@@ -266,7 +266,7 @@ _Add Stackup Points_
 _Stackup Points when selected show assigned door and capsule size_
 
 <a id="roompos"></a>
-* [Room position](#room-position) can be used to limit stack-up points to one side in the command menu, but SWAT may not always respect it or may still "PIE it" or "Check the threshold".  
+* [Room position](#room-position) can be used to limit stack-up points to one side in the command menu, but SWAT may not always respect it or may still "Pie it" or "Check the threshold".  
 In that case, you should delete the undesired side's `BP_StackUpActors` from the level and assign the desired side's array to the undesired now empty array in the door spawner's properties.
 
 > You can copy a variable quickly by `Shift + Right Mouse Button` clicking on the source and `Shift + Left Mouse Button` clicking on the target.  
@@ -332,20 +332,17 @@ If you want a more rapid process for this you can use the `Add Clear Point (by N
 7. When done, with the door selected press the `Clear Point Trace LOS` and `Clear Point Direction by Angle` buttons like in `#9` and `#10` from the above section.
 
 {%
-  include embed/video.html
-  src='/assets/world-data/WorldData_Door_AddClearPointByNavVideo.mp4'
-  poster='/assets/world-data/WorldData_Door_AddClearPointByNavVideo_Snapshot.jpg'
-  title='Add Clear Point by Nav example'
+  include embed/youtube.html
+  id='tinhvt2TPfY'
   autoplay=false
   loop=true
   muted=true
 %}
 
-
 ### Room Position
 `World Gen > Room Position`
 Room position has a minor effect on SWAT clearing but mainly effects stack up behaviour.  
-The main differences of Center vs Hallway are;
+The main differences of Centre vs Hallway are;
 * Centre - Allows stack ups on either side of the door Front and Back.
 * Hallway - Allows one stack, Front/Back (Not tested. `Can Issue Orders on Front/Back Side` may be more reliable if needed).  
 When clearing, after passing the threshold, they will skip corner checks and focus/aim at further distances. SWAT voice lines will also be different when clearing and mirroring.
