@@ -31,6 +31,9 @@ pin: false
 }
 </style>
 
+# Temporary Download
+All the needed files will be included in a future Framework version, but for now you can download this ["Patch.zip"](https://drive.google.com/uc?export=download&id=11ivhVPC6Tn8lsWnshwBHu5BcBq0GDdmM) which you can extract into a DarkWaters version of the framework, overwriting when prompted.
+
 # Overview
 World data is the info needed by AI to know about rooms. It is intertwined with doors to let SWAT know how to stack up, clear rooms, know where to look as-well-as by the suspects and civilians for fleeing and retreating.
 ![An example of world data for 3 rooms](/assets/world-data/WorldData_All.jpg){: w="1920" h="1080" }
