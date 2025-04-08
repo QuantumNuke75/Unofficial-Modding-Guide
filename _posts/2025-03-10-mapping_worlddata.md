@@ -516,14 +516,14 @@ Honestly you can probably just select every cover point (Ctrl + Shift + A) and r
   
 If you want to remove an entire rail set of cover points, with them all selected, you can use the regular `Delete` key since there will be no remaining references.  
   
-![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SelectByRail.png){: w="222" h="38" }{: .right } You can use `Select Cover Points by Rail Group` for quick selecting.  
+> ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SelectByRail.png){: w="222" h="38" }{: .right } You can use `Select Cover Points by Rail Group` for quick selecting.  
 {: .prompt-tip }
 
 ### Appending Cover Point
 
 ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_AppendPoint.png){: w="222" h="38" }{: .right } You can add a cover point to a rail using the `Append Cover Point & Update` button.  
 This is based on the location of the selected cover point in a rail, determining which side of the rail it will be placed.
-You edit it's location you can use the Tools `Cover Rails` section.
+You edit it's location you can use the Tools [#Cover Rails](#cover-rails) section.
 
 ## Cover Rails
 
