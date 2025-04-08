@@ -80,7 +80,9 @@ This is a Framework only helper blueprint which is used to auto-populate and/or 
 
 # Setting Up World Data
 This guide will cover setting up a simple map with 3 rooms, but can be extrapolated to any sized map.
-Most blueprints which I say "drag" or "place" into the level will be found at `/Content/Mods/Template/Blueprints/WorldData/`
+Most blueprints which I say "drag" or "place" into the level will be found at `/Content/Mods/Template/Blueprints/WorldData/`  
+  
+Keep in mind, in vanilla RoN maps, world data is mostly automatically generated, so manually setting this up isn't an exact science concerning measurements/spacing.
 
 ## Tool
 This guide makes heavy use of the Editor Utility Widget called `BPW_WorldDataHelper`.  
@@ -418,3 +420,158 @@ This function will;
 * Change a Door's `Front or Back Threat` variables.
 * Change Threat Actor's `Preferred Exit` variable.
 {: .prompt-danger }
+
+# Cover Points
+
+![](/assets/world-data/worlddata_coverpoint_showcase.webp){: w="1920" h="1080" }
+
+Cover Points are locations that Civs or Suspects can use to take cover. 
+ * They are auto generated, pretty well, as long as your collisions are clean or you have helper blocking volumes set to the `Cover` collision profile.
+ * They are generated as an element of a collection called a `Rail`. Each rail has a Start and End world location and a struct array of the other cover point actors world location and a global unique ID number.
+ * Cover point actors for that reason, usually have a meta-data tag to prevent manual placement (disabled in newer framework builds) and have their transforms/location locked.
+ * Civilians will crouch/lean against cover.
+ * Suspects can shoot over or lean around cover based on it's type.  
+ 
+## Cover Point Overview
+
+For the framework, you will be using the `BP_CoverPoint` blueprint based on the "CoverPoint" DynamicCoverSystem class.
+You should never manually place, copy or duplicate a BP_CoverPoint.  
+ * If you need to add a single cover point, use the `BP_CoverPoint_Single` actor.  
+ * If you want a new Rail of cover points, you will use a `BP_CoverPointRailPreview` and the Tool, as explained later.  
+ * The location of a cover point is locked and shouldn't be manually edited along with it's rotation. You can edit it's transform with the Tool's `Cover Rails` section, covered in [#Cover Rails](#cover-rails)
+ 
+![](/assets/world-data/worlddata_coverpoint_overview.webp){: w="1920" h="1080" }
+
+ * `Index`: A unique number that needs to be unique across the whole level. This is the number shown in the view-port.
+ * `Is Crouch Only Cover`: Crouch or Crouch+Standing cover. If true, will only show the bottom Type sprite and direction arrows. Also changes the yellow box preview when selected.
+ * `Stand Cover Type`: Whether the user considers this a middle wall section, or if they have the option to lean based on a selected direction. This is shown by the top sprite, which is hidden if Crouch-Only is True.
+ * `Crouch Cover Type`: The same as above, but with the added combination option of `Up` if Crouch-Only is True. This is shown by the bottom sprite.  
+     * Type sprites sizes are based on their location in a rail. First and Last elements are bigger than the elements in between. (You may require selecting with the Tool open to update this preview sometimes)
+   
+ * `Stand Cover Direction/ Crouch Cover Direction`: Used when the user leans. The Direction is always just the Rail Start to Rail End vector or inverted, based on Left/Right. This is previewed by the Green Arrow (Left) and Blue arrow (Right)
+ * `Cover Rail`: A struct with the World Position Start and End, Direction and World Position + Index array of self and other Cover Point actors contributing to the rail. The Start and End are previewed by a 3D gizmo when selected.
+     * When selected and the Tool is open, the Rail will also be previewed with a yellow box with a height based on Crouch-Only. This doesn't actually represent any surface, it's just a preview I based on how far and high imported generated cover points are usually from the floor/wall.
+
+## Automatic Generation
+
+1. Place a `BP_CoverGen_Saver`  
+2. Place one or multiple `Cover Gen Override Volumes` to cover the playable nav mesh you want cover points to generate on. Don't change any settings.
+3. When generating, sample traces will "walk" along the edge of the nav-mesh testing for a hit in the Cover channel at crouch and standing height. For better generation you should plug holes between props where you may want suspects to take cover behind.  
+Regular Blocking Volumes can be used or they can also be set to `Cover` to not affect character collisions. You can cover gaps in balustrades, low car engine blocks, barricades of crates, tables and chairs etc.
+     ![](/assets/world-data/worlddata_coverpoint_sampling.webp){: w="1920" h="1080" }
+     _An example of how a ballistrade may be sampled when generating cover which may cause a cover point to not be generated, or an incorrect lean angle to be set_  
+     ![](/assets/world-data/worlddata_coverpoint_coverblockingvolume.webp){: w="1920" h="1080" }
+     _An example of a blocking volume with `Cover` collision profile, placed over a static mesh to provide cleaner generation._
+4. Nothing more needs to be done if you want to just use automatic cover generation, which I'd recommend when iterating on your level. 
+However, if your level geometry is locked-in you may wish to export out what is being generated and to edit and include with your level.
+
+## Importing Automatic Generation
+
+0. Make sure a `BP_CoverGen_Saver` and or supporting actors are in the level as per above section.
+1. On the placed `BP_CoverGen_Saver`, set `Save Cover Points` to `True` (and also make sure `Enabled` is `True`).
+2. Save, Cook and Pak your level to your game install.
+3. Open the game and load your level. Wait for the countdown to finish and for you to spawn in game. Wait 4 to 10 seconds for the cover points to generate and save to disk.
+4. Close the game and navigate to `%localappdata%\ReadyOrNot\Saved\SaveGames\Cover\` in windows explorer.  
+	 > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_OpenGameSaveGames.png){: w="222" h="38" }{: .right } In the Tool, there is a button shortcut;  
+     {: .prompt-tip }
+5. You should find a `.Cover.sav` file that has your level name prefixed. Copy it.
+6. In your Framework Project's directory, navigate to `...\Saved\`, from here create a `SaveGames` folder if missing and within, a `Cover` folder if missing.  
+     > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_OpenProjectSaveGames.png){: w="222" h="38" }{: .right } In the Tool, there is another button shortcut, which also makes the folders if missing; 
+     {: .prompt-tip }
+7. Paste your LEVELNAME.cover.sav file into the project's `\Saved\SaveGames\Cover\` folder.
+8. Back in Unreal Engine, with your level open, in the Tool, press the `Load Cover Point Save` button.  
+You should see below the number of Cover Point's that have been read.
+     > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SaveName.png){: w="222" h="38" }{: .right } If "No save file loaded/found." is displayed, check that the correct level is loaded. You can see what .sav file is trying to be loaded in the text field to the left of the button.
+     {: .prompt-warning }
+9. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_CreateRailGizmo.png){: w="222" h="38" }{: .right } You can now press the `Create Cover Point from Save` button. A task will start and actors will start to be placed. Keep the editor focused until it completes.  
+     > After importing and creating the cover points, the Tool will set any `BP_CoverGen_Saver's` `Enabled` variable to `False` effectively disabling it to avoid user error. If you want to iterate making changes for generation and visualising them in editor, you should delete every cover point in your level and set the `Enabled` to `True` before cooking, paking and loading your map.
+     {: .prompt-danger }
+	 > The `BP_CoverGen_Saver` should be disabled and can be deleted from the level once cover points have been created/imported.
+     {: .prompt-info }  
+	 
+## Editing Cover Points
+
+### Clean-up
+After importing there may be some overlapping cover points/rails.  
+  
+1. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SelectOverlap.png){: w="222" h="38" }{: .right } To quickly find these, press the `Select Next Overlap` button. This will compare every cover point's location in the level and find overlaps.  
+It will select one set of cover points by the rail and focus the camera on them.
+2. You can usually press `Delete` to remove the selected cover points rail, then repeat from step `#1` until `Select Next Overlap` is no longer selecting anything.
+	 > BUG: Make sure you have no cover point selected before pressing the button. Looks like I forgot to clear your selection, so rails are still selected if nothing overlapping is found.
+     {: .prompt-warning }  
+
+### Type Changing  
+![Cover Point types](/assets/world-data/Cover_Combined.png){: w="432" h="54" }
+_Cover Point types_  
+  
+You'll probably come across a few cover points which you may want to tweak the type on.  
+Your free to do so, however keep in mind types that didn't generate with a direction (ie Walls), will have no Direction vectors set.  
+  
+![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_GuessDirection.png){: w="222" h="38" }{: .right } You can fix this by selecting the cover point/s and pressing the `Guess Cover Direction` button in the Tool which will pull the direction from the rail locations. 
+Honestly you can probably just select every cover point (Ctrl + Shift + A) and run this if you want, since it seems to match what is generated normally.  
+  
+### Removing Cover Point/s
+
+![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_DeletePoint.png){: w="222" h="38" }{: .right } If you want to remove a cover point that is a part of a remaining rail, you should use use the `Delete Cover Point & Update` button in the tool.  
+  
+If you want to remove an entire rail set of cover points, with them all selected, you can use the regular `Delete` key since there will be no remaining references.  
+  
+![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SelectByRail.png){: w="222" h="38" }{: .right } You can use `Select Cover Points by Rail Group` for quick selecting.  
+{: .prompt-tip }
+
+### Appending Cover Point
+
+![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_AppendPoint.png){: w="222" h="38" }{: .right } You can add a cover point to a rail using the `Append Cover Point & Update` button.  
+This is based on the location of the selected cover point in a rail, determining which side of the rail it will be placed.
+You edit it's location you can use the Tools `Cover Rails` section.
+
+## Cover Rails
+
+### Gizmo Blueprint
+
+The `BP_CoverPointRailGizmo` is a custom Framework blueprint which is for manipulating the transforms of cover points in a rail. It's NOT meant to be manually placed.
+Usage:
+1. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_CreateRailGizmo.png){: w="222" h="38" }{: .right } Select a cover point or multiple.
+2. Press `Create Rail Gizmo from Point` to create a rail gizmo.  
+  
+  
+ > If multiple points from the same rail was selected, only one gizmo will be created.  
+ > If a rail gizmo already exists for that cover point's rail, it will be selected instead.  
+ > Therefore, if you wanted to create gizmos for the whole level, it is safe to just select every cover point and create rail gizmos.
+ {: .prompt-info }
+ 
+![](/assets/world-data/worlddata_coverpoint_railGizmo.png){: w="1156" h="563" }
+ 
+ * Rail gizmos can be freely deleted and remade.
+ * Rail gizmos are selected via the now always visible blue mesh preview, or the `<--- Rail Gizmo --->` text.
+ * Rail gizmos can be moved or rotated to move every cover point in the rail set that it has been assigned. Don't scale.
+ * Individual cover point locations can now be manipulated by first selecting the rail gizmo, then using the diamond gizmos to edit. 
+	Be sure to select the gizmo's wire-frame and not the cover point sprite so you don't change your actor selection.
+ * The Delete and Append cover point Tool buttons will update rail gizmos when used, but work best on the start and end cover points of a rail. 
+    Even then, the logic isn't great, so you may end up with some weird behaviour with new points on the wrong side or the need to delete and remake a rail gizmo.
+  
+### Preview Blueprint
+![](/assets/world-data/worlddata_coverpoint_railPreview.gif){: w="979" h="583" }
+_Preview Rail gizmo handles_  
+  
+The `BP_CoverPointRailPreview` is a preparation tool. It can be used to create a completely new rail and set of cover actors.  
+Usage:
+1. Place a `BP_CoverPointRailPreview` in the level. Adjust it's location so the points are above the ground. The preview wall offset will match what you see when you select a regular cover point.
+2. You can use the Rail Start and End diamond wire-frame gizmos to size your rail and preview your cover points.
+3. You can edit various variables to automatically set properties on the cover point actors that will be created as-well-as spacing options.
+4. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_ConvertRailPreview.png){: w="222" h="38" }{: .right } When ready, press `Convert Rail Preview` to create your new cover point actors and delete the preview blueprint.  
+
+ > The `Convert Rail Preview` performs the actor creation then preview deletion as two separate "Transactions".  
+ > This means if you want to reuse the preview blueprint, you can run `Undo` once to get the blueprint while also retaining the new actors.  
+ > Press `Undo` twice to fully undo the operation if needed.
+ {: .prompt-tip }
+ 
+### Cover Point Single
+![](/assets/world-data/worlddata_coverpoint_single.gif){: w="871" h="500" }
+_It's single, not meant to mingle._
+
+The `BP_CoverPoint_Single` blueprint is also based on the "CoverPoint" DynamicCoverSystem class, however, it has no transform locks.
+ * It's rail is set relative to itself.
+ * It's rail is not meant to be expanded with other cover points.
+ * While the Tool _does_ work with it, you shouldn't ever use it with this blueprint to append etc. 
+ * Great when you just need an extra cover point somewhere on it's own, like around a tree trunk or column etc.
