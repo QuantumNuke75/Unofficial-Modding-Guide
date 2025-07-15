@@ -61,18 +61,15 @@ GraphicsAPI = dx11
 ```
 
 2. Start the game, wait to load to menu, switch to the UE4SS window.  
-> If the game crashes after Epic Online Services says connected/offline, you may need to start the game with your pc disconnected from a network.  
-{: .prompt-warning }
-
+	> If the game crashes after Epic Online Services says connected/offline, you may need to start the game with your pc disconnected from a network.  
+	{: .prompt-warning }
 3. Under the `Dumpers` tab press `Generate .usmap file.....`
 4. It should work instantly, but you can confirm on the `Console` tab.  
-The file `Mappings.usmap` should be create next to your .exe
-  
+The file `Mappings.usmap` should be create next to your .exe  
 5. You can close the game now.  
-  
->If you want to disable UE4SS you can rename dwmapi.dll or remove it's files.  
->Otherwise it's quite handy for enabling the in game console, you may just want to hide the GUI window if your not using it  
->```ini
-GuiConsoleVisible = 0
-```
-{: .prompt-tip }
+	>If you want to disable UE4SS you can rename dwmapi.dll or remove it's files.  
+	>Otherwise it's quite handy for enabling the in game console, you may just want to hide the GUI window if your not using it  
+	>```ini
+	GuiConsoleVisible = 0
+	```
+	{: .prompt-tip }
