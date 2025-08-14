@@ -6,6 +6,7 @@ tags: [mapping, patch, changelog, change log, los suenos stories, lss]
 description: Modding related changes and fixes for Los Sueños Stories update.
 author: RareKiwi
 pin: false
+hidden: true
 ---
 
 <style>
