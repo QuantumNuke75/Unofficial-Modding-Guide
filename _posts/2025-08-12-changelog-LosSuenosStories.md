@@ -56,13 +56,13 @@ This is great for load times and memory usage, but does mean a few of the templa
 
 Many of the door related blueprints construction scripts have been added to the base C++ classes so that they can now be used natively like VOID would. While you don't have to migrate an existing map to them, the old classes have been moved to an extra `"Deprecated.zip"` within the download, now that they are redundant. 
 
-Old Door Spawners are still a valid method once fixed, however the related world data blueprints will have doubled up billboard components and in some cases may need a few fixes to disable the doubled up C++ logic. Only old cover point blueprints need a non cosmetic fix. See here for a fix video.
+Old Door Spawners are still a valid method once fixed, however the related world data blueprints will have doubled up billboard components and in some cases may need a few fixes to disable the doubled up C++ logic. Only old cover point blueprints need a non cosmetic fix. See [here](#cover-point-fix--world-data-blueprint-visual-fixes) for a fix video.
 
 Advantages; 
 
  - Easy to update template.
- - Mappers don't need to fix classes with game updates.
- - Mappers don't need to make their own copy of classes to avoid conflicts.
+ - Mappers don't need to fix blueprints with game updates.
+ - Mappers don't need to make their own copy of blueprints to avoid conflicts.
  - Tools can point to native C++ classes so they don't also need to be copied by mappers.
 
 Blueprints moved to Deprecated.zip
@@ -97,12 +97,13 @@ Changed Blueprints;
 
 #### Conversion
 If you would like to convert an existing map anyway, there is a WIP tool;  EUW_Tool_OldWD_Convert  
+
 This is for Doors, Stackup Actors, Threats and Rooms and is based on actor location.  
 For doors, only the type and world data properties are set. Doors need to be assigned to "Attached Actors" on portals.
 Look At Points are not converted.  
 Even if you don't have world data, you should be able to use this also for BP_Door_Spawner_V2 to set the door type in bulk.
 
-Guide to come...
+See [video guide](#wip-euw_tool_oldwd_convert-conversion-tool-usage) for usage.
 
 ### Difficulties
 
@@ -120,12 +121,10 @@ Guide/Example Level to come...
 
 ### Quality of Life C++ class tweaks and additions.
 
-Many other Ready or Not classes have had editor only billboard components added to them for easier selection and id. Brushes and boxes have unique line colors where possible and construction scripts have been added for some classes like the landmarks so that child BP's are not needed to vizulize their setups.
-
+Many other Ready or Not classes have had editor only billboard components added to them for easier selection and id. Brushes and boxes have unique line colors where possible and construction scripts have been added for some classes like the landmarks so that child BP's are not needed to vizulize their setups.  
 On the editor toolbar there is a new custom Cook button next to platforms, which automates temporarily disabling ShareShaderCode, Cooking and copying difficulty configs.
 
-Also up there are shortcuts for the map build functions as well as some folder shortcuts you can customize.
-
+Also up there are shortcuts for the map build functions as well as some folder shortcuts you can customize.  
 Additionally because of the change to soft references, cooking should succeed on the first run, due to the class with a broken mat/ref (I think one of the weapons) no longer being loaded.
 
 ## Mapping Fix Guides
@@ -137,6 +136,7 @@ Additionally because of the change to soft references, cooking should succeed on
 
 Old copies of BP_Door_Spawner_v2 and BP_Door_Spawner_v3 will be broken in game and need to be fixed for existing maps.  
 For BP_Door_Spawner_v2, in Windows Explorer you can copy the fixed version (from /content/mods/template/blueprints/ to your existing map copy and overwrite it (with the editor closed).  
+
 Old copies of BP_Door_Spawner_v3 will need to be fixed manually due to other copied assets referencing it, and it referencing others.  
 See the video below for how to copy the fixes from the template blueprint to your old one.  
 
@@ -164,13 +164,28 @@ Old copies BP_AISpawn_Managed will still function in game but old copies' charac
 
 Existing cover points need a construction script edit to fix their location. Old cover point single bps also need a class default change.  
 See the video for guidance.  
-  
+
 Old World data BPs will still work, but have doubled debug visulizers.  
 See the video on how to optionally fix them.  
 
 {%
   include embed/youtube.html
   id='bxTk2iPj-yw'
+  autoplay=false
+  loop=true
+  muted=true
+%}
+
+### WIP EUW_Tool_OldWD_Convert conversion Tool Usage
+
+Not really recommended unless you want to redo some stuff. Not all properties are going to be copied. 
+Door type and world data values are only set for example.  
+
+ > Custom door data tables still need to use a child BP to fix a hardcoded bug. See `BP_Door_Framework`.
+
+{%
+  include embed/youtube.html
+  id='YA7y_dw_RLE'
   autoplay=false
   loop=true
   muted=true
