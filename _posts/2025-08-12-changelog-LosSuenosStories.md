@@ -117,7 +117,8 @@ Any configs like timing for bombs, AS timers, Stress, Roamers, Locked Door %, Tr
  > The new custom Cook button automates the copying of the \Config\Difficulties folder to your cooked content.
  {: .prompt-tip }
 
-Guide/Example Level to come...
+There is and example level; `RoN_DifficultyExampleMap`{: file="path/to/file" } and `/Config/Difficulties/CustomMapDifficulty_RoN_Difficulty_Standard.ini`{: file="path/to/file" } as an example.  
+[Check out the guide](/posts/mapping_CustomDifficulty) for custom levels.
 
 ### Quality of Life C++ class tweaks and additions.
 
