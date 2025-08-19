@@ -72,6 +72,8 @@ Unreal gameplay tags are used as the "key" values in the gameplay code, so we ne
 	 > Make sure you create the new diff in the `MyCustomGameplayTags.ini` source. You can find this in your configs and can migrate it when the framework updates.
 	 {: .prompt-warning }
 	
+![Copy Difficulties](/assets/gameplayTags_Difficulty.png){: w="576" h="474" }
+	
 ## B) Difficulty.ini
 
 1. In your project's `/Config/Difficulties/` create your new difficulty either by renaming/copying the example *CustomMapDifficulty_RoN_Difficulty_Standard.ini*
@@ -87,7 +89,8 @@ or export a difficulty from the game files using FModel.
 	```ini
 	[Info]
 	DifficultyGameplayTag = CustomDifficulty.ExampleMap.Standard
-	DifficultyNameKey = Custom Map Difficulty ExampleMap Standard
+	DifficultyNameKey = 
+	DifficultyDescriptionKey = DO NOT USE
 
 	[/Script/GameplayTags.GameplayTagsList]
 	GameplayTagList=(Tag="CustomDifficulty.ExampleMap.Standard",DevComment="")
@@ -117,11 +120,15 @@ or export a difficulty from the game files using FModel.
 	 - Instead, set the `Group ID` to the number at the end of `MinSuspects_Group` or `MinSuspects_Group` etc that you defined in your CustomDifficulty.ini  
 	 - I'd recommend NOT using group 0, so that your sure your changes are working.
 	 - If your not using groups, then nothing needs to be set. Civs and suspects will spawn according to the Min/MaxCivilians and Min/MaxSuspects values.
-3. To load your custom diff, place a `/Content/Mods/Template/Blueprints/BP_LoadCustomDifficulty`{: .filepath} blueprint in your level.
+	 ![Copy Difficulties](/assets/difficulty_aispawn.png){: w="610" h="275" }
+	 
+3. To load your custom diff, place a `/Content/Mods/Template/Blueprints/BP_LoadCustomDifficulty` blueprint in your level.
 4. Set the `Fallback Difficulty` to the tag you created in [Step A)](#a-gameplay-tags).
 5. Expand the `Difficulty Map` fully (shift + click).
 	 - For the value of each key, add your custom gameplay tag.
-	 - If you created 3 difficulties, map each to the relevant vanilla gameplay tag. This lets the user pick which they want to use based on their vanilla selection.
+	 - If you created 3 difficulties, map each to the relevant vanilla gameplay tag.  
+	 This lets the user pick which they want to use based on their vanilla selection.
+	 ![Copy Difficulties](/assets/difficulty_BP_LoadCustomDifficulty.png){: w="613" h="389" }
 	 
 ## D) Cooking
 
