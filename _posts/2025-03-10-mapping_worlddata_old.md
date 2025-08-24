@@ -1,11 +1,12 @@
 ---
-title: World Data Authoring Guide
+title: World Data Authoring Guide Old
 date: 2025-03-10 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, world data]
 description: An guide on how to author your own world data with your level.
 author: RareKiwi
 pin: false
+hidden: true
 ---
 
 <style>
@@ -31,36 +32,36 @@ pin: false
 }
 </style>
 
- > The Los Suenos Stories update to the Community Framework, reworked the following world gen related assets to the base game Door class rather than Door Spawners.  
- > The old guide is hidden, but available [here](/posts/mapping_worlddata_old). You can still use that guide to create world data for your existing door spawner copies or those in the Deprecated.zip  
+ > This is for the Dark Waters version of the Framework or the door spawner and blueprints in the Deprecated.zip of the LSS framework.  
+ > If you are making a new level, do not follow this guide and instead use the guide for the base Door class.
+ {: .prompt-danger }
 
- > If you are making a new map or are reworking to use the base Doors, DO NOT use that linked guide.
-
+# Temporary Download
+All the needed files will be included in a future Framework version, but for now you can download this ["Patch.zip"](https://drive.google.com/uc?export=download&id=11ivhVPC6Tn8lsWnshwBHu5BcBq0GDdmM) which you can extract into a DarkWaters version of the framework, overwriting when prompted.
 
 # Overview
-
 World data is the info needed by AI to know about rooms. It is intertwined with doors to let SWAT know how to stack up, clear rooms, know where to look as-well-as by the suspects and civilians for fleeing and retreating.
 ![An example of world data for 3 rooms](/assets/world-data/WorldData_All.jpg){: w="1920" h="1080" }
 _An example of world data for 3 rooms_  
-This is a brief overview of the classes which you will be using to author your level's World Data.  
+This is a brief overview of the contents of `/Content/Mods/Template/Blueprints/WorldData/`which you will be using to author your level's World Data.  
+>As these blueprints have interlinked references, they should be used in place, or, as assets in the above `/Blueprints` folder are also referenced, you should `Move` or `Advanced Copy` the entire `/Content/Mods/Template/Blueprints/` folder if you wish to make a unique copy for your level.
+{: .prompt-warning }
 
 ## Overview: World Data Actor ![](/assets/world-data/T_WorldAction.png) 
-
-The core of the world data in your level is contained in a single actor in your level; the `World Data Generator` Ready Or Not class.  
+The core of the world data in your level is contained in a single actor in your level based on the "WorldDataGenerator" Ready Or Not class.  
 
 This `World Data` actor contains an array of `Room Data` which contains a reference to their `Doors` and `Threat Awareness Actors`, along with a unique name, location and other linked rooms.  
 
-Rather than trying to manually populate the room values, the Framework instead provides the *Editor Only* actor class **`Editor Only Room Proxy`** which will populate the `Room Data|Rooms` in the data generator when it's construction script is run.  
+To make this work with the Framework's door spawners you will use a child class called the **`BP_WorldDataGen_ModdedRoomData`** along with visual helper actors called `BP_RoomProxy` which will populate the `Room Data` at run-time.  
 
 >Placing one in your level will disable automatic world data generation in game due to "Has World Ever Been Generated" being automatically set to True.
 {: .prompt-info }
  
-## Overview: Editor Only Room Proxy ![](/assets/world-data/RT_CORRIDOR.png) 
+## Overview: Room Proxy ![](/assets/world-data/RT_CORRIDOR.png) 
 
+**BP_RoomProxy**
 
-**Editor Only Room Proxy**
-
-This is a Framework only class which is used to contain a single room's `Room Data` in a visual form, so that you're less likely to make mistakes when setting things up.  
+This is a Framework only blueprint which is used to contain a single room's `Room Data` in a visual form, so that you're less likely to make mistakes when setting things up.  
 
 It has selection based visuals for assigned doors and linked rooms, as well as an automatic name check so you can't create conflicts.  
 
@@ -75,69 +76,62 @@ They have 3 main functions.
 2. They are used by SWAT to determine where to stand in a room based on the `Threat Level`.  
 3. The nearest Threat will have an array of `Swat Look At Points` so they have an appropriate angle to cover when not in combat.
 
-The Framework's **Threat Awareness Actor** has loads of helpful construction script logic and visuals. Notably, the essential `Pathable Threat Awareness Actors` array will be auto-populated based on the assigned "Owning Room" and "Pathable Group ID"
+You will use the child class **BP_ThreatAwarenessActor** which has loads of helpful construction script logic and visuals. Notably, the essential `Pathable Threat Awareness Actors` array will be auto-populated based on the assigned "Owning Room" and "Pathable Group ID"
 
-## Overview: Editor Only Look At Proxy ![](/assets/world-data/T_Swat_look_at_proxy.png) ![](/assets/world-data/T_Swat_look_at_proxy_noauto.png) 
+## Overview: Look At Proxy ![](/assets/world-data/T_Swat_look_at_proxy.png) ![](/assets/world-data/T_Swat_look_at_proxy_noauto.png) 
 
-**Editor Only Look At Proxy**  
-This is a Framework, *Editor Only* helper actor which is used to auto-populate and/or auto-trace additional "Swat Look at Points" when using the `World Data Helper` tool
+**BP_LookAtProxy**  
+This is a Framework only helper blueprint which is used to auto-populate and/or auto-trace additional "Swat Look at Points" when using the `World Data Helper` tool
 
 # Setting Up World Data
-
-This guide will cover setting up a simple map with 3 rooms, but can be extrapolated to any sized map.  
+This guide will cover setting up a simple map with 3 rooms, but can be extrapolated to any sized map.
+Most blueprints which I say "drag" or "place" into the level will be found at `/Content/Mods/Template/Blueprints/WorldData/`  
   
 Keep in mind, in vanilla RoN maps, world data is mostly automatically generated, so manually setting this up isn't an exact science concerning measurements/spacing.
 
 ## Tool
-
-This guide makes heavy use of the Editor Utility Widget called `EUW_Tool_WorldDataHelper_Framework`.  
+This guide makes heavy use of the Editor Utility Widget called `BPW_WorldDataHelper`.  
 It's also used to display extra actor visuals when they are selected. If I refer to "the Tool" in the guide, I'm referencing this widget.  
-To run it; find it in `/Content/Game/Mods/Tools/EUW_Tool_WorldDataHelper_Framework` and press `Right-Click | Run Editor Utility Widget`
-
-> In the DarkWaters framework, this was in /Content/Game/Mods/Tempalte/Blueprints/WorldData/  
-> With the Door update, this tool is no longer hard-coded to reference door spawners and other bps and instead works with the base game classes.
+To run it; find it in `/Content/Mods/Template/Blueprints/WorldData/` and press `Right-Click | Run Editor Utility Widget`
 
 ## 1. World Data Generator
-
-1. Place a single `World Data Generator` anywhere in your level.
+1. Place a single `BP_WorldDataGen_ModdedRoomData` anywhere in your level.
 2. Make sure `Has World Ever Been Generated` is **True**. This will skip the game's auto-generation at run-time.
 
- > Make sure there are no other `World Data Generator` placed in your level
- {: .prompt-warning }
+>Make sure there are no other `World Data Generator` placed in your level
+{: .prompt-warning }
 
- > After placing a World Data Generator with `Has World Ever Been Generated` = `True`, your map will no longer have any cover point generation.  
- To remedy this you should place a `BP_CoverGen_Framework` and RoN `Cover Gen Override Volumes` in your level.
- {: .prompt-danger }
+>After placing a World Data Generator with `Has World Ever Been Generated` = `True`, your map will no longer have any cover point generation.  
+To remedy this you should place a `BP_CoverGen_Saver` and RoN `Cover Gen Override Volumes` in your level.
+{: .prompt-danger }
 
 ## 2. Rooms
-
 * I'd suggest just setting up two rooms to begin with, even if you have placed all your doors already. You can expand later.  
 * A room should always have it's nav-mesh separated by a door or doorway  
 * Outdoor areas should also be rooms. Large spaces should be split at thresholds to limit how much SWAT needs to clear, but it's not required.  
-
 ![World Data Rooms](/assets/world-data/WorldData_Rooms.jpg){: w="1920" h="1080" }  
 	
-1. Place two Editor Only Room Proxy on either side of a threshold where there is/will be a door or doorway. 
+1. Place two BP_RoomProxy on either side of a threshold where there is/will be a door or doorway. 
     * The "Location Offset" visual, should be at the height of the nav mesh.
 	* The `Room | Location` will be auto-calculated from this offset location.
 	* Room XY position isn't too critical, just try to make it centred and visible for yourself.
 	![RoomHeight](/assets/world-data/WorldData_RoomHeight.png){: w="1154" h="729" }  
-2. Each room needs a unique `Name`. The construction script will give a new one if a conflict is found in the level.
-3. `Connecting Rooms` needs to be populated with each room directly connected with a door in the current room. (Rooms that share doors) 
+2. Each room needs a unique `Room | Name`. The construction script will give a new one if a conflict is found in the level.
+3. `Room | Connecting Rooms` needs to be populated with each room directly connected with a door in the current room.  
     * To avoid mistakes, you should use the `Quick Add Connecting Rooms` picker to do this, as it will also populate the other room's list with the currently selected room.  
     * If the Tool is running, you should see a large arrow pointing at connected rooms when a room is selected.  
     ![](/assets/world-data/WorldData_QuickAddRoom.png){: w="222" h="38" }  
     ![](/assets/world-data/WorldData_LinkedRooms.jpg){: w="1920" h="1080" }  
-4. `Root Door` needs to be assigned. 
+4. `Room | RootDoorSpawner` needs to be assigned. 
     * This can be shared between other rooms.
 	* See [Doors Placement](#placement) briefly if you don't have doors yet.
-5. `Additional Root Doors` All other doors for the room should be assigned.
-	* This needs the Root Door assigned too. Construction script will try to add it.  
+5. `Room | AdditionalRootDoorSpawners` All other doors for the room should be assigned.
+	* This needs the RootDoorSpawner assigned too. Construction script will try to add it.  
 
 ![Root Door and Additional Root Door](/assets/world-data/WorldData_DoorGIF.webp){: w="1920" h="1080" }
 _Root Door and Additional Root Doors_
 
-> If you are duplicating rooms and changed the `Root Door`, be sure to remove it from `Additional Root Doors` if needed.  
+> If you are duplicating rooms and changed the `RootDoorSpawner`, be sure to remove it from `AdditionalRootDoorSpawners` if needed.  
 {: .prompt-warning }
 * `Room | Threats` needs to be populated, but we will come back to this [later](#5-rooms-final)  
 
@@ -147,7 +141,7 @@ _Root Door and Additional Root Doors_
 
 ## 3. Threats
 For each room;
-1. Place a `Threat Awareness Actor` in the room. It should have nav mesh near it, placed just above nav-mesh height.
+1. Place a `BP_ThreatAwarenessActor` in the room. It should have nav mesh near it, placed just above nav-mesh height.
 2. Set the `Owning Room`  
 	* This can be set with the `Quick Add Room` picker to avoid typos.
 	* Each room name will generate a randomly coloured cone that should match the other's in the room.
@@ -164,7 +158,7 @@ _Meth Outside Threats_
 _Meth Door Threat Placement_
 	* Stair threats use the `TL Stairs` threat level and should be; ![](/assets/world-data/THREAT_LEVEL_STAIRS.png){: .right }
 	    * Placed on one side of the nav-mesh boundary (or both if wide enough)
-		* Elevated much higher, usually above any balustrades or rails so that look-at-traces have clearer line-of-sights to doors and proxies for tracing.
+		* Elevated much higher, usually above any ballistrades or rails so that look-at-traces have clearer line-of-sights to doors and proxies for tracing.
 		* Placed much tighter together, about 60 units. This is probably to give more accurate SWAT look-at-points.
 ![Meth stair threats](/assets/world-data/worlddata_mth_stairs.jpg){: w="1448" h="1132" }
 _Meth Stair Threats_
@@ -190,83 +184,79 @@ You should see your Room Proxies' `Room | Threats` arrays also populate after pr
 ![](/assets/world-data/WorldData_Proxy_Gif.gif){: w="1920" h="1080" }
 * Each Threat can have an array of `Swat Look at Points` which is usually populated with world-space locations of visible doors.  
 Instead of directly editing that, the BP_ThreatAwarenessActor class has an array called `Swat Look at Point Proxy` which will populate that other array at run time. Locations in this array are in local-space, so you can use the 3D gizmo to edit/visulize them.  
-* The proxy structure used can also optionally link to a Door or Editor Only Look At Proxy which the construction script uses to keep the locations up to date.  
+* The proxy structure used can also optionally link to a Door Spawner or BP_LookAtProxy which the construction uses to keep the locations relative.  
 
 1. To populate the `Swat Look at Point Proxy`, you should use the Tool's `Do Look At Traces` **with the Threats selected** that you want to edit.  
-Without needing to do any additional setup, this will trace to nearby doors and add them to the `Swat Look at Point Proxy` array if there is a clear line-of-sight.
-    * If you want a door to be ignored for tracing (for a doorway for example), in the door's details you can enable the `Ignore for Look At` variable.
+Without needing to do any additional setup, this will trace to nearby door spawners and add them to the `Swat Look at Point Proxy` array if there is a clear line-of-sight.
+    * If you want a door to be ignored for tracing (for a doorway for example), in the door spawner's details you can enable the `Ignore for Look At` variable.
 
 ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Threats_DoTraces.png){: w="222" h="38" }  
 
 > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_ClearDebugLines.png){: .right }{: w="222" h="38" } If the trace line previews don't fade, you can press the `Clear Debug Lines` button at the top of the Tool.
 {: .prompt-tip }
-* You can also manually add extra locations to the `Swat Look at Point Proxy` for each Threat that the `Do Look At Traces` will ignore when running. But to help with automating that instead, you can use the Framework's Editor Only Look At Proxy actors.
+* You can also manually add extra locations to the `Swat Look at Point Proxy` for each Threat that the `Do Look At Traces` will ignore when running. But to help with automating that instead, you can use the Framework's BP_LookAtProxy actors.
 
-### Editor Only Look At Proxy
+### BP_LookAtProxy
 
- * Place these at extra locations you'd like SWAT to look at.  
- * You can add Threats to the `Forced Linked Threat Awareness` array which will add this proxies' location to them when `Do Look At Traces` is pressed.  
- * Selecting a proxy after `Do Look At Traces` is run will show where it's used (unless it was forced, then it's always shown)  
+* Place these at extra locations you'd like SWAT to look at.  
+* You can add Threats to the `Forced Linked Threat Awareness` array which will add this proxies' location to them when `Do Look At Traces` is pressed.  
+* Selecting a proxy after `Do Look At Traces` is run will show where it's used (unless it was forced, then it's always shown)  
 
- > The selection-only debug previews only work/update when the Tool is open.
- {: .prompt-info }
+>The selection-only debug previews only work/update when the Tool is open.
+{: .prompt-info }
 
 ![Selected Proxy with Forced Threats](/assets/world-data/WorldData_Proxy_Force.png){: w="1606" h="907" }
 _Selected Proxy with Forced Threats_
 
 You can also switch the proxy to an automatic mode which will perform a trace by enabling `Use for Auto Trace`. This will make the proxy's icon blue instead of purple and show radius previews for the `Auto Min Distance` and `Auto Max Distance`  
- * `Auto Min Distance` and `Auto Max Distance` can be used to constrain the trace. Not too close so the SWAT doesn't twist weirdly and not too far for optimisation.
- * `Use Clip Plane` will use the `Clip Plane` transform to further constrain valid Threats. 
-     * You can use this make SWAT look at upstairs balconies from below but not above or at a corner from one side, but not the other etc.
-     * `Clip Plane` can be selected in the view-port to be moved or rotated.
-     * The plane is infinite, with Threats on the green side being kept. 
-     * If you've already ran `Do Look At Traces`, you will see a temporary debug coloured point as you adjust the plane.  
+* `Auto Min Distance` and `Auto Max Distance` can be used to constrain the trace. Not too close so the SWAT doesn't twist weirdly and not too far for optimisation.
+* `Use Clip Plane` will use the `Clip Plane` transform to further constrain valid Threats. 
+    * You can use this make SWAT look at upstairs balconies from below but not above or at a corner from one side, but not the other etc.
+    * `Clip Plane` can be selected in the view-port to be moved or rotated.
+    * The plane is infinite, with Threats on the green side being kept. 
+    * If you've already ran `Do Look At Traces`, you will see a temporary debug coloured point as you adjust the plane.  
 	
 ![Selected Proxy with Auto Trace and a Clip Plane](/assets/world-data/WorldData_Proxy_AutoTrace_ClipPlane.png){: w="1944" h="1122" }
 _Selected Proxy with Auto Trace and a Clip Plane_
 
 ## 4. Doors
-
- > The selection-only debug previews only work/update when the Tool is open. That includes Front/Back text, clear-points and stack-up point info.
- {: .prompt-info }
+>The selection-only debug previews only work/update when the Tool is open. That includes Front/Back text, clear-points and stack-up point info.
+{: .prompt-info }
 
 ### Placement
-
- * A room should always have it's nav-mesh separated by a door or doorway  
- * Large spaces should be split at thresholds (usually with a doorway) to limit how much SWAT needs to clear, but it's not required.  
-     * Doors should NOT be scaled, instead you should select the `Door Way` component and edit it's `Box Extent` variable. DO NOT scale it.
-	 * The `Door Way` can be moved on the Y and Z axis. The actor's root seems to usually be in the corner or towards the centre of a doorways threshold.
- * Using a custom door mesh smaller than the RoN door sizes is not recommended. Often this will lead to AI being able to path normally through a door, but SWAT not being able to do clear activities (probably due to the swung door's nav modifier blocking the small threshold)
+* A room should always have it's nav-mesh separated by a door or doorway  
+* Large spaces should be split at thresholds (usually with a doorway) to limit how much SWAT needs to clear, but it's not required.  
+    * Doors should NOT be scaled, instead you should select the `DoorWayBox` component and edit it's `Box Extent` variable. DO NOT scale it.
+	* The `DoorWayBox` can be moved on the Y and Z axis. The actor's root seems to usually be in the corner or towards the centre of a doors threshold.
+* Using a custom door mesh smaller than the RoN door sizes is not recommended. Often this will lead to AI being able to path normally through a door, but SWAT not being able to do clear activities (probably due to the swung door's nav modifier blocking the small threshold)
 
 ![A Doorway Box on Meth that is offset slightly from the actor root](/assets/world-data/worlddata_mth_garage_doorway.jpg){: w="1972" h="1105" }
-_A Doorway box component on Meth that is offset slightly from the actor root_
-
+_A Doorway Box on Meth that is offset slightly from the actor root_
 ### Front & Back Threats
-
 1. `Front Threat` should be assigned to an `TL Extreme` threat placed right in front of the door with the correct room.
 2. `Back Threat` should be assigned to an `TL Extreme` threat placed right in back of the door with the correct room.  
-     > When you select a door with the tool open, you will see front/back left/right texts which indicate what side you are facing.  
-     > When the text is readable, you are on that side of the door.
-     {: .prompt-info }
-	 > Once assigned, a green arrow (front) and red arrow (back) will be permanently visible to indicate assigned threats.
-     {: .prompt-tip }
+    > When you select a door spawner with the tool open, you will see front/back left/right texts which indicate what side you are facing.  
+    > When the text is readable, you are on that side of the door.
+    {: .prompt-info }
+	> Once assigned, a green arrow (front) and red arrow (back) will be permanently visible to indicate assigned threats.
+    {: .prompt-tip }
 3. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Threats_Sync.png){: .right }{: w="222" h="38" } In the tool, press the `Sync Threat Awareness` button.  
-This will populate the `Front/Back Threat Awareness Points` arrays on ALL your door based on the two above assigned threats.
+This will populate the `Front/Back Threat Awareness Points` arrays on ALL your door spawners based on the two above assigned threats.
 
- > These are super critical. Your SWAT will stack, but not clear if these are missing.  
- > If these are assigned to the wrong room your game will crash when SWAT tries to clear the door, so be careful when duplicating already configured doors.
- {: .prompt-danger }
+> These are super critical. Your SWAT will stack, but not clear if these are missing.  
+> If these are assigned to the wrong room your game will crash when SWAT tries to clear the door, so be careful when duplicating already configured doors.
+{: .prompt-danger }
 
 ### Stack-Up Actors
+* We will use the `BP_StackUpActor` class based on the RoN class "StackUpActor". This contains some helpful debug previews and compatibility with door spawners.
+* There should be 4 for each position; `Front/Back left/Right Stack Up Points`. These are variable arrays on the door spawner, in the `World Gen > Stackup` category.
+* `Depth` and `Stack Up Position` need to match on the Stackup actors. `0 = SP Alpha`,`1 = SP Beta` etc
+* `Door Spawner` should be linked on each BP_StackUpActor to it's owning door.
+* To avoid manually doing this, you should use the Tool.
 
- * There should be 4 for each position; `Front/Back left/Right Stack Up Points`. These are variable arrays on the door, in the `World Data > Stack Up` category.
- * `Depth` and `Stack Up Position` need to match on the Stack Up actors. `0 = SP Alpha`,`1 = SP Beta` etc
- * `Door` should be linked on each BP_StackUpActor to it's owning door.
- * To avoid manually doing this, you should use the Tool.
-
-1. Select a door.
+1. Select a door spawner.
 2. In the tool, press the `Add Stackup Points` button.
-3. Adjust the location of each `Stack Up Actor` as needed.
+3. Adjust the location of each `BP_StackUpActor` as needed.
     * Make sure it is above valid nav-mesh
 	* Keep in mind the swing of the Door
 	* When selected, you will see the capsule size of the player/SWAT so you can place them far enough apart.
@@ -277,9 +267,9 @@ _Add Stackup Points_
 
 > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddStackupPoints_Folder.png){: .right }{: w="222" h="38" } The text box below that button is the folder location the new actors will be placed in the Outliner. 
 {: .prompt-info }
-> ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddStackupPoints_Offset.png){: .right }{: w="222" h="38" } The selector box to the right let's you choose the initial offset of the new stack up actors. `Place in Front` can be more useful for corners or doorways placed 90° against a wall.
+> ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddStackupPoints_Offset.png){: .right }{: w="222" h="38" } The selector box to the right let's you choose the initial offset of the new stackup actors. `Place in Front` can be more useful for corners or doorways placed 90° against a wall.
 {: .prompt-info }
-> You can use `Undo` to remove the added stack up actors, but double-check that there are not empty references left in your door's stack up arrays.
+> You can use `Undo` to remove the added stackup actors, but double-check that there are not empty references left in your door spawner's stackup arrays.
 {: .prompt-warning }
 
 ![Stackup Points Selected](/assets/world-data/WorldData_Door_Stackups.png){: w="1866" h="761" }
@@ -287,18 +277,18 @@ _Stackup Points when selected show assigned door and capsule size_
 
 <a id="roompos"></a>
 * [Room position](#room-position) can be used to limit stack-up points to one side in the command menu, but SWAT may not always respect it or may still "Pie it" or "Check the threshold".  
-In that case, you should delete the undesired side's `Stack Up Actors` from the level and assign the desired side's array to the undesired now empty array in the door's properties.
+In that case, you should delete the undesired side's `BP_StackUpActors` from the level and assign the desired side's array to the undesired now empty array in the door spawner's properties.
 
 > You can copy a variable quickly by `Shift + Right Mouse Button` clicking on the source and `Shift + Left Mouse Button` clicking on the target.  
 > ![](/assets/world-data/Unreal_ShiftCopyPaste.gif){: w="467" h="316" }
 {: .prompt-tip }
 
 ![Stackup Points Corner](/assets/world-data/WorldData_Door_Stackup_Corner.png){: w="1919" h="796" }
-_Stackup Points in a Corner, with room position indicating undesired `[X]` stack up actors_
+_Stackup Points in a Corner, with room position indicating undesired `[X]` stackups_
 
 ### Clear Points
 ![](/assets/world-data/worlddata_door_Clearpoint.png){: w="370" h="435" }{: .right }
-* There are 4 clear point arrays for each door; `Front/Back left/Right Stack Up Points`. These are in the `World Data > Clear Points` category.
+* There are 4 clear point arrays for each door spawner; `Front/Back left/Right Stack Up Points`. These are in the `World Gen > Clear Points` category.
 * For the arrow and sprite previews to be visible when selected, the Tool needs to be running.
 * For each clear point added to the array;
     * The first clear point in each array, index [0] should usually be right in front of the door’s swing and `Direction` **MUST** be set to `None`
@@ -308,17 +298,17 @@ _Stackup Points in a Corner, with room position indicating undesired `[X]` stack
 	
 I’d recommend using the `Add Clear Point` and `Remove Clear Point` buttons in the tool, since it will set all of this automatically and give a nice offset based on the last point.
 #### Add Clear Point	
-1. Select a door.
+1. Select a door spawner.
 2. In the tool, under the **Add Clear Point** button, chose which side and face to work on, such as `Front Left`
     ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddClearPoints_WorkingSide.png){: w="222" h="38" }
-    > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddStackupPoints_ColourFilter.png){: .right }{: w="222" h="38" } To the right of the working side drop down selector, there is a check-box. This will change the sprite previews of the clear points when the door is selected, showing only the currently "active" clear point array with colours.
+    > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddStackupPoints_ColourFilter.png){: .right }{: w="222" h="38" } To the right of the working side drop down selector, there is a check-box. This will change the sprite previews of the clear points when the door spawner is selected, showing only the currently "active" clear point array with colours.
     {: .prompt-info }
 3.  ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_AddClearPoints.png){: w="222" h="38" }{: .right } In the tool, press the `Add Clear Point` button.
 
 4. I'd recommend adding the first clear point for each side and face, as it will be added at an offset, indicating which way the clear path should head off in.
      ![](/assets/world-data/worlddata_door_clearpoint_0s.png){: w="1280" h="720" }
 	 _Clear Points `[0]` added with the Tool button. Each will have slight offset_
-5. The first point `[0]` should be placed in front of the door. It can be offset (along the doors threshold) for very long doorways, closer to the stack up actors. For double doors, it should be near the centre of the overall threshold, but offset to the relevant side. See [Wide Doorway Image](#widedoorway)
+5. The first point `[0]` should be placed in front of the door. It can be offset (along the doors threshold) for very long doorways, closer to the stackup actors. For double doors, it should be near the centre of the overall threshold, but offset to the relevant side. See [Wide Doorway Image](#widedoorway)
 6. Keep using the `Add Clear Point` button to add to the clear path, following the outer edge of your room usually. Keep in mind;
     * You should try to visit every Threat Awareness Actor in the room with either the **Left** or **Right** clear path for that face of the door.
 	* The first clear points should be close (~100 units) to the stack up points, so that the 2nd SWAT isn’t waiting for the 1st to reach his first clear point to enter the room and start their own clear.
@@ -333,13 +323,13 @@ I’d recommend using the `Add Clear Point` and `Remove Clear Point` buttons in 
 ![](/assets/world-data/worlddata_door_clearpath.png){: w="1920" h="1080" }
 _The 4 clear paths of a single door. Note that for each room, the clear points will take the SWAT along a path where they can see every threat._
 ![WideDoorway](/assets/world-data/worlddata_door_clearpoints_wide_doorway.png){: w="1920" h="1080" }
-_A wide doorway, with the first clear points moved closer to the stack up actors, on the opposite sides_  
+_A wide doorway, with the first clear points moved closer to the stackup actors, on the opposite sides_  
 
 #### Add Clear Point (by Nav)
 If you want a more rapid process for this you can use the `Add Clear Point (by Nav)` in the tool. This is more useful for large areas like outdoors.  
 ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Door_ClearPointByNav.png){: w="222" h="38" }  
 
-1. Select a door.
+1. Select a door spawner.
 2. In the tool, above the **Add Clear Point (by Nav)** button, chose which side and face to work on, such as `Front Left`
 3. Ensure at least the first clear point `[0]` has been added for the side/face you are working on. Press the `Add Clear Point` button if not, and adjust position if needed.
 4. To the right of the **Add Clear Point (by Nav)** button, use the number input to define your final clear point spacing. **100** is what the auto-gen spaces and is good for small rooms. **150** for medium rooms and **200/250** is great for large spaces.
@@ -360,25 +350,25 @@ If you want a more rapid process for this you can use the `Add Clear Point (by N
 %}
 
 ### Room Position
-`World Data > Room Position`
+`World Gen > Room Position`
 Room position has a minor effect on SWAT clearing but mainly effects stack up behaviour.  
 The main differences of Centre vs Hallway are;
 * Centre - Allows stack ups on either side of the door Front and Back.
 * Hallway - Allows one stack, Front/Back (Not tested. `Can Issue Orders on Front/Back Side` may be more reliable if needed).  
 When clearing, after passing the threshold, they will skip corner checks and focus/aim at further distances. SWAT voice lines will also be different when clearing and mirroring.
 
-As mentioned in [#Stack-Ups](#roompos) the main purpose I've found for room position is to limit the command menu so there is only one stack up option.
+As mentioned in [#Stack-Ups](#roompos) the main purpose I've found for room position is to limit the command menu so there is only one stackup option.
 However SWAT may not always respect a left/right only room position if a stack-up is on the wrong side, or in front of the opening and may also still "PIE it" or "Check the threshold" if both stack-up arrays use separate actors.  
-In that case, you should delete the undesired side's `Stack Up Actors` from the level and assign the desired side's array to the undesired now empty array in the door's properties.
- > When selecting a left or right room position, a red `[X]` will overlay the "disabled" stack-up actors. If the left and right arrays are set to the same actors these are always shown, so just ignore them.
- {: .prompt-tip }
+In that case, you should delete the undesired side's `BP_StackUpActors` from the level and assign the desired side's array to the undesired now empty array in the door spawner's properties.
+> When selecting a left or right room position, a red `[X]` will overlay the "disabled" stack-up actors. If the left and right arrays are set to the same actors these are always shown, so just ignore them.
+{: .prompt-tip }
 
 ### Double Doors
 Note, traps don’t cover both doors and should be disabled for double doors.
 
 The basic setup for interactions on doors A and B;
-1. Set `Drive Sub Door` on door A to door B
-2. Set `Drive Sub Door` on door B to door A
+1. Set `Sub Door Spawner` on door A to door B
+2. Set `Sub Door Spawner` on door B to door A
 3. Pick one door, and enable `Main Sub Door`. Ensure this is disabled on the other door.
 
 For World Data related values;
@@ -390,10 +380,10 @@ For World Data related values;
 
 Therefore you can use the Tool to quickly fix this up;
 1. Start with only one door. Delete the sub-door if it exists. Setup stack up actors and clear points as usual for Door A. Stack up actors should be moved to the sides of the threshold for the side with the sub-door.
-	> The Stack-Up Actors' `Door` variable can remain pointed at Door A for every side.
+	> The Stack-Up Actors' `Door Spawner` variable can remain pointed at Door A for every side.
 	{: .prompt-info }
 2. Duplicate Door A and rotate/offset the new Door B as needed.
-3. Set the `Drive Sub Door` references and `Main Sub Door` variables on door A and B.
+3. Set the `Sub Door Spawner` references and `Main Sub Door` variables on door A and B.
 	> **Don't forget** to untick `Main Sub Door` on door B if it was enabled for door A when you duplicated it!
 	{: .prompt-danger }
 4. For the new door B, be sure to set the new correct `Front Threat` and `Back Threat` and run the `Sync Threat Awareness` Tool function at some point.
@@ -417,14 +407,14 @@ Therefore you can use the Tool to quickly fix this up;
 ## 5. Rooms Final
 Now that our Door's and Threats are placed and referencing each other and assigned to Rooms, we want to ensure our Rooms' variables are configured correctly.
 1. For each [Room Proxy](#2-rooms), select it and;
-2. Check that each of the Room's doors are assigned to the `Additional Root Doors`. A large orange bounds box and arrow should be surrounding them if the Tool is running.
-3. Check that `Connecting Rooms` is populated with the names of the other Rooms which have shared doors with assigned Front/Back threats. A big orange arrow should link them if the Tool is running.
+2. Check that each of the Room's doors are assigned to the `Room | AdditionalRootDoorSpawners`. A large orange bounds box and arrow should be surrounding them if the Tool is running.
+3. Check that `Room | Connecting Rooms` is populated with the names of the other Rooms which have shared doors with assigned Front/Back threats. A big orange arrow should link them if the Tool is running.
 4. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Threats_Sync.png){: w="222" h="38" }{: .right } Finally, in the Tool, run the `Sync Threat Awareness` button.  
 Nothing needs to be selected when doing so.  
 This function will;
-	* For Doors; based on the `Front/Back Threat` populate the `Front/Back Threat Awareness Points` arrays, by matching `Owning Room` and `Pathable Group ID`.
+	* For Door Spawners; based on the `Front/Back Threat` populate the `Front/Back Threat Awareness Points` arrays, by matching `Owning Room` and `Pathable Group ID`.
 	* For Threats; populate the `Pathable Threat Awareness Actors` elements based on `Owning Room` and `Pathable Group ID`
-	* For EO Room Proxies; populate the `Threats` array by matching `Name` to each threat's `Owning Room`
+	* For Room Proxies; populate the `Threats` array by matching `Room | Name` to each threat's `Owning Room`
 	* For Threats also; pick a `Preferred Exit` for each `Owning Room` if missing and add it's world location to each threat's `Exits` element `[0]`
   
 
@@ -449,9 +439,10 @@ Cover Points are locations that Civs or Suspects can use to take cover.
  
 ## Cover Point Overview
 
-You should never manually place, copy or duplicate a Cover Point.  
- * If you need to add a single cover point, use the `BP_CoverPoint_Single_Framework` actor.  
- * If you want a new Rail of cover points, you will use a `Editor Only Cover Point Rail Preview` and the Tool, as explained later.  
+For the framework, you will be using the `BP_CoverPoint` blueprint based on the "CoverPoint" DynamicCoverSystem class.
+You should never manually place, copy or duplicate a BP_CoverPoint.  
+ * If you need to add a single cover point, use the `BP_CoverPoint_Single` actor.  
+ * If you want a new Rail of cover points, you will use a `BP_CoverPointRailPreview` and the Tool, as explained later.  
  * The location of a cover point is locked and shouldn't be manually edited along with it's rotation. You can edit it's transform with the Tool's `Cover Rails` section, covered in [#Cover Rails](#cover-rails)
  
 ![](/assets/world-data/worlddata_coverpoint_overview.webp){: w="1920" h="1080" }
@@ -468,7 +459,7 @@ You should never manually place, copy or duplicate a Cover Point.
 
 ## Automatic Generation
 
-1. Place a `BP_CoverGen_Framework`  
+1. Place a `BP_CoverGen_Saver`  
 2. Place one or multiple `Cover Gen Override Volumes` to cover the playable nav mesh you want cover points to generate on. Don't change any settings.
 3. When generating, sample traces will "walk" along the edge of the nav-mesh testing for a hit in the Cover channel at crouch and standing height. For better generation you should plug holes between props where you may want suspects to take cover behind.  
 Regular Blocking Volumes can be used or they can also be set to `Cover` to not affect character collisions. You can cover gaps in balustrades, low car engine blocks, barricades of crates, tables and chairs etc.
@@ -481,8 +472,8 @@ However, if your level geometry is locked-in you may wish to export out what is 
 
 ## Importing Automatic Generation
 
-0. Make sure a `BP_CoverGen_Framework` and or supporting actors are in the level as per above section.
-1. On the placed `BP_CoverGen_Framework`, set `Save Cover Points` to `True` (and also make sure `Enabled` is `True`).
+0. Make sure a `BP_CoverGen_Saver` and or supporting actors are in the level as per above section.
+1. On the placed `BP_CoverGen_Saver`, set `Save Cover Points` to `True` (and also make sure `Enabled` is `True`).
 2. Save, Cook and Pak your level to your game install.
 3. Open the game and load your level. Wait for the countdown to finish and for you to spawn in game. Wait 4 to 10 seconds for the cover points to generate and save to disk.
 4. Close the game and navigate to `%localappdata%\ReadyOrNot\Saved\SaveGames\Cover\` in windows explorer.  
@@ -498,9 +489,9 @@ You should see below the number of Cover Point's that have been read.
      > ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_SaveName.png){: w="222" h="38" }{: .right } If "No save file loaded/found." is displayed, check that the correct level is loaded. You can see what .sav file is trying to be loaded in the text field to the left of the button.
      {: .prompt-warning }
 9. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_CreateRailGizmo.png){: w="222" h="38" }{: .right } You can now press the `Create Cover Point from Save` button. A task will start and actors will start to be placed. Keep the editor focused until it completes.  
-     > After importing and creating the cover points, the Tool will set any `BP_CoverGen_Framework's` `Enabled` variable to `False` effectively disabling it to avoid user error. If you want to iterate making changes for generation and visualising them in editor, you should delete every cover point in your level and set the `Enabled` to `True` before cooking, paking and loading your map.
+     > After importing and creating the cover points, the Tool will set any `BP_CoverGen_Saver's` `Enabled` variable to `False` effectively disabling it to avoid user error. If you want to iterate making changes for generation and visualising them in editor, you should delete every cover point in your level and set the `Enabled` to `True` before cooking, paking and loading your map.
      {: .prompt-danger }
-	 > The `BP_CoverGen_Framework` should be disabled and can be deleted from the level once cover points have been created/imported.
+	 > The `BP_CoverGen_Saver` should be disabled and can be deleted from the level once cover points have been created/imported.
      {: .prompt-info }  
 	 
 ## Editing Cover Points
@@ -541,9 +532,9 @@ You edit it's location you can use the Tools [#Cover Rails](#cover-rails) sectio
 
 ## Cover Rails
 
-### Gizmo actor
+### Gizmo Blueprint
 
-The `Editor Only Cover Point Rail Gizmo` is a custom Framework actor which is for manipulating the transforms of cover points in a rail. It's NOT meant to be manually placed.
+The `BP_CoverPointRailGizmo` is a custom Framework blueprint which is for manipulating the transforms of cover points in a rail. It's NOT meant to be manually placed.
 Usage:
 1. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_CreateRailGizmo.png){: w="222" h="38" }{: .right } Select a cover point or multiple.
 2. Press `Create Rail Gizmo from Point` to create a rail gizmo.  
@@ -564,19 +555,19 @@ Usage:
  * The Delete and Append cover point Tool buttons will update rail gizmos when used, but work best on the start and end cover points of a rail. 
     Even then, the logic isn't great, so you may end up with some weird behaviour with new points on the wrong side or the need to delete and remake a rail gizmo.
   
-### Preview Actor
+### Preview Blueprint
 ![](/assets/world-data/worlddata_coverpoint_railPreview.gif){: w="979" h="583" }
 _Preview Rail gizmo handles_  
   
-The `Editor Only Cover Point Rail Preview` is a preparation tool. It can be used to create a completely new rail and set of cover actors.  
+The `BP_CoverPointRailPreview` is a preparation tool. It can be used to create a completely new rail and set of cover actors.  
 Usage:
-1. Place a `Editor Only Cover Point Rail Preview` in the level. Adjust it's location so the points are above the ground. The preview wall offset will match what you see when you select a regular cover point.
+1. Place a `BP_CoverPointRailPreview` in the level. Adjust it's location so the points are above the ground. The preview wall offset will match what you see when you select a regular cover point.
 2. You can use the Rail Start and End diamond wire-frame gizmos to size your rail and preview your cover points.
 3. You can edit various variables to automatically set properties on the cover point actors that will be created as-well-as spacing options.
-4. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_ConvertRailPreview.png){: w="222" h="38" }{: .right } When ready, press `Convert Rail Preview` to create your new cover point actors and delete the preview actor.  
+4. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_ConvertRailPreview.png){: w="222" h="38" }{: .right } When ready, press `Convert Rail Preview` to create your new cover point actors and delete the preview blueprint.  
 
  > The `Convert Rail Preview` performs the actor creation then preview deletion as two separate "Transactions".  
- > This means if you want to reuse the preview actor, you can run `Undo` once to get the preview actor while also retaining the new actors.  
+ > This means if you want to reuse the preview blueprint, you can run `Undo` once to get the blueprint while also retaining the new actors.  
  > Press `Undo` twice to fully undo the operation if needed.
  {: .prompt-tip }
  
@@ -584,7 +575,7 @@ Usage:
 ![](/assets/world-data/worlddata_coverpoint_single.gif){: w="871" h="500" }
 _It's single, not meant to mingle._
 
-The `BP_CoverPoint_Single_Framework` blueprint is also based on the "CoverPoint" DynamicCoverSystem class, however, it has no transform locks.
+The `BP_CoverPoint_Single` blueprint is also based on the "CoverPoint" DynamicCoverSystem class, however, it has no transform locks.
  * It's rail is set relative to itself.
  * It's rail is not meant to be expanded with other cover points.
  * While the Tool _does_ work with it, you shouldn't ever use it with this blueprint to append etc. 
