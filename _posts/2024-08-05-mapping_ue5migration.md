@@ -5,7 +5,7 @@ categories: [Map Modding]
 tags: [maps]
 description: An in-depth guide on migrating your map from UE4 to UE5
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/
-pin: true
+pin: false
 ---
 # UE4 to UE5 Map Migration Guide
 
