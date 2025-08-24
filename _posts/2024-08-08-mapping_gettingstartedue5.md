@@ -430,9 +430,21 @@ Once complete move onto the next step
 ### Copy Cooked Content to your Project
 
 1. Close the new UE5 Template before continuing.
-2. Navigate to where FModel exported the cooked assets and copy the `Content` folder (or drag if storage space is limited) to your Project's Content Folder.
-    * This INCLUDES the shadercaches.
+2. Navigate to where FModel exported the cooked assets and copy the `/Content/` folder (or drag if storage space is limited) to your Project's Content Folder.
+     > This INCLUDES all the shadercaches.
+	 {: .prompt-warning }
+	 > Make sure you copy the extracted Content folder to your Project's root.  
+	 > **DO NOT** copy into the Project's Content.  
+	 > **DO NOT** end up with `.../ReadyOrNot/Content/Content/`{: .filepath} (<-- **BAD**)
+	 {: .prompt-danger }
+	
 3. **DO NOT overwrite any files if prompted!** Just skip these files. If you overwrite them, you will need to start again from scratch with a new Project.
+
+For the DLCs you will also need to copy their content folders if you wish to use more than their AI data tables the Framework includes. You will have these even if you don't own them.  
+
+ - Home Invasion is included in `/Content/` already.
+ 1. `.../FmodelExports/ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC2/Content` needs to be copied to the Project's `.../ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC2/` folder. This is DarkWaters.
+ 2. `.../FmodelExports/ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC3/Content` needs to be copied to the Project's `.../ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC3/` folder. This is Los Suenos Stories.
 
 All the game's assets should be available in the project now, including working Materials, Decals and Particle Effects!
 
@@ -440,8 +452,8 @@ All the game's assets should be available in the project now, including working 
 
 If you wish to hear the QSM or ambient sounds follow these steps:
 
-1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD\` and copy the `Desktop` folder.
-2. Navigate to your projects `...\Content\FMOD\` folder and paste the `Desktop` folder here.
+ 1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD\` and copy the `Desktop` folder.
+ 2. Navigate to your projects `...\Content\FMOD\` folder and paste the `Desktop` folder here.
 
 
 ## Where to Next?
