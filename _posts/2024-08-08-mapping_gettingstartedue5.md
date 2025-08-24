@@ -8,6 +8,29 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/
 pin: true
 ---
 
+<style>
+.embed-video {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1rem;
+  aspect-ratio: 16 / 9;
+
+  @extend %rounded;
+
+  &.file {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    margin-bottom: 0;
+  }
+
+  @extend %img-caption;
+}
+</style>
+
 # Getting Started with Ready or Not Mapping in UE5 [POST DLC1 Home Invasion]
 
 > If you already have a map made in UE4 for Ready or Not we have a [Migration Guide into UE5](/posts/mapping_ue5migration) for you.
@@ -35,12 +58,20 @@ For the Level Design process, you pretty much do it all within Unreal Engine, an
 
 It is important to note that currently we cannot test gameplay within Unreal Engine and can only do it within the Game. To actually play the level you need to pack your level into a deployable `.PAK` file. More info here: [Cooking](#cooking) & [Packaging & Installing](#packaging--installing-your-map)
 
-![Ready or Not Development Cycle](/assets/mapping-gettingstarted/DevCycleUE5.png)
+![Ready or Not Development Cycle](/assets/mapping-gettingstarted/DevCycleUE5.png){: w="1098" h="494" }
 
 ### Development Example
 If you would like to see what it's like to make a map for Ready or Not, I recorded my entire development for [Hell Comes to the Hills](https://www.nexusmods.com/readyornot/mods/3072/){:target="_blank"}. 
 
-[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3){:target="_blank"}
+[YouTube Playlist: Ready or Not: Custom Map Development by Delta](https://www.youtube.com/playlist?list=PLeMpdkJrX_CGU-kIZJz4nbZ8KMNNWhWz3){:target="_blank"}  
+
+{%
+  include embed/youtube.html
+  id='zBHjZC462_4'
+  autoplay=false
+  loop=true
+  muted=false
+%}
 
 
 ## Installation
@@ -60,8 +91,12 @@ If you open the Content Browser (Ctrl+Spacebar) and navigate to `Content > Mods 
     * This is as the name suggests an Example Map which shows how the different mechanics of the game need to be implemented: Including Spawning, Doors, AI, Lighting, QSM and Ambient Sounds. It's meant as a learning and reference level if you need to check how things should be implemented. 
 2. **RoN_ExampleMap_MissionSelect**
     * A very basic level that is only used when you are selecting a level in the Station.
-2. **RoN_Template**
+3. **RoN_Template**
     * This is a barebones level that will cook and play in the game. You can use this as a template if you are making a new map, but we will make one from scratch in a little bit below to explain the requirements.
+4. **RoN_WorldGen**
+	* This is an advanced example map made showcasing what can be done with the [World Data Guide](/posts/mapping_worlddata)
+5. **RoN_DifficultyExampleMap**
+	* This is an intermediate example map made showcasing what can be done with [Custom Map Difficulties](/posts/mapping_CustomDifficulty)
 
 ## Your First Map
 >If you have seen previous YouTube tutorials it may have said you need to set up the Render Settings, or modify the Packaging settings. With the latest version of the Template, you do not need to change or extract any settings. You should be good to go from the first time you launch.
@@ -110,7 +145,7 @@ Content
     * Whatever you name it will be what it shows up as in-game
         * But do not name it "House" - it is a restricted namespace and will not load in game
 3. Once opened, on the toolbar click Blueprints button and click `Open Level Blueprint`
-![Level Blueprint Location](/assets/mapping-gettingstarted/OpenLevelBlueprintLocation.png)
+![Level Blueprint Location](/assets/mapping-gettingstarted/OpenLevelBlueprintLocation.png){: w="643" h="403" }
 4. Under `Class Settings`, check the details panel and change the `Parent Class` to `ReadyOrNotLevelScript`
 5. Click `Compile`, and you can save and exit the window
 6. On the toolbar select *Window > Place Actors*
@@ -182,7 +217,7 @@ The 2 `BP_AISpawns_Managed` blueprints that we placed down are not configured ye
 
 Your AISpawn details should look something similar to this:
 
-![AISpawn Detail Example](/assets/mapping-gettingstarted/AISpawnExampleUE5.png)
+![AISpawn Detail Example](/assets/mapping-gettingstarted/AISpawnExampleUE5.png){: w="492" h="1121" }
 
 ### Spawn Manager
 
@@ -198,14 +233,17 @@ You are free to add and change the tags on the Spawns and Manager how you see fi
 
 ### Doors
 Doors are pretty simple to place down and edit into your map. 
-1. In the Content Browser, navigate to `...\Content\Template\Blueprints` and place down a `BP_Door_Spawner`.
-2. You can change which door you want by going to *Default > Door Type* and selecting the desired door from the `Row Name` dropdown.
+1. In the Place Actors window, search for `Door` and place down a `Door` actor.
+	 > This may sometimes show as BP_Door_New
+2. You can change which door you want by going to *Door > Type of Door* and selecting the desired door from the `Row Name` dropdown.
 
->The basic Template includes the Static Meshes so you can preview the door but not the materials. To get them you will need to follow the steps in [Using Ready or Not Game Assets and Content](#using-ready-or-not-game-assets-and-content)
-{: .prompt-info }
+ > The basic Template includes the Static Meshes so you can preview the door but not the materials. To get them you will need to follow the steps in [Using Ready or Not Game Assets and Content](#using-ready-or-not-game-assets-and-content)
+ {: .prompt-info }
 
->Currently double doors do not work, it's a bug and limitation we do not have the ability to address at the moment. They do work on the first time you load a map, but on subsequent loads they will not show as double doors anymore. 
-{: .prompt-warning }
+ > To use double doors, add a second door actor and rotate it 180° into position.  
+ > In both door actors set `Drive Sub Door` to the other actor and in **ONE** door actor, enable `Main Sub Door`.  
+ > Some doors have a left/right variant so the hinge/handle models are correct. However some are unfinished/unused and have the wrong rotation, so should not be used.
+ {: .prompt-tip }
 
 
 ## Building / Baking
@@ -236,11 +274,11 @@ To build your map, on the Toolbar, drop down Build and select what is appropriat
 
 My usual build process currently is: Build Geometery > Pathing > Lighting. Once the builds complete, you should `File > Save All`
 
->Building times can vary, but the largest determining factor is usually Lighting. As map size increases and the quality of Lighting is changed, builds can take anywhere from 2mins all the way up to 6hrs and longer. At the moment the map should probably only take a couple of seconds. 
-{: .prompt-info }
+ > Building times can vary, but the largest determining factor is usually Lighting. As map size increases and the quality of Lighting is changed, builds can take anywhere from 2mins all the way up to 6hrs and longer. At the moment the map should probably only take a couple of seconds. 
+ {: .prompt-info }
 
 
-## Cooking
+## Cook
 Cooking is the process of turning the project into content that can be deployed on other machines. We also only want cook content that is only important for the map to keep file size small. We need to configure this first:
 
 1. Go to `Edit > Project Settings` and on the side tab select `Project > Packaging`
@@ -258,25 +296,44 @@ Cooking is the process of turning the project into content that can be deployed 
 4. Press the `+` and create an entry and enter your map's directory within the project folder.
 5. Press the `+` again but this time, use your map's BuildData, it should be in the exact same location as your map.
 6. You do not need to change any other settings and it should look something like this:
-![Packaging Settings Example](/assets/mapping-gettingstarted/MapsToPackageUE5.png)
+![Packaging Settings Example](/assets/mapping-gettingstarted/MapsToPackageUE5.png){: w="689" h="84" }
 7. Make sure you Save All before proceeding
 8. On the Toolbar click *Platforms > Windows > Cook Content*
-![UE5 Cook Location](/assets/mapping-gettingstarted/UE5CookLocation.png)
+![UE5 Cook Location](/assets/mapping-gettingstarted/UE5CookLocation.png){: w="709" h="500" }
     * This could take some time for your first cook as it compiles all the shaders. Just be patient.
 9. Once cooking has completed re-Enable *Project Settings > Packaging* `Share Material Shader Code`
 
 >You should hear it succeed, but a message will not remain on screen when it completes. If it failed the notification will stay on the screen. You will need to look at the Output log in the Editor to find out what the Errors are (you can ignore warnings - there will be a lot of them).
 {: .prompt-info }
 
+## Custom Cook ![Custom Cook](/assets/CookIcon.png){: w="24" h="24" }
+
+With the Los Suenos Stories update to the Framework, a custom Cook button was added to the level editor toolbar.  
+This will, by default, automatically;  
+ 1. Write a Game.ini to `/Saved/Config/WindowsEditor/`{: .filepath} which disables Share material Shader Code, regardless of your project setting.
+ 2. Start a cook via UnrealEditor-Cmd.exe
+ 3. Remove the Game.ini after it finishes
+ 4. Copy the `/Config/Difficulties/`{: .filepath} folder to your cooked files.  
+ 
+ > If the editor is unfocused you won't hear the completion sound effects. However, by default the notification is set to not auto-fade.
+ {: .prompt-warning }
+ 
+ > To cancel the cook, find the Unreal command prompt that opened, and close it.
+ {: .prompt-info }
+
 
 ## Packaging & Installing your Map
 Packaging will turn our cooked content into a single compressed file that we can actually use to play in game and distribute to other people. 
 
->There are a bunch of Unreal packers out in the wild, but only use the following method for maps.
-{: .prompt-danger }
+ > There are a bunch of Unreal packers out in the wild, but only use the following method for maps.
+ {: .prompt-danger }
 
 1. Create a folder somewhere to act as your staging location for packing, name doesn't matter but I use `Paking`.
-    * I wouldn't create it in your project folder however.
+    * I wouldn't create it in your project folder however.  
+	
+	 > With the LSS update there is a folder shortcut button on the toolbar which you can configure.  ![Custom Cook](/assets/OpenStagedMods.png){: w="16" h="16" }{: .right }
+	 {: .prompt-info }
+	 
 2. Within this folder create a new folder using the following naming convention: `pakchunk99-YOURMAPNAME`
     * the 99 after `pakchunk` indicates the load order of paks. We keep maps at 99.
     * Replace `YOURMAPNAME` with whatever your map's name is. This will not show up in game, but will help identify your map/mod to people downloading your mod.
@@ -301,13 +358,18 @@ Packaging will turn our cooked content into a single compressed file that we can
 ```
 4. Create a Shortcut to the .bat file you created and move it to your staging folder from step 1.
 5. Navigate to your Template/Project folder and go to: `...\RoNTemplate\Saved\Cooked\Windows\ReadyOrNot` and copy **ONLY** the `Content` folder
+	 > With the LSS update there is a folder shortcut button on the toolbar for this.  ![Custom Cook](/assets/OpenCookedContent.png){: w="16" h="16" }{: .right }
+	 {: .prompt-info }
+
 6. Paste your `Content` folder into your `pakchunk99-YOURMAPNAME` folder
 7. Drag your `pakchunk99-YOURMAPNAME` folder onto your .bat shortcut. A command window will pop up and tell you when it is complete. If successful you should have a new file in your staging directory named `pakchunk99-YOURMAPNAME.pak`
 8. Copy your `pakchunk99-YOURMAPNAME.pak` to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Paks`
+	 > With the LSS update there is a folder shortcut button on the toolbar which you can configure.  ![Custom Cook](/assets/OpenPaks.png){: w="16" h="16" }{: .right }
+	 {: .prompt-info }
 9. Your map should now be available in the game
 
 This is an example of what a Staging folder can look like:
-![Staging Folder Example](/assets/mapping-gettingstarted/StagingExample.png)
+![Staging Folder Example](/assets/mapping-gettingstarted/StagingExample.png){: w="772" h="104" }
 
 >You will be jumping between these folders a lot, I really recommend putting your Staging folder, Project Cooked folder Ready or Not Pak directory to your Quick Access bar.
 {: .prompt-tip }
@@ -345,15 +407,15 @@ There are just some final important steps needed to know when you re-cook and pa
 
 ### FModel Setup
 
->You will at least around 100GB free for the next part, we will be extracting the game's cooked assets so they will show up in your map, and unfortunately require a lot of space.
-{: .prompt-warning }
+ > You will at least around 100GB free for the next part, we will be extracting the game's cooked assets so they will show up in your map, and unfortunately require a lot of space.
+ {: .prompt-warning }
 
 Download FModel: [https://fmodel.app/](https://fmodel.app/){:target="_blank"}
 
-Download Mappings file: [Mapping File](https://unofficial-modding-guide.com/posts/ue4ss_and_mappings/#mappings-download){:target="_blank"}
+Download Mappings file: [Mapping File](/posts/ue4ss_and_mappings/#mappings-download){:target="_blank"}
 
->**BEFORE PROCEEDING:** Remove *ALL* mods from your game. FModel will load them and cause issues and materials may not load properly.
-{: .prompt-danger }
+ > **BEFORE PROCEEDING:** Remove *ALL* mods from your game. FModel will load them and cause issues and materials may not load properly.
+ {: .prompt-danger }
 
 1. If first time using, click the arrows for `ADD UNDETECTED GAME` and select `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot` as your directory AND press the `+` button.
 2. Select the UE Version to be `GAME_UE5_3` and press OK
@@ -378,8 +440,8 @@ All the game's assets should be available in the project now, including working 
 
 If you wish to hear the QSM or ambient sounds follow these steps:
 
-1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD` and copy the `Desktop` folder.
-2. Navigate to your projects `...Content\FMOD` folder and paste the `Desktop` folder here.
+1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD\` and copy the `Desktop` folder.
+2. Navigate to your projects `...\Content\FMOD\` folder and paste the `Desktop` folder here.
 
 
 ## Where to Next?
@@ -387,7 +449,7 @@ We have other guides that cover some more in-depth aspects of mapping that you c
 
 ### [Setting up Audio and Working with QSM](/posts/mapping_audio){:target="_blank"}
 ### [Setting up Music Events for Levels](/posts/mapping_music){:target="_blank"}
-### Mission Select (ModLevelData) - COMING SOON
+### Mission Select, Objectives, Entry Points; [Mod Level Data guide](/posts/mapping_ModLevelData)
 ### Map Optimization - COMING SOON
 
 
