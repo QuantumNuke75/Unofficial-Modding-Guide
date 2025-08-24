@@ -278,7 +278,7 @@ My usual build process currently is: Build Geometery > Pathing > Lighting. Once 
  {: .prompt-info }
 
 
-## Cook
+## Cooking
 Cooking is the process of turning the project into content that can be deployed on other machines. We also only want cook content that is only important for the map to keep file size small. We need to configure this first:
 
 1. Go to `Edit > Project Settings` and on the side tab select `Project > Packaging`
