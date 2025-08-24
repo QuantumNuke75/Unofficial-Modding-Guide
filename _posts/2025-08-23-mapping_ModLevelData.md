@@ -90,8 +90,8 @@ The Los Suenos Stories Framework update includes a simple blueprint actor you ca
 2. Go to /Content/Mods/Template/Blueprints/ (or your copy)
 3. Place a `BP_ModLevelDataReferencer` in your level.
 4. Add an entry to `Mod Level Datas` and use the picker to find and add the MLD you created earlier.
- > If you have manu MLD you want reference, you can select them all in the Content Browser, then drag them onto the `Mod Level Datas` property to quickly add them all.
- {: .prompt-tip }
+	 > If you have many MLD you want reference, you can select them all in the Content Browser, then drag them onto the `Mod Level Datas` property to quickly add them all.  
+	 {: .prompt-tip }
  
 That's it. There's now a reference chain to your MLD so it will be automatically included in your cook when your map is set to cook.
 
