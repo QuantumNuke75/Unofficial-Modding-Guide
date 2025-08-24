@@ -6,7 +6,7 @@ tags: [mapping]
 description: How to create custom difficulties for custom levels.
 author: RareKiwi
 pin: false
-hidden: true
+hidden: false
 ---
 
 <style>
