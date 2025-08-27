@@ -10,8 +10,8 @@ pin: false
 
 # Overview
 
-A Mod Level Data (MLD) is a data asset you can include in your pak to customize the following for level;
- - Show In mission Select
+A Mod Level Data (**MLD**) is a data asset you can include in your pak to customize the following for level;
+ - Show in mission Select true/false
  - Level Display Name, Nickname and Designation
  - Level Picture
  - Level Description
@@ -22,7 +22,7 @@ A Mod Level Data (MLD) is a data asset you can include in your pak to customize 
  - Briefing Biographies
  - Briefing Timeline  
   
- > By default, if you don't include a MLD for your level, the game will create on at run time based on the file name and display it in the levels list.  
+ > By default, if you don't include a MLD for your level, the game will create one at run time based on the file name and display it in the levels list.  
  > That also includes the default Objectives; BringOrderToChaos and RescueAllCivilians.
  {: .prompt-info }
  
