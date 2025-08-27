@@ -139,9 +139,9 @@ _Root Door and Additional Root Doors_
 
 > If you are duplicating rooms and changed the `Root Door`, be sure to remove it from `Additional Root Doors` if needed.  
 {: .prompt-warning }
-* `Room | Threats` needs to be populated, but we will come back to this [later](#5-rooms-final)  
+* `Threats` will need to be populated, but we will come back to this [later](#5-rooms-final)  
 
-![Room Details Example](/assets/world-data/WorldData_Room_DetailsExample.png){: w="555" h="466" }
+![Room Details Example](/assets/world-data/WorldData_Room_DetailsExample.png){: w="535" h="470" }
 *Example Room Details View*  
 
 
@@ -293,7 +293,7 @@ In that case, you should delete the undesired side's `Stack Up Actors` from the 
 > ![](/assets/world-data/Unreal_ShiftCopyPaste.gif){: w="467" h="316" }
 {: .prompt-tip }
 
-![Stackup Points Corner](/assets/world-data/WorldData_Door_Stackup_Corner.png){: w="1919" h="796" }
+![Stackup Points Corner](/assets/world-data/WorldData_Door_Stackup_Corner.png){: w="1776" h="713" }
 _Stackup Points in a Corner, with room position indicating undesired `[X]` stack up actors_
 
 ### Clear Points
@@ -429,11 +429,12 @@ This function will;
   
 
   
-> You much re-run this button once before launching your game if you;
+> You must re-run this button once before launching your game if you;
 * Delete or add a Threat Actor.
 * Change a threats `Owning Room` or `Pathable ID`.
 * Change a Door's `Front or Back Threat` variables.
 * Change Threat Actor's `Preferred Exit` variable.
+* Add, remove or update an Editor Only Room Proxy.
 {: .prompt-danger }
 
 # Cover Points
@@ -576,7 +577,7 @@ Usage:
 4. ![](/assets/world-data/WorldDataToolImages/Image_WorldDataTool_Cover_ConvertRailPreview.png){: w="222" h="38" }{: .right } When ready, press `Convert Rail Preview` to create your new cover point actors and delete the preview actor.  
 
  > The `Convert Rail Preview` performs the actor creation then preview deletion as two separate "Transactions".  
- > This means if you want to reuse the preview actor, you can run `Undo` once to get the preview actor while also retaining the new actors.  
+ > This means if you want to reuse the preview a, you can run `Undo` once to get the preview actor while also retaining the new actors.  
  > Press `Undo` twice to fully undo the operation if needed.
  {: .prompt-tip }
  
