@@ -69,7 +69,7 @@ If you would like to see what it's like to make a map for Ready or Not, I record
   include embed/youtube.html
   id='zBHjZC462_4'
   autoplay=false
-  loop=true
+  loop=false
   muted=false
 %}
 
