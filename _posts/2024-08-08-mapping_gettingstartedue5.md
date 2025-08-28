@@ -448,6 +448,22 @@ For the DLCs you will also need to copy their content folders if you wish to use
 
 All the game's assets should be available in the project now, including working Materials, Decals and Particle Effects!
 
+#### Viewing DLC folders and C++ classes
+
+By default your Unreal Engine's content browser might not be setup to show these folders.
+
+1. In the top right of your content browser, click the `Settings` button.  ![Settings Button](/assets/mapping-gettingstarted/UE5_ContentBrowserSettings.png){: w="80" h="30" }
+2. Ensure the following options are enabled;  ![Settings Options](/assets/mapping-gettingstarted/UE5_ContentBrowserSettings_Options.png){: w="212" h="198" }{: .right }
+	 - Show Sources panel
+	 - Show Developers Content
+	 - Show Engine Content
+	 - Show Plugin Content
+3. In the far left of the Content Browser, you should now be able to expand the ReadyOrNot drop down and find these folders.
+	 - Dark Waters content is found in `/Plugins/ReadyOrNotDLC2/`{: .filepath}
+	 - Los Suenos Stories content is found in `/Plugins/ReadyOrNotDLC3/`{: .filepath}  
+	 
+![Settings Button](/assets/mapping-gettingstarted/UE5_ContentBrowser_Sources.png){: w="419" h="296" }
+
 ### Optional: Importing FMOD Events
 
 If you wish to hear the QSM or ambient sounds follow these steps:
