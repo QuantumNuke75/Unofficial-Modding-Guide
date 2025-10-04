@@ -32,6 +32,25 @@ hidden: false
 }
 </style>
 
+# CMF Build 2 changes
+
+These are the changes for build 2 built for # Update 3 of LSS.  
+
+If your map wasn't crashing, then it's not worth pushing an update, but this should probably resolve any issues if your map was using any classes that got changed.
+Considering a lot of misc game files probably got changed in the update I would NOT update in place and instead recommend a fresh project and the latest extracted game files with your user project content copied over (don't just move, make backups please). 
+The config folder didn't change if you want to copy your packaging and other configs over.
+
+```
+Updated source and build with C++ changes for update #3
+Changed C++ data table variables to specific types. This has the side effect of non-loaded cooked game data tables not showing up. StartupObject was updated to load all the known game file data tables on editor load to fix that.
+Proxy asset W_AnimatedIconWidget was added to fix serialization crash through trap data table>trap BPs>to the widget
+OLDWD_Convert was updated to support old lookatproxies
+Update 3 changed interactable component class so referencing cooked bps needed to be updated to prevent editor crash. (All included game files should be latest)
+First Person Template BPS updated a bit for better door interaction.
+```
+
+Release LSS changes below
+
 # Mapping Changes
 
 ## Overview
