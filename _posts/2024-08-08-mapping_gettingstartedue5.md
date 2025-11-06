@@ -441,6 +441,9 @@ Once complete move onto the next step
 3. **DO NOT overwrite any files if prompted!** Just skip these files. If you overwrite them, you will need to start again from scratch with a new Project.
 
 For the DLCs you will also need to copy their content folders if you wish to use more than their AI data tables the Framework includes. You will have these even if you don't own them.  
+ > If you havn't already, make sure you exported the DLC plugins' content folders in FModel.  
+ > ie ReadyOrNot > Plugins > GameFeatures ; /ReadyOrNotDLC2/Content/ & /ReadyOrNotDLC3/Content/ etc
+ {: .prompt-tip }
 
  - Home Invasion is included in `/Content/` already.
  1. `.../FmodelExports/ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC2/Content` needs to be copied to the Project's `.../ReadyOrNot/Plugins/GameFeatures/ReadyOrNotDLC2/` folder. This is DarkWaters.
