@@ -81,7 +81,7 @@ I think a lot of newer people coming into UE will suffer from these issues at so
 
 ### Light Blockers
 
-> ****FOREWORD:** Light Blockers mostly deals with solving Dynamic Shadows bleeding, they do have some limited success with baked lighting. However, if you are getting baked lighting bleeds, the root cause is likely something else and I would look again at the list above or double check your lightmaps.
+> **FOREWORD:** Light Blockers mostly deals with solving Dynamic Shadows bleeding, they do have some limited success with baked lighting. However, if you are getting baked lighting bleeds, the root cause is likely something else and I would look again at the list above or double check your lightmaps.
 {: .prompt-warning }
 
 A lot of times you are forced to use planar meshes which don't have a backside to block incoming light, or sections where meshes connect let light slip through, especially with strong Directional lights. The tried and true method for patching these areas is to add basic cubes as invisible Light Blockers!
@@ -333,15 +333,15 @@ _Default State of the Lighting Channels (0) on all Lights_
 
 At a very low level and basic primer for how dynamic shadows work in Unreal, when a light needs to cast a dynamic shadow, any object that it casts onto will need to have it's primitives/tris rendered again from the perspective of the light. The dynamic shadow system cannot clearly differentiate what should be rendered, so essentially anything that is in the casting radius could have its primitives calculated again, per shadow casting light. 
  
-Assigning a light's `Light Channel` allows for that light to only cast on anything else with matching channels - and Unreal gives us 2 more additional channels to work with. 
+Assigning a light's `Lighting Channels` allows for that light to only cast on anything else with matching channels - and Unreal gives us 2 more additional channels to work with. 
 
-Essentially, changing the `Lighting Channel` allows for complete control on what actually needs to cast dynamic shadows. 
+Essentially, changing the `Lighting Channels` allows for complete control on what actually needs to cast dynamic shadows. 
 
 Not everything in the scene moves or is close enough to the source to warrant a dynamic shadow, especially if a baked shadow already exists. Additionally, much like the example above where the light's radius can bleed through rooms/floors, those rooms may not have any sources that generate dynamic shadows, yet due to how Unreal handles dynamic shadows, they are still likely rendering them even if you cannot see it.
 
 *Ready Or Not* does this with EVERY stationary/movable light that casts dynamic shadows (minus the Directional). They use the combo method [described above](#being-smart-about-dynamic-lights-light-combos) but **also** make sure the dynamic lights have their Lighting Channel's set solely to `1` and any surrounding meshes enables channel 1 as well (eg: core walls, floors or props close by). By default, the Player and all AI meshes also cast on channels 0 & 1. 
 
-![Lighting Channel Default State](/assets/mapping-lighting/LightingChannelBreakdown.jpg)  
+![Lighting Channel Default State](/assets/mapping-lighting/LightingChannelBreakdown.jpg)
 _The highlighted Stationary SpotLight casts dynamic shadows on Channel 1. This breakdown shows meshes within its radius as to what actually accepts it's Lighting and Shadows. Comments are left on non-highlighted meshes as to why they do not need to receive the SpotLight's lighting._
 
 It really cannot be overstated how much of a lighting performance boost can be obtained from such a simple tweak. If you have the ability to implement this in your game's player character and AI, I would highly recommend it as you can save a significant amount of additional primitives from being calculated. You could literally be saving hundred's of thousands of unneeded tris from ever being rendered!
