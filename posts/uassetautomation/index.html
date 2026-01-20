@@ -1,0 +1,1167 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta content="https://unofficial-modding-guide.com/assets/unofficialmoddingguide.png" property="og:image" /><meta name="twitter:card" content="summary_large_image"><meta content="#FF0000" data-react-helmet="true" name="theme-color" /><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="UAsset Automation" /><meta name="author" content="QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com" /><meta property="og:locale" content="en" /><meta name="description" content="An in depth guide on how to automatically edit and parse data from a UAsset file. Useful for quickly updating mods when a new Ready or Not update comes out." /><meta property="og:description" content="An in depth guide on how to automatically edit and parse data from a UAsset file. Useful for quickly updating mods when a new Ready or Not update comes out." /><link rel="canonical" href="https://unofficial-modding-guide.com/posts/uassetautomation/" /><meta property="og:url" content="https://unofficial-modding-guide.com/posts/uassetautomation/" /><meta property="og:site_name" content="Unofficial Modding Guide" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-07-19T00:00:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="UAsset Automation" /><meta name="twitter:site" content="@twitter_username" /><meta name="twitter:creator" content="@QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"QuantumNuke75|https://www.nexusmods.com/users/62784961,UMG|https://unofficial-modding-guide.com"},"dateModified":"2022-07-21T20:22:44+00:00","datePublished":"2022-07-19T00:00:00+00:00","description":"An in depth guide on how to automatically edit and parse data from a UAsset file. Useful for quickly updating mods when a new Ready or Not update comes out.","headline":"UAsset Automation","mainEntityOfPage":{"@type":"WebPage","@id":"https://unofficial-modding-guide.com/posts/uassetautomation/"},"url":"https://unofficial-modding-guide.com/posts/uassetautomation/"}</script><title>UAsset Automation | Unofficial Modding Guide</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Unofficial Modding Guide"><meta name="application-name" content="Unofficial Modding Guide"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="https://github.com/QuantumNuke75/Unofficial-Modding-Guide/blob/main/assets/img/favicons/UMG.png?raw=true" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Unofficial Modding Guide</a></div><div class="site-subtitle font-italic">A comprehensive guide for most aspects of Ready or Not modding.</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>MODDING</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/quantumnuke75" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>UAsset Automation</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>UAsset Automation</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1658188800" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Jul 19, 2022 </em> </span> <span> Updated <em class="" data-ts="1658434964" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Jul 21, 2022 </em> </span><div class="d-flex justify-content-between"> <span> By <a href="https://www.nexusmods.com/users/62784961">QuantumNuke75</a> & <a href="https://unofficial-modding-guide.com">UMG</a> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3045 words"> <em>50 min</em> read</span></div></div></div><div class="post-content"><h2 id="uasset-automation"><span class="mr-2">UAsset Automation</span><a href="#uasset-automation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><h3 id="json-parsing-via-python"><span class="mr-2">JSON Parsing via Python</span><a href="#json-parsing-via-python" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Once you have a firm understanding of manually editing UAssets, you can semi-easily automate tasks. To start, you’ll need some Python, or other programming knowledge. I’ll be using Python for this tutorial because of the simple to use json library that comes with Python 3+. I highly recommend doing this if you need to change a lot of data every time the game updates. If you would like specific help with this, ask QuantumNuke75#3593 on Discord. Note that the code down below may not be pretty, as it’s gone under numerous changes as the game updates.</p><h3 id="ammo-mod"><span class="mr-2">Ammo Mod</span><a href="#ammo-mod" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Your first line should be the import statement.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">json</span>
+</pre></table></code></div></div><p>Next, you’ll want to open the file. To do this, replace FILE_NAME with the location of your JSON file that you extracted with UAssetGUI.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'FILE_NAME'</span><span class="p">)</span>
+</pre></table></code></div></div><p>At the bottom of the file, you’ll want to export your JSON file, which you can then load back up in UAssetGUI and save it as a .uasset.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">"export.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">))</span>
+</pre></table></code></div></div><p>But, you’ll then want to load this file as a JSON file. <code class="language-plaintext highlighter-rouge">data</code> will become a Python dictionary.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</pre></table></code></div></div><p>Within this data variable will be layers of dictionaries, lists, and key-value pairs witin the dictionaries. From this, you’ll be able to easily automate adding, data, changing values, or anything. Now we’ll need to loop through every item in the export datatable, which is where the majority of the data we need is held.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">"Exports"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Table"</span><span class="p">][</span><span class="s">"Data"</span><span class="p">]:</span>
+</pre></table></code></div></div><p>Now we need to loop through every value for every item, since the ammo count for a gun is just one of many values an item has.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>	<span class="k">for</span> <span class="n">item_data</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+</pre></table></code></div></div><p>Now, we check for specific tags, in our case, these tags are <code class="language-plaintext highlighter-rouge">MagazineCountDefault(0)</code> and <code class="language-plaintext highlighter-rouge">MagazineCountMax(0)</code>. Once we’ve found these tags, we can set the values of these to whatever we want. In this specific case, the code is getting the value, and adding a number of mags to it.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>		<span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"MagazineCountDefault(0)"</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">])</span>
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+                <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_mags</span>
+                <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"MagazineCountMax(0)"</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">])</span>
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+                <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_mags</span>
+                <span class="k">continue</span>
+</pre></table></code></div></div><p>The full code is below:</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">num_mags</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'ItemDataTable.json'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="c1"># For every item in the export table.
+</span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">"Exports"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Table"</span><span class="p">][</span><span class="s">"Data"</span><span class="p">]:</span>
+    <span class="c1"># For every piece of the item data.
+</span>    <span class="k">for</span> <span class="n">item_data</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+        <span class="c1"># If the item's name is MagazineCount
+</span>        <span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"MagazineCountDefault(0)"</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">])</span>
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+                <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_mags</span>
+                <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"MagazineCountMax(0)"</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">])</span>
+            <span class="k">if</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+                <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_mags</span>
+                <span class="k">continue</span>
+
+<span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s">"ammo_export_</span><span class="si">{</span><span class="n">num_mags</span><span class="si">}</span><span class="s">.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">))</span>
+</pre></table></code></div></div><blockquote class="prompt-warning"><div><p><strong>More Ammo</strong> is an outdated mod, and this code will no longer effect anything in the game.</p></div></blockquote><h3 id="everything-unlocked"><span class="mr-2">Everything Unlocked</span><a href="#everything-unlocked" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>I’ll be skipping basic portions of parsing, and will explain more complicated changes instead. Adding data with this method is significantly harder than just changing values. There are two different files we need to edit for Everything Unlocked, <code class="language-plaintext highlighter-rouge">ItemDataTable.uasset</code> and <code class="language-plaintext highlighter-rouge">ItemData.uasset</code>.</p><h4 id="itemdata"><span class="mr-2">ItemData</span><a href="#itemdata" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4><p>In order to add entries to the <code class="language-plaintext highlighter-rouge">ItemData</code> we’ll need know what data to add. Every weapon has the following distinct attributes: name, gun blueprint location, default class name, class name, and the item type. In order to make this easier, a struct class was created.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">ItemDataStruct</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">clas</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">location</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">clas</span> <span class="o">=</span> <span class="n">clas</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span>
+</pre></table></code></div></div><p>This class holds all the information needed to add a specific gun. Now, we need to add a bunch of values. Since we are adding both primary weapons, secondary weapons, tacticals, and helmets accessory options, it’s important to distinguish them all. We’ll store each category of items in their separate arrays.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="n">primary_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"P90"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_P90(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_P90_C(0)"</span><span class="p">,</span> <span class="s">"Primary_P90_C(0)"</span><span class="p">,</span> <span class="s">"SMG"</span><span class="p">))</span>
+
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Primary_M16A4"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_M16A4(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_M16A4_C(0)"</span><span class="p">,</span> <span class="s">"Primary_M16A4_C(0)"</span><span class="p">,</span> <span class="s">"AR"</span><span class="p">))</span>
+
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Primary_Saiga12"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_Saiga12(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_Saiga12_C(0)"</span><span class="p">,</span> <span class="s">"Primary_Saiga12_C(0)"</span><span class="p">,</span> <span class="s">"Shotgun"</span><span class="p">))</span>
+
+<span class="n">secondary_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">secondary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"P250"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Secondary_P250(0)"</span><span class="p">,</span> <span class="s">"Default__Secondary_P250_C(0)"</span><span class="p">,</span> <span class="s">"Secondary_P250_C(0)"</span><span class="p">,</span> <span class="s">"Pistol"</span><span class="p">))</span>
+
+<span class="n">tacticals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tacticals</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"9Banger"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Grenade_9Banger_V2(0)"</span><span class="p">,</span> <span class="s">"Default__Grenade_9Banger_V2_C(0)"</span><span class="p">,</span> <span class="s">"Grenade_9Banger_V2_C(0)"</span><span class="p">,</span> <span class="s">"Grenade"</span><span class="p">))</span>
+
+<span class="n">helmets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">helmets</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Helmet_UpArmor"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/ArmorRevised/Helmet_UpArmor(0)"</span><span class="p">,</span> <span class="s">"Default__Helmet_UpArmor_C(0)"</span><span class="p">,</span> <span class="s">"Helmet_UpArmor_C(0)"</span><span class="p">,</span> <span class="s">"Helmet"</span><span class="p">))</span>
+</pre></table></code></div></div><p>Now we can begin parsing through the data. Similarly to More Ammo, we’ll be accessing the data in the same way but instead we’ll checking if the item is a <code class="language-plaintext highlighter-rouge">PrimaryWeapons(0)</code>, <code class="language-plaintext highlighter-rouge">SecondaryWeapon(0)</code>, <code class="language-plaintext highlighter-rouge">TacticalItems(0)</code>, or <code class="language-plaintext highlighter-rouge">HeadSelection(0)</code>.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"PrimaryWeapons(0)"</span><span class="p">:</span>
+<span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"SecondaryWeapons(0)"</span><span class="p">:</span>
+<span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"TacticalItems(0)"</span><span class="p">:</span>
+<span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"HeadSelection(0)"</span><span class="p">:</span>
+</pre></table></code></div></div><p>I’ll only be covering how to automate the primary weapons to prevent this guide from getting longer. Each category is very similar, with some slight changes. Once we’ve establish that we’re in the <code class="language-plaintext highlighter-rouge">PrimaryWeapons(0)</code> category, we can begin making changes. Now we can parse through all the weapon structs we created for primary weapons.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">for</span> <span class="n">weapon_struct</span> <span class="ow">in</span> <span class="n">primary_weapons</span><span class="p">:</span>
+</pre></table></code></div></div><p>The second thing we’ll need to to is add the imports. Without imports, the game will have no idea what you’ve added to the table. However, we need to get the current import number.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">last_import_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">])</span>
+</pre></table></code></div></div><p>Once we’ve done that, we can add all the imports we need.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="n">dic_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/CoreUObject(0)'</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'Package(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">dic_2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/Engine(0)'</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'BlueprintGeneratedClass(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="n">last_import_index</span><span class="p">}</span>
+<span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">default</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)}</span>
+<span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_1</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_2</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>
+</pre></table></code></div></div><p>Now we can add the actual weapons to <code class="language-plaintext highlighter-rouge">ItemData</code>. We first need to distinguish between what type of weapon we have, this changes what <code class="language-plaintext highlighter-rouge">Type</code>, <code class="language-plaintext highlighter-rouge">CultureInvariantString</code>, and <code class="language-plaintext highlighter-rouge">ItemClass</code> we need. We’ll also be copying a related gun entry so we don’t have to create everything from scratch.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="n">last_copy</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="nb">type</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">item_class</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"SMG"</span><span class="p">:</span>
+	<span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_SubmachineGun(0)"</span>
+	<span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"SMG"</span>
+	<span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_SMG(0)"</span>
+
+	<span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">elif</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"AR"</span><span class="p">:</span>
+	<span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_Rifles(0)"</span>
+	<span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"Rifle"</span>
+	<span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_AssaultRifle(0)"</span>
+
+	<span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">12</span><span class="p">])</span>
+
+<span class="k">elif</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"Shotgun"</span><span class="p">:</span>
+	<span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_Shotgun(0)"</span>
+	<span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"Shotgun"</span>
+	<span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_Shotgun(0)"</span>
+
+	<span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">7</span><span class="p">])</span>
+</pre></table></code></div></div><p>Now, we set the related data in the copy.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="c1"># Set gun type
+</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span>
+
+<span class="c1"># Set Category
+</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_class</span>
+
+<span class="c1">#Set name
+</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">'Value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">name</span>
+
+<span class="c1"># Set culture invariant string
+</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span> <span class="o">=</span> <span class="n">CultureInvariantString</span>
+</pre></table></code></div></div><p>Then, we set the import reference to the imports we just created, and append the new weapon to the table.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="c1"># Set import ref
+</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">5</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Append item to table
+</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">last_copy</span><span class="p">)</span>
+</pre></table></code></div></div><p>The final code:</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+</pre><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">copy</span><span class="p">,</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="nn">ItemDataStruct</span> <span class="kn">import</span> <span class="n">ItemDataStruct</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'json/ItemData.json'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">primary_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"P90"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_P90(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_P90_C(0)"</span><span class="p">,</span> <span class="s">"Primary_P90_C(0)"</span><span class="p">,</span> <span class="s">"SMG"</span><span class="p">))</span>
+
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Primary_M16A4"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_M16A4(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_M16A4_C(0)"</span><span class="p">,</span> <span class="s">"Primary_M16A4_C(0)"</span><span class="p">,</span> <span class="s">"AR"</span><span class="p">))</span>
+
+<span class="n">primary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Primary_Saiga12"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Primary_Saiga12(0)"</span><span class="p">,</span> <span class="s">"Default__Primary_Saiga12_C(0)"</span><span class="p">,</span> <span class="s">"Primary_Saiga12_C(0)"</span><span class="p">,</span> <span class="s">"Shotgun"</span><span class="p">))</span>
+
+<span class="n">secondary_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">secondary_weapons</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"P250"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Secondary_P250(0)"</span><span class="p">,</span> <span class="s">"Default__Secondary_P250_C(0)"</span><span class="p">,</span> <span class="s">"Secondary_P250_C(0)"</span><span class="p">,</span> <span class="s">"Pistol"</span><span class="p">))</span>
+
+<span class="n">tacticals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tacticals</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"9Banger"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/WeaponsRevised/Grenade_9Banger_V2(0)"</span><span class="p">,</span> <span class="s">"Default__Grenade_9Banger_V2_C(0)"</span><span class="p">,</span> <span class="s">"Grenade_9Banger_V2_C(0)"</span><span class="p">,</span> <span class="s">"Grenade"</span><span class="p">))</span>
+
+<span class="n">helmets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">helmets</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ItemDataStruct</span><span class="p">(</span><span class="s">"Helmet_UpArmor"</span><span class="p">,</span> <span class="s">"/Game/Blueprints/Items/ArmorRevised/Helmet_UpArmor(0)"</span><span class="p">,</span> <span class="s">"Default__Helmet_UpArmor_C(0)"</span><span class="p">,</span> <span class="s">"Helmet_UpArmor_C(0)"</span><span class="p">,</span> <span class="s">"Helmet"</span><span class="p">))</span>
+
+<span class="n">last_import_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">])</span>
+
+<span class="c1"># For every item in the table.
+</span><span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">"Exports"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Data"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"PrimaryWeapons(0)"</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">weapon_struct</span> <span class="ow">in</span> <span class="n">primary_weapons</span><span class="p">:</span>
+
+            <span class="c1"># START IMPORTS
+</span>            <span class="n">dic_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/CoreUObject(0)'</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'Package(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/Engine(0)'</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'BlueprintGeneratedClass(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="n">last_import_index</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'ClassName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">default</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_1</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_2</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>
+            <span class="c1"># END IMPORTS
+</span>
+            <span class="n">last_copy</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="nb">type</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">item_class</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"SMG"</span><span class="p">:</span>
+                <span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_SubmachineGun(0)"</span>
+                <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"SMG"</span>
+                <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_SMG(0)"</span>
+
+                <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">elif</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"AR"</span><span class="p">:</span>
+                <span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_Rifles(0)"</span>
+                <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"Rifle"</span>
+                <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_AssaultRifle(0)"</span>
+
+                <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">12</span><span class="p">])</span>
+
+            <span class="k">elif</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"Shotgun"</span><span class="p">:</span>
+                <span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_Shotgun(0)"</span>
+                <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"Shotgun"</span>
+                <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_Shotgun(0)"</span>
+
+                <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">7</span><span class="p">])</span>
+
+            <span class="c1"># Set gun type
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span>
+
+            <span class="c1"># Set Category
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_class</span>
+
+            <span class="c1">#Set name
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">'Value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">name</span>
+
+            <span class="c1"># Set culture invariant string
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span> <span class="o">=</span> <span class="n">CultureInvariantString</span>
+
+            <span class="c1"># Set import ref
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">5</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">last_copy</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"SecondaryWeapons(0)"</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">weapon_struct</span> <span class="ow">in</span> <span class="n">secondary_weapons</span><span class="p">:</span>
+
+            <span class="c1"># START IMPORTS
+</span>            <span class="n">dic_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/CoreUObject(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'Package(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/Engine(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'BlueprintGeneratedClass(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="n">last_import_index</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">default</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_1</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_2</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>
+            <span class="c1"># END IMPORTS
+</span>
+            <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="nb">type</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">item_class</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="nb">type</span> <span class="o">==</span> <span class="s">"Pistol"</span><span class="p">:</span>
+                <span class="nb">type</span> <span class="o">=</span> <span class="s">"EWeaponType::WT_PistolsLethal(0)"</span>
+                <span class="n">CultureInvariantString</span> <span class="o">=</span> <span class="s">"Semi-Automatic"</span>
+                <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_Pistol(0)"</span>
+
+            <span class="c1"># Set Weapon Type
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span>
+
+            <span class="c1"># Set ItemClass
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_class</span>
+
+            <span class="c1"># Set name
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">'Value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">weapon_struct</span><span class="p">.</span><span class="n">name</span>
+
+            <span class="c1"># Set culture invariant string
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span> <span class="o">=</span> <span class="n">CultureInvariantString</span>
+
+            <span class="c1"># Set import ref
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">5</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">last_copy</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"TacticalItems(0)"</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item_struct</span> <span class="ow">in</span> <span class="n">tacticals</span><span class="p">:</span>
+            <span class="c1"># START IMPORTS
+</span>            <span class="n">dic_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/CoreUObject(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'Package(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/Engine(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'BlueprintGeneratedClass(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="n">last_import_index</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">default</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_1</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_2</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>
+            <span class="c1"># END IMPORTS
+</span>
+            <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_Grenade(0)"</span>
+
+            <span class="c1"># Set Name
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">name</span>
+
+            <span class="c1">#Set ItemClass
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">10</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_class</span>
+
+            <span class="c1"># Set import ref
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">13</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]))</span>
+
+            <span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">last_copy</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">items</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"HeadSelection(0)"</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item_struct</span> <span class="ow">in</span> <span class="n">helmets</span><span class="p">:</span>
+            <span class="c1"># START IMPORTS
+</span>            <span class="n">dic_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/CoreUObject(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'Package(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="s">'/Script/Engine(0)'</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="s">'BlueprintGeneratedClass(0)'</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="n">last_import_index</span><span class="p">}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.Import, UAssetAPI'</span><span class="p">,</span> <span class="s">'ClassPackage'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">location</span><span class="p">,</span>
+                     <span class="s">'ClassName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">clas</span><span class="p">,</span> <span class="s">'ObjectName'</span><span class="p">:</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">default</span><span class="p">,</span>
+                     <span class="s">'OuterIndex'</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span>
+            <span class="n">last_import_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_1</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_2</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">"Imports"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>
+            <span class="c1"># END IMPORTS
+</span>
+            <span class="n">item_class</span> <span class="o">=</span> <span class="s">"EItemClass::IC_Headgear(0)"</span>
+
+            <span class="n">last_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="c1"># Set Name
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_struct</span><span class="p">.</span><span class="n">name</span>
+
+            <span class="c1"># Set Item Class
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_class</span>
+
+            <span class="c1"># Set import ref
+</span>            <span class="n">last_copy</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">last_import_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">items</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">last_copy</span><span class="p">)</span>
+
+
+<span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s">"output/everything_unlocked_itemdata.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">))</span>
+</pre></table></code></div></div><h4 id="itemdatatable"><span class="mr-2">ItemDataTable</span><a href="#itemdatatable" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4><p>This is an easier table to edit, but required more data. To start, you’ll need a dictionary of attachments mapped to their respective socket for each category of attachment: sight, muzzle, underbarrel. You’ll also need a dictionary of item names, mapped to a list of sockets they have.<br /> Here’s an example of the underbarrel attachment list, which we’ll be using as an example:</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="n">all_under</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">38</span><span class="p">:</span><span class="s">"combat_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">39</span><span class="p">:</span><span class="s">"combat_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">65</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">66</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">70</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">81</span><span class="p">:</span><span class="s">"light_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">82</span><span class="p">:</span><span class="s">"laser_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">83</span><span class="p">:</span><span class="s">"laser_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">86</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">87</span><span class="p">:</span><span class="s">"afg_mlok_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">90</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">91</span><span class="p">:</span><span class="s">"pointer_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">92</span><span class="p">:</span><span class="s">"pointer_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">102</span><span class="p">:</span><span class="s">"foregrip_VFG_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">103</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">104</span><span class="p">:</span><span class="s">"vfg_mlok_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">136</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">}</span>
+</pre></table></code></div></div><p>And here’s an example of the weapon names mapped to attachments (Note: <em>This list may be outdated.</em>):</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="n">weapon_to_attachments</span> <span class="o">=</span> <span class="p">{</span><span class="s">'M1911A1'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'G19'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">}}</span>
+</pre></table></code></div></div><p>Now we parse through the <code class="language-plaintext highlighter-rouge">ItemDataTable</code> and look for the corresponding attachment <code class="language-plaintext highlighter-rouge">AvailableUnderbarrelAttachments(0)</code>. Once we do, we check the <code class="language-plaintext highlighter-rouge">weapon_to_attachments</code> dictionary, and add all the attachments to the weapon.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">"Exports"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Table"</span><span class="p">][</span><span class="s">"Data"</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">item_data</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+	    <span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"AvailableUnderbarrelAttachments(0)"</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">comp_attachments</span> <span class="o">=</span> <span class="n">weapon_to_attachments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">attachments_to_add</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">under</span> <span class="ow">in</span> <span class="n">all_under</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">all_under</span><span class="p">[</span><span class="n">under</span><span class="p">]</span> <span class="ow">in</span> <span class="n">comp_attachments</span><span class="p">:</span>
+                    <span class="n">attachments_to_add</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">under</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments_to_add</span><span class="p">:</span>
+                <span class="n">copied</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">attachment_dic_format</span><span class="p">)</span>
+                <span class="n">copied</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">attachment</span>
+                <span class="k">if</span> <span class="n">copied</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+                    <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">copied</span><span class="p">)</span>
+            <span class="k">continue</span>
+</pre></table></code></div></div><p>Full code below. As a bonus, weapon inertia was also changed for items, making unlocked weapons more usable.</p><div class="language-python highlighter-rouge"><div class="code-header"> <span data-label-text="Python"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+</pre><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">copy</span><span class="p">,</span> <span class="n">json</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'json/ItemDataTable.json'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">all_scopes</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">42</span><span class="p">:</span><span class="s">"SRO_FBI_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">43</span><span class="p">:</span><span class="s">"RMR_FBI_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">44</span><span class="p">:</span><span class="s">"RMRPistol_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">45</span><span class="p">:</span><span class="s">"RMR_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">46</span><span class="p">:</span><span class="s">"RMRPistol_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">47</span><span class="p">:</span><span class="s">"SRO_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">48</span><span class="p">:</span><span class="s">"SROPistol_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">49</span><span class="p">:</span><span class="s">"SROPistol_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">50</span><span class="p">:</span><span class="s">"SRORaised_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">51</span><span class="p">:</span><span class="s">"Delta_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">52</span><span class="p">:</span><span class="s">"ACOG_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">53</span><span class="p">:</span><span class="s">"atac_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">54</span><span class="p">:</span><span class="s">"HAMR_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">55</span><span class="p">:</span><span class="s">"Harris_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">56</span><span class="p">:</span><span class="s">"M5B_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">57</span><span class="p">:</span><span class="s">"sdr_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">105</span><span class="p">:</span><span class="s">"Scope_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">106</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">107</span><span class="p">:</span><span class="s">"EXPS3_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">108</span><span class="p">:</span><span class="s">"Holosight_XPS3"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">109</span><span class="p">:</span><span class="s">"Rail_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">110</span><span class="p">:</span><span class="s">"Rail_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">111</span><span class="p">:</span><span class="s">"Rail_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">112</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">113</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">114</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">115</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">116</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">117</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">118</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">119</span><span class="p">:</span><span class="s">"MicroT2_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">120</span><span class="p">:</span><span class="s">"MicroT2_FBI_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">121</span><span class="p">:</span><span class="s">"MicroT2Raised_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">122</span><span class="p">:</span><span class="s">"EXPS3_MP5_optic"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">123</span><span class="p">:</span><span class="s">"SRO_MP5_optic"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">124</span><span class="p">:</span><span class="s">"mp5_optic"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">125</span><span class="p">:</span><span class="s">"MicroT2_mp5_optic"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">126</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">127</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">128</span><span class="p">:</span><span class="s">"Reflex_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">129</span><span class="p">:</span><span class="s">"SRSRaised_socket"</span><span class="p">}</span>
+
+<span class="n">all_muzzles</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">28</span><span class="p">:</span><span class="s">"muzzle_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">29</span><span class="p">:</span><span class="s">"asr_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">30</span><span class="p">:</span><span class="s">"asr_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">31</span><span class="p">:</span><span class="s">"sfmb_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">32</span><span class="p">:</span><span class="s">"sfmb_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">33</span><span class="p">:</span><span class="s">"shotgunbrake_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">40</span><span class="p">:</span><span class="s">"brake_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">60</span><span class="p">:</span><span class="s">"socom338_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">61</span><span class="p">:</span><span class="s">"tag_mp9suppressor"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">62</span><span class="p">:</span><span class="s">"PBS_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">63</span><span class="p">:</span><span class="s">"socom338_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">64</span><span class="p">:</span><span class="s">"socom338_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">78</span><span class="p">:</span><span class="s">"comp_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">79</span><span class="p">:</span><span class="s">"comp_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">80</span><span class="p">:</span><span class="s">"flash_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">84</span><span class="p">:</span><span class="s">"supressor_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">85</span><span class="p">:</span><span class="s">"supressor_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">88</span><span class="p">:</span><span class="s">"compensator_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">97</span><span class="p">:</span><span class="s">"Barrel_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">100</span><span class="p">:</span><span class="s">"Barrel_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">101</span><span class="p">:</span><span class="s">"supressor_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">130</span><span class="p">:</span><span class="s">"Choke_Socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">131</span><span class="p">:</span><span class="s">"tube_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">135</span><span class="p">:</span><span class="s">"supressor_socket"</span><span class="p">}</span>
+
+<span class="n">all_under</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">38</span><span class="p">:</span><span class="s">"combat_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">39</span><span class="p">:</span><span class="s">"combat_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">65</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">66</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">70</span><span class="p">:</span><span class="s">"mp5_foregrip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">81</span><span class="p">:</span><span class="s">"light_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">82</span><span class="p">:</span><span class="s">"laser_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">83</span><span class="p">:</span><span class="s">"laser_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">86</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">87</span><span class="p">:</span><span class="s">"afg_mlok_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">90</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">91</span><span class="p">:</span><span class="s">"pointer_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">92</span><span class="p">:</span><span class="s">"pointer_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">102</span><span class="p">:</span><span class="s">"foregrip_VFG_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">103</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">104</span><span class="p">:</span><span class="s">"vfg_mlok_grip"</span><span class="p">,</span>
+<span class="o">-</span><span class="mi">136</span><span class="p">:</span><span class="s">"foregrip_socket"</span><span class="p">}</span>
+
+<span class="n">weapon_to_attachments</span> <span class="o">=</span> <span class="p">{</span><span class="s">'M1911A1'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'G19'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'G18 Auto'</span><span class="p">:{</span><span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">},</span>
+<span class="s">'SKL_Pistol_M92FS'</span><span class="p">:{</span><span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">},</span>
+<span class="s">'P250'</span><span class="p">:{</span><span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">},</span>
+<span class="s">'P99'</span><span class="p">:{</span><span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'Delta_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'flash_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'Harris_Socket'</span><span class="p">},</span>
+<span class="s">'.357 Magnum'</span><span class="p">:{</span><span class="s">'muzzle_socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">},</span>
+<span class="s">'Taser'</span><span class="p">:{</span><span class="s">'laser_socket'</span><span class="p">},</span>
+<span class="s">'USP45'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">},</span>
+<span class="s">'P92X'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">},</span>
+<span class="s">'G36C'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'M14'</span><span class="p">:{</span><span class="s">'Rail_Socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">},</span>
+<span class="s">'M24'</span><span class="p">:{</span><span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'Scope_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">},</span>
+<span class="s">'M4A1'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'MicroT2Raised_Socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'compensator_socket'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'AK102'</span><span class="p">:{</span><span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'Harris_Socket'</span><span class="p">},</span>
+<span class="s">'MK1 Carbine'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">},</span>
+<span class="s">'ARN-18'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'vfg_mlok_grip'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'SA-58'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'sdr_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'MicroT2Raised_Socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">,</span> <span class="s">'atac_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'GA416'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'sdr_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'vfg_mlok_grip'</span><span class="p">,</span> <span class="s">'atac_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'M16A4'</span><span class="p">:{</span><span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'Scope_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'SCAR-H'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'atac_Socket'</span><span class="p">},</span>
+<span class="s">'SLR47'</span><span class="p">:{</span><span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'PBS_socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'SR-16'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'Harris_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'ACOG_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'vfg_mlok_grip'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'Pepperball Gun'</span><span class="p">:{</span><span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'M5B_Socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'B1301'</span><span class="p">:{</span><span class="s">'Choke_Socket'</span><span class="p">,</span> <span class="s">'MicroT2_Socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'shotgunbrake_socket'</span><span class="p">,</span> <span class="s">'SRO_FBI_Socket'</span><span class="p">,</span> <span class="s">'RMR_FBI_Socket'</span><span class="p">,</span> <span class="s">'MicroT2_FBI_Socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">},</span>
+<span class="s">'B1301 "Entryman"'</span><span class="p">:{</span><span class="s">'Choke_Socket'</span><span class="p">,</span> <span class="s">'MicroT2_Socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'shotgunbrake_socket'</span><span class="p">,</span> <span class="s">'SRO_FBI_Socket'</span><span class="p">,</span> <span class="s">'RMR_FBI_Socket'</span><span class="p">,</span> <span class="s">'MicroT2_FBI_Socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">},</span>
+<span class="s">'M4 Super 90'</span><span class="p">:{</span><span class="s">'Choke_Socket'</span><span class="p">,</span> <span class="s">'Barrel_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'M590-A'</span><span class="p">:{</span><span class="s">'tube_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'Saiga 12'</span><span class="p">:{</span><span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'870 CQB'</span><span class="p">:{</span><span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'shotgunbrake_socket'</span><span class="p">,</span> <span class="s">'brake_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'MP5/10MM'</span><span class="p">:{</span><span class="s">'MicroT2_Socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'foregrip_VFG_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">},</span>
+<span class="s">'MP5A3'</span><span class="p">:{</span><span class="s">'MicroT2_Socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'foregrip_VFG_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">},</span>
+<span class="s">'MP9'</span><span class="p">:{</span><span class="s">'MicroT2_Socket'</span><span class="p">,</span> <span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'tag_mp9suppressor'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'SRO_Socket'</span><span class="p">},</span>
+<span class="s">'MPX'</span><span class="p">:{</span><span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'SRORaised_socket'</span><span class="p">,</span> <span class="s">'vfg_mlok_grip'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'P90'</span><span class="p">:{</span><span class="s">'RMR_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'57 USG'</span><span class="p">:{</span><span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'SROPistol_Socket'</span><span class="p">},</span>
+<span class="s">'MK16'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'Barrel_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'MicroT2Raised_Socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'compensator_socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'Harris_Socket'</span><span class="p">},</span>
+<span class="s">'ARWC'</span><span class="p">:{</span><span class="s">'asr_socket'</span><span class="p">,</span> <span class="s">'sdr_Socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'HAMR_Socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'socom338_socket'</span><span class="p">,</span> <span class="s">'sfmb_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'vfg_mlok_grip'</span><span class="p">,</span> <span class="s">'atac_Socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">,</span> <span class="s">'afg_mlok_grip'</span><span class="p">},</span>
+<span class="s">'UMP-45'</span><span class="p">:{</span><span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'pointer_socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">,</span> <span class="s">'MicroT2Raised_Socket'</span><span class="p">,</span> <span class="s">'SRSRaised_socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'combat_grip'</span><span class="p">,</span> <span class="s">'SRORaised_socket'</span><span class="p">,</span> <span class="s">'foregrip_socket'</span><span class="p">,</span> <span class="s">'EXPS3_socket'</span><span class="p">,</span> <span class="s">'Reflex_Socket'</span><span class="p">},</span>
+<span class="s">'PFC9'</span><span class="p">:{</span><span class="s">'SROPistol_Socket'</span><span class="p">,</span> <span class="s">'laser_socket'</span><span class="p">,</span> <span class="s">'comp_socket'</span><span class="p">,</span> <span class="s">'light_socket'</span><span class="p">,</span> <span class="s">'RMRPistol_Socket'</span><span class="p">,</span> <span class="s">'supressor_socket'</span><span class="p">}}</span>
+
+<span class="n">attachment_dic_format</span> <span class="o">=</span> <span class="p">{</span><span class="s">'$type'</span><span class="p">:</span> <span class="s">'UAssetAPI.PropertyTypes.ObjectPropertyData, UAssetAPI'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'3'</span><span class="p">,</span> <span class="s">'DuplicationIndex'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'Value'</span><span class="p">:</span> <span class="o">-</span><span class="mi">95</span><span class="p">}</span>
+
+
+<span class="c1"># For every item in the table.
+</span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">"Exports"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"Table"</span><span class="p">][</span><span class="s">"Data"</span><span class="p">]:</span>
+
+
+    <span class="c1"># For every piece of the item data.
+</span>    <span class="k">for</span> <span class="n">item_data</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+
+        <span class="c1">#
+</span>        <span class="c1"># Set inertia
+</span>        <span class="c1">#
+</span>        <span class="k">if</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"InertiaDragAimRotation(0)"</span><span class="p">:</span>
+            <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.8</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"InertiaDragAimLocation(0)"</span><span class="p">:</span>
+            <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.15</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"InertiaDragStrafeRotation(0)"</span><span class="p">:</span>
+            <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.4</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"InertiaDragStrafeLocation(0)"</span><span class="p">:</span>
+            <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
+            <span class="k">continue</span>
+
+
+        <span class="c1"># Attachments
+</span>        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"AvailableScopeAttachments(0)"</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">comp_attachments</span> <span class="o">=</span> <span class="n">weapon_to_attachments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">attachments_to_add</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">scope</span> <span class="ow">in</span> <span class="n">all_scopes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">all_scopes</span><span class="p">[</span><span class="n">scope</span><span class="p">]</span> <span class="ow">in</span> <span class="n">comp_attachments</span><span class="p">:</span>
+                    <span class="n">attachments_to_add</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments_to_add</span><span class="p">:</span>
+                <span class="n">copied</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">attachment_dic_format</span><span class="p">)</span>
+                <span class="n">copied</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">attachment</span>
+
+                <span class="k">if</span> <span class="n">copied</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+                    <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">copied</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"AvailableMuzzleAttachments(0)"</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">comp_attachments</span> <span class="o">=</span> <span class="n">weapon_to_attachments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">attachments_to_add</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">muzzle</span> <span class="ow">in</span> <span class="n">all_muzzles</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">all_muzzles</span><span class="p">[</span><span class="n">muzzle</span><span class="p">]</span> <span class="ow">in</span> <span class="n">comp_attachments</span><span class="p">:</span>
+                    <span class="n">attachments_to_add</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">muzzle</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments_to_add</span><span class="p">:</span>
+                <span class="n">copied</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">attachment_dic_format</span><span class="p">)</span>
+                <span class="n">copied</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">attachment</span>
+                <span class="k">if</span> <span class="n">copied</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+                    <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">copied</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"AvailableUnderbarrelAttachments(0)"</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">"Value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"CultureInvariantString"</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">comp_attachments</span> <span class="o">=</span> <span class="n">weapon_to_attachments</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">attachments_to_add</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">under</span> <span class="ow">in</span> <span class="n">all_under</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">all_under</span><span class="p">[</span><span class="n">under</span><span class="p">]</span> <span class="ow">in</span> <span class="n">comp_attachments</span><span class="p">:</span>
+                    <span class="n">attachments_to_add</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">under</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments_to_add</span><span class="p">:</span>
+                <span class="n">copied</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">attachment_dic_format</span><span class="p">)</span>
+                <span class="n">copied</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">attachment</span>
+                <span class="k">if</span> <span class="n">copied</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">]:</span>
+                    <span class="n">item_data</span><span class="p">[</span><span class="s">"Value"</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">copied</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+<span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s">"output/everything_unlocked_itemdatatable.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">))</span>
+
+</pre></table></code></div></div></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/uasset-modding/'>UAsset Modding</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/uasset/" class="post-tag no-text-decoration" >uasset</a> <a href="/tags/python/" class="post-tag no-text-decoration" >python</a> <a href="/tags/automation/" class="post-tag no-text-decoration" >automation</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Recently Updated</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/UE5LightingHacks/">Practical Hacks to Wrangle Unreal Engine's Static Lighting</a><li><a href="/posts/mapping_gettingstartedue5/">Getting Started with Ready or Not Mapping in UE5</a><li><a href="/posts/changelog-LosSuenosStories/">Change Log - Los Sueños Stories</a><li><a href="/posts/ue4ss_and_mappings/">UE4SS and Mappings [UE5.3+]</a><li><a href="/posts/mapping_ModLevelData/">Mod Level Data</a></ul></div><div id="access-tags"><div class="panel-heading">Common Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/maps/">maps</a> <a class="post-tag" href="/tags/essential/">essential</a> <a class="post-tag" href="/tags/audio/">audio</a> <a class="post-tag" href="/tags/batch/">batch</a> <a class="post-tag" href="/tags/fmodel/">fmodel</a> <a class="post-tag" href="/tags/introduction/">introduction</a> <a class="post-tag" href="/tags/mapping/">mapping</a> <a class="post-tag" href="/tags/uasset/">uasset</a> <a class="post-tag" href="/tags/uassetgui/">uassetgui</a> <a class="post-tag" href="/tags/ue4ss/">ue4ss</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">Contents</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/adding_weapons/"><div class="card-body"> <em class="small" data-ts="1658188800" data-df="ll" > Jul 19, 2022 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Adding Weapons</h3><div class="text-muted small"><p> UAsset Editing: Adding New Weapons (WIP) Tutorial Provided by 0w0-Yui Requirements UAssetGUI/Asset Editor (Reccomend use both to get higher efficiency) UModel/FModel (Recommend...</p></div></div></a></div><div class="card"> <a href="/posts/uassetmodding/"><div class="card-body"> <em class="small" data-ts="1724025600" data-df="ll" > Aug 19, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Getting Started With UAssetGUI</h3><div class="text-muted small"><p> Getting Started With UAssetGUI Introduction This guide will give you a general overview on how to use UAssetGUI, so that you can edit games files (such as creating cosmetic additions, weapon/atta...</p></div></div></a></div><div class="card"> <a href="/posts/ue4ss_and_mappings/"><div class="card-body"> <em class="small" data-ts="1721692800" data-df="ll" > Jul 23, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>UE4SS and Mappings [UE5.3+]</h3><div class="text-muted small"><p> Mappings Download With the Unreal Engine upgrade to 5.3, you will now need a Mappings.usmap for UAssetGUI and Fmodel to fully function. You can download a shared version of the Mappings.usmap for R...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/tools/" class="btn btn-outline-primary" prompt="Older"><p>Tools</p></a> <a href="/posts/mapmodding/" class="btn btn-outline-primary" prompt="Newer"><p>Map Modding (OUTDATED)</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2026 <a href="https://github.com/QuantumNuke75/Unofficial-Modding-Guide">UMG</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by GitHub Pages.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Common Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/maps/">maps</a> <a class="post-tag" href="/tags/essential/">essential</a> <a class="post-tag" href="/tags/audio/">audio</a> <a class="post-tag" href="/tags/batch/">batch</a> <a class="post-tag" href="/tags/fmodel/">fmodel</a> <a class="post-tag" href="/tags/introduction/">introduction</a> <a class="post-tag" href="/tags/mapping/">mapping</a> <a class="post-tag" href="/tags/uasset/">uasset</a> <a class="post-tag" href="/tags/uassetgui/">uassetgui</a> <a class="post-tag" href="/tags/ue4ss/">ue4ss</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No results found.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>
