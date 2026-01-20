@@ -37,7 +37,9 @@ Static Lighting has been a staple of the industry for nearly 30 years now. While
 The following is a collection of different "hacks" I've utilized to wrangle weird lighting scenarios that occur with Static light baking. Most of these solutions are a little nuanced, but I will try and explain them as best as possible.
 
 > While Ready Or Not is stuck on version UE 5.3.2, it sadly means we are stuck with CPU Lightmass and unable to use the aforementioned GPU Lightmass which is *significantly* faster. 
+> 
 > Why? The 5.3 version is just broken on Rect Lights, Stationary Lights, Emissive light sources, Landscapes and more importantly - Cooked Assets. It is also very unstable.
+> 
 > **However! A lot of the techniques discussed here are completely Universal and *will* apply to GPU Lightmass baking in newer versions, which are working for the most part.**
 {: .prompt-danger }
 
@@ -78,6 +80,9 @@ I think a lot of newer people coming into UE will suffer from these issues at so
 	* Sometimes things slip through.
 
 ### Light Blockers
+
+> ****FOREWORD:** Light Blockers mostly deals with solving Dynamic Shadows bleeding, they do have some limited success with baked lighting. However, if you are getting baked lighting bleeds, the root cause is likely something else and I would look again at the list above or double check your lightmaps.
+{: .prompt-warning }
 
 A lot of times you are forced to use planar meshes which don't have a backside to block incoming light, or sections where meshes connect let light slip through, especially with strong Directional lights. The tried and true method for patching these areas is to add basic cubes as invisible Light Blockers!
 
@@ -193,6 +198,8 @@ Essentially, the Volumetric Lightmap is a grid of cells/probes (visualized as sp
 
 The VLM is mostly used for lighting dynamic game objects: Your player, interactables, doors, AI/NPCs and Volumetric Fog. In brightly lit scenes it is very common to see game objects completely lit incorrectly due to how the VLM probes interpolate between each other. 
 
+You can turn of the Volumetric Lightmap visualization by clicking on `Show > Visualize > Volumetric Lightmap` within the viewport. 
+
 #### Further Reading
 
 * [Volumetric Lightmaps](https://dev.epicgames.com/documentation/en-us/unreal-engine/volumetric-lightmaps-in-unreal-engine){:target="_blank"}
@@ -294,7 +301,7 @@ The go to solution would seem to make all the lights Stationary and manually pic
 
 We need to be smart about it. 
 
-### Being Smart about Dynamic Lights
+### Being Smart about Dynamic Lights: Light Combos
 
 If you require the full illumination that can really only be gained by a Point or Rect Light, but still require Dynamic shadows - I will introduce you to the Point/Spot Light Combo:
 
@@ -316,6 +323,28 @@ The other solution is to manually control when lights are active based on *Trigg
 
 ![Light Controller](/assets/mapping-lighting/LightController.jpg)
 _Notice how the Radius of the Spot Light clips through the floor above (and even the floor above that), manual control of these lights are needed_
+
+### And this.....is to go even Further Beyond! 
+
+*Ready Or Not* uses an amazingly simple technique to control what can cast dynamic shadows through the use of `Lighting Channels`. It's so brilliant in its simplicity, I am shocked that it isn't more widely known.
+
+![Lighting Channel Default State](/assets/mapping-lighting/LightingChannelDefaultState.png)  
+_Default State of the Lighting Channels (0) on all Lights_
+
+At a very low level and basic primer for how dynamic shadows work in Unreal, when a light needs to cast a dynamic shadow, any object that it casts onto will need to have it's primitives/tris rendered again from the perspective of the light. The dynamic shadow system cannot clearly differentiate what should be rendered, so essentially anything that is in the casting radius could have its primitives calculated again, per shadow casting light. 
+ 
+Assigning a light's `Light Channel` allows for that light to only cast on anything else with matching channels - and Unreal gives us 2 more additional channels to work with. 
+
+Essentially, changing the `Lighting Channel` allows for complete control on what actually needs to cast dynamic shadows. 
+
+Not everything in the scene moves or is close enough to the source to warrant a dynamic shadow, especially if a baked shadow already exists. Additionally, much like the example above where the light's radius can bleed through rooms/floors, those rooms may not have any sources that generate dynamic shadows, yet due to how Unreal handles dynamic shadows, they are still likely rendering them even if you cannot see it.
+
+*Ready Or Not* does this with EVERY stationary/movable light that casts dynamic shadows (minus the Directional). They use the combo method [described above](#being-smart-about-dynamic-lights-light-combos) but **also** make sure the dynamic lights have their Lighting Channel's set solely to `1` and any surrounding meshes enables channel 1 as well (eg: core walls, floors or props close by). By default, the Player and all AI meshes also cast on channels 0 & 1. 
+
+![Lighting Channel Default State](/assets/mapping-lighting/LightingChannelBreakdown.jpg)  
+_The highlighted Stationary SpotLight casts dynamic shadows on Channel 1. This breakdown shows meshes within its radius as to what actually accepts it's Lighting and Shadows. Comments are left on non-highlighted meshes as to why they do not need to receive the SpotLight's lighting._
+
+It really cannot be overstated how much of a lighting performance boost can be obtained from such a simple tweak. If you have the ability to implement this in your game's player character and AI, I would highly recommend it as you can save a significant amount of additional primitives from being calculated. You could literally be saving hundred's of thousands of unneeded tris from ever being rendered!
 
 ### Dealing with MORE Volumetric Lightmap Limitations 💀
 
@@ -346,7 +375,7 @@ _No more fog bleed and accurate cone coming from the street light._
 
 ### Hidden Features
 
-Another thing to consider is that sometimes other material features can be locked behind the movable/dynamic nature of Stationary Lights - such as subsurface scattering, volumetric translucency and dynamic translucent shadows. This must also be considered for your scenario on what visual features are important to conserve. In this case, a Stationary Light was required to make the tarp seem thin and illuminated from behind utilizing 2-sided foliage techniques, using a Static light would not give us these effects.
+Another thing to consider is that sometimes other material features can be locked behind the movable/dynamic nature of Stationary Lights - such as subsurface scattering, volumetric translucency and dynamic translucent shadows. This must also be considered for your scenario on what visual features are important to conserve. In this case, a Stationary Light was required to make the tarp seem thin and illuminated from behind utilizing 2-sided foliage techniques, sing a Static light would not give us these effects.
 
 {%
   include embed/youtube.html
@@ -384,3 +413,9 @@ I'm constantly learning new things when it comes to lighting and for me it's an 
 If you've read this far, thanks, and I hope something was useful - if it was please let me know! And if I got something wrong also let me know! I'm also really interested to know if you have encountered any lighting problems that require some non-conventional workarounds or hacks; There's just something technical yet artistic to the solutions that always entertain me.  
 
 With the direction Epic/Unreal is deciding to take lighting and with companies using Unreal deciding to use their own Lighting engines, Static Lighting might end up becoming a lost art form. I would like to share as much knowledge as I can before that happens~
+
+## Changelog
+```
+21/11/2025: Original Upload
+19/01/2026: Added new info about utilizing Lighting Channels to optimize Dynamic Shadows
+```
