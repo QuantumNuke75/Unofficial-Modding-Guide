@@ -12,7 +12,7 @@ pin: true
 With the Unreal Engine upgrade to 5.3, you will now need a Mappings.usmap for UAssetGUI and Fmodel to fully function.  
 You can download a shared version of the Mappings.usmap for Ready Or Not below:  
 [Ready Or Mod Discord](https://discord.com/channels/925225229175906324/1143385363130351636)  
-[UMG Mappings.usmap](/downloads/Mappings.usmap) **[12-September-2025 Build:94572 "Los Sueños Stories Patch # 3"]**  
+[UMG Mappings.usmap](/downloads/Mappings.usmap) **[12-March-2026 Build:112610 "Boiling Point v1.4.1"]**  
 
 ## UAssetGUI Import
 >Ensure UAssetGUI is updated for UE5.3 (Versions 1.0.1.0+)  
