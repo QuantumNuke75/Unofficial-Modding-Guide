@@ -74,9 +74,8 @@ Luckily not many changes are required for compatibility with the latest update. 
   * If you have made significant changes to the Exposure values for your map, the Post Processing for NVGs will look muted/washed out (especially on darker maps) as the NVGs no longer override the Exposure values by default.
   * Within the Mod Level Datatable, make sure that `Override Min EV100` and `Override Max EV100` are enabled under *Data >  NVG Post Process Override*.
   
-	 > Kiwi Note: Opening a MLD for the first time will populate the NVG override via a function.  
+	 > Kiwi Note: Opening a MLD for the first time and modifying something will populate the NVG override via a function.  
 	 > EV Min and Max floats will be preserved if not 0.  
-	 > This function will also run if you simply right-click and save the MLD.
 	 {: .prompt-tip }
 	 
 * ***Because of the conversations overhaul for Boiling Point, the game voice-line function nodes used within BP_Reportable_Actor_V3 were removed at some stage.***
