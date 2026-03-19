@@ -272,7 +272,7 @@ To build your map, on the Toolbar, drop down Build and select what is appropriat
     * NOTE: In UE5.3.2 Precomputed Visibility (PCV) is sorta broken - you cannot visualize cells in the Editor and you can never really get rid of the Error Message. 
     * You can disable the Error Message in *Project Settings > Engine Settings > Rendering > Culling* and disable `Warn about no precomputed visibiilty`.
     * You can STILL build PCV and the data will remain, but you will not be able to verify it. You will need to enable `Precompute Visibility` in World Settings to get it to build. 
-    * PCV will usually build after lighting, and selecting this will usually force rebuild the lighting anyway.
+    * PCV will usually built after lighting, and selecting this will usually force rebuild the lighting anyway.
 
 My usual build process currently is: Build Geometery > Pathing > Lighting. Once the builds complete, you should `File > Save All`
 
@@ -404,21 +404,20 @@ First, configure the plugin:
 2. In the `Mods Staging Folder` put the location of your staging folder
 3. In the `Ready or Not Paks Folder` put the location of the installed game's paks folder
 
-Second, Download & Install [Quick Load](https://www.nexusmods.com/readyornot/mods/2313){:target="_blank"} Pak by *RareKiwi*
-1. After installing, open `C:\Users\USERNAME\AppData\Local\ReadyOrNot\Saved\Config\Windows\Engine.ini`{: .filepath}
-2. Add an empty line then add the following:
-```ini
-[/Script/EngineSettings.GameMapsSettings]
-GameDefaultMap=/Game/QuickCook/QuickMap.QuickMap
-```
-3. Save the Engine.ini
-4. OPTIONAL: Delete or rename startup movies in `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Movies\`{: .filepath} for faster start ups.
+Second, Install **Quick Load** 
+ * Within the Framework's root directory, copy `pakchunk99-Mod_QuickLoad.pak` over to your game's pak folder.
+ * Or you can download and install it from Nexus: [Quick Load](https://www.nexusmods.com/readyornot/mods/2313){:target="_blank"}
 
 > Installing **Quick Load** is Optional - but it is required if you want the game to automatically launch your map at the end of the AMP process, otherwise the game will just simply launch to the Main Menu. 
 {: .prompt-info }
 
+**OPTIONAL:** Delete or rename startup movies in `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\Movies\`{: .filepath} for faster start ups.
+
 To use the **Automatic Mod Paker (AMP)**:
 1. Open your map and on the Framework dropdown click on `Create Profile`
+
+![Staging Folder Example](/assets/mapping-gettingstarted/FrameworkCreateProfile.png)
+
 2. This will create a profile under the `Mod Pakaging Profiles` using your map's filename.
     * The `Auto Add Maps to Cook` will automatically add your opened map the `List of maps to include in a packaged build` so you do no need to worry about it.
     * The pak's *name* will be auto-generated based on your map's **.umap name** - you may wish to change the name of the pak here under `Pak File Name`
@@ -427,7 +426,7 @@ To use the **Automatic Mod Paker (AMP)**:
 3. Close the plugin window and make sure your newly selected profile is in the drop-down in the toolbar
     > The profile will automatically be selected to match the map's name if they are the same.
     {: .prompt-tip }
-4. Click on `Start an Automated Mod Paker Queue` button. 
+4. Click the ![Staging Folder Example](/assets/mapping-gettingstarted/ChecklistPlay.png) `Start an Automated Mod Paker Queue` button.
     * This will do all the neccessary steps needed to play your map in the game. 
     * You can toggle what actions are done when you press the AMP button by changing the check-boxes in the Framework dropdown.
         * *Example: If you do not wish to launch the game then you would simple uncheck `Queue Play` in the Framework dropdown.*
@@ -438,7 +437,10 @@ To use the **Automatic Mod Paker (AMP)**:
 * You can do each step manually by pressing the appropriate button instead. You can find out what each button does by hovering over them and reading their tooltip.
 * Clicking the Framework dropdown also allows you to quickly open folder shortcuts to your Cooked Content folder, Staging folder and the Game's Paks folder. 
 * The Frameworks dropdown also has quick access to commonly used tools such as the World Data Helper, World Data Loader and the Material Instance Editor
-* If you have a Mod Level Data table configured for your map, you can also choose the Entry Point/Spawn when you launch the game.
+* If you have a [Mod Level Data](/posts/mapping_ModLevelData){:target="_blank"} table configured for your map, you can also choose the Entry Point/Spawn when you launch the game.
+* Within each map profile, you can also automatically pack custom *Difficulties* - if you manually type the `.../Content/Difficulties`{: .filepath} directory into `Directories to Copy`. 
+    * Further reading: [Custom Difficulties](/posts/mapping_CustomDifficulty/){:target="_blank"}
+* AMP also automatically copies custom Audio files (.ogg, .wav, .mp4, etc..) if you use them in your map. This will automatically search the `.../Content/Mods/`{: .filepath} directory for any folders/files.
 
 
 ## Using Ready or Not Game Assets and Content

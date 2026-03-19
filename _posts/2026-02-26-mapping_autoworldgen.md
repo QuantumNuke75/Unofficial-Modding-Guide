@@ -1,6 +1,6 @@
 ---
 title: Setting up Auto World Data Generation
-date: 2025-11-21 00:00:00 +0000
+date: 2026-03-19 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, essential, world data, boiling point]
 description: A Guide on how to prepare your Map for Auto-World Data Generation and Importing it into the Editor

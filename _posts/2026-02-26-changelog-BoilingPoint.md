@@ -1,6 +1,6 @@
 ---
 title: Upgrading your Map for Boiling Point
-date: 2025-11-21 00:00:00 +0000
+date: 2026-03-19 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, essential, patch, changelog, boiling point]
 description: How to upgrade your Map to be compatible with Boiling Point
@@ -48,7 +48,6 @@ Luckily not many changes are required for compatibility with the latest update. 
   * The Automatic Mod Paker allows you with a single click of a button to cook, copy, pak and launch the game from the editor!
   * This saves a lot of time and will help us iterate faster.
   * This was previously Quick Cook created by *RareKiwi*, but now fully integrated into the framework.
-    * **Everyone give Praise to Kiwi!**
   * [FULL GUIDE HERE: Automatic Mod Packing](/posts/mapping_gettingstartedue5#automatic-mod-packing-amp){:target="_blank"}
 
 * ***World Gen can now be completely generated within the game and imported into your map with a click of a button.*** 
