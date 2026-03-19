@@ -4,7 +4,7 @@ date: 2024-08-23 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, mod level data, brief, briefing, description, objective, entry points ]
 description: Intermediate guide for levels' MLD and objectives.
-author: RareKiwi
+author: RareKiwi, Delta|https://www.nexusmods.com/readyornot/mods/3072/
 pin: false
 ---
 
@@ -28,18 +28,18 @@ A Mod Level Data (**MLD**) is a data asset you can include in your pak to custom
  
 # Basic MLD Setup
 
-## 1.) Creation
+## Part 1 - Creation
 
 To create a MLD you can use two methods:
 
-### A) Manual
+### Manual Method
 
 1. In the content browser navigate to your level's content directory and optionally add a ModLevelData folder
 2. Within your folder, press the `+ Add` button in the top left, and create a `Miscellaneous > Data Asset`
 3. In the popup window, search for *mod level data* and chose the `Mod Level Data` class, then press **Select** to create it.
 4. Naming isn't essential, however, usually you want to use: `MLD_YourLevelFileName`
 
-### B) Scripted Asset Action
+### Scripted Asset Action Method
 
 This is the same process as above, but is automated.
 
@@ -61,28 +61,53 @@ This is the same process as above, but is automated.
  > When run with multiple levels selected, the folder path is based on the first level's popup choice in step 2.)  
  {: .prompt-info }
  
-## 2.) Configuration
+## Part 2 - Configuration
 
 1. Open your new Mod Level Data asset
-2. Set the very, very top `Level Name` variable to the file name of your level.  
+2. Set the very, very top `Level Name` variable to the **file name** of your level that is present in the Editor.  
 
 	 > There are some hard-coded forbidden names you must avoid such as `house` and any vanilla Ready Or Not map names.  
 	 {: .prompt-danger }  
 	 
 	 ![Example Map MLD Name](/assets/modleveldata/mld_examplemap.png){: w="438" h="370" }
-	 _Example Map MLD **"Level Name"** set to the level's file name_  
- 
-3. Expand `Data` if not already and set values for `Friendly Level Name`, `Level Nickname` and `Level Designation`.  
-	 These are the user-facing display names, so can differ from your file name. 
-4. If missing entries; find the `Objectives` array and add `+` two entries.
+	 _Example Map MLD **"Level Name"** set to the level's file name used in the Editor. NOT the name you want to call it in game._  
+
+3. If missing entries; find the `Objectives` array and add `+` two entries.
 	 - Set one to `BringOrderToChaos`
 	 - Set the second to `RescueAllOfTheCivilians`  
 	 ![Example Map MLD Name](/assets/modleveldata/mld_examplemap_objectives.png){: w="435" h="85" }  
 	 
 	 > By default, after creating a custom MLD for your level, these are missing, so your mission will auto complete if you do not add them now.  
 	 {: .prompt-warning }
+ 
+4. Expand `Data` if not already and set values for 
+	* `Friendly Level Name`: What you actually call your map 
+		* *Thank You, Come Again*
+	* `Level Nickname`: Usually the name of the location the map takes place in 
+		* *4U Gas Station*
+	* `Level Designation`: Usually the Address of the mission
+		* *4U Gas Station, 5th St, South Los Suenos*
+	* `Time of Day:`: When the mission takes place
+		* *2300*
+	* `Description`: Short description when you select the mission from the mission select 
+		* *Seizing a moment of opportunity, a posse of delinquent young adults execute their plan in order to support a crippling addition.*
+
+5. Set the `Level Picture`: This is the main image of the map when selecting a level.
+	* Guide here: [Level Select Image](#level-select-image)
+
+6. Set the `Mission Select Map`: This is the fullscreen background image shown in the Mission Select screen that usually has some minor animation/effect. 
+	* Guide here: [Mision Select Level](#mission-select-level)
+
+7. If you want multiple spawn points set the `Entry Points`
+	* Guide here: [Entry Points](#entry-points)
+
+8. If you want custom objectives/reportables, add additional entries to `Objectives`
+	* Guide here: [Custom Objectives & Reportables](#custom-objectives--reportables)
+
+9. The MLD also contains information for stuff like Suspect & Civilian Bios, Photos for Evidence, Floor plans (Floor maps) and more. All of theme are pretty self explanatory so just go through and add information as required. 
+
 	 
-## 3.) Cooking
+## Part 3 - Cooking
 
 By default when you specify your level to be included in the build (in Packaging Settings) there is no reference chain to your Mod Level Data assets.  
 
@@ -99,11 +124,9 @@ The Los Suenos Stories Framework update includes a simple blueprint actor that y
  
 That's it! There's now a reference chain to your MLD so they will be automatically included in your cook when your map is set to cook.
 
-# Mission Select Image and Preview Level
+## Level Select Image
 
-## Screen Shots
-
-### Capture
+### Screenshot Capture
 
 We'll need an image for the MLD and for our mission selector level later. You can either take this in game or in editor.  
 For in game; 
@@ -125,59 +148,66 @@ For in editor;
  5. Again in the top left of your 3D viewport, click the hamburger icon  ![Hamburger](/assets/modleveldata/viewport_hamburger.png){: w="23" h="24" }
 	 - Click `High Resolution Screenshot...`
 	 - Set `Screen Shot Multiplier` so it will create a 4k+ image based on your current resolution.
-		 - 1080p would be 2.0+
-		 - 1440P would be 1.5+
-		 - 4k could use 1.2+ for better anti-aliasing.
  6. Pilot your camera into the desired location and click `Capture`
  7. Use the pop-up in the bottom right to open your project's screenshot folder or find it at `.\Saved\Screenshots\WindowsEditor\`{: .filepath}
  
 ### Process and Import
  
- 1. In Photoshop or a free alternative, scale your image to 2048x2048 pixels. Save as a .png or .tga 24bit.
-	 - File naming is optional but `T_UI_MissionSelect_YourLevelName` is a recommended format
- 2. In UE5, in your level folder create a `/UI` folder
- 3. Import your screenshot to this folder, via the content browser. ![Import](/assets/modleveldata/contentbrowser_import.png){: w="63" h="20" }
+ 1. In Photoshop or a free alternative, scale your image to 2048x1048 pixels (or higher). Save as a .png or .tga 24bit.
+	 - File naming is optional but `T_LevelSelect_YourLevelName_UI` is a recommended format
+ 2. Import your screenshot to your *Mods > YourUsername* directory, via the content browser. ![Import](/assets/modleveldata/contentbrowser_import.png){: w="63" h="20" }
+	 - How you organize your assets it up to you, just make sure it's within your mods folder.
  4. Open your newly imported texture and set:
 	 - `Texture Group` to `UI`
 	 - `Mip Gen Settings` to `NoMipmaps`
  5. Save your texture.  
  
-![Texture Settings](/assets/modleveldata/texture_settings.png){: w="443" h="246" }
+![Texture Settings](/assets/modleveldata/TextureSettings.jpg)
 _Example Map screenshot texture settings_
 
-## Mission Selector Level
+## Mission Select Level
 
-While you can create one from scratch, copying the ExampleMap's and using it as a template is recommended.
+The Mission Select Level is the fullscreen image you see when selecting a mission, official maps usually have some sort of particle effect going on to make it look a little bit dynamic. But as the name suggests, it is not an image but a Level/.umap.
 
- 1. Open a second content browser if one isn't open.
-	- Navigate the first to your level asset directory.
-	- Navigate the second to `/Content/Mods/Template/Levels/`{: .filepath}
- 2. Copy the `RoN_ExampleMap_MissionSelect` level to your folder by dragging it and choosing `Copy Here` from the prompt.
- 3. Rename the copied level to `YOURLEVELNAME_MissionSelect`
-	* Naming is option, but this format is recommended.
-    * Ensure the renamed level is saved, then, right-click your folder and run `Fix Up Redirects`
- 4. Open the level.
- 
-### Screenshot Texture Setup
-
-Mission Select levels are meant to be extremely light-weight so they load quickly. 
+Mission Select Levels are meant to be extremely light-weight so they load quickly. 
  - Most levels are going to consist of an image plane mesh, assigned an unlit material with a screenshot texture.
  - A camera is pointed at it with the actor tag `LosSuenosCamera` added to indicate to the game which camera to view.  
- 
-![Mission Select Level](/assets/modleveldata/mld_missionselectLevel.png){: w="1691" h="518" }
- 
-Since you have a copy of the example mission select map, you just need to swap the material to show your new screenshot texture.
 
- 1. Open your second content browser if one isn't open.
-	 - Navigate one to your levels `/UI` folder from before  
-	 - Navigate the other to `/Content/Mods/Template/Levels/UI/` 
+> Since these are levels you can do some pretty interesting things with them. However do not use a lot of static meshes or effects. All official maps are pretty much just a screenshot with a particle effect so they load quickly. **DO NOT** just use your main level.
+{: .prompt-danger }
+
+![Mission Select Level](/assets/modleveldata/MissionSelectLevel.jpg)
+
+### Step 1 - Create the Level
+
+1. Open a second content browser if one isn't open.
+	- Navigate the first to your level asset directory.
+	- Navigate the second to `/Content/Mods/YourUsername/Template/Levels/`{: .filepath}
+2. Copy the `RoN_ExampleMap_MissionSelect` level to your folder by dragging it and choosing `Copy Here` from the prompt.
+3. Rename the copied level to `YOURLEVELNAME_MissionSelect`
+	* Naming is optional, but this format is recommended.
+    * Ensure the renamed level is saved, then, right-click your folder and run `Fix Up Redirects`
+4. Open the level.
+ 
+### Step 2 - Editing the Level to show your Screenshot
+
+ 1. Create a new Screenshot, using the steps from earlier to be used as the main texture for the material we are going to use. 
+	* This time it is recommended naming this image along the lines of `T_MissionSelect_YourLevelName_UI`
+
+	> You can use the same image as the Level Select, but all official maps have a different perspective than the Level Select image - usually something that focuses on a point of interest or an overview of the map.
+	{: .prompt-tip }
+ 
+ 2. Open your second content browser if one isn't open.
+	 - Navigate to where you saved your previous images
+	 - Navigate the other to `/Content/Mods/YourUsername/Template/Levels/UI/` 
  2. Select both `M_MissionSelect_Template` and `MI_MissionSelect_ExampleMap`
- 3. With both selected, drag both to your `/UI`{: .filepath} folder
+ 3. With both selected, drag both to you directory folder where you keep your images
  4. IMPORTANT: Select `Advanced Copy Here` then `OK` in the pop-up window.
 	> Do not use the regular copy! Otherwise the Material Instance will have it's parent and reference still set to the original material in the template folder,  
 	> which you DO NOT want in order to stop conflicts with other mappers.
 	{: .prompt-warning }
- 5. Optionally rename both the material and instance with `_YourLevelName` appended (instead of "ExampleMap" or "Template"), then on your `/UI`{: .filepath} folder run `Fix Up Redirects`
+ 5. Optionally rename both the material and instance with `_YourLevelName` appended (instead of "ExampleMap" or "Template")
+ 	* After renaming, right click your *Mods > YourUsername* folder folder run `Fix Up Redirects`
  6. Open your copy of `M_MissionSelect_Template`
  7. Find the `Texture Sample` node to the left and select it.
 	 - Assign your new screenshot texture via the details panel on the left.
@@ -196,18 +226,10 @@ Since you have a copy of the example mission select map, you just need to swap t
 	 - You can customize the view with basic particles or animated materials for water etc.
 	 - You may need to add lights such as a moveable spotlight if you add actors to the scene which you want to see.
  12. Save your Level
- 
-## MLD Level Picture, Mission Select Map and extra MLD
 
- 1. Open your MLD
- 2. Assign your new screen shot texture to `Level Picture`
-	 - This is used in the top-left lobby HUD when a level has been chosen, as well as on the projector screen in the HQ lobby.
- 3. Assign `Mission Select Map` to your `_MissionSelect` level.
- 
-![Example Map MLD texture assignments](/assets/modleveldata/mld_examplemap_images.png){: w="316" h="313" }
-_Example Map MLD assigned screenshot texture and _missionSelect level_
- 
-Now that you have another level, by default, it will be selectable as a playable level in game, which you don't want. To fix this;
+ ### Step 3 - Hide the Mission Select Level
+
+ Now that you have another level, by default, it will be selectable as a playable level in game, which you don't want. To fix this;
  
  1. Create a new `Mod Level Data` data asset for your `_MissionSelect` level using the same methods in [#basic-mld-setup](#basic-mld-setup).
 	 - This MLD does not require any objectives to be set etc.
@@ -219,11 +241,41 @@ Now that you have another level, by default, it will be selectable as a playable
  ![Example Map MLDs](/assets/modleveldata/mld_examplemap_mlds.png){: w="381" h="204" }
 _Example Map MLD and the mission select level's MLD ("MLD_ExampleMap_MS")_
  
-# Entry points
+# Entry Points
 
-TBD
+If you want your users to choose from different locations to start the missions, you need to set up Entry & Spawn Points. 
 
-# Objectives
+There are actually 2 fields required for this. Entry Points seem to be the main way to change spawn location. 
+
+1. In your level, select your *Player Start* actor and give `Player Start Tag` a unique tag
+	* These can be anything, but something simple to match the location used in the MLD is recommended
+	* *Example: spawn_1, spawn_2, spawn_3, etc*
+2. Repeat for all other Player Spawn locations. **Make sure the tags for each location are unique.**
+3. Within the MLD, under *Data* add an array element for `Entry Points`
+	* Each element has information for a spawn
+2. Within the entry, assign the `Tag` to match the corresponding `Player Start Tag` from above
+4. You can also set other important details:
+	* `Name`: The name you wish to give the spawn location
+	* `Description`: Small sentence to describe the spawn. 
+	* `Image`: UI Texture to display the location.
+	* `Loading Scene`: Which loading scene to play (Bearcat, Boat or Helicopter - if left blank Bearcat will be default)
+		* The following levels are valid: `LoadingScene_Bearcat`, `LoadingScene_Boat`, `LoadingScene_helicopter`
+5. Repeat for the remaining Entry Points you have.
+
+If you find your player falls through the ground when you load in the game make sure that your player spawn is high enough off the ground and the ground has collision. 
+
+If both of these are true you may need to also set the Spawn entries.
+
+1. Within the MLD, under *Data* there are 4 entries for `Spawn 1`, `Spawn 2`, `Spawn 3` & `Spawn 4`. 
+2. Within a Spawn entry, assign the `Spawn Label` to match the corresponding `Player Start Tag` from above
+4. You can also set other important details:
+	* `Spawn Point Name`: The name you wish to give the spawn location
+	* `Spawn Image`: UI Texture to display the location.
+	* `Spawn Description`: Small sentence to describe the spawn. 
+5. Repeat for the remaining Spawns you have.
+
+
+# Custom Objectives & Reportables
 
 TBD
 

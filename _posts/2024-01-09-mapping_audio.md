@@ -30,10 +30,7 @@ author: Delta|https://www.nexusmods.com/readyornot/mods/3072/, Zack|https://void
 }
 </style>
 
-
-# Setting up Audio and Working with QSM for Maps
-
-## Introduction
+# Introduction
 
 Ready or Not uses a combination of FMOD and an in-house built audio solver called the [Quantum Sound Manager (QSM)](https://www.youtube.com/watch?v=ATLRmTDEfG8){:target="_blank"}. QSM is a method to help with reverb and audio occlusion from around the map and takes into consideration room sizes, door states and even whether or not glass is broken and adjust volumes accordingly.
 
@@ -51,24 +48,24 @@ The Example Map provided in the Template has QSM set up for a generic house, so 
 
 The second part of this guide is [Setting up Music Events for Maps](/posts/mapping_music)
 
-## Setting up FMOD
+# Importing FMOD Content
 
  > You do not actually need to complete the steps below to implement QSM. However it is likely you will want to mess with some events if you want to tweak Ambient events. The steps below will tell you how to get it working. 
  {: .prompt-info }
 
 Currently the Template has placeholders for the FMOD events - you cannot actually listen to them. If you wish to hear them you will need to:
 
-1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD` and copy the `Desktop` folder
-2. Within your project folder, paste the `Desktop` folder to `...\RonTemplate\Content\FMOD`
+1. Navigate to `C:\SteamLibrary\steamapps\common\Ready Or Not\ReadyOrNot\Content\FMOD`{: .filepath}   and copy the `Desktop` folder
+2. Within your project folder, paste the `Desktop` folder to `...\RonTemplate\Content\FMOD`{: .filepath}  
 
 This should be all you need to do to start hearing FMOD events if you press Play.
 
-## Actor Overview
+# Actor Overview
 
  > Any property not listed in the tables below are meant to be private and we shouldn't modify them
  {: .prompt-info }
 
-### Ready Or Not Audio Volume
+## Ready Or Not Audio Volume
 
 * A Volume that controls FMOD Events when players are in them, it essentially acts as a trigger volume for child/nested events.
 * Maps require at least one for Reverb and Ambient Sounds that cover the entire playable space
@@ -78,7 +75,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
 |:---|:---|
 | Reverb Events | *Unknown use* |
 
-### Room Volume
+## Room Volume
 
  * These are volumes that are placed within the interior sections of your map. They aim to represent the different shapes and sizes of the rooms they occupy.
  * QSM will use these volumes to determine how the audio will bounce around the room according to the shape of the volumes.
@@ -92,7 +89,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the Volume in Brush Edit mode (Shift+4).
 {: .prompt-warning }
 
-### [NEW] Reflection Probe ![Probe](/assets/mapping-audio/AudioFader_Normal.png){: w="32" h="32" }
+## Reflection Probe ![Probe](/assets/mapping-audio/AudioFader_Normal.png){: w="32" h="32" }
 
  * A probe placed in the middle of the Room Volume to communicate the center and size of the room to QSM
  * There is a Tool available called **EUW_Tool_RoomVolumeHelper** which will automate the process for you
@@ -120,7 +117,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
  > DO NOT Edit the scale of these. If you require to edit the shape, modify the Volume in Brush Edit mode (Shift+4).
  {: .prompt-warning }
 
-### Sound_ParameterTransition_V2_BP_C Blueprint
+## Sound_ParameterTransition_V2_BP_C Blueprint
 
  * This Blueprint is used to help transition between different FMOD and Reverb states. Specifically used when passing through doors and thresholds into other rooms.
  * They can also be used to activate parameters for the music in the game to make it more dynamic.
@@ -149,7 +146,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
 >DO NOT Edit the scale of these. If you require to edit the shape, modify the `Box` component's `Box Extent`. Editing the object scales will mess with the FMOD transitions.
 {: .prompt-warning }
 
-### [NEW] QSM_Weapon_Reflection_Probe
+## QSM_Weapon_Reflection_Probe
 
  * Located `Content > FMOD > Events > Levels > Reverbs`
  * The best way to describe it is that it's akin to a sound version of a Map's Facade. Its a fake Reverb/Echo probe placed outside the map to mimic where sound would Reverb off of back to the player. 
@@ -159,7 +156,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
  > DO NOT Exceed more than 6 of these probes per map. You may usually need less. 
  {: .prompt-warning }
 
-### [NEW] Sound_StarterAmbience_V2_BP_C Blueprint
+## Sound_StarterAmbience_V2_BP_C Blueprint
 
  * Works very similar to the Transition Blueprint above, however is meant to set the starting values for Ambiance through *"*AmbSwitch"* when a player loads into a map. It covers the player spawns.
 
@@ -172,7 +169,7 @@ This should be all you need to do to start hearing FMOD events if you press Play
 | Starting Reverb | Select the drop down that best represents the Reverb of the starting area |
 | Starting Reverb Material | Select the drop down that best represents the make of the materials of the starting area |
 
-### Character Reaction Volume ![Portal](/assets/mapping-audio/T_ReactionVolumeIcon.png){: w="32" h="32" }
+## Character Reaction Volume ![Portal](/assets/mapping-audio/T_ReactionVolumeIcon.png){: w="32" h="32" }
 
 Usually used with ai SWAT to trigger `[CALL]Env` voice lines when you and SWAT are standing within the volume.
  * There is a timer looping trying to run the voice lines, provided that combat isn't active and another line hasn't played too recently.
@@ -187,12 +184,12 @@ Changes the characters footsteps when they are overlapping it.
  * Can be used for puddles, glass, tall grass or bushes etc.
  * Many usable FMOD events are located in `/Content/FMOD/Events/Surfaces/Foliage/`
 
-## Setting up Audio
+# Setting up Audio
 
  > Before beginning, it is **highly** recommended that each one of these steps are done within a folder (or sub-level) within the World Outliner to keep things ordered. In this particular case you should be renaming assets (F2) as you create them to keep things managable.
  {: .prompt-tip }
 
-### Part 1 - [NEW] Important Notes about FMOD Events
+## Part 1 - Important Notes about FMOD Events
 
 All FMOD events must follow these 2 guidelines so they work flawlessly in the map:
  1. Always Disable `Auto Activate` for all Events
@@ -200,7 +197,7 @@ All FMOD events must follow these 2 guidelines so they work flawlessly in the ma
 
 The reasoning is that there are "way too many instances where FMOD for whatever reason stops the audio for certain events since they load before the game initializes" - Zack c. 2024
 
-### Part 2 - Ready or Not Audio Volume and Level Ambience & Reverb
+## Part 2 - Ready or Not Audio Volume and Level Ambience & Reverb
 
  1. Drag a `Ready or Not Audio Volume` from the actor's tab into the scene.
  2. Edit the brush to cover the playable area. 
@@ -208,7 +205,7 @@ The reasoning is that there are "way too many instances where FMOD for whatever 
  3. Go to `Content > FMOD > Levels > Reverbs` in the Content Browser and select the `ReverbMaster` FMOD Event and drag it into your scene.
  4. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it an attached actor of it.
  5. Decide which Level's ambiance is appropriate for your map and navigate to `Content > FMOD > Levels` and enter the appropriate level folder.
- 6. Find the correct Ambient FMOD Event for your specific level listed here: [Reference - FMOD Parameters](){:target="_blank"} and drag it into your scene.
+ 6. Find the correct Ambient FMOD Event for your specific level listed here: [Reference - FMOD Parameters](posts/reference_fmod_parameters){:target="_blank"} and drag it into your scene.
  7. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it an attached actor of it, just like before.  
  
 ![Main RoN Audio Volume](/assets/mapping-audio/MasterVolumeAttachedEvents.png){: w="587" h="58" }
@@ -238,7 +235,7 @@ Room Volumes (RV) have a couple of requirements and quirks that you **MUST** fol
      * Having the RV not extend outside the walls a little bit might cause issues such as footsteps not being heard on the floor or gunshots not being registered inside the room if they hit the ceiling or walls.
      * I have used a spacing of 5uu as a good buffer for my extra extending.
 
-### Part 4 - [NEW] Setting Up Reflection Probes
+### Part 4 - Setting Up Reflection Probes
 
  1. Go to *Content > Mods > Template > Tools* and right-click and Run the **EUW_Tool_Room_VolumeHelper**
  2. Click on `Make/Assign Probes`, it will go through and make and assign probes and place them in their appropriate location to the Volumes they get assigned to.
@@ -297,7 +294,7 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
  2. For the same element, type the corresponding `INParameter` & `OUTParameter` that is defined within the same FMOD Event
      * These do not have a consistent naming convention, however the OUT parameter is usually named `OUT` or `EXT`
          * Eg: `Gas_Amb_V2` is `GasAmbIN` & `GasAmbOUT`, while `Valley_Amb_V2` uses `ValleyAmbINT` & `ValleyAmbEXT`
-     * You will need to locate these identifiers defined here [Reference - FMOD Parameters](){:target="_blank"}
+     * You will need to locate these identifiers defined here [Reference - FMOD Parameters](posts/reference_fmod_parameters){:target="_blank"}
  3. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
  4. For `FMOD Global Parameter` type in exactly: `AmbSwitch`
  5. Enable `Use Door Check Feature` if your Transition BP contains doors
@@ -309,7 +306,7 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
  1. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
  2. That's it! You don't need to modify any of the other properties like above. It is actually recommended not to modify anything else as the BP has checks that will mess up audio for smooth Interior transitions.
 
-### Part 7 - [NEW] Breakable Glass
+### Part 7 - Breakable Glass
 
 Breakable glass is extremely easy to implement but they need to use Portals to allow sound to allow sound pass through when they're broken.
 
@@ -320,7 +317,7 @@ Breakable glass is extremely easy to implement but they need to use Portals to a
  3. Select the Portal Volume you wish to match with the glass and under `Breakable Glass Soft Point` use the eye-dropper to select the Breakable Glass Blueprint in the scene.
  4. If your Breakable Glass crosses the threshold of Indoor-Outdoor (like most windows do), Enable `Is Outside`
 
-### Part 8 - [NEW] Placing down QSM_Weapon_Reflection_Probes
+### Part 8 - Placing down QSM_Weapon_Reflection_Probes
 
 As mentioned in the Actor Overview, these are akin to a sound version of a Map's Facade. It's a fake Reverb/Echo probe placed outside the map to mimic where sound (specifically gunshots) would echo/reverb off of back towards the player. 
 
@@ -333,7 +330,7 @@ To set them up:
 
 Some additional notes, Zack mentions you can place up to around 6 probes in your map, but you shouldn't exceed 6. Additionally only 2 probes are active at a time based on proximity to the player. They can be nested in a RoNAudioVolume, but do not need to be physically inside it.
 
-### Part 9 - [NEW] Using the Sound_StarterAmbience_V2_BP_C Blueprint
+### Part 9 - Using the Sound_StarterAmbience_V2_BP_C Blueprint
 
 These work very similar to the Transition Blueprints, however is meant to set the starting values for Ambiance through *"*AmbSwitch"* when a player loads into a map. 
 
