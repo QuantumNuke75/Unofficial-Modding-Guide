@@ -277,12 +277,11 @@ _The previous issues above are fixed using a combination of Blocking and Modifie
     * Right-Click and Run `EUW_Tool_WorldGenLoader` located at: *Content > Mods > Tools > EUW_Tool_WorldGenLoader*
     * Alternatively, on the toolbar open the Framework dropdown and click `Open World Gen Loader`
 
-5. The **World Gen Loader** tool should automatically find the *WorldGen.sav* file if it exists in the directory while your map is open.
+5. The **World Gen Loader** tool should automatically find the *WorldGen.sav* file if it exists in the directory while your map is open. ![SwapSearchDirectory](/assets/mapping-autoworldgen/SwapSearchDirectory.png){: .right }
     * If it does exists and doesn't show, press the most **top-left** button (*Swap Search Directoy*) once or twice to "Change Directory" to refresh the tool.
 
-    ![SwapSearchDirectory](/assets/mapping-autoworldgen/SwapSearchDirectory.png)
-
-6. Click  ![LoadWorldDataButton](/assets/mapping-autoworldgen/LoadWorldDataButton.png) and it should make the other buttons available.
+6. ![LoadWorldDataButton](/assets/mapping-autoworldgen/LoadWorldDataButton.png){: .right } Click `Load World Data...` and it should make the other buttons available. 
+  
 
       > Before continuing, It is highly recommended that you save your map, just in case the Editor freezes and needs restarting. 
       {: .prompt-tip }
