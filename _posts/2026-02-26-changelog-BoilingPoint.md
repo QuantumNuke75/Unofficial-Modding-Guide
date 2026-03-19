@@ -1,10 +1,11 @@
 ---
-title: Upgrading your Map for Boiling Point
+title: Change Log - Boiling Points
 date: 2026-03-19 00:00:00 +0000
 categories: [Map Modding]
 tags: [maps, essential, patch, changelog, boiling point]
 description: How to upgrade your Map to be compatible with Boiling Point
 author: Delta|https://www.nexusmods.com/readyornot/mods/3072/
+pin: true
 ---
 
 <style>

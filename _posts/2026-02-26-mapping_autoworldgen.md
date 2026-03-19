@@ -95,19 +95,19 @@ These are scattered throughout a level/room - we **won't** be editing these. The
 
 TAAs are generated in a 20x20 grid from each **Door** actor, approximately spaced 250uu from each other, or closer if the NavMesh is tighter (like in corridors or angled areas). Essentially a 5000 x 5000uu square from the center of the door. 
 
-![1](/assets/world-data/THREAT_LEVEL_LOW.png){: .left } ![2](/assets/world-data/THREAT_LEVEL_MEDIUM.png){: .left } **Threat Level Low and Medium** 
+**Threat Level Low and Medium** ![1](/assets/world-data/THREAT_LEVEL_LOW.png) ![2](/assets/world-data/THREAT_LEVEL_MEDIUM.png)
 : Usually where there are no direct line of sights to doors or where the NavMesh is marked for *"No Suspects"*
 
-![3](/assets/world-data/THREAT_LEVEL_HIGH.png){: .left } **Threat Level High** 
+**Threat Level High** ![3](/assets/world-data/THREAT_LEVEL_HIGH.png) 
 : 90% of the map will be these.
 
-![4](/assets/world-data/THREAT_LEVEL_EXTREME.png){: .left } **Threat Level Extreme** 
+**Threat Level Extreme** ![4](/assets/world-data/THREAT_LEVEL_EXTREME.png) 
 : These are usually reserved for TAAs that are connected to Doors
 
-![Stairs](/assets/world-data/THREAT_LEVEL_STAIRS.png){: .left } **Threat Level Stairs** 
+**Threat Level Stairs** ![Stairs](/assets/world-data/THREAT_LEVEL_STAIRS.png)
 : Just a special use-case when generation detects stairs. 
 
-![PreferredExit](/assets/world-data/FallbackIcon.png){: .left } **Preferred Exit** 
+**Preferred Exit** ![PreferredExit](/assets/world-data/FallbackIcon.png)
 : These are editor only icons to help debug/assign door `Exits`, they have no impact on gameplay
 
 ### Stack-Up Points ![StackUpPoints](/assets/world-data/STACKING_ALL.png)
@@ -279,17 +279,18 @@ _The previous issues above are fixed using a combination of Blocking and Modifie
 
 5. The **World Gen Loader** tool should automatically find the *WorldGen.sav* file if it exists in the directory while your map is open.
     * If it does exists and doesn't show, press the most **top-left** button (*Swap Search Directoy*) once or twice to "Change Directory" to refresh the tool.
-    ![SwapSearchDirectory](/assets/mapping-autoworldgen/SwapSearchDirectory.png){: .right }
 
-6. ![LoadWorldDataButton](/assets/mapping-autoworldgen/LoadWorldDataButton.png){: .right } Click  `Load World Data Save from disk` and it should make the other buttons available.
+    ![SwapSearchDirectory](/assets/mapping-autoworldgen/SwapSearchDirectory.png)
+
+6. Click  ![LoadWorldDataButton](/assets/mapping-autoworldgen/LoadWorldDataButton.png) and it should make the other buttons available.
 
       > Before continuing, It is highly recommended that you save your map, just in case the Editor freezes and needs restarting. 
       {: .prompt-tip }
 
-7. ![CreateAllActorsButton](/assets/mapping-autoworldgen/CreateAllActorsButton.png){: .right } Click `Create All Actors`
+7. Click ![CreateAllActorsButton](/assets/mapping-autoworldgen/CreateAllActorsButton.png)
     * The checkbox on the button determines whether you want to import `Stack-Up` Actors. If disabled, it will not import/override existing ones.
 
-8. ![ApplyValuesToActorsButton](/assets/mapping-autoworldgen/ApplyValuesToActorsButton.png){: .right } Once complete, then click `Apply Values to Actors`
+8. Once complete, then click ![ApplyValuesToActorsButton](/assets/mapping-autoworldgen/ApplyValuesToActorsButton.png)
     * The checkbox on the button determines whether you want to assign `Stack-Up` & `Clear Point` actors to doors. If disabled, it will not override existing values.
 
     > The **World Gen Loader** also has buttons to manually add World Data elements one-by-one instead of all at once.
@@ -301,7 +302,7 @@ _The previous issues above are fixed using a combination of Blocking and Modifie
 
 If you end up editing your map or need to regenerate the World Data, then you will need to delete the existing imported data and repak & play your map again. 
 
-1. ![DeleteWorldDataButton](/assets/mapping-autoworldgen/DeleteWorldDataButton.png){: .right } Within the **World Gen Loader** tool, press `Delete World Data Actors`.
+1. Within the **World Gen Loader** tool, press ![DeleteWorldDataButton](/assets/mapping-autoworldgen/DeleteWorldDataButton.png)
     * If you have edited `Stack-Up Points`, make sure you **disable** the checkmark on the button to keep these actors.
     > You do not need to remove the Stack-Up and Clear Point Arrays for Doors - the tool will clean this up for you when you import new World Gen - unless the previously mentioned flag is enabled.
     {: .prompt-info }
