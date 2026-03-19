@@ -67,8 +67,6 @@ Unreal gameplay tags are used as the "key" values in the gameplay code, so we ne
 	 > If you want one for each diff add a `Standard`, `Casual`, and `Hard`  
 	 {: .prompt-tip }
  
-	 > The name doesn't matter, however **DO NOT** create your tags under the base *Difficulty* group as this will make it show in the selector for players in quickplay for example, which is not how we want to use it.  
-	 {: .prompt-warning }
 	 > Make sure you create the new diff in the `MyCustomGameplayTags.ini` source. You can find this in your configs and can migrate it when the framework updates.
 	 {: .prompt-warning }
 	
@@ -91,11 +89,16 @@ or export a difficulty from the game files using FModel.
 	DifficultyGameplayTag = CustomDifficulty.ExampleMap.Standard
 	DifficultyNameKey = 
 	DifficultyDescriptionKey = DO NOT USE
+	bIsHidden = true
 
 	[/Script/GameplayTags.GameplayTagsList]
 	GameplayTagList=(Tag="CustomDifficulty.ExampleMap.Standard",DevComment="")
 	```
 	{: file="Example ini header" }
+	
+	> Ensure `bIsHidden = true` is added to your difficulty. Map diffs are not meant to be played on other or vanilla levels, and so should be hidden from the difficulty selectors.
+	 {: .prompt-warning }
+	
 6. At the bottom of the ini, add the file name of your custom level with square brackets `[]`.  
 	 If you copied the example ini, you can replace "[RoN_DifficultyExampleMap]"
 7. Add your map configs below this header and save the file.  
@@ -144,9 +147,16 @@ To include your CustomDifficulty.ini
 	 {: .prompt-info }
 	 
 2. When copying your cooked files to be paked, be sure to copy both `/Content` and `/Config` to your staged mod folder.
-3. If you want to copy without cooking, press the `Copy Difficulties` button:   ![Copy Difficulties](/assets/CopyDiff.png){: w="24" h="24" }
+3. If you want to copy without cooking, press the `Copy Non-Uassets` button:   ![Copy Difficulties](/assets/CopyDiff.png){: w="24" h="24" }
 	 > You can see successful copy actions in the output log.  
 	 
 	 > You can use this to make changes to your CustomDifficulty.ini if your content is unchanged.  
 	 {: .prompt-info }
 4. Play your map in game to confirm your config has loaded.
+
+	 > If your using the Automated Mod Paker, you can add an entry in your Mod Profile for a "Rename Copy".  
+	 > Select your diff from the `/PROJECT_DIR/Config/Difficulties/` folder, and it will be automatically copied to your staged folder and paked.  
+	 > Alternatively, you can manually type in `/Config/Difficulties/` to the "Directories to Copy" if you only have one level.
+	 {: .prompt-info }
+	 > You can update your ini without cooking if you use the "Copy Non-Uassets" button from the Framework menu and then Staging and Paking.
+	 {: .prompt-tip }
