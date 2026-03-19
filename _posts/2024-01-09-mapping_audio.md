@@ -205,7 +205,7 @@ The reasoning is that there are "way too many instances where FMOD for whatever 
  3. Go to `Content > FMOD > Levels > Reverbs` in the Content Browser and select the `ReverbMaster` FMOD Event and drag it into your scene.
  4. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it an attached actor of it.
  5. Decide which Level's ambiance is appropriate for your map and navigate to `Content > FMOD > Levels` and enter the appropriate level folder.
- 6. Find the correct Ambient FMOD Event for your specific level listed here: [Reference - FMOD Parameters](posts/reference_fmod_parameters){:target="_blank"} and drag it into your scene.
+ 6. Find the correct Ambient FMOD Event for your specific level listed here: [Reference - FMOD Parameters](/posts/reference_fmod_parameters){:target="_blank"} and drag it into your scene.
  7. **IMPORTANT**: Within the World Outliner, find this Event and drag it ONTOP of the `Ready or Not Audio Volume` to make it an attached actor of it, just like before.  
  
 ![Main RoN Audio Volume](/assets/mapping-audio/MasterVolumeAttachedEvents.png){: w="587" h="58" }
@@ -294,7 +294,7 @@ Portal Volumes (PV) are relatively easier to set up in comparison to Room Volume
  2. For the same element, type the corresponding `INParameter` & `OUTParameter` that is defined within the same FMOD Event
      * These do not have a consistent naming convention, however the OUT parameter is usually named `OUT` or `EXT`
          * Eg: `Gas_Amb_V2` is `GasAmbIN` & `GasAmbOUT`, while `Valley_Amb_V2` uses `ValleyAmbINT` & `ValleyAmbEXT`
-     * You will need to locate these identifiers defined here [Reference - FMOD Parameters](posts/reference_fmod_parameters){:target="_blank"}
+     * You will need to locate these identifiers defined here [Reference - FMOD Parameters](/posts/reference_fmod_parameters){:target="_blank"}
  3. Select the appropriate reverbs for your rooms for `ReverbIN` & `ReverbOUT`
  4. For `FMOD Global Parameter` type in exactly: `AmbSwitch`
  5. Enable `Use Door Check Feature` if your Transition BP contains doors
