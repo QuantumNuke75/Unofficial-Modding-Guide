@@ -73,6 +73,17 @@ Luckily not many changes are required for compatibility with the latest update. 
 * ***Night-Vision now needs to have 2 overrides ticked within the MLD to make sure they are usuable***
   * If you have made significant changes to the Exposure values for your map, the Post Processing for NVGs will look muted/washed out (especially on darker maps) as the NVGs no longer override the Exposure values by default.
   * Within the Mod Level Datatable, make sure that `Override Min EV100` and `Override Max EV100` are enabled under *Data >  NVG Post Process Override*.
+  
+	 > Kiwi Note: Opening a MLD for the first time will populate the NVG override via a function.  
+	 > EV Min and Max floats will be preserved if not 0.  
+	 > This function will also run if you simply right-click and save the MLD.
+	 {: .prompt-tip }
+	 
+* ***Because of the conversations overhaul for Boiling Point, the game voice-line function nodes used within BP_Reportable_Actor_V3 were removed at some stage.***
+  * This will cause a crash on interaction on un-updated levels.
+  * The native Reportable Actor class has been updated and made functional, so you can swap to that. The Example Map and Objective_Reportable has been updated with instructions on how to use BP_ReportableActor_FrameWork or your own child class.
+  * The native class supports multiple shapes for the interaction geometry and can be reported from a distance (like the server room on Streamer). There's also much better voice line options and the ability to chain the report with other reports or objectives.
+  * Alternatively, you can fix the code in your old V3 version by copying the basic reworked nodes in BP_Reportable_Actor_Legacy. The nodes to copy should be in the same location as the errors in your old version.
 
 * ***You can now open Official VOID Maps as sub-levels***
   * To open the maps, make a New Empty Level and add the game's sublevels as the map's additional sublevels
