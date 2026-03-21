@@ -12,7 +12,7 @@ pin: true
 With the Unreal Engine upgrade to 5.3, you will now need a Mappings.usmap for UAssetGUI and Fmodel to fully function.  
 You can download a shared version of the Mappings.usmap for Ready Or Not below:  
 [Ready Or Mod Discord](https://discord.com/channels/925225229175906324/1143385363130351636)  
-[UMG Mappings.usmap](/downloads/Mappings.usmap) **[12-March-2026 Build:112610 "Boiling Point v1.4.1"]**  
+[UMG Mappings.usmap](/downloads/Mappings.usmap) **[20-March-2026 Build:113451 "Boiling Point v1.4.2"]**  
 
 ## UAssetGUI Import
 >Ensure UAssetGUI is updated for UE5.3 (Versions 1.0.1.0+)  
@@ -52,24 +52,33 @@ How to create a new `Mappings.usmap`
 
 1. Open `UE4SS-settings.ini` and change the following:
 ```ini
+bUseUObjectArrayCache = false
 MajorVersion = 5
 MinorVersion = 3
 ConsoleEnabled = 1
 GuiConsoleEnabled = 1
 GuiConsoleVisible = 1
-GraphicsAPI = dx11
+GraphicsAPI = dx11'
+HookBeginPlay  = 0
 ```
 
 2. Start the game, wait to load to menu, switch to the UE4SS window.  
-	> If the game crashes after Epic Online Services says connected/offline, you may need to start the game with your pc disconnected from a network.  
-	{: .prompt-warning }
+	 > If the game crashes after Epic Online Services says connected/offline, you may need to start the game with your pc disconnected from a network.  
+	 {: .prompt-warning }
+	 > Alternatively add the below to your Engine.ini to disable the EOS overlay. Located in:  
+	 > `%localappdata%\ReadyOrNot\Saved\Config\Windows\`  
+	 > ```ini
+[EpicOnlineServices]
+NeverShowEpicGamesOverlay=True
+```
+	 {: .prompt-info }
 3. Under the `Dumpers` tab press `Generate .usmap file.....`
 4. It should work instantly, but you can confirm on the `Console` tab.  
 The file `Mappings.usmap` should be create next to your .exe  
 5. You can close the game now.  
-	>If you want to disable UE4SS you can rename dwmapi.dll or remove it's files.  
-	>Otherwise it's quite handy for enabling the in game console, you may just want to hide the GUI window if your not using it  
-	>```ini
-	GuiConsoleVisible = 0
-	```
+	 >If you want to disable UE4SS you can rename dwmapi.dll or remove it's files.  
+	 >Otherwise it's quite handy for enabling the in game console, you may just want to hide the GUI window if your not using it  
+	 >```ini
+GuiConsoleVisible = 0
+```
 	{: .prompt-tip }
