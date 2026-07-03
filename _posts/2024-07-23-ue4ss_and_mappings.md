@@ -58,7 +58,7 @@ MinorVersion = 3
 ConsoleEnabled = 1
 GuiConsoleEnabled = 1
 GuiConsoleVisible = 1
-GraphicsAPI = dx11'
+GraphicsAPI = dx11
 HookBeginPlay  = 0
 ```
 
